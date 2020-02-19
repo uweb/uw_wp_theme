@@ -1,0 +1,69 @@
+<?php
+/**
+ * Shortcodes for UW Social theme.
+ *
+ * @package uw_wp_theme
+ */
+
+/**
+ * Main function. Runs everything.
+ */
+function uw_wp_theme_shortcodes() {
+
+	// If this is the admin page, do nothing.
+	if ( is_admin() ) {
+		return;
+	}
+
+	$parent = get_template_directory() . '/inc/shortcodes/';
+	require_once( $parent . 'class.modal-shortcode.php' );
+	require_once( $parent . 'class.button-shortcode.php' );
+	require_once( $parent . 'class.uw-2014-button-shortcode.php' );
+	require_once( $parent . 'class.tile-box-shortcode.php' );
+	require_once( $parent . 'class.trumba-shortcode.php' );
+	require_once( $parent . 'class.trumba-rss-shortcode.php' );
+	require_once( $parent . 'class.menu-shortcode.php' );
+	require_once( $parent . 'class.tagboard-shortcode.php' );
+	require_once( $parent . 'class.grid-shortcode.php' );
+	require_once( $parent . 'class.subpage-list-shortcode.php' );
+	require_once( $parent . 'class.custom-link-shortcode.php' );
+	require_once( $parent . 'class.accordion-shortcode.php' );
+	require_once( $parent . 'class.youtube-shortcode.php' );
+
+	$tilebox     = new UW_TileBox;
+	$button      = new UW_Button;
+	$oldButton   = new UW_2014_Button;
+	$modal       = new UW_Modal;
+	$trumba      = new UW_Trumba;
+	$trumbaRss   = new UW_TrumbaRSS;
+	$menu        = new UW_Menu;
+	$tagboard    = new UW_Tagboard;
+	$grid        = new UW_Grid;
+	$subpageList = new UW_SubpageList;
+	$customLink  = new UW_CustomLinks;
+	$accordion   = new UW_Accordion;
+	$youtube     = new UW_Youtube;
+
+	// call the enqueue scripts for shortcodes.
+	add_action( 'wp_enqueue_scripts', 'uw_wp_theme_enqueue_shortcodes' );
+}
+add_action( 'wp', 'uw_wp_theme_shortcodes' );
+
+/**
+ * Enqueue and defer shortcode scripts.
+ */
+function uw_wp_theme_enqueue_shortcodes() {
+	if ( is_multisite() ) {
+		wp_enqueue_script( 'uw_wp_theme-shortcode-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/shortcodes.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20190625', true );
+		wp_enqueue_script( 'uw_wp_theme-accordionmodule-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/accordionmodule.js' ), array( 'underscore', 'uw_wp_theme-backbone' ), '20200117', true );
+		wp_enqueue_script( 'uw_wp_theme-accordion-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/accordion.js' ), array( 'underscore', 'uw_wp_theme-backbone' ), '20200117', true );
+		wp_enqueue_script( 'uw_wp_theme-custom-link-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/custom-link.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200116', true );
+		wp_enqueue_script( 'uw_wp_theme-youtube-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/youtube.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200124', true );
+	} else {
+		wp_enqueue_script( 'uw_wp_theme-shortcode-script', get_theme_file_uri( '/js/shortcodes/shortcodes.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20190625', true );
+		wp_enqueue_script( 'uw_wp_theme-accordionmodule-script', get_theme_file_uri( '/js/shortcodes/accordionmodule.js' ), array( 'underscore', 'uw_wp_theme-backbone' ), '20200117', true );
+		wp_enqueue_script( 'uw_wp_theme-accordion-script', get_theme_file_uri( '/js/shortcodes/accordion.js' ), array( 'underscore', 'uw_wp_theme-backbone' ), '20200117', true );
+		wp_enqueue_script( 'uw_wp_theme-custom-link-script', get_theme_file_uri( '/js/shortcodes/custom-link.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200116', true );
+		wp_enqueue_script( 'uw_wp_theme-youtube-script', get_theme_file_uri( '/js/shortcodes/youtube.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200124', true );
+	}
+}
