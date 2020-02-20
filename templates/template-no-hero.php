@@ -4,15 +4,15 @@
  */
 ?>
 
-<?php get_header(); 
+<?php get_header();
       $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
       $sidebar = get_post_meta($post->ID, "sidebar");   ?>
 
 <div class="uw-hero-image hero-blank">
-	<h1 class="container uw-site-title-blank"><?php the_title(); ?></h1>
+	<h1 class="container-fluid uw-site-title-blank"><?php the_title(); ?></h1>
 </div>
 
-<div class="container uw-body">
+<div class="container-fluid uw-body">
 
   <div class="row">
 
@@ -42,7 +42,7 @@
 
     </div>
 
-    <div id="sidebar"> <?php 
+    <div id="sidebar"> <?php
       if($sidebar[0]!="on"){
         get_sidebar();
       }

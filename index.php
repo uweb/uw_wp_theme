@@ -14,7 +14,7 @@
 
 get_header(); ?>
 
-<div class="container uw-body">
+<div class="container-fluid uw-body">
 	<div class="row">
 		<main id="primary" class="site-main">
 

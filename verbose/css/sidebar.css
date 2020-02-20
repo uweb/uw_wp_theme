@@ -10,7 +10,13 @@
 
 @media screen and (min-width: 60em) {
 	.primary-sidebar {
-		padding: 0 0 0 1.5em;
+		padding: 0 0 0 2.5em;
+	}
+}
+
+@media (min-width: 1300px) {
+	.primary-sidebar {
+		padding: 0 0 0 5em;
 	}
 }
 

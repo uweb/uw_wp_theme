@@ -14,7 +14,7 @@ if ( is_front_page() || is_post_type_archive( 'uw_oplevents' ) ) {
 
 ?>
 <div class="uw-hero-image <?php echo esc_attr( $header_image_class ); ?>">
-	<div class="container">
+	<div class="container-fluid">
 		<a href="<?php echo esc_attr( home_url( '/' ) ); ?>" title="<?php echo esc_attr( the_title() ); ?>"><div class="uw-site-title"><?php echo esc_attr( bloginfo() ); ?></div></a>
 		<div class="udub-slant-divider gold"><span></span></div>
 	</div>

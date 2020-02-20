@@ -21,7 +21,7 @@ if ( false !== strpos( $_SERVER['REQUEST_URI'], 'lectures' ) ) {
 ?>
 
 
-<div class="container uw-body">
+<div class="container-fluid uw-body">
 	<div class="row">
 
 		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>"
