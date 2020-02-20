@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<div class="container uw-body">
+<div class="container-fluid uw-body">
 
   <div class="row">
 

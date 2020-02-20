@@ -27,7 +27,7 @@ wp_print_styles( array( 'uw_wp_theme-content', 'uw_wp_theme-bootstrap' ) ); // N
 
 ?>
 
-<div class="container uw-body">
+<div class="container-fluid uw-body">
 	<div class="row">
 
 		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>" tabindex="-1" role="main">

@@ -26,7 +26,7 @@
         <div class="mobile-image" style="background-image: url(<?php echo $mobileimage ?>);"></div>
       <?php } ?>
 
-      <div class="container">
+      <div class="container-fluid">
         <div id="hashtag" class="mask"><span><span><?php echo $banner[0] ? $banner[0] : ''; ?></span></span></div>
         <?php if(!empty($banner) && $banner[0]){ ?>
         <div id="hashtag"><span><span><?php echo $banner[0] ? $banner[0] : ''; ?></span></span></div>
@@ -40,7 +40,7 @@
       </div>
 </div>
 
-<div class="container uw-body">
+<div class="container-fluid uw-body">
   <div class="row">
     <div class="hero-content col-md-<?php echo (($sidebar[0]!="on") ? "8" : "12" ) ?> uw-content" role='main'>
 

@@ -8379,6 +8379,10 @@ a:visited {
 html {
 	overflow-x: hidden; }
 
+.container-fluid {
+	padding-right: 10vw;
+	padding-left: 10vw; }
+
 .img-horizontal {
 	max-width: 720px;
 	height: 250px;

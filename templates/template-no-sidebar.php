@@ -8,7 +8,7 @@
 
 <?php get_template_part( 'header', 'image' ); ?>
 
-<div class="container uw-body">
+<div class="container-fluid uw-body">
 
   <div class="row">
 

@@ -204,7 +204,7 @@ if ( ! function_exists( 'uw_wp_theme_white_bar_menu') ) :
 				echo '<nav class="navbar navbar-expand-md navbar-light ' . UW_Dropdowns::LOCATION .'">
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . UW_Dropdowns::LOCATION .'" aria-controls="' . UW_Dropdowns::LOCATION .'" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
-						  </button><div class="container">';
+						  </button><div class="container-fluid">';
 				echo  wp_nav_menu( array(
 							'theme_location'    => UW_Dropdowns::LOCATION,
 							'container_id'      => UW_Dropdowns::LOCATION,
