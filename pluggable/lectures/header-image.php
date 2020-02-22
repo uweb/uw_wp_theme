@@ -1,6 +1,6 @@
 <?php
 
-if ( is_front_page() || is_post_type_archive( 'uw_oplevents' ) ) {
+if ( is_front_page() || is_post_type_archive( 'uw_oplevents' ) || is_page( 59 ) ) {
 	$header_image_class = 'opl-header1';
 } elseif ( is_singular( 'uw_oplevents' ) ) {
 	$header_image_class = 'opl-header2';
