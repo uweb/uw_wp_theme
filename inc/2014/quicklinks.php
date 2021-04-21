@@ -41,7 +41,7 @@ class UW_QuickLinks {
 	}
 
 	function parse_menu() {
-		if ( isset( $this->items ) )
+		if ( isset( $this->items ) && ( is_array( $this->items ) || is_object($this->items) ) )
 		foreach ( $this->items as $index => $item ) {
 			// Only keep the necessary keys of the $item.
 			$item = array_intersect_key( (array) $item, array_fill_keys( array( 'ID', 'title', 'url', 'classes', 'menu_item_parent' ), null ) );

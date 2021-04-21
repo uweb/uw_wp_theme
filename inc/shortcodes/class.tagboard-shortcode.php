@@ -4,7 +4,9 @@
  * UW Tagboard shortcode.
  * Embeds a Tagboard feed onto the page.
  *
- * Structure: [tagboard slug="435487" layout="waterfall" post-count="30" mobile-count="15" toolbar="none" feed-type="auto"]
+ * Structure: [tagboard id="435487"]
+ *
+ *
  */
 
 class UW_Tagboard
@@ -17,19 +19,14 @@ class UW_Tagboard
   function tagboard_handler( $atts )
   {
     $tagboard_atts = shortcode_atts( array(
-      'slug' => '',
-      'layout' => 'grid',
-      'feed-type' => 'default',
-      'post-count' => '50',
-      'mobile-count' => '50',
-      'toolbar'      => 'default'
+      'id' => ''
     ), $atts);
-    if ($tagboard_atts['slug'] == '') {
-      return '<div>Missing parameter: slug</div>';
+    if ($tagboard_atts['id'] == '') {
+      return '<div>Missing parameter: Tagboard embed id</div>';
     } else {
-      return sprintf('<div class="tagboard-embed" tgb-slug="t/%s" tgb-layout="%s" tgb-feed-type="%s" tgb-post-count="%s" tgb-mobile-count="%s" tgb-toolbar="%s"></div>
-                    <script src="https://static.tagboard.com/public/js/embedAdvanced.js"></script>', $tagboard_atts['slug'], $tagboard_atts['layout'], $tagboard_atts['feed-type'],
-                    $tagboard_atts['post-count'], $tagboard_atts['mobile-count'], $tagboard_atts['toolbar']);
+      return sprintf('<div class="tagboard-embed" tgb-embed-id="%s"></div>
+
+                    <script src="https://static.tagboard.com/embed/assets/js/embed.js"></script>', $tagboard_atts['id']);
     }
   }
 }

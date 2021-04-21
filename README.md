@@ -1,12 +1,12 @@
-# UW Social theme
-![UW Social version 0.1.0](https://img.shields.io/badge/version-0.1.0-blue.svg)
+# UW WordPress Theme
+![UW WordPress Theme version 0.1.0](https://img.shields.io/badge/version-0.1.0-blue.svg)
 
-## UW Social was built using WP Rig
+## UW WordPress Theme was built using WP Rig
 
 This theme was build using [WP Rig](https://wprig.io/) ([GitHub](https://github.com/wprig/wprig/)) 1.0.4.
 
 ## Requirements
-The UW Social theme requires the following dependencies. Full installation instructions are provided at their respective websites.
+The UW WordPress Theme theme requires the following dependencies. Full installation instructions are provided at their respective websites.
 
 - [PHP](http://php.net/) 7.0
 - [npm](https://www.npmjs.com/)
@@ -14,9 +14,8 @@ The UW Social theme requires the following dependencies. Full installation instr
 
 ## Theme features
 
-The UW Social theme includes the following features.
+The UW WordPress Theme theme includes the following features.
 
-- Lazy-loading of images by default
 - [Bootstrap 4](https://getbootstrap.com/) integration
 - Mobile-first
 - Progressive enhancement
@@ -24,7 +23,7 @@ The UW Social theme includes the following features.
 - AMP-ready
 - Component-based development
 
-The UW Social theme uses the following development tools. These will all be installed for you as part of the package installation. *Note: if you already have Gulp installed, please make sure you are using version 4.*
+The UW WordPress Theme theme uses the following development tools. These will all be installed for you as part of the package installation. *Note: if you already have Gulp installed, please make sure you are using version 4.*
 
 - [BrowserSync](https://browsersync.io/)
 - [Gulp 4](https://gulpjs.com/)
@@ -49,14 +48,14 @@ To take full advantage of the features in this theme, your code editor needs sup
 - [ESLint](https://eslint.org/docs/user-guide/integrations)
 - [PHP CodeSniffer (phpCS)](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki)
 
-## Working with the UW Social theme
+## Working with the UW WordPress Theme theme
 *Please note some of this section has been copied from the WP Rig README.*
 
 You can install this theme in any development environment.
 
-UW Social uses [BrowserSync](https://browsersync.io/) to enable synchronized browser testing. To take advantage of this feature, configure the `proxy` wrapper settings in `./dev/config/themeConfig.js` to match your local development environment. The `URL` value is the URL to the live version of your local site.
+UW WordPress Theme uses [BrowserSync](https://browsersync.io/) to enable synchronized browser testing. To take advantage of this feature, configure the `proxy` wrapper settings in `./dev/config/themeConfig.js` to match your local development environment. The `URL` value is the URL to the live version of your local site.
 
-UW Social uses a [Gulp 4](https://gulpjs.com/) build process to generate and optimize the code for the theme. All development is done in the `/dev` folder and Gulp preprocesses, transpiles, and compiles the files into the root folder. The root folder files become the active theme. WordPress ignores anything in the `/dev` folder.
+UW WordPress Theme uses a [Gulp 4](https://gulpjs.com/) build process to generate and optimize the code for the theme. All development is done in the `/dev` folder and Gulp preprocesses, transpiles, and compiles the files into the root folder. The root folder files become the active theme. WordPress ignores anything in the `/dev` folder.
 
 **Note:** If you have previously used Gulp, you may encounter seemingly random errors that prevent the build process from running. To fix this issue, [upgrade to Gulp 4 following the steps outlined in the WP Rig Wiki](https://github.com/wprig/wprig/wiki/Updating-to-Gulp-4).
 
@@ -85,7 +84,7 @@ export: {
 ## Component-based approach
 *Please note this section was copied from the WP Rig README.*
 
-UW Social takes a component-based approach to WordPress themes. Out of the box, the compiled theme uses `index.php` as the core template file for all views (index, archives, single posts, pages, etc). The `/optional` folder holds optional template files that can be accessed via the [WordPress Template Hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/). To activate these files, move or copy them into the root `/dev` folder. The `/optional` folder is ignored by the Gulp build process.
+UW WordPress Theme takes a component-based approach to WordPress themes. Out of the box, the compiled theme uses `index.php` as the core template file for all views (index, archives, single posts, pages, etc). The `/optional` folder holds optional template files that can be accessed via the [WordPress Template Hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/). To activate these files, move or copy them into the root `/dev` folder. The `/optional` folder is ignored by the Gulp build process.
 
 The separation of Pluggable and External features into their own folders allows the theme developer to swap out any feature for an external feature (AMP components) or non-php feature (JavaScript framework etc) without interfering with the core theme functions.
 
@@ -107,7 +106,7 @@ Content loop files are placed in the `/template-parts` folder.
 *Please note this section was copied from the WP Rig README.*
 
 ### Progressive loading of CSS
-To further componentize the theme, UW Social employs progressive loading of CSS through [in-body `<link>` tags](https://jakearchibald.com/2016/link-in-body/). Component-specific styles are held in component-specific stylesheets and loaded at component level. The `wprig_add_body_style()` in `./dev/inc/template-functions.php` can be used to conditionally preload in-body stylesheets for improved performance.
+To further componentize the theme, UW WordPress Theme employs progressive loading of CSS through [in-body `<link>` tags](https://jakearchibald.com/2016/link-in-body/). Component-specific styles are held in component-specific stylesheets and loaded at component level. The `wprig_add_body_style()` in `./dev/inc/template-functions.php` can be used to conditionally preload in-body stylesheets for improved performance.
 This approach has several advantages:
 - The main stylesheet file size is reduced
 - Styles are only loaded if and when a component is present in the view.
@@ -130,17 +129,53 @@ For backward compatibility with browsers who do not support modern layout module
 
 ### Accordion
 
-This is an accessible version of the accordion menu based off of Nicolas Hoffmann's [accessible jQuery accordion](https://a11y.nicolas-hoffmann.net/accordion/).
+This accordion shortcode uses the [Bootstrap collapse](https://getbootstrap.com/docs/4.6/components/collapse/), with additional keyboard accessibility added per [WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices/examples/accordion/accordion.html).
 
 Example:
 
 ```
-[accordion name='Accessible Accordion']
-    [section title='Example'] Section[/section]
-    [section title='Example'] Section[/section]
-    [section title='Example'] Section[/section]
+[accordion name="Accessible Accordion"]
+    [section title="Example"] Section[/section]
+    [section title="Example"] Section[/section]
+    [section title="Example"] Section[/section]
 [/accordion]
 ```
+
+Options include defaulting an accordion open. For example:
+
+```
+[accordion name="Accessible Accordion"]
+    [section title="Example" active="true"] Section[/section]
+    [section title="Example"] Section[/section]
+    [section title="Example"] Section[/section]
+[/accordion]
+```
+
+
+### Blogroll ###
+
+>  This is a shortcode that wraps the WordPress [get\_posts](https://codex.wordpress.org/Template_Tags/get_posts) function and templates out a blogroll. Any parameter you can pass to `get_posts` will be understood along with the following.
+
+> Attributes:
+
+> - **excerpt** : Choose whether to show the excerpt in the blogroll. Options: **show**, **hide**. (_Default: hide_)
+> - **trim** : Whether or not to trim the words via WordPress [wp\_trim\_words](https://codex.wordpress.org/Function_Reference/wp_trim_words) function. Options: **true**, **false**. (_Default: _false)
+> - **image**:  Choose whether to show the featured image thumbnail. Options: **show**, **hide**. (_Default: hide_)
+> - **author**: Choose whether to show the author. Options: **show**, **hide**. (_Default: show_)
+> - **date**:  Choose whether to show the publish date. Options: **show**, **hide**. (_Default: show_)
+> - **titletag**:  The html element for the post titles. (_Default: h2_)
+> - **post\_type**:  The post type to look for.(_Default: post_)
+> - **number**:  The maximum number of results to return (_Default: 5_)
+> - **mini**:  Use the miniture template instead of the default one. (_Default: false_)
+> - **category**:  The WordPress category ID to limit the results from. (_Default: None_)
+> - **category\_name**:  The WordPress category name to limit the results from. (_Default: None_)
+> - **readmore**: Choose whether to show the "Read More" link or not. Options: **on**, **off**. (_Default: on_)
+
+> Example:
+```
+  [blogroll number=3 trim=true readmore='off']
+```
+
 
 ### Buttons
 
@@ -198,6 +233,17 @@ Example:
 [/row]
 ```
 
+### Intro ###
+> This shortcode creates an italicized block of introduction text for the content.
+
+> No attributes.
+
+> Example:
+
+```
+  [intro] A block on introductory text for the content. [/intro]
+```
+
 ### Modals
 
 For adding a modal. Anything placed inside the `[uw_modal][/uw_modal]` shortcode will appear in the modal.
@@ -227,6 +273,41 @@ Example:
 ```
 [subpage-list link="More information here" tilebox=true ]
 ```
+
+### Tabs and Tours
+
+This tabs/tours shortcode uses the [Bootstrap tabs](https://getbootstrap.com/docs/4.6/components/navs/#tabs) and vertical tabs for tours, with additional keyboard accessibility added per [WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices/examples/tabs/tabs-2/tabs.html).
+
+Example:
+
+```
+[uw_tabs name="tabs name"]
+	[tabs_section title="section title"] content [/tabs_section]
+	[tabs_section title="section title"] content [/tabs_section]
+	[tabs_section title="section title"] content [/tabs_section]
+[/uw_tabs]
+```
+
+Options include defaulting a specific tab open by setting it to active and specifying an alternate style. For example:
+
+```
+[uw_tabs name="tabs name" style="alt-tab"]
+	[tabs_section title="section title"] content [/tabs_section]
+	[tabs_section title="section title"] content [/tabs_section]
+	[tabs_section title="section title" active="true"] content [/tabs_section]
+[/uw_tabs]
+```
+
+To use as a tour, or vertical tabs, set the tour flag. You can also set a default tab in this layout. For example:
+
+```
+[uw_tabs name="tabs name" tour="true"]
+	[tabs_section title="section title"] content [/tabs_section]
+	[tabs_section title="section title" active="true"] content [/tabs_section]
+	[tabs_section title="section title"] content [/tabs_section]
+[/uw_tabs]
+```
+
 
 ### Tagboard
 
@@ -320,3 +401,38 @@ Example:
 ```
 [youtube type='type' id='video or playlist id' max-results='integer that defines max results']
 ```
+
+## Widgets
+
+### UW Campus Map ###
+
+>Embed the location of a UW campus building on your page using the UW branded campus map. You can find the building code on the [UW Campus Map](https://www.washington.edu/maps/)
+
+> Options:
+
+> - **Title** : The title of the widget (*Default: None*)
+> - **Building code** : The UW campus building code for the desired building to embed, ie: 'kne' for Kane Hall. (*Default: None*)
+
+
+### UW Image Card ###
+
+> Displays one of three styles of branded card. Both text and image can be customized.
+
+> Options:
+
+> - **Title** : The title of the widget (_Default: Image Widget_)
+> - **Select an image** : Select an image from the WordPress  media library (_Default: None_)
+> - **Featured text** : A small blurb that is shown below or on top of the image (_Default: None_)
+> - **Link** : A URL for the More link text (_Default: None_)
+> - **More link** : The text to display in the more link (_Default: Read more_)
+> - **Card style** : Choose one of three styles (_Default: None_)
+
+### UW Recent Posts ###
+
+>  Similar to the default WordPress widget Recent Posts but with different options and layout.
+
+> Options:
+
+> - **Title** : The title of the widget (*Default: None*)
+> - **Number of posts to display** : The number of posts to show (*Default: 1*)
+> - **Display more link** : Display an anchor tag that links to the blogroll page (*Default: false*)

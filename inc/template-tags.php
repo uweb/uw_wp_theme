@@ -214,7 +214,7 @@ function uw_wp_theme_post_thumbnail() {
 		?>
 
 		<div class="post-thumbnail">
-			<?php the_post_thumbnail( 'full', array( 'class' => 'skip-lazy' ) ); ?>
+			<?php the_post_thumbnail( 'full' ); ?>
 		</div><!-- .post-thumbnail -->
 
 		<?php
@@ -228,8 +228,7 @@ function uw_wp_theme_post_thumbnail() {
 				the_post_thumbnail(
 					'full',
 					array(
-						'class' => 'skip-lazy',
-						'alt'   => the_title_attribute(
+						'alt' => the_title_attribute(
 							array(
 								'echo' => false,
 							)

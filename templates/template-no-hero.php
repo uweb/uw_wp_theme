@@ -18,7 +18,7 @@
 
     <div class="col-md-<?php echo (($sidebar[0]!="on") ? "8" : "12" ) ?> uw-content" role='main'>
 
-      <?php get_template_part( 'menu', 'mobile' ); ?>
+      <?php //get_template_part( 'template-parts/menu', 'mobile' ); ?>
       <?php get_template_part( 'breadcrumbs' ); ?>
 
       <div id='main_content' class="uw-body-copy" tabindex="-1">
@@ -28,7 +28,7 @@
           while ( have_posts() ) : the_post();
 
             //the_content();
-            get_template_part( 'content', 'page-noheader' );
+            get_template_part( 'template-parts/content', 'page-noheader' );
 
             // If comments are open or we have at least one comment, load up the comment template.
             if ( comments_open() || get_comments_number() ) {

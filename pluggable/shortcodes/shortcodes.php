@@ -108,10 +108,10 @@ add_action( 'wp', 'uw_golden_shortcodes' );
  */
 function uw_golden_enqueue_shortcodes() {
 	if ( is_multisite() ) {
-		wp_enqueue_script( 'uw_golden-shortcode-script', network_site_url( '/wp-content/themes/uw_golden/pluggable/shortcodes/shortcodes.js' ), array( 'jquery', 'uw_golden-popper' ), '20190625', true );
+		wp_enqueue_script( 'uw_golden-shortcode-script', network_site_url( '/wp-content/themes/uw_golden/pluggable/shortcodes/shortcodes.js' ), array( 'uw_golden-jquery', 'uw_golden-popper' ), '20190625', true );
 		wp_enqueue_style( 'uw_golden-shortcode-style', network_site_url( '/wp-content/themes/uw_golden/pluggable/shortcodes/shortcodes.css' ), array(), '20190624' );
 	} else {
-		wp_enqueue_script( 'uw_golden-shortcode-script', get_theme_file_uri( '/pluggable/shortcodes/shortcodes.js' ), array( 'jquery', 'uw_golden-popper' ), '20190625', true );
+		wp_enqueue_script( 'uw_golden-shortcode-script', get_theme_file_uri( '/pluggable/shortcodes/shortcodes.js' ), array( 'uw_golden-jquery', 'uw_golden-popper' ), '20190625', true );
 		wp_enqueue_style( 'uw_golden-shortcode-style', get_theme_file_uri( '/pluggable/shortcodes/shortcodes.css' ), array(), '20190624' );
 	}
 }

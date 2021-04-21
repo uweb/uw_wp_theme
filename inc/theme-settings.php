@@ -42,12 +42,34 @@ function display_facebook_element()
     <?php
 }
 
+function display_quicklinks_element()
+{
+	?>
+    	<input type="checkbox" name="quicklinks-hide" value="1" <?php checked(1, get_option('quicklinks-hide'), true); ?> />
+    <?php
+}
+
+function display_search_element()
+{
+	?>
+    	<input type="checkbox" name="search-hide" value="1" <?php checked(1, get_option('search-hide'), true); ?> />
+    <?php
+}
+
 function display_theme_panel_fields()
 {
 	add_settings_section("section", "All Settings", null, "theme-options");
 
 	add_settings_field("twitter_url", "Twitter Profile Url", "display_twitter_element", "theme-options", "section");
     add_settings_field("facebook_url", "Facebook Profile Url", "display_facebook_element", "theme-options", "section");
+
+    // add_settings_field("quicklinks-hide", "Hide Quicklinks menu button", "display_quicklinks_element", "theme-options", "section");
+
+    // register_setting("section", "search-hide");
+
+    // add_settings_field("search-hide", "Hide Search menu button", "display_search_element", "theme-options", "section");
+
+    register_setting("section", "search-hide");
 
     register_setting("section", "twitter_url");
     register_setting("section", "facebook_url");
