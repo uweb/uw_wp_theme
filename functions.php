@@ -294,24 +294,6 @@ function uw_wp_theme_gutenberg_styles() {
 add_action( 'enqueue_block_editor_assets', 'uw_wp_theme_gutenberg_styles' );
 
 /**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-function uw_wp_theme_widgets_init() {
-	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'uw_wp_theme' ),
-		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'uw_wp_theme' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4><span class="udub-slant-divider gold"><span></span></span>',
-	) );
-}
-add_action( 'widgets_init', 'uw_wp_theme_widgets_init' );
-
-/**
  * Enqueue styles.
  */
 function uw_wp_theme_styles() {
@@ -375,11 +357,15 @@ function uw_wp_theme_scripts() {
 		wp_enqueue_script( 'uw_wp_theme-bootstrap', network_site_url( '/wp-content/themes/uw_wp_theme/js/libs/bootstrap.min.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20190610', true );
 		wp_enqueue_script( 'uw_wp_theme-popper', network_site_url( '/wp-content/themes/uw_wp_theme/js/libs/popper.min.js' ), array(), '20190610', true );
 		wp_enqueue_script( 'uw_wp_theme-tinyscrollbar', network_site_url( '/wp-content/themes/uw_wp_theme/js/libs/jquery.tinyscrollbar.js' ), array(), '20200124', true );
+		wp_enqueue_script( 'uw.bootstrap.shortcode-init', network_site_url( '/wp-content/themes/uw_wp_theme/js/uw.bootstrap.shortcode-init.js' ), array(), '20210413', true );
+
 	} else {
 		wp_register_script( 'jquery', get_theme_file_uri( '/js/libs/jquery.min.js' ), array(), '20190610', true );
 		wp_enqueue_script( 'uw_wp_theme-bootstrap', get_theme_file_uri( '/js/libs/bootstrap.min.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20190610', true );
 		wp_enqueue_script( 'uw_wp_theme-popper', get_theme_file_uri( '/js/libs/popper.min.js' ), array(), '20190610', true );
 		wp_enqueue_script( 'uw_wp_theme-tinyscrollbar', get_theme_file_uri( '/js/libs/jquery.tinyscrollbar.js' ), array(), '20200124', true );
+		wp_enqueue_script( 'uw.bootstrap.shortcode-init', get_theme_file_uri( '/js/uw.bootstrap.shortcode-init.js' ), array(), '20210413', true );
+
 	}
 
 	// Add Backbone.js and Underscore.js - legacy UW2014 but using current versions of both!
@@ -442,13 +428,6 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
- * Optional: Add theme support for lazyloading images.
- *
- * @link https://developers.google.com/web/fundamentals/performance/lazy-loading-guidance/images-and-video/
- */
-require get_template_directory() . '/pluggable/lazyload/lazyload.php';
-
-/**
  * Carryover from UW 2014 theme.
  */
 
@@ -482,14 +461,16 @@ if ( ! function_exists( 'suppress_updates' ) ) {
 add_action( 'admin_head', 'suppress_updates', 1 );
 
 /**
- * Social theme feed stuff. Only needed for UW social.
-*/
-// require get_template_directory() . '/pluggable/social/social-feeds.php';
-
-/**
  * Theme shortcodes.
 */
 require get_template_directory() . '/inc/shortcodes/shortcodes.php';
+
+
+/**
+ * Theme widgets.
+ */
+require get_template_directory() . '/inc/widgets/widgets.php';
+
 
 // Register Custom Navigation Walker for function.php
 require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';
