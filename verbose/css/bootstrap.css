@@ -11356,12 +11356,6 @@ footer.site-footer {
 	to {
 		background-position: 0 0; } }
 
-.entry-content .progress {
-	margin-right: 1.5rem;
-	margin-left: 1.5rem;
-	padding-right: 0;
-	padding-left: 0; }
-
 .progress {
 	overflow: hidden;
 	background-color: #e9ecef;
@@ -11457,6 +11451,49 @@ a[data-toggle="tooltip"] {
 
 .tooltip.bottom-right .tooltip-arrow {
 	top: 0; }
+
+hr {
+	margin-top: 3rem; }
+
+.list-group {
+	border-radius: 0;
+	margin-left: 0;
+	padding-left: 0 !important; }
+	.list-group br {
+		display: none; }
+
+.list-group-item {
+	border: 1px solid rgba(55, 58, 60, 0.125); }
+	.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+		color: #373a3c;
+		border: 0;
+		border-left: 2px solid #4b2e83;
+		background: #eee; }
+	.list-group-item.disabled {
+		color: #c9c9c9; }
+	.list-group-item.list-group-item-action {
+		text-decoration: underline;
+		color: #495057;
+		margin-bottom: -1px; }
+		.list-group-item.list-group-item-action:hover, .list-group-item.list-group-item-action:focus {
+			background-color: #f8f9fa !important;
+			text-decoration: none; }
+		.list-group-item.list-group-item-action .list-group-item-heading {
+			color: inherit; }
+		.list-group-item.list-group-item-action:hover, .list-group-item.list-group-item-action:focus {
+			color: #495057;
+			background-color: #e9ecef; }
+
+.list-group-flush > .list-group-item {
+	border-width: 1px 0px 1px;
+	margin-bottom: -1px; }
+	.list-group-flush > .list-group-item:last-child {
+		border-bottom-width: 1px; }
+
+.badge-pill {
+	padding-right: 0.6em;
+	padding-left: 0.6em;
+	border-radius: 10rem; }
 
 .uw-hero-image,
 .no-uw-hero-image {
@@ -12200,17 +12237,9 @@ body.home .uw-sidebar-menu {
 	margin-bottom: 40px; }
 	.accordion:focus, .accordion:focus:not(:focus-visible), .accordion:focus-within {
 		-webkit-box-shadow: 1px 1px 5px rgba(75, 46, 131, 0.7);
-		        box-shadow: 1px 1px 5px rgba(75, 46, 131, 0.7);
-		padding-left: 0;
-		padding-right: 0;
-		margin-left: 1.5rem;
-		margin-right: 1.5rem; }
+		        box-shadow: 1px 1px 5px rgba(75, 46, 131, 0.7); }
 	.accordion:focus-visible {
-		outline: 2px dashed rgba(75, 46, 131, 0.7);
-		padding-left: 0;
-		padding-right: 0;
-		margin-left: 1.5rem;
-		margin-right: 1.5rem; }
+		outline: 2px dashed rgba(75, 46, 131, 0.7); }
 	.accordion.uppercase-title .card-header h3 button {
 		text-transform: uppercase; }
 	.accordion .card {
@@ -12237,7 +12266,8 @@ body.home .uw-sidebar-menu {
 					-webkit-box-align: stretch;
 					    -ms-flex-align: stretch;
 					        align-items: stretch;
-					padding: 0; }
+					padding: 0;
+					margin: 0; }
 					.accordion .card .card-header h3 button span.btn-text {
 						padding: 5px 20px;
 						text-align: left;
