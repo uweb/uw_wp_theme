@@ -11,6 +11,7 @@ function theme_settings_page()
     ?>
 	    <div class="wrap">
 	    <h1>Theme Panel</h1>
+		<?php settings_errors(); ?>
 	    <form method="post" action="options.php">
 	        <?php
 	            settings_fields("section");
@@ -42,19 +43,34 @@ function display_facebook_element()
     <?php
 }
 
-function display_quicklinks_element()
-{
+function nav_menu_options() {
+	$nav_option = get_option( 'nav_menu_options' );
+
+	if ( ! isset( $nav_option['uw_nav_options'] ) ) {
+		$nav_option['uw_nav_options'] = 'default';
+	}
+
 	?>
-    	<input type="checkbox" name="quicklinks-hide" value="1" <?php checked(1, get_option('quicklinks-hide'), true); ?> />
-    <?php
+		<select name="nav_menu_options[uw_nav_options]" id="uw_nav_options">
+			<option value="default" <?php selected( $nav_option['uw_nav_options'], 'default' ); ?>>Default (classic uw-2014)</option>
+			<option value="mega" <?php selected( $nav_option['uw_nav_options'], 'mega' ); ?>>Mega Menu</option>
+		</select>
+	<?php
 }
 
-function display_search_element()
-{
-	?>
-    	<input type="checkbox" name="search-hide" value="1" <?php checked(1, get_option('search-hide'), true); ?> />
-    <?php
-}
+ function display_quicklinks_element()
+ {
+ 	?>
+     	<input type="checkbox" name="quicklinks-hide" value="1" <?php checked(1, get_option('quicklinks-hide'), true); ?> />
+     <?php
+ }
+
+ function display_search_element()
+ {
+ 	?>
+     	<input type="checkbox" name="search-hide" value="1" <?php checked(1, get_option('search-hide'), true); ?> />
+     <?php
+ }
 
 function display_theme_panel_fields()
 {
@@ -62,6 +78,7 @@ function display_theme_panel_fields()
 
 	add_settings_field("twitter_url", "Twitter Profile Url", "display_twitter_element", "theme-options", "section");
     add_settings_field("facebook_url", "Facebook Profile Url", "display_facebook_element", "theme-options", "section");
+	add_settings_field( 'uw_nav_options', 'Main navigation menu style', 'nav_menu_options', 'theme-options', 'section' );
 
     // add_settings_field("quicklinks-hide", "Hide Quicklinks menu button", "display_quicklinks_element", "theme-options", "section");
 
@@ -73,6 +90,7 @@ function display_theme_panel_fields()
 
     register_setting("section", "twitter_url");
     register_setting("section", "facebook_url");
+	register_setting( 'section', 'nav_menu_options' );
 }
 
 add_action("admin_init", "display_theme_panel_fields");

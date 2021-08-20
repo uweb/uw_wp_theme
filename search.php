@@ -9,24 +9,16 @@
 
 get_header();
 
-$sidebar = get_post_meta($post->ID, "sidebar");
-
-// if this is the public lectures site.
-if ( false !== strpos( $_SERVER['REQUEST_URI'], 'lectures' ) ) {
-	require get_template_directory() . '/pluggable/lectures/header-image.php';
-} else {
-	get_template_part( 'template-parts/header', 'image' );
-}
-
-/*
-* Include the component stylesheet for the content.
-* This call runs only once on index and archive pages.
-* At some point, override functionality should be built in similar to the template part below.
-*/
-wp_print_styles( array( 'uw_wp_theme-content', 'uw_wp_theme-bootstrap' ) ); // Note: If this was already done it will be skipped.
+// get the image header.
+get_template_part( 'template-parts/header', 'image' );
 
 ?>
 
+<div class="container-fluid ">
+<?php //get_template_part( 'template-parts/breadcrumbs' ) ?>
+<?php echo uw_breadcrumbs(); ?>
+
+</div>
 <div class="container-fluid uw-body">
 	<div class="row">
 
@@ -43,13 +35,6 @@ wp_print_styles( array( 'uw_wp_theme-content', 'uw_wp_theme-bootstrap' ) ); // N
 				while ( have_posts() ) :
 					the_post();
 
-					/*
-					* Include the component stylesheet for the content.
-					* This call runs only once on index and archive pages.
-					* At some point, override functionality should be built in similar to the template part below.
-					*/
-					wp_print_styles( array( 'uw_wp_theme-content' ) ); // Note: If this was already done it will be skipped.
-
 					/**
 					 * Run the loop for the search to output the results.
 					 * If you want to overload this in a child theme then include a file
@@ -62,19 +47,20 @@ wp_print_styles( array( 'uw_wp_theme-content', 'uw_wp_theme-bootstrap' ) ); // N
 				the_posts_pagination(
 					array(
 						'mid_size'           => 2,
-						'prev_text'          => __( 'Previous results', 'uw_wp_theme' ),
-						'next_text'          => __( 'More results', 'uw_wp_theme' ),
+						'prev_text'          => __( '&lsaquo; Previous', 'uw_wp_theme' ),
+						'next_text'          => __( 'Next &rsaquo;', 'uw_wp_theme' ),
 						'screen_reader_text' => __( 'Search Results Navigation', 'uw_wp_theme' ),
 						'aria_label'         => __( 'Search Results', 'uw_wp_theme' ),
 					)
 				);
 
-			else :
+				else :
 
-				get_template_part( 'template-parts/content', 'none' );
+					//get_template_part( 'template-parts/content', 'none' );
+					echo '<h3 class=\'no-results\'>Sorry, no results matched your criteria.</h3>';
 
 			endif;
-			?>
+				?>
 
 			</main><!-- #primary -->
 

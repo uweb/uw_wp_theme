@@ -30,27 +30,36 @@ $sidebar = get_post_meta( $post->ID, 'sidebar' );
     <?php } ?>
     <div id="hero-bg">
       <div id="hero-container" class="container">
+	  <div class="container-fluid">
       <?php if(!empty($banner) && $banner[0]){ ?>
         <div id="hashtag"><span><span><?php echo $banner[0] ? $banner[0] : ''; ?></span></span></div>
       <?php } ?>
+
         <h1 class="uw-site-title"><?php the_title(); ?></h1>
         <span class="udub-slant"><span></span></span>
+
       <?php if(!empty($buttontext) && $buttontext[0]){ ?>
-        <a class="uw-btn btn-sm btn-none" href="<?php echo $buttonlink[0] ? $buttonlink[0] : ''; ?>"><?php echo $buttontext[0] ? $buttontext[0] : ''; ?></a>
+        <a href="<?php echo $buttonlink[0] ? $buttonlink[0] : ''; ?>" class="btn btn-lg arrow primary purple"><span><?php echo $buttontext[0] ? $buttontext[0] : ''; ?></span><span class="arrow-box"><span class="arrow"></span></span></a>
       <?php } ?>
+
+
+	  </div>
       </div>
     </div>
 </div>
-
+<div class="container-fluid ">
+<?php echo uw_breadcrumbs() ?>
+	  </div>
 <div class="container-fluid uw-body">
 	<div class="row">
 
-		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>"
+		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>">
 
       <?php
-      uw_site_title();
+     // uw_site_title();
       get_template_part( 'template-parts/menu', 'mobile' );
-      get_template_part( 'template-parts/breadcrumbs' );
+      //get_template_part( 'template-parts/breadcrumbs' );
+
 
 
 
@@ -77,8 +86,12 @@ $sidebar = get_post_meta( $post->ID, 'sidebar' );
 
         ?>
 
-
-
+		</main>
+		<?php
+    if ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) {
+    	get_sidebar();
+    }
+    ?>
 
       </div>
 
@@ -87,11 +100,7 @@ $sidebar = get_post_meta( $post->ID, 'sidebar' );
 
 
 
-    <?php
-    if ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) {
-    	get_sidebar();
-    }
-    ?>
+
 
 </div><!-- .row -->
 </div><!-- .container -->

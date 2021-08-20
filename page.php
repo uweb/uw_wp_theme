@@ -11,30 +11,21 @@ get_header();
 
 $sidebar = get_post_meta( $post->ID, 'sidebar' );
 
-// if this is the public lectures site.
-if ( false !== strpos( $_SERVER['REQUEST_URI'], 'lectures' ) ) {
-	require get_template_directory() . '/pluggable/lectures/header-image.php';
-} else {
-	get_template_part( 'template-parts/header', 'image' );
-}
+// get the image header.
+get_template_part( 'template-parts/header', 'image' );
 
 ?>
+<div class="container-fluid ">
+<?php echo uw_breadcrumbs(); ?>
 
-
+</div>
 <div class="container-fluid uw-body">
 	<div class="row">
 
-		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>"
-
+		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>">
+		
 		<?php
 		while ( have_posts() ) : the_post();
-
-			/*
-				* Include the component stylesheet for the content.
-				* This call runs only once on index and archive pages.
-				* At some point, override functionality should be built in similar to the template part below.
-				*/
-			wp_print_styles( array( 'uw_wp_theme-content' ) ); // Note: If this was already done it will be skipped.
 
 			get_template_part( 'template-parts/content', 'page' );
 

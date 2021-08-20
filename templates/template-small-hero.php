@@ -35,7 +35,8 @@
         <h1 class="uw-site-title2"><?php the_title(); ?></h1>
         <span class="udub-slant"><span></span></span>
         <?php if(!empty($buttontext) && $buttontext[0]){ ?>
-        <a class="uw-btn btn-sm btn-none" href="<?php echo $buttonlink[0] ? $buttonlink[0] : ''; ?>"><?php echo $buttontext[0] ? $buttontext[0] : ''; ?></a>
+        <a class="btn btn-lg arrow white" href="<?php echo $buttonlink[0] ? $buttonlink[0] : ''; ?>"><span><?php echo $buttontext[0] ? $buttontext[0] : ''; ?></span><span class="arrow-box"><span class="arrow"></span></span></a>
+
         <?php } ?>
       </div>
 </div>
@@ -44,21 +45,15 @@
   <div class="row">
     <div class="hero-content col-md-<?php echo (($sidebar[0]!="on") ? "8" : "12" ) ?> uw-content" role='main'>
 
-      <?php uw_site_title(); ?>
+      <?php //uw_site_title(); ?>
       <?php get_template_part( 'menu', 'mobile' ); ?>
-      <?php get_template_part( 'breadcrumbs' ); ?>
-
+      <?php echo uw_breadcrumbs() ?>
       <div id='main_content' class="uw-body-copy" tabindex="-1">
-
-
-
-
-
 
         <?php
           while ( have_posts() ) : the_post();
 
-            //the_content();
+            the_content();
             get_template_part( 'content', 'page-noheader' );
 
             // If comments are open or we have at least one comment, load up the comment template.
@@ -74,11 +69,13 @@
 
     </div>
 
-    <div id="sidebar"><?php
+    <!--<div id="sidebar" >-->
+		<?php
       if($sidebar[0]!="on"){
         get_sidebar();
       }
-    ?></div>
+    ?>
+	<!--</div>-->
 
   </div>
 
@@ -86,4 +83,3 @@
 
 <?php get_footer(); ?>
 
-<?php

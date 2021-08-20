@@ -20,10 +20,12 @@ class UW_Grid
 
     function bs_row( $params, $content=null ) {
         extract( shortcode_atts( array(
-            'class' => 'row'
+            'class'  => 'row',
+			'height' => '',
         ), $params ) );
+
         $content = preg_replace( '/<br class="nc".\/>/', '', $content );
-        $result = '<div class="' . $class . '">';
+        $result = '<div class="' . $class . ' ' . $height . '">';
         $result .= do_shortcode( $content );
         $result .= '</div>';
         return force_balance_tags( $result );

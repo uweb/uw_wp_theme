@@ -61,6 +61,7 @@ class UW_Iframes
       'tvw.org',
       'www.uwtv.org',
       'google.com',
+	  'calendar.google.com',
       'docs.google.com',
       'drive.google.com',
       'youtube.com',

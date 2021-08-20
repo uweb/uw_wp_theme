@@ -8,11 +8,11 @@
     $: jQuery,
     init: function init(ed, url) {
       var this_ = this;
-      ed.onBeforeSetContent.add(function (ed, o) {
-        o.content = this_._do_shcode(o.content);
+      ed.on('BeforeSetContent', function (ed, o) {
+        ed.content = this_._do_shcode(ed.content);
       });
-      ed.onPostProcess.add(function (ed, o) {
-        if (o.get) o.content = this_._get_shcode(o.content);
+      ed.on('PostProcess', function (ed, o) {
+        if (ed.get) ed.content = this_._get_shcode(ed.content);
       }); // delete mediacredit html when its corresponding image is deleted
 
       tinymce.dom.Event.bind(document, 'mousedown', function (e) {
@@ -24,18 +24,11 @@
           el = this_.$(el).closest('dl.mediacredit').get(0);
           ed.dom.remove(el);
         }
-      }); //TODO: figure out if we can remove this
-      // ed.onInit.add(function(ed, evt) {
-      //
-      //  tinymce.dom.Event.bind( ed.getDoc(), 'mousedown', function(e) {
-      //    console.log(e.target, 'here')
-      //  });
-      //
-      //})
+      });
     },
     _do_shcode: function _do_shcode(co) {
       return wp.shortcode.replace('mediacredit', co, function (a) {
-        return '<dl class="mediacredit ' + a.attrs.named.align + '" data-credit="' + a.attrs.named.credit + '" data-size="' + a.attrs.named.size + '" data-align="' + a.attrs.named.align + '" style="width:' + a.attrs.named.width + 'px">' + '<dt class="mediacredit-dt">' + a.content + '<dt>' + '<dd class="wp-caption-dd">' + a.attrs.named.credit + '<dd>' + '</dl>';
+        return '<dl class="mediacredit ' + a.attrs.named.align + '" data-credit="' + a.attrs.named.credit + '" data-align="' + a.attrs.named.align + '" data-width="' + a.attrs.named.width + '" style="width:' + a.attrs.named.width + 'px">' + '<dt class="mediacredit-dt">' + a.content + '<dt>' + '<dd class="wp-caption-dd">' + a.attrs.named.credit + '<dd>' + '</dl>';
       });
     },
     _get_shcode: function _get_shcode(co) {
@@ -49,9 +42,8 @@
           tag: 'mediacredit',
           content: $content.find('dt').filter(':not(:empty)').html(),
           attrs: {
-            id: $content.find('img').attr('class').replace(/\D+/g, ''),
-            size: data.size,
-            //width: data.width,
+            id: $content.find('img').attr('class').replace(/\D+/g, 'attachment_'),
+            width: data.width,
             align: data.align,
             credit: data.credit
           }

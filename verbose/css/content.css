@@ -88,6 +88,8 @@
 	/* max-width: var(--content-width)rem; */
 }
 
+.entry-footer { margin-bottom: 0 !important; }
+
 @media screen and (min-width: 48em) {
 	.page-content > *,
 	.entry-content > *,
@@ -192,12 +194,12 @@
 	padding-left: 1.2em;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) { */
 	.entry-content ul,
 	.entry-content ol {
 		margin-left: 1.5em;
 	}
-}
+/* } */
 
 .entry-content ul ul,
 .entry-content ol ol {
@@ -414,11 +416,8 @@ object {
 
 .wp-caption .wp-caption-text {
 	margin: 0.8075em 0;
-	font-style: italic;
-}
-
-.wp-caption-text {
-	text-align: center;
+	font-style: normal;
+	font-size: 15px;
 }
 
 /*--------------------------------------------------------------

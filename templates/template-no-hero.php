@@ -5,7 +5,7 @@
 ?>
 
 <?php get_header();
-      $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+     // $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
       $sidebar = get_post_meta($post->ID, "sidebar");   ?>
 
 <div class="uw-hero-image hero-blank">
@@ -17,9 +17,7 @@
   <div class="row">
 
     <div class="col-md-<?php echo (($sidebar[0]!="on") ? "8" : "12" ) ?> uw-content" role='main'>
-
-      <?php //get_template_part( 'template-parts/menu', 'mobile' ); ?>
-      <?php get_template_part( 'breadcrumbs' ); ?>
+    <?php echo uw_breadcrumbs() ?>
 
       <div id='main_content' class="uw-body-copy" tabindex="-1">
 
@@ -42,11 +40,11 @@
 
     </div>
 
-    <div id="sidebar"> <?php
+    <?php
       if($sidebar[0]!="on"){
         get_sidebar();
       }
-    ?> </div>
+    ?>
 
   </div>
 

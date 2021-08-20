@@ -1,11 +1,1 @@
-'use strict';
-
-var uw_golden = {};
-
-uw_golden.wrapHashtagsLinks = function (text) {
-    var hashTagRegexp = /#([a-zA-Z0-9]+)/g;
-    var linkRegexp = /https([^ ]+)/g;
-    text = text.replace(hashTagRegexp, '<span class="hash">#$1</span>');
-    text = text.replace(linkRegexp, '<span class="link">https$1</span>');
-    return text;
-};
+"use strict";var uw_wp_theme={wrapHashtagsLinks:function(s){return s=(s=s.replace(/#([a-zA-Z0-9]+)/g,'<span class="hash">#$1</span>')).replace(/https([^ ]+)/g,'<span class="link">https$1</span>')}};

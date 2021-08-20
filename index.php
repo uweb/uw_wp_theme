@@ -19,19 +19,13 @@ $sidebar = get_post_meta( $post->ID, 'sidebar' );
 
 
 <div class="container-fluid uw-body">
+<?php echo uw_breadcrumbs(); ?>
 	<div class="row">
-		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>"
+		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>">
 
 		<?php
 
 		if ( have_posts() ) :
-
-			/**
-			 * Include the component stylesheet for the content.
-			 * This call runs only once on index and archive pages.
-			 * At some point, override functionality should be built in similar to the template part below.
-			 */
-			wp_print_styles( array( 'uw_wp_theme-content', 'uw_wp_theme-bootstrap' ) ); // Note: If this was already done it will be skipped.
 
 			/* Display the appropriate header when required. */
 			uw_wp_theme_index_header();
@@ -50,12 +44,20 @@ $sidebar = get_post_meta( $post->ID, 'sidebar' );
 			endwhile;
 
 			if ( ! is_singular() ) :
-				the_posts_navigation();
+				the_posts_pagination(
+					array(
+						'mid_size'           => 2,
+						'prev_text'          => __( '&lsaquo; Previous', 'uw_wp_theme' ),
+						'next_text'          => __( 'Next &rsaquo;', 'uw_wp_theme' ),
+						'screen_reader_text' => __( 'Search Results Navigation', 'uw_wp_theme' ),
+						'aria_label'         => __( 'Search Results', 'uw_wp_theme' ),
+					)
+				);
 			endif;
 
-		else :
+			else :
 
-			get_template_part( 'template-parts/content', 'none' );
+				get_template_part( 'template-parts/content', 'none' );
 
 		endif;
 		?>

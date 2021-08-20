@@ -9,7 +9,6 @@
 
 get_header();
 
-wp_print_styles( array( 'uw_wp_theme-content', 'uw_wp_theme-bootstrap' ) ); // Note: If this was already done it will be skipped.
 ?>
 	<div class="uw-hero-image"></div>
 	<main id="primary" class="site-main container">

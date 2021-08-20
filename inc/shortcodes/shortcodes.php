@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcodes for UW Social theme.
+ * Shortcodes for UW WP theme.
  *
  * @package uw_wp_theme
  */
@@ -11,9 +11,9 @@
 function uw_wp_theme_shortcodes() {
 
 	// If this is the admin page, do nothing.
-	if ( is_admin() ) {
-		return;
-	}
+	// if ( is_admin() ) {
+	// 	return;
+	// }
 
 	$parent = get_template_directory() . '/inc/shortcodes/';
 	require_once( $parent . 'class.modal-shortcode.php' );
@@ -31,6 +31,10 @@ function uw_wp_theme_shortcodes() {
 	require_once( $parent . 'class.tabs-tours-shortcode.php' );
 	require_once( $parent . 'class.youtube-shortcode.php' );
 	require_once( $parent . 'class.uw-iframes.php' );
+	require_once( $parent . 'class.cards-shortcode.php' );
+	require_once( $parent . 'class.blockquote-shortcode.php' );
+	require_once( $parent . 'class.gallery-shortcode.php' );
+	require_once( $parent . 'class.jumbotron-shortcode.php' );
 
 	$tilebox     = new UW_TileBox();
 	$button      = new UW_Button();
@@ -46,25 +50,24 @@ function uw_wp_theme_shortcodes() {
 	$accordion   = new UW_Accordion();
 	$tabsTours   = new UW_Tabs_Tours();
 	$youtube     = new UW_Youtube();
-	$iframes	 = new  UW_Iframes();
-
+	$iframes     = new UW_Iframes();
+	$uwcard      = new UW_Card();
+	$blockquote  = new UW_Blockquote();
+	$gallery     = new UW_Gallery();
+	$jumbotron   = new UW_Jumbotron();
 
 	// call the enqueue scripts for shortcodes.
 	add_action( 'wp_enqueue_scripts', 'uw_wp_theme_enqueue_shortcodes' );
 }
-add_action( 'wp', 'uw_wp_theme_shortcodes' );
+add_action( 'wp_loaded', 'uw_wp_theme_shortcodes' );
 
 /**
  * Enqueue and defer shortcode scripts.
  */
 function uw_wp_theme_enqueue_shortcodes() {
 	if ( is_multisite() ) {
-		wp_enqueue_script( 'uw_wp_theme-shortcode-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/shortcodes.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20190625', true );
 		wp_enqueue_script( 'uw_wp_theme-custom-link-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/custom-link.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200116', true );
-		wp_enqueue_script( 'uw_wp_theme-youtube-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/youtube.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200124', true );
 	} else {
-		wp_enqueue_script( 'uw_wp_theme-shortcode-script', get_theme_file_uri( '/js/shortcodes/shortcodes.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20190625', true );
 		wp_enqueue_script( 'uw_wp_theme-custom-link-script', get_theme_file_uri( '/js/shortcodes/custom-link.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200116', true );
-		wp_enqueue_script( 'uw_wp_theme-youtube-script', get_theme_file_uri( '/js/shortcodes/youtube.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200124', true );
 	}
 }

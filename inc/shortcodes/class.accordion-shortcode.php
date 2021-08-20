@@ -121,12 +121,17 @@ class UW_Accordion {
 			$content = 'No content for this section.  Make sure you wrap your content like this: [section]Content here[/section]';
 		}
 		if ( $section_atts['active'] ) {
-			$class = 'show';
+			$class      = 'show';
+			$active_tab = 'true';
+		} else {
+			$active_tab = 'false';
+			$class      = '';
 		}
 		$output = do_shortcode( $content );
 
 		return sprintf(
-			'<div class="card"><div class="card-header" id="accordion-header"><h3 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button</h3></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion">%s</div></div>',
+			'<div class="card"><div class="card-header" id="accordion-header"><h3 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button</h3></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion">%s</div></div>',
+			$active_tab,
 			$section_atts['title'],
 			$class,
 			apply_filters( 'the_content', $output )

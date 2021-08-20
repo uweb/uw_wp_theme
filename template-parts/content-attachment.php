@@ -17,10 +17,10 @@
 		?>
 		<div class="entry-meta">
 			<?php
-				uw_wp_theme_posted_on();
-				uw_wp_theme_posted_by();
-				uw_wp_theme_attachment_in( $post );
-				uw_wp_theme_comments_link();
+				//uw_wp_theme_posted_on();
+				//uw_wp_theme_posted_by();
+				//uw_wp_theme_attachment_in( $post );
+				//uw_wp_theme_comments_link();
 			?>
 		</div><!-- .entry-meta -->
 
@@ -53,11 +53,11 @@
 
 
 // If the attachment is attached to a post, try linking to other attachments on the same post.
-if ( ! empty( $post->post_parent ) ) :
-	uw_wp_theme_the_attachment_navigation();
-endif;
+// if ( ! empty( $post->post_parent ) ) :
+// 	uw_wp_theme_the_attachment_navigation();
+// endif;
 
 // If comments are open or we have at least one comment, load up the comment template.
-if ( comments_open() || get_comments_number() ) :
-	comments_template();
-endif;
+// if ( comments_open() || get_comments_number() ) :
+// 	comments_template();
+// endif;

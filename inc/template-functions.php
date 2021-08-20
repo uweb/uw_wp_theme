@@ -75,10 +75,10 @@ add_filter( 'script_loader_tag', 'uw_wp_theme_filter_script_loader_tag', 10, 2 )
  * @param object $wp_styles Registered styles.
  * @param string $handle The style handle.
  */
-function uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, $handle ) {
-	$preload_uri = $wp_styles->registered[ $handle ]->src . '?ver=' . $wp_styles->registered[ $handle ]->ver;
-	return $preload_uri;
-}
+// function uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, $handle ) {
+// 	$preload_uri = $wp_styles->registered[ $handle ]->src . '?ver=' . $wp_styles->registered[ $handle ]->ver;
+// 	return $preload_uri;
+// }
 
 /**
  * Adds preload for in-body stylesheets depending on what templates are being used.
@@ -86,46 +86,46 @@ function uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, $handle ) {
  *
  * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
  */
-function uw_wp_theme_add_body_style() {
+// function uw_wp_theme_add_body_style() {
 
 	// If AMP is active, do nothing.
-	if ( uw_wp_theme_is_amp() ) {
-		return;
-	}
+	// if ( uw_wp_theme_is_amp() ) {
+	// 	return;
+	// }
 
 	// Get registered styles.
-	$wp_styles = wp_styles();
+	// $wp_styles = wp_styles();
 
-	$preloads = array();
+	// $preloads = array();
 
 	// Preload content.css.
-	$preloads['uw_wp_theme-content'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-content' );
+	// $preloads['uw_wp_theme-content'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-content' );
 
 	// Preload sidebar.css and widget.css.
-	if ( is_active_sidebar( 'sidebar-1' ) ) {
-		$preloads['uw_wp_theme-sidebar'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-sidebar' );
-		$preloads['uw_wp_theme-widgets'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-widgets' );
-	}
+	// if ( is_active_sidebar( 'sidebar-1' ) ) {
+	// 	$preloads['uw_wp_theme-sidebar'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-sidebar' );
+	// 	$preloads['uw_wp_theme-widgets'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-widgets' );
+	// }
 
 	// Preload comments.css.
-	if ( ! post_password_required() && is_singular() && ( comments_open() || get_comments_number() ) ) {
-		$preloads['uw_wp_theme-comments'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-comments' );
-	}
+	// if ( ! post_password_required() && is_singular() && ( comments_open() || get_comments_number() ) ) {
+	// 	$preloads['uw_wp_theme-comments'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-comments' );
+	// }
 
 	// Preload front-page.css.
-	global $template;
-	if ( 'front-page.php' === basename( $template ) ) {
-		$preloads['uw_wp_theme-front-page'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-front-page' );
-	}
+	// global $template;
+	// if ( 'front-page.php' === basename( $template ) ) {
+	// 	$preloads['uw_wp_theme-front-page'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-front-page' );
+	// }
 
 	// Output the preload markup in <head>.
-	foreach ( $preloads as $handle => $src ) {
-		echo '<link rel="preload" id="' . esc_attr( $handle ) . '-preload" href="' . esc_url( $src ) . '" as="style" />';
-		echo "\n";
-	}
+// 	foreach ( $preloads as $handle => $src ) {
+// 		echo '<link rel="preload" id="' . esc_attr( $handle ) . '-preload" href="' . esc_url( $src ) . '" as="style" />';
+// 		echo "\n";
+// 	}
 
-}
-add_action( 'wp_head', 'uw_wp_theme_add_body_style' );
+// }
+// add_action( 'wp_head', 'uw_wp_theme_add_body_style' );
 
 /**
  * Add dropdown symbol to nav menu items with children.
@@ -245,6 +245,16 @@ if ( !function_exists('uw_site_title')):
 
 endif;
 
+if ( ! function_exists('uw_is_custom_post_type') ) :
+
+	function uw_is_custom_post_type()
+	{
+	  return get_post_type() ? array_key_exists(  get_post_type(),  get_post_types( array( '_builtin'=>false) ) ) : true;
+	}
+
+  endif;
+
+
 if ( ! function_exists( 'uw_mobile_front_page_menu' ) ) :
 
   function uw_mobile_front_page_menu($class='')
@@ -283,15 +293,14 @@ function uw_list_front_page_menu_items()
 
 endif;
 
-if ( ! function_exists('get_uw_breadcrumbs') ) :
+if ( ! function_exists('uw_breadcrumbs') ) :
 
-  function get_uw_breadcrumbs()
+  function uw_breadcrumbs()
   {
 
     global $post;
     $ancestors = array_reverse( get_post_ancestors( $post ) );
-    $html = '<li><a href="http://uw.edu" title="University of Washington">Home</a></li>';
-    $html .= '<li' . (is_front_page() ? ' class="current"' : '') . '><a href="' . home_url('/') . '" title="' . get_bloginfo('title') . '">' . get_bloginfo('title') . '</a><li>';
+    $html = '<li><a href="' . home_url('/') . '" title="' . get_bloginfo('title') . '">' . get_bloginfo('title') . '</a>';
 
     if ( is_404() )
     {
@@ -339,17 +348,12 @@ if ( ! function_exists('get_uw_breadcrumbs') ) :
           $category = array_shift( $thecat ) ;
           $html .=  '<li><a href="'  . get_category_link( $category->term_id ) .'" title="'. get_cat_name( $category->term_id ).'">'. get_cat_name($category->term_id ) . '</a>';
         }
-        if ( uw_is_custom_post_type() )
-        {
-          $posttype = get_post_type_object( get_post_type() );
-          $archive_link = get_post_type_archive_link( $posttype->query_var );
-          if (!empty($archive_link)) {
-            $html .=  '<li><a href="'  . $archive_link .'" title="'. $posttype->labels->menu_name .'">'. $posttype->labels->menu_name  . '</a>';
-          }
-          else if (!empty($posttype->rewrite['slug'])){
-            $html .=  '<li><a href="'  . site_url('/' . $posttype->rewrite['slug'] . '/') .'" title="'. $posttype->labels->menu_name .'">'. $posttype->labels->menu_name  . '</a>';
-          }
-        }
+		//check if is Custom Post Type
+		if( ! is_singular( array('page', 'attachment', 'post') ) ){
+			$posttype = get_post_type_object( get_post_type() );
+			$html .=  '<li><a href="' . home_url('/') . '" title="' . get_bloginfo('title') . '">' . get_bloginfo('title') . '</a>';
+		}
+
         $html .=  '<li class="current"><span>'. get_the_title( $post->ID ) . '</span>';
       }
     }
@@ -365,132 +369,102 @@ if ( ! function_exists('get_uw_breadcrumbs') ) :
       {
         foreach ( array_filter( $ancestors ) as $index=>$ancestor )
         {
+
           $class      = $index+1 == count($ancestors) ? ' class="current" ' : '';
           $page       = get_post( $ancestor );
           $url        = get_permalink( $page->ID );
           $title_attr = esc_attr( $page->post_title );
+
           if (!empty($class)){
+
             $html .= "<li $class><span>{$page->post_title}</span></li>";
           }
           else {
+
             $html .= "<li><a href=\"$url\" title=\"{$title_attr}\">{$page->post_title}</a></li>";
           }
         }
       }
-
     }
 
     return "<nav class='uw-breadcrumbs' aria-label='breadcrumbs'><ul>$html</ul></nav>";
+
   }
 
 endif;
 
-if ( ! function_exists('uw_breadcrumbs') ) :
+// Mega Menu navigation.
+if ( ! function_exists( 'uw_wp_theme_mega_menu' ) ) :
+	function uw_wp_theme_mega_menu() {
+		if ( has_nav_menu( UW_MegaMenu::LOCATION ) ) {
 
-  function uw_breadcrumbs()
-  {
-    echo get_uw_breadcrumbs();
-  }
+			// only enqueue script when mega menu is present!
+			wp_enqueue_script( 'uw_wp_theme-megamenu-script' );
 
+			// output the mega menu.
+			echo '<nav class="navbar white-bar navbar-expand-md navbar-light ' . UW_MegaMenu::LOCATION . '" aria-label="' . UW_MegaMenu::LOCATION . '">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . UW_MegaMenu::LOCATION .'" aria-controls="' . UW_MegaMenu::LOCATION . '" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+		  		<div class="container-fluid">';
+			echo wp_nav_menu(
+				array(
+					'theme_location'    => UW_MegaMenu::LOCATION,
+					'container_id'      => UW_MegaMenu::LOCATION,
+					'container'         => 'div',
+					'container_class'   => 'collapse navbar-collapse',
+					'fallback_cb'       => 'Bootstrap_MegaMenu_Walker::fallback',
+					'walker'            => new Bootstrap_MegaMenu_Walker(),
+					'menu_class'        => 'navbar-nav',
+					'depth'             => 3,
+				)
+			);
+			echo '</div></nav>';
+		} else {
+			// if no menu is set in the WP settings, add this message to the front end.
+			echo '<div class="container"><div class="alert alert-warning" role="alert">You\'re almost there. Please add a menu to the Mega Menu in Appearance > Menus.</div></div>';
+		}
+	}
 endif;
 
-if ( ! function_exists('uw_wp_theme_breadcrumbs') ) :
 
-	function uw_wp_theme_breadcrumbs(){
 
-		global $post;
-		$ancestors = array_reverse( get_post_ancestors( $post ) );
-		$html = '<li><a href="http://uw.edu" title="University of Washington">Home</a></li>';
-		$html .= '<li' . (is_front_page() ? ' class="current"' : '') . '><a href="' . home_url('/') . '" title="' . get_bloginfo('title') . '">' . get_bloginfo('title') . '</a><li>';
+//adds Resources widget to right side of admin dashboard
+add_action( 'wp_dashboard_setup', 'uw_dashboard_setup_function' );
+function UW_dashboard_setup_function() {
+    add_meta_box(
+		'uw-dashboard-widget',
+		'UW Theme Resources',
+		'uw_dashboard_widget_function',
+		'dashboard',
+		'side',
+		'high'
+	);
+}
+function UW_dashboard_widget_function() {
+    // widget content goes here
 
-		if ( is_404() )
-		{
-		    $html .=  '<li class="current"><span>Woof!</span>';
-		} else
+	echo '<div class="colums2">';
+	echo '<p style="font-weight: 600;">Documentation and guides</p>';
+	echo '<p><a href="https://github.com/uweb/uw_wp_theme" target="_blank">UW WordPress Theme repo</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
+ 	echo '<p><a href="https://github.com/uweb/uw_wp_theme#readme" target="_blank">README.md</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
+	echo '<p><a href="https://www.washington.edu/brand/" target="_blank">UW Brand Portal</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
+	echo '</div>';
 
-		if ( is_search() )
-		{
-		    $html .=  '<li class="current"><span>Search results for ' . get_search_query() . '</span>';
-		} else
+	echo '<div class="colums2">';
+	echo '<p style="font-weight: 600;">Meetups</p>';
+	echo '<p><a href="https://www.washington.edu/brand/web/web-council/">Web Council </a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
+	echo '<p><a href="https://sites.uw.edu/wpug/">WordPress Users Group </a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
+	echo '<br>';
+	echo '<p><strong>Need help?</strong> Contact the  <a href="mailto:uweb@uw.com">UW Web Team</a>. </p>';
+	echo '</div>';
+}
 
-		if ( is_author() )
-		{
-		    $author = get_queried_object();
-		    $html .=  '<li class="current"><span> Author: '  . $author->display_name . '</span>';
-		} else
-
-		if ( get_queried_object_id() === (Int) get_option('page_for_posts')   ) {
-		    $html .=  '<li class="current"><span> '. get_the_title( get_queried_object_id() ) . ' </span>';
-		}
-
-		// If the current view is a post type other than page or attachment then the breadcrumbs will be taxonomies.
-		if( is_category() || is_single() || is_post_type_archive() )
-		{
-
-		  if ( is_post_type_archive() )
-		  {
-		    $posttype = get_post_type_object( get_post_type() );
-		    //$html .=  '<li class="current"><a href="'  . get_post_type_archive_link( $posttype->query_var ) .'" title="'. $posttype->labels->menu_name .'">'. $posttype->labels->menu_name  . '</a>';
-		    $html .=  '<li class="current"><span>'. $posttype->labels->menu_name  . '</span>';
-		  }
-
-		  if ( is_category() )
-		  {
-		    $category = get_category( get_query_var( 'cat' ) );
-		    //$html .=  '<li class="current"><a href="'  . get_category_link( $category->term_id ) .'" title="'. get_cat_name( $category->term_id ).'">'. get_cat_name($category->term_id ) . '</a>';
-		    $html .=  '<li class="current"><span>'. get_cat_name($category->term_id ) . '</span>';
-		  }
-
-		  if ( is_single() )
-		  {
-		    if ( has_category() )
-		    {
-		      $thecat = get_the_category( $post->ID  );
-		      $category = array_shift( $thecat ) ;
-		      $html .=  '<li><a href="'  . get_category_link( $category->term_id ) .'" title="'. get_cat_name( $category->term_id ).'">'. get_cat_name($category->term_id ) . '</a>';
-		    }
-		    if ( uw_is_custom_post_type() )
-		    {
-		      $posttype = get_post_type_object( get_post_type() );
-		      $archive_link = get_post_type_archive_link( $posttype->query_var );
-		      if (!empty($archive_link)) {
-		        $html .=  '<li><a href="'  . $archive_link .'" title="'. $posttype->labels->menu_name .'">'. $posttype->labels->menu_name  . '</a>';
-		      }
-		      else if (!empty($posttype->rewrite['slug'])){
-		        $html .=  '<li><a href="'  . site_url('/' . $posttype->rewrite['slug'] . '/') .'" title="'. $posttype->labels->menu_name .'">'. $posttype->labels->menu_name  . '</a>';
-		      }
-		    }
-		    $html .=  '<li class="current"><span>'. get_the_title( $post->ID ) . '</span>';
-		  }
-		}
-
-		// If the current view is a page then the breadcrumbs will be parent pages.
-		else if ( is_page() )
-		{
-
-		  if ( ! is_home() || ! is_front_page() )
-		    $ancestors[] = $post->ID;
-
-		  if ( ! is_front_page() )
-		  {
-		    foreach ( array_filter( $ancestors ) as $index=>$ancestor )
-		    {
-		      $class      = $index+1 == count($ancestors) ? ' class="current" ' : '';
-		      $page       = get_post( $ancestor );
-		      $url        = get_permalink( $page->ID );
-		      $title_attr = esc_attr( $page->post_title );
-		      if (!empty($class)){
-		        $html .= "<li $class><span>{$page->post_title}</span></li>";
-		      }
-		      else {
-		        $html .= "<li><a href=\"$url\" title=\"{$title_attr}\">{$page->post_title}</a></li>";
-		      }
-		    }
-		  }
-
-		}
-
-		return "<nav class='uw-breadcrumbs' aria-label='breadcrumbs'><ul>$html</ul></nav>";
+add_action( 'admin_enqueue_scripts', 'dashboard_widget_display_enqueues' );
+function dashboard_widget_display_enqueues( $hook ) {
+	if( 'index.php' != $hook ) {
+		return;
 	}
 
-endif;
+	wp_enqueue_style( 'dashboard-widget-styles', get_template_directory_uri( '', __FILE__ ) . '/dev/assets/admin/css/dashboard-widgets.css' );
+}

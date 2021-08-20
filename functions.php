@@ -41,13 +41,6 @@ function uw_wp_theme_setup() {
 		*/
 	add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus(
-		array(
-			'primary' => esc_html__( 'Primary', 'uw_wp_theme' ),
-		)
-	);
-
 	/*
 		* Switch default core markup for search form, comment form, and comments
 		* to output valid HTML5.
@@ -63,14 +56,14 @@ function uw_wp_theme_setup() {
 	);
 
 	// Set up the WordPress core custom background feature.
-	add_theme_support(
-		'custom-background', apply_filters(
-			'uw_wp_theme_custom_background_args', array(
-				'default-color' => 'ffffff',
-				'default-image' => '',
-			)
-		)
-	);
+	// add_theme_support(
+	// 	'custom-background', apply_filters(
+	// 		'uw_wp_theme_custom_background_args', array(
+	// 			'default-color' => 'ffffff',
+	// 			'default-image' => '',
+	// 		)
+	// 	)
+	// );
 
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
@@ -80,14 +73,14 @@ function uw_wp_theme_setup() {
 	 *
 	 * @link https://codex.wordpress.org/Theme_Logo
 	 */
-	add_theme_support(
-		'custom-logo', array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => false,
-			'flex-height' => false,
-		)
-	);
+	// add_theme_support(
+	// 	'custom-logo', array(
+	// 		'height'      => 250,
+	// 		'width'       => 250,
+	// 		'flex-width'  => false,
+	// 		'flex-height' => false,
+	// 	)
+	// );
 
 	/**
 	 * Add support for default block styles.
@@ -203,9 +196,9 @@ function uw_wp_theme_setup() {
 	 *
 	 * @link https://wordpress.org/plugins/amp/
 	 */
-	add_theme_support( 'amp', array(
-		'comments_live_list' => true,
-	) );
+	// add_theme_support( 'amp', array(
+	// 	'comments_live_list' => true,
+	// ) );
 
 }
 add_action( 'after_setup_theme', 'uw_wp_theme_setup' );
@@ -309,19 +302,19 @@ function uw_wp_theme_styles() {
 
 	// Register component styles that are printed as needed.
 	if ( is_multisite() ) {
-		wp_register_style( 'uw_wp_theme-bootstrap', network_site_url( '/wp-content/themes/uw_wp_theme/css/bootstrap.css' ), array(), '20190610' );
-		wp_register_style( 'uw_wp_theme-comments', network_site_url( '/wp-content/themes/uw_wp_theme/css/comments.css' ), array(), '20180514' );
-		wp_register_style( 'uw_wp_theme-content', network_site_url( '/wp-content/themes/uw_wp_theme/css/content.css' ), array(), '20180514' );
-		wp_register_style( 'uw_wp_theme-sidebar', network_site_url( '/wp-content/themes/uw_wp_theme/css/sidebar.css' ), array(), '20180514' );
-		wp_register_style( 'uw_wp_theme-widgets', network_site_url( '/wp-content/themes/uw_wp_theme/css/widgets.css' ), array(), '20180514' );
-		wp_register_style( 'uw_wp_theme-front-page', network_site_url( '/wp-content/themes/uw_wp_theme/css/front-page.css' ), array(), '20180514' );
+		wp_enqueue_style( 'uw_wp_theme-bootstrap', network_site_url( '/wp-content/themes/uw_wp_theme/css/bootstrap.css' ), array(), '20190610' );
+		wp_enqueue_style( 'uw_wp_theme-comments', network_site_url( '/wp-content/themes/uw_wp_theme/css/comments.css' ), array(), '20180514' );
+		wp_enqueue_style( 'uw_wp_theme-content', network_site_url( '/wp-content/themes/uw_wp_theme/css/content.css' ), array(), '20180514' );
+		wp_enqueue_style( 'uw_wp_theme-sidebar', network_site_url( '/wp-content/themes/uw_wp_theme/css/sidebar.css' ), array(), '20180514' );
+		wp_enqueue_style( 'uw_wp_theme-widgets', network_site_url( '/wp-content/themes/uw_wp_theme/css/widgets.css' ), array(), '20180514' );
+		// wp_enqueue_style( 'uw_wp_theme-front-page', network_site_url( '/wp-content/themes/uw_wp_theme/css/front-page.css' ), array(), '20180514' );
 	} else {
-		wp_register_style( 'uw_wp_theme-bootstrap', get_theme_file_uri( '/css/bootstrap.css' ), array(), '20190610' );
-		wp_register_style( 'uw_wp_theme-comments', get_theme_file_uri( '/css/comments.css' ), array(), '20180514' );
-		wp_register_style( 'uw_wp_theme-content', get_theme_file_uri( '/css/content.css' ), array(), '20180514' );
-		wp_register_style( 'uw_wp_theme-sidebar', get_theme_file_uri( '/css/sidebar.css' ), array(), '20180514' );
-		wp_register_style( 'uw_wp_theme-widgets', get_theme_file_uri( '/css/widgets.css' ), array(), '20180514' );
-		wp_register_style( 'uw_wp_theme-front-page', get_theme_file_uri( '/css/front-page.css' ), array(), '20180514' );
+		wp_enqueue_style( 'uw_wp_theme-bootstrap', get_theme_file_uri( '/css/bootstrap.css' ), array(), '20190610' );
+		wp_enqueue_style( 'uw_wp_theme-comments', get_theme_file_uri( '/css/comments.css' ), array(), '20180514' );
+		wp_enqueue_style( 'uw_wp_theme-content', get_theme_file_uri( '/css/content.css' ), array(), '20180514' );
+		wp_enqueue_style( 'uw_wp_theme-sidebar', get_theme_file_uri( '/css/sidebar.css' ), array(), '20180514' );
+		wp_enqueue_style( 'uw_wp_theme-widgets', get_theme_file_uri( '/css/widgets.css' ), array(), '20180514' );
+		// wp_enqueue_style( 'uw_wp_theme-front-page', get_theme_file_uri( '/css/front-page.css' ), array(), '20180514' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'uw_wp_theme_styles' );
@@ -375,14 +368,6 @@ function uw_wp_theme_scripts() {
 	} else {
 		wp_enqueue_script( 'underscore' );
 		wp_enqueue_script( 'uw_wp_theme-backbone', get_theme_file_uri( '/js/libs/backbone-min.js' ), array(), '20190619', true );
-	}
-
-	/**
-	 * OPL theme stuff. Only needed for UW Public Lectures.
-	 */
-	if ( false !== strpos( $_SERVER['REQUEST_URI'], 'lectures' ) ) {
-		// if the uri includes 'lectures', load this stylesheet.
-		wp_enqueue_style( 'opl-style', network_site_url( '/wp-content/themes/uw_wp_theme/pluggable/lectures/public-lectures.css' ), array(), '20200218' );
 	}
 
 	// Enqueue skip-link-focus script.
@@ -472,9 +457,11 @@ require get_template_directory() . '/inc/shortcodes/shortcodes.php';
 require get_template_directory() . '/inc/widgets/widgets.php';
 
 
-// Register Custom Navigation Walker for function.php
+// Register Custom Navigation Walker for the default Bootstrap menu (aka updated 2014 menu).
 require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';
 
+// Register Custom Navigation Walker for the Mega Menu.
+require get_template_directory() . '/inc/wp-bootstrap-megamenu-navwalker.php';
 
 // Register Custom Navigation Walker for function.php
 require get_template_directory() . '/inc/theme-settings.php';

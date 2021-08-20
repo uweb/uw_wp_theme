@@ -30,6 +30,7 @@
 <div id="uwsearcharea" aria-hidden="true" class="uw-search-bar-container"></div>
 
 <div id="page" class="site">
+	<?php get_template_part( 'template-parts/menu', 'quicklinks' ); ?>
 	<div id="page-inner">
 		<header id="masthead" class="site-header">
 			<nav class="navbar navbar-expand-lg">
@@ -38,21 +39,7 @@
 					<a href="http://uw.edu" title="University of Washington Home" class="uw-wordmark" tabindex="-1" aria-hidden="true">University of Washington</a>
 				</div><!-- .site-branding -->
 
-				<div id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Main menu', 'uw_wp_theme' ); ?>"
-					<?php if ( uw_wp_theme_is_amp() ) : ?>
-						[class]=" siteNavigationMenu.expanded ? 'main-navigation toggled-on' : 'main-navigation' "
-					<?php endif; ?>
-				>
-					<?php if ( uw_wp_theme_is_amp() ) : ?>
-						<amp-state id="siteNavigationMenu">
-							<script type="application/json">
-								{
-									"expanded": false
-								}
-							</script>
-						</amp-state>
-					<?php endif; ?>
-					</button>
+				<div id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Main menu', 'uw_wp_theme' ); ?>">
 
 					<div class="audience-menu-container collapse navbar-collapse">
 						<?php uw_wp_theme_purple_bar_menu(); ?>
@@ -70,5 +57,21 @@
 				</div><!-- #site-navigation -->
 			</nav><!-- .navbar.navbar-expand-lg -->
 		</header><!-- #masthead -->
-	<?php uw_wp_theme_white_bar_menu(); ?>
-	<?php wp_print_styles( array( 'uw_wp_theme-content', 'uw_wp_theme-bootstrap' ) ); // Note: If this was already done it will be skipped. ?>
+		
+	<?php
+	$nav_option = get_option( 'nav_menu_options' );
+
+	// if the mega menu is set, load the mega menu.
+	if ( isset( $nav_option['uw_nav_options'] ) ) {
+		if ( 'mega' === $nav_option['uw_nav_options'] ) {
+			uw_wp_theme_mega_menu();
+		} else {
+			// load the classic but updated 2014 menu.
+			uw_wp_theme_white_bar_menu();
+		}
+	} else {
+		// load the classic but updated 2014 menu.
+		uw_wp_theme_white_bar_menu();
+	}
+
+	?>

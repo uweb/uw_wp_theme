@@ -26,30 +26,33 @@ var UWTabs = function UWTabs() {
       return 1 < ids.filter(function (id) {
         return id === el.id;
       }).length;
-    }); // get the duplicated ID.
+    }); // then add a unique id to the end e.g. -1 (++).
 
-    var dupId = dups[0].id; // then add a unique id to the end e.g. -1 (++).
+    if (0 !== dups.length) {
+      // get the duplicated ID.
+      var dupId = dups[0].id;
 
-    for (var _d = 0; _d < allTabLists.length; _d++) {
-      if (dupId === allTabLists[_d].id) {
-        allTabLists[_d].id = dupId + '-' + _d; // set the IDs and hrefs for the links.
+      for (var _d = 0; _d < allTabLists.length; _d++) {
+        if (dupId === allTabLists[_d].id) {
+          allTabLists[_d].id = dupId + '-' + _d; // set the IDs and hrefs for the links.
 
-        var dupTabsLinks = allTabLists[_d].getElementsByClassName('nav-link');
+          var dupTabsLinks = allTabLists[_d].getElementsByClassName('nav-link');
 
-        for (var t = 0; t < dupTabsLinks.length; t++) {
-          dupTabsLinks[t].id = 'title-' + dupId + '-' + _d + '-' + t;
-          dupTabsLinks[t].href = '#content-' + dupId + '-' + _d + '-' + t;
-          dupTabsLinks[t].setAttribute('aria-controls', 'content-' + dupId + '-' + _d + '-' + t);
-        } // set the content panels to match the IDs.
+          for (var t = 0; t < dupTabsLinks.length; t++) {
+            dupTabsLinks[t].id = 'title-' + dupId + '-' + _d + '-' + t;
+            dupTabsLinks[t].href = '#content-' + dupId + '-' + _d + '-' + t;
+            dupTabsLinks[t].setAttribute('aria-controls', 'content-' + dupId + '-' + _d + '-' + t);
+          } // set the content panels to match the IDs.
 
 
-        allTabLists[_d].parentElement.getElementsByClassName('tab-content')[0].id = 'tab-content-' + dupId + '-' + _d; // set the
+          allTabLists[_d].parentElement.getElementsByClassName('tab-content')[0].id = 'tab-content-' + dupId + '-' + _d; // set the
 
-        var dupTabsPanes = allTabLists[_d].parentElement.getElementsByClassName('tab-pane');
+          var dupTabsPanes = allTabLists[_d].parentElement.getElementsByClassName('tab-pane');
 
-        for (var p = 0; p < dupTabsPanes.length; p++) {
-          dupTabsPanes[p].id = 'content-' + dupId + '-' + _d + '-' + p;
-          dupTabsPanes[p].setAttribute('aria-labelledby', 'title-' + dupId + '-' + _d + '-' + p);
+          for (var p = 0; p < dupTabsPanes.length; p++) {
+            dupTabsPanes[p].id = 'content-' + dupId + '-' + _d + '-' + p;
+            dupTabsPanes[p].setAttribute('aria-labelledby', 'title-' + dupId + '-' + _d + '-' + p);
+          }
         }
       }
     }
