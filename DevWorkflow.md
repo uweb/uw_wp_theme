@@ -119,7 +119,53 @@ git pull origin develop
 ```
 8) Go back to your feature branch and continue working [(see Steps for setting up Git & daily workflow)](#steps-for-setting-up-git-daily-workflow)
 
-#Random git links & Resources
+# Random git links & Resources
 [Git housekeeping: clean-up outdated branches in local and remote repositories](https://railsware.com/blog/git-housekeeping-tutorial-clean-up-outdated-branches-in-local-and-remote-repositories/)
 
 [Gitflow Workflow basics](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+
+# Creating a release from develop / developing new features
+
+Releases foir uw_wp_theme should be created only from the main branch.
+
+1) Checkout the develop branch locally, run `git pull`, and open dev/style.css and edit the theme version number to match the release number. The release number should use [semantic versioning](https://semver.org/). Look at previous release version before selecting a version number and *understand semver major/minor/patch version numbering*.
+
+
+2) Create a [pull request](https://github.com/uweb/golden-snitch/pulls) to merge **develop** into the **main** branch. Give the PR a title that conveys this merge is for a release, note the release number.
+
+3) Check for any conflicts and solve for them, then merge the PR into main. **Do not delete the develop branch after merging!**
+
+4) In terminal, checkout the main branch of the repository and run `git pull`. Update the artifact to its latest point with `git submodule update`.
+
+5) `npm run bundle` Build the new release artifact
+
+6) `cd uw_wp_theme` Move into the release submodule folder
+
+7) `git checkout master` Checkout the **master** branch
+
+8) `git commit -a -m "updating to VERSION_NUMBER_HERE"` Make your commit and note the version number.
+
+9) `git push origin master` Push your updates to the master branch.
+
+10) `git tag VERSION_NUMBER_HERE` Tag your release with the version number.
+
+11) `git push --tags` Push the tags, this is a separate step.
+
+12) Return to the main directory `cd ../`
+
+13) Add the submodule update and commit/push it, then tag the update.
+```
+git add .
+git commit -m "created VERSION_NUMBER_VERION release artifact"
+git push origin main
+git tag VERSION_NUMBER_HERE
+git push --tags
+```
+
+14) Merge all updates on main back to develop. Handle any merge conflicts to get develop to match up to main as closely as possible.
+```
+git checkout develop
+git pull
+git merge main
+git push origin develop
+```

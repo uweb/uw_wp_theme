@@ -9438,7 +9438,7 @@ nav.popular-links {
 	position: relative; }
 
 .carousel .carousel-item {
-	margin: 0; }
+	margin-bottom: 0; }
 
 .carousel.slide {
 	-webkit-box-shadow: 0 0 0;
@@ -13385,7 +13385,7 @@ a.more {
 		.card.full-width .slant-pattern {
 			height: 60px; }
 
-.info-box {
+.entry-content .info-box {
 	width: 310px;
 	float: left;
 	margin: 20px 50px 50px 0;
@@ -13395,27 +13395,27 @@ a.more {
 	border: 1px solid rgba(112, 112, 112, 0.2);
 	border-radius: 2px;
 	position: relative; }
-	.info-box img {
+	.entry-content .info-box img {
 		max-width: 100%;
 		height: auto; }
-	.info-box.float-right {
+	.entry-content .info-box.float-right {
 		margin: 20px 0 50px 50px; }
 		@media (max-width: 767px) {
-			.info-box.float-right {
+			.entry-content .info-box.float-right {
 				margin: 20px 0; } }
-	.info-box.full-width {
+	.entry-content .info-box.full-width {
 		width: 100%;
 		margin: 20px auto; }
-	.info-box:after {
+	.entry-content .info-box:after {
 		top: auto;
 		bottom: -40px; }
-	.info-box p, .info-box li, .info-box a {
+	.entry-content .info-box p, .entry-content .info-box li, .entry-content .info-box a {
 		font-size: 16px;
 		line-height: 1.6; }
-	.info-box h1, .info-box h2, .info-box h3, .info-box h4, .info-box h5 {
+	.entry-content .info-box h1, .entry-content .info-box h2, .entry-content .info-box h3, .entry-content .info-box h4, .entry-content .info-box h5 {
 		margin-top: 0; }
 	@media (max-width: 767px) {
-		.info-box {
+		.entry-content .info-box {
 			width: 100%;
 			float: none !important;
 			margin: 20px 0; } }
