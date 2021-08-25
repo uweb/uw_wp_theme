@@ -1,1 +1,0 @@
-"use strict";!function(t){t(document).ready(function(){t('[data-toggle="tooltip"]').tooltip().filter('[data-trigger*="click"]').on("click",function(t){t.preventDefault()})})}(jQuery);

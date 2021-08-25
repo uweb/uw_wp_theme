@@ -1,1 +1,0 @@
-"use strict";var uw_wp_theme={wrapHashtagsLinks:function(s){return s=(s=s.replace(/#([a-zA-Z0-9]+)/g,'<span class="hash">#$1</span>')).replace(/https([^ ]+)/g,'<span class="link">https$1</span>')}};

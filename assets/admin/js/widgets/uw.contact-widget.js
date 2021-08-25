@@ -1,1 +1,24 @@
-"use strict";jQuery(document).ready(function(c){c("body").on("click","#person-button",function(t){t.preventDefault();var e=c(this).closest(".widget").attr("id").split("_contact-list-").pop();c(this).parent().find("#the-people").append(_.template(c("#redirect-template").html())({number:e}))}),c("body").on("click",".uw-contact-card-remove",function(t){this.closest(".peep").remove(),c("#widget-contact-list-2-savewidget").trigger("click")})});
+jQuery(document).ready(function( $ ) {
+
+
+
+	$('body').on('click', '#person-button', function(event) {
+		event.preventDefault();
+		var $id = $(this).closest('.widget').attr('id');
+		var $number = $id.split("_contact-list-").pop();
+
+		$(this).parent().find('#the-people').append(
+		                                            _.template( $('#redirect-template').html() ) ( { number : $number } )
+		                                            );
+
+
+
+	})
+
+	$('body').on('click', '.uw-contact-card-remove', function(event) {
+		this.closest('.peep').remove();
+		$("#widget-contact-list-2-savewidget").trigger('click');
+	})
+
+})
+

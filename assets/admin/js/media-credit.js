@@ -1,1 +1,85 @@
-"use strict";tinymce.create("tinymce.plugins.MediaCredit",{$:jQuery,init:function(t,e){var i=this;t.on("BeforeSetContent",function(t,e){t.content=i._do_shcode(t.content)}),t.on("PostProcess",function(t,e){t.get&&(t.content=i._get_shcode(t.content))}),tinymce.dom.Event.bind(document,"mousedown",function(t){var e=tinymce.activeEditor,n=e.selection.getNode();"DT"==n.nodeName&&"mediacredit-dt"===e.dom.getAttrib(n,"class")&&(n=i.$(n).closest("dl.mediacredit").get(0),e.dom.remove(n))})},_do_shcode:function(t){return wp.shortcode.replace("mediacredit",t,function(t){return'<dl class="mediacredit '+t.attrs.named.align+'" data-credit="'+t.attrs.named.credit+'" data-align="'+t.attrs.named.align+'" data-width="'+t.attrs.named.width+'" style="width:'+t.attrs.named.width+'px"><dt class="mediacredit-dt">'+t.content+'<dt><dd class="wp-caption-dd">'+t.attrs.named.credit+"<dd></dl>"})},_get_shcode:function(t){var a=this;return t.replace(/<dl class="mediacredit (.*?)>(.*?)<\/dl>/gi,function(t,e,n){var i=a.$(t),d=i.data();return i.find("img").length?(i.find("."+d.align).removeClass(d.align),wp.shortcode.string({tag:"mediacredit",content:i.find("dt").filter(":not(:empty)").html(),attrs:{id:i.find("img").attr("class").replace(/\D+/g,"attachment_"),width:d.width,align:d.align,credit:d.credit}})):""})},getInfo:function(){return{longname:"UW Media Credit",author:"Dane Odekirk",authorurl:"http://uw.edu",infourl:"http://uw.edu",version:tinymce.majorVersion+"."+tinymce.minorVersion}}}),tinymce.PluginManager.add("mediacredit",tinymce.plugins.MediaCredit);
+/**
+ * Adds [mediacredit] shortcode to tinymce
+ */
+
+(function() {
+ 	tinymce.create('tinymce.plugins.MediaCredit', {
+
+ 		$ : jQuery,
+
+ 		init : function(ed, url) {
+
+ 			var this_ = this;
+
+ 			ed.on('BeforeSetContent', function(ed, o) {
+ 				ed.content = this_._do_shcode(ed.content);
+ 			});
+
+ 			ed.on('PostProcess', function(ed, o) {
+ 				if (ed.get)
+ 					ed.content = this_._get_shcode(ed.content);
+ 			});
+
+			// delete mediacredit html when its corresponding image is deleted
+			tinymce.dom.Event.bind( document, 'mousedown', function(e) {
+				var ed = tinymce.activeEditor, el = ed.selection.getNode(), parent;
+
+				if ( el.nodeName == 'DT' && ed.dom.getAttrib(el, 'class') === 'mediacredit-dt' ) {
+					el = this_.$(el).closest('dl.mediacredit').get(0)
+					ed.dom.remove(el)
+				}
+
+			});
+
+		},
+
+		_do_shcode : function(co) {
+			return wp.shortcode.replace( 'mediacredit', co, function(a) {
+				return '<dl class="mediacredit '+a.attrs.named.align
+				+ '" data-credit="'+a.attrs.named.credit
+				+ '" data-align="'+a.attrs.named.align
+				+ '" data-width="'+a.attrs.named.width
+				+ '" style="width:'+a.attrs.named.width+'px">'
+				+ '<dt class="mediacredit-dt">' + a.content +'<dt>'
+				+ '<dd class="wp-caption-dd">' + a.attrs.named.credit +'<dd>'
+				+ '</dl>';
+			})
+		},
+
+		_get_shcode : function(co) {
+			var this_ = this
+			return co.replace(/<dl class="mediacredit (.*?)>(.*?)<\/dl>/gi, function(a,b,c) {
+				var $content = this_.$(a)
+				, data = $content.data()
+				if ( ! $content.find('img').length )
+					return '';
+
+				$content.find('.'+data.align).removeClass(data.align)
+
+				return wp.shortcode.string({
+					tag: 'mediacredit',
+					content: $content.find('dt').filter(':not(:empty)').html(),
+					attrs: {
+						id: $content.find('img').attr('class').replace(/\D+/g, 'attachment_'),
+						width: data.width,
+						align: data.align,
+						credit: data.credit
+					}
+				})
+			});
+
+		},
+
+		getInfo : function() {
+			return {
+				longname : 'UW Media Credit',
+				author : 'Dane Odekirk',
+				authorurl : 'http://uw.edu',
+				infourl : 'http://uw.edu',
+				version : tinymce.majorVersion + "." + tinymce.minorVersion
+			};
+		}
+	});
+
+	tinymce.PluginManager.add('mediacredit', tinymce.plugins.MediaCredit);
+})();

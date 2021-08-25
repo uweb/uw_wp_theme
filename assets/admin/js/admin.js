@@ -1,1 +1,25 @@
-"use strict";jQuery(document).ready(function(n){if(n("input[name=noconfirmation]").closest("tr").hide().end().attr("checked",!0),n("#uw-documentation").length){var t=new showdown.Converter({}),o=(t.setFlavor("github"),n("#markdown").text()),e=t.makeHtml(o);n("#uw-documentation").html(e),n("a").on("click",function(){var t=n(this).attr("href");"#"!==_.first(t)||n("html, body").animate({scrollTop:n(t).position().top},700)})}});
+jQuery(document).ready(function($){
+
+	$('input[name=noconfirmation]').closest('tr').hide().end().attr('checked', true);
+
+	if ( $('#uw-documentation').length )
+	{
+
+		var converter = new showdown.Converter({}),
+		flavor  = converter.setFlavor('github'),
+		text  = $('#markdown').text(),
+		html  = converter.makeHtml(text);
+
+		$('#uw-documentation').html( html )
+
+		$('a').on('click', function() {
+			var href = $(this).attr('href')
+			if ( _.first( href )  === '#') {
+				$( 'html, body' ).animate( {'scrollTop': $(href).position().top}, 700 )
+				return
+			}
+		})
+	}
+
+
+})

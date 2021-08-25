@@ -1,5 +1,7 @@
-# UW WordPress Theme
-![UW WordPress Theme version 1.0.0-beta](https://img.shields.io/static/v1?label=version&message=v1.0.0-beta&color=yellow)
+# UW WordPress Theme - BETA
+![UW WordPress Theme version 1.0.1-beta](https://img.shields.io/static/v1?label=version&message=v1.0.1-beta&color=yellow)
+
+**IMPORTANT NOTE: This theme is in BETA. Use at your own risk. Do not use in production.**
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
