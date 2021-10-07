@@ -12,10 +12,27 @@ class UW_Button
 	function __construct()
 	{
 		add_shortcode( 'uw_button', array( $this, 'button_handler' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'uw_wp_theme_enqueue_button_script' ) );
 	}
 
+
+	/**
+	 * Enqueue button script.
+	 *
+	 * @return void
+	 */
+	public function uw_wp_theme_enqueue_button_script() {
+		if ( is_multisite() ) {
+			wp_register_script( 'uw_wp_theme-button-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/button.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210921', true );
+		} else {
+			wp_register_script( 'uw_wp_theme-button-script', get_theme_file_uri( '/js/shortcodes/button.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210921', true );
+		}
+	}
 	function button_handler( $atts, $content = null )
 	{
+		// only enqueue script when shortcode is present!
+		wp_enqueue_script( 'uw_wp_theme-button-script' );
+
 		// Attributes.
 		$atts = shortcode_atts(
 			array(

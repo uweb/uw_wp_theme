@@ -6,42 +6,36 @@
  */
 
 
-function theme_settings_page()
-{
+function theme_settings_page() {
     ?>
 	    <div class="wrap">
-	    <h1>Theme Panel</h1>
-		<?php settings_errors(); ?>
-	    <form method="post" action="options.php">
-	        <?php
-	            settings_fields("section");
-	            do_settings_sections("theme-options");
-	            submit_button();
-	        ?>
-	    </form>
+			<h1>Theme Panel</h1>
+			
+			<?php settings_errors(); ?>
+			<div class="notice notice-info is-dismissible">
+				<p>Check out the <a href="https://github.com/uweb/uw_wp_theme#readme" target="_blank">theme documentation</a> for more information on these settings.</p>
+			</div>
+			<div class="card" style="float: right;">
+				<?php UW_dashboard_widget_function(); ?>
+			</div>
+			<div style="float: left;">
+				<form method="post" action="options.php">
+					<?php
+						settings_fields( "section" );
+						do_settings_sections( "theme-options" );
+						submit_button();
+					?>
+				</form>
+			</div>
 		</div>
 	<?php
 }
-function add_theme_menu_item()
-{
-	add_menu_page("Theme Panel", "Theme Panel", "manage_options", "theme-panel", "theme_settings_page", null, 99);
+function add_theme_menu_item() {
+	add_menu_page( "Theme Panel", "Theme Panel", "manage_options", "theme-panel", "theme_settings_page", null, 99 );
 }
 
-add_action("admin_menu", "add_theme_menu_item");
+add_action( "admin_menu", "add_theme_menu_item" );
 
-function display_twitter_element()
-{
-	?>
-    	<input type="text" name="twitter_url" id="twitter_url" value="<?php echo get_option('twitter_url'); ?>" />
-    <?php
-}
-
-function display_facebook_element()
-{
-	?>
-    	<input type="text" name="facebook_url" id="facebook_url" value="<?php echo get_option('facebook_url'); ?>" />
-    <?php
-}
 
 function nav_menu_options() {
 	$nav_option = get_option( 'nav_menu_options' );
@@ -58,39 +52,63 @@ function nav_menu_options() {
 	<?php
 }
 
- function display_quicklinks_element()
- {
+ function display_quicklinks_element() {
  	?>
-     	<input type="checkbox" name="quicklinks-hide" value="1" <?php checked(1, get_option('quicklinks-hide'), true); ?> />
+     	<input type="checkbox" name="quicklinks-hide" value="1" <?php checked( 1, get_option( 'quicklinks-hide' ), true ); ?> />
      <?php
  }
 
- function display_search_element()
- {
+ function display_breadcrumb_element() {
  	?>
-     	<input type="checkbox" name="search-hide" value="1" <?php checked(1, get_option('search-hide'), true); ?> />
+     	<input type="checkbox" name="breadcrumb-hide" value="1" <?php checked( 1, get_option( 'breadcrumb-hide' ), true ); ?> />
      <?php
  }
 
-function display_theme_panel_fields()
-{
-	add_settings_section("section", "All Settings", null, "theme-options");
+ function display_search_element() {
+	 ?>
+     	<input type="checkbox" name="search-hide" value="1" <?php checked( 1, get_option( 'search-hide' ), true ); ?> />
+		 <?php
+ }
+ 
+ function display_overly_long_title() {
+	 ?>
+     	<input type="checkbox" name="overly_long_title" value="1" <?php checked( 1, get_option( 'overly_long_title' ), true ); ?> />
+		 <?php
+ }
+ 
+ function display_byline_on_posts() {
+	 ?>
+     	<input type="checkbox" name="show_byline_on_posts" value="1" <?php checked( 1, get_option( 'show_byline_on_posts' ), true ); ?> />
+		 <?php
+ }
+ 
+function display_theme_panel_fields() {
+	add_settings_section( "section", "All Settings", null, "theme-options" );
 
-	add_settings_field("twitter_url", "Twitter Profile Url", "display_twitter_element", "theme-options", "section");
-    add_settings_field("facebook_url", "Facebook Profile Url", "display_facebook_element", "theme-options", "section");
 	add_settings_field( 'uw_nav_options', 'Main navigation menu style', 'nav_menu_options', 'theme-options', 'section' );
+	
+	add_settings_field( 'overly_long_title', 'Does your site title take two lines on desktop?', 'display_overly_long_title', 'theme-options', 'section' );
+	
+	add_settings_field( 'show_byline_on_posts', 'Show bylines on single posts and archives?', 'display_byline_on_posts', 'theme-options', 'section' );
 
+    add_settings_field("breadcrumb-hide", "Hide Breadcrumbs from site", "display_breadcrumb_element", "theme-options", "section");
+	
     // add_settings_field("quicklinks-hide", "Hide Quicklinks menu button", "display_quicklinks_element", "theme-options", "section");
-
+	
+    // add_settings_field("search-hide", "Hide Search menu button", "display_search_element", "theme-options", "section");
+	
     // register_setting("section", "search-hide");
 
-    // add_settings_field("search-hide", "Hide Search menu button", "display_search_element", "theme-options", "section");
+    // register_setting( "section", "search-hide" );
+	
+    register_setting( "section", "breadcrumb-hide" );
 
-    register_setting("section", "search-hide");
-
-    register_setting("section", "twitter_url");
-    register_setting("section", "facebook_url");
 	register_setting( 'section', 'nav_menu_options' );
+	
+	register_setting( 'section', 'overly_long_title' );
+	
+	register_setting( 'section', 'show_byline_on_posts' );
 }
 
-add_action("admin_init", "display_theme_panel_fields");
+add_action("admin_init", "display_theme_panel_fields" );
+

@@ -20,20 +20,20 @@ class UW_Gallery {
 		add_shortcode( 'gallery', array( $this, 'uw_gallery_handler' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_gallery_script' ) );
-		
+
 	}
-	
+
 	/**
 	 * Load gallery JS.
 	 *
 	 * @return void
 	 */
 	public function enqueue_gallery_script() {
-		
+
 		wp_register_script( 'uw-gallery-script', get_bloginfo( 'template_directory' ) . '/js/shortcodes/gallery.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210603', true );
-		
+
 	}
-	
+
 	/**
 	 * Add Carousel option to WP Gallery.
 	 * https://wordpress.org/support/topic/how-to-add-fields-to-gallery-settings/
@@ -317,7 +317,7 @@ class UW_Gallery {
 				$image_caption = wp_get_attachment_caption( $imgid );
 				$credit = get_post_meta( $imgid, '_media_credit', true );
 				$source_url = get_post_meta( $imgid, "_source_url", true );
-				
+
 
 				if ( 1 === $slidecount ) {
 					$output .= '<figure class="carousel-item active" role="group" aria-roledescription="slide" aria-label="' . $image_src_alt . '">';
@@ -326,7 +326,7 @@ class UW_Gallery {
 				}
 
 				$output .= '<img src="' . $image_src_url[0] . '" class="d-block w-100" alt="' . $image_src_alt . '">';
-				
+
 				if ( $source_url != '' ) {
 					$credit = '<a href="'. ( $source_url ) .'">'. $credit .'</a>';
 				} else {
@@ -360,7 +360,7 @@ class UW_Gallery {
 			wp_enqueue_script( 'uw-gallery-script' );
 
 			// if carousel is not checked we want to revert to a responsive photo grid.
-			$output .= '<div id="photo-grid-' . $instance . '" class="photo-grid' . $grid_columns_class . $grid_gap_class . '">';
+			$output .= '<div id="photo-grid-' . $instance . '" class="photo-grid' . $grid_columns_class . $grid_gap_class . '" tabindex="0">';
 
 			// if linking to the image file, we want it to pop up in our modal, so let's set that up.
 			if ( isset( $attr['link'] ) ) {
@@ -371,9 +371,9 @@ class UW_Gallery {
 						$image_src_alt = get_post_meta( $att_id, '_wp_attachment_image_alt', true );
 						$image_caption = wp_get_attachment_caption( $att_id );
 						$credit = get_post_meta( $att_id, '_media_credit', true );
-						$source_url = get_post_meta( $att_id, "_source_url", true );					
+						$source_url = get_post_meta( $att_id, "_source_url", true );
 
-						$output .= '<img src="' . $image_src_url[0] . '" alt="' . $image_src_alt . '" data-toggle="modal" data-target="#photoGridModal" data-image="' . $image_src_url[0] . '" data-caption="' . $image_caption . '" data-credit="' . $credit . '" data-source="' . $source_url . '">';
+						$output .= '<a href="#" data-toggle="modal" data-target="#photoGridModal" ><img src="' . $image_src_url[0] . '" alt="' . $image_src_alt . '" data-image="' . $image_src_url[0] . '" data-caption="' . $image_caption . '" data-credit="' . $credit . '" data-source="' . $source_url . '"></a>';
 					}
 
 					// output the modal code.

@@ -64,7 +64,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			$this->dropdown = true;
-			$output         .= $n . str_repeat( $t, $depth ) . '<div class="dropdown-menu" role="menu">' . $n;
+			$output         .= $n . str_repeat( $t, $depth ) . '<ul class="dropdown-menu" role="menu">' . $n;
 		}
 
 		/**
@@ -88,7 +88,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			$this->dropdown = false;
-			$output         .= $n . str_repeat( $t, $depth ) . '</div>' . $n;
+			$output         .= $n . str_repeat( $t, $depth ) . '</ul>' . $n;
 		}
 
 		/**
@@ -124,7 +124,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			$classes   = empty( $item->classes ) ? array() : (array) $item->classes;
-			$classes[] = 'menu-item-' . $item->ID;
+			// $classes[] = 'menu-item-' . $item->ID;
 			$classes[] = 'nav-item';
 
 			if ( $args->walker->has_children ) {
@@ -232,6 +232,22 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * @param int      $depth Depth of menu item. Used for padding.
 			 */
 			$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
+			$li_attributes = '';
+			$class_names   = '';
+
+			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+			$classes[] = ( $args->walker->has_children ) ? 'dropdown' : '';
+			$classes[] = ( $item->current ) ? 'current_page_item' : '';
+			$classes[] = ( $item->current || $item->current_item_ancestor ) ? 'active' : '';
+			$classes[] = 'nav-item-' . $item->ID;
+
+			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+			$class_names = ' class="nav-item ' . esc_attr( $class_names ) . '"';
+
+			$id = apply_filters( 'nav_menu_item_id', 'nav-item-' . $item->ID, $item, $args );
+			$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
+
+			// $output .= '<li' . $id . $class_names . $li_attributes . '>';
 
 			$item_classes = array( 'nav-link' );
 
@@ -241,7 +257,8 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			if ( 0 < $depth ) {
 				$item_classes = array_diff( $item_classes, [ 'nav-link' ] );
-				$item_classes[] = 'dropdown-item';
+				$item_classes[] = 'nav-link';
+				$output .= '<li' . $id . $class_names . $li_attributes . '>';
 			}
 
 			$item_output = $args->before;
@@ -288,7 +305,13 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$n = "\n";
 			}
 
-			$output .= $this->dropdown ? '' : str_repeat( $t, $depth ) . '</li>' . $n;
+			// $output .= $this->dropdown ? '' : str_repeat( $t, $depth ) . '</li>' . $n;
+
+			if ( $depth && $args->walker->has_children ) {
+				$output .= $n . str_repeat( $t, $depth ) . '</li></div>' . $n;
+			} else {
+				$output .= $n . str_repeat( $t, $depth ) . '</li>' . $n;
+			}
 		}
 
 		/**

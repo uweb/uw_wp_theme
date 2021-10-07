@@ -18,13 +18,12 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
 
-		if ( 'post' === get_post_type() ) :
+		if ( 'post' === get_post_type() && get_option( 'show_byline_on_posts' ) ) :
 			?>
 			<div class="entry-meta">
 				<?php
 					uw_wp_theme_posted_on();
 					uw_wp_theme_posted_by();
-					uw_wp_theme_comments_link();
 				?>
 			</div><!-- .entry-meta -->
 			<?php
@@ -77,9 +76,4 @@ if ( is_singular() ) :
 			'next_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Next:', 'uw_wp_theme' ) . '</span></div>%title',
 		)
 	);
-
-	// If comments are open or we have at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) :
-		comments_template();
-	endif;
 endif;

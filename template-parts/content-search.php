@@ -18,7 +18,6 @@
 			<?php
 				uw_wp_theme_posted_on();
 				uw_wp_theme_posted_by();
-				uw_wp_theme_comments_link();
 			?>
 		</div><!-- .entry-meta -->
 		<?php endif; ?>

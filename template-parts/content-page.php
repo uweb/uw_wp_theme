@@ -13,6 +13,15 @@
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
+	<?php
+	if ( ( is_single() || is_home() ) && get_option( 'show_byline_on_posts' ) ) :
+		?>
+		<div class="author-info">
+		<?php if ( function_exists( 'coauthors' ) ) { coauthors(); } else { the_author(); } ?>
+		<p class="author-desc"> <small><?php the_author_meta(); ?></small></p>
+		</div>
+		
+		<?php endif; ?>
 
 	<?php uw_wp_theme_post_thumbnail(); ?>
 
@@ -37,11 +46,3 @@
 		</footer><!-- .entry-footer -->
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->
-
-<?php
-if ( is_singular() ) :
-	// If comments are open or we have at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) :
-		comments_template();
-	endif;
-endif;

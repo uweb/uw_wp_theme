@@ -25,6 +25,9 @@ function uw_wp_theme_setup() {
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
+	
+	// Add theme support for Gallery post format
+	add_theme_support( 'post-formats', array( 'gallery' ) );
 
 	/*
 		* Let WordPress manage the document title.
@@ -188,18 +191,6 @@ function uw_wp_theme_setup() {
 		),
 	) );
 
-	/**
-	 * Optional: Add AMP support.
-	 *
-	 * Add built-in support for the AMP plugin and specific AMP features.
-	 * Control how the plugin, when activated, impacts the theme.
-	 *
-	 * @link https://wordpress.org/plugins/amp/
-	 */
-	// add_theme_support( 'amp', array(
-	// 	'comments_live_list' => true,
-	// ) );
-
 }
 add_action( 'after_setup_theme', 'uw_wp_theme_setup' );
 
@@ -274,15 +265,14 @@ add_filter( 'wp_resource_hints', 'uw_wp_theme_resource_hints', 10, 2 );
  * Enqueue WordPress theme styles within Gutenberg.
  */
 function uw_wp_theme_gutenberg_styles() {
+	$template_directory = get_bloginfo( 'template_directory' );
+	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+	
 	// Add custom fonts, used in the main stylesheet.
 	wp_enqueue_style( 'uw_wp_theme-fonts', uw_wp_theme_fonts_url(), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
 	// Enqueue main stylesheet.
-	if ( is_multisite() ) {
-		wp_enqueue_style( 'uw_wp_theme-base-style', network_site_url( '/wp-content/themes/uw_wp_theme/css/editor-styles.css' ), array(), '20180514' );
-	} else {
-		wp_enqueue_style( 'uw_wp_theme-base-style', get_theme_file_uri( '/css/editor-styles.css' ), array(), '20180514' );
-	}
+	wp_enqueue_style( 'uw_wp_theme-base-style', $template_directory . '/css/editor-styles.css', array(), $theme_version );
 }
 add_action( 'enqueue_block_editor_assets', 'uw_wp_theme_gutenberg_styles' );
 
@@ -290,51 +280,36 @@ add_action( 'enqueue_block_editor_assets', 'uw_wp_theme_gutenberg_styles' );
  * Enqueue styles.
  */
 function uw_wp_theme_styles() {
+	
+	$template_directory = get_bloginfo( 'template_directory' );
+	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+	
 	// Add custom fonts, used in the main stylesheet.
 	wp_enqueue_style( 'uw_wp_theme-fonts', uw_wp_theme_fonts_url(), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
 	// Enqueue main stylesheet.
-	if ( is_multisite() ) {
-		wp_enqueue_style( 'uw_wp_theme-base-style', network_site_url( '/wp-content/themes/uw_wp_theme/style.css' ), array(), '20180514' );
-	} else {
-		wp_enqueue_style( 'uw_wp_theme-base-style', get_stylesheet_uri(), array(), '20180514' );
-	}
+	wp_enqueue_style( 'uw_wp_theme-base-style', $template_directory . '/style.css', array(), $theme_version );
 
 	// Register component styles that are printed as needed.
-	if ( is_multisite() ) {
-		wp_enqueue_style( 'uw_wp_theme-bootstrap', network_site_url( '/wp-content/themes/uw_wp_theme/css/bootstrap.css' ), array(), '20190610' );
-		wp_enqueue_style( 'uw_wp_theme-comments', network_site_url( '/wp-content/themes/uw_wp_theme/css/comments.css' ), array(), '20180514' );
-		wp_enqueue_style( 'uw_wp_theme-content', network_site_url( '/wp-content/themes/uw_wp_theme/css/content.css' ), array(), '20180514' );
-		wp_enqueue_style( 'uw_wp_theme-sidebar', network_site_url( '/wp-content/themes/uw_wp_theme/css/sidebar.css' ), array(), '20180514' );
-		wp_enqueue_style( 'uw_wp_theme-widgets', network_site_url( '/wp-content/themes/uw_wp_theme/css/widgets.css' ), array(), '20180514' );
-		// wp_enqueue_style( 'uw_wp_theme-front-page', network_site_url( '/wp-content/themes/uw_wp_theme/css/front-page.css' ), array(), '20180514' );
-	} else {
-		wp_enqueue_style( 'uw_wp_theme-bootstrap', get_theme_file_uri( '/css/bootstrap.css' ), array(), '20190610' );
-		wp_enqueue_style( 'uw_wp_theme-comments', get_theme_file_uri( '/css/comments.css' ), array(), '20180514' );
-		wp_enqueue_style( 'uw_wp_theme-content', get_theme_file_uri( '/css/content.css' ), array(), '20180514' );
-		wp_enqueue_style( 'uw_wp_theme-sidebar', get_theme_file_uri( '/css/sidebar.css' ), array(), '20180514' );
-		wp_enqueue_style( 'uw_wp_theme-widgets', get_theme_file_uri( '/css/widgets.css' ), array(), '20180514' );
-		// wp_enqueue_style( 'uw_wp_theme-front-page', get_theme_file_uri( '/css/front-page.css' ), array(), '20180514' );
-	}
+	wp_enqueue_style( 'uw_wp_theme-bootstrap', $template_directory . '/css/bootstrap.css', array(), $theme_version );
+	wp_enqueue_style( 'uw_wp_theme-content', $template_directory . '/css/content.css', array(), $theme_version );
+	wp_enqueue_style( 'uw_wp_theme-sidebar', $template_directory . '/css/sidebar.css', array(), $theme_version );
+	wp_enqueue_style( 'uw_wp_theme-widgets', $template_directory . '/css/widgets.css', array(), $theme_version );
+	
 }
+
 add_action( 'wp_enqueue_scripts', 'uw_wp_theme_styles' );
 
 /**
  * Enqueue scripts.
  */
 function uw_wp_theme_scripts() {
-
-	// If the AMP plugin is active, return early.
-	if ( uw_wp_theme_is_amp() ) {
-		return;
-	}
-
+	
+	$template_directory = get_bloginfo( 'template_directory' );
+	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+	
 	// Enqueue the navigation script.
-	if ( is_multisite() ) {
-		wp_enqueue_script( 'uw_wp_theme-navigation', network_site_url( '/wp-content/themes/uw_wp_theme/js/navigation.js' ), array(), '20180514', false );
-	} else {
-		wp_enqueue_script( 'uw_wp_theme-navigation', get_theme_file_uri( '/js/navigation.js' ), array(), '20180514', false );
-	}
+	wp_enqueue_script( 'uw_wp_theme-navigation', $template_directory . '/js/navigation.js', array(), $theme_version, false );
 
 	wp_script_add_data( 'uw_wp_theme-navigation', 'async', true );
 	wp_localize_script( 'uw_wp_theme-navigation', 'uw_wp_themeScreenReaderText', array(
@@ -345,44 +320,25 @@ function uw_wp_theme_scripts() {
 	// Add jQuery, Bootstrap, and popper.js scripts.
 	wp_deregister_script( 'jquery' ); // deregister first, just in case.
 
-	if ( is_multisite() ) {
-		wp_register_script( 'jquery', network_site_url( '/wp-content/themes/uw_wp_theme/js/libs/jquery.min.js' ), array(), '20190610', true );
-		wp_enqueue_script( 'uw_wp_theme-bootstrap', network_site_url( '/wp-content/themes/uw_wp_theme/js/libs/bootstrap.min.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20190610', true );
-		wp_enqueue_script( 'uw_wp_theme-popper', network_site_url( '/wp-content/themes/uw_wp_theme/js/libs/popper.min.js' ), array(), '20190610', true );
-		wp_enqueue_script( 'uw_wp_theme-tinyscrollbar', network_site_url( '/wp-content/themes/uw_wp_theme/js/libs/jquery.tinyscrollbar.js' ), array(), '20200124', true );
-		wp_enqueue_script( 'uw.bootstrap.shortcode-init', network_site_url( '/wp-content/themes/uw_wp_theme/js/uw.bootstrap.shortcode-init.js' ), array(), '20210413', true );
-
-	} else {
-		wp_register_script( 'jquery', get_theme_file_uri( '/js/libs/jquery.min.js' ), array(), '20190610', true );
-		wp_enqueue_script( 'uw_wp_theme-bootstrap', get_theme_file_uri( '/js/libs/bootstrap.min.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20190610', true );
-		wp_enqueue_script( 'uw_wp_theme-popper', get_theme_file_uri( '/js/libs/popper.min.js' ), array(), '20190610', true );
-		wp_enqueue_script( 'uw_wp_theme-tinyscrollbar', get_theme_file_uri( '/js/libs/jquery.tinyscrollbar.js' ), array(), '20200124', true );
-		wp_enqueue_script( 'uw.bootstrap.shortcode-init', get_theme_file_uri( '/js/uw.bootstrap.shortcode-init.js' ), array(), '20210413', true );
-
-	}
+	wp_register_script( 'jquery', $template_directory . '/js/libs/jquery.min.js', array(), $theme_version, true );
+	wp_enqueue_script( 'uw_wp_theme-bootstrap', $template_directory . '/js/libs/bootstrap.min.js', array( 'jquery', 'uw_wp_theme-popper' ), $theme_version, true );
+	wp_enqueue_script( 'uw_wp_theme-popper', $template_directory . '/js/libs/popper.min.js', array(), $theme_version, true );
+	wp_enqueue_script( 'uw_wp_theme-tinyscrollbar', $template_directory . '/js/libs/jquery.tinyscrollbar.js', array(), $theme_version, true );
+	wp_enqueue_script( 'uw.bootstrap.shortcode-init', $template_directory . '/js/uw.bootstrap.shortcode-init.js', array(), $theme_version, true );
 
 	// Add Backbone.js and Underscore.js - legacy UW2014 but using current versions of both!
-	if ( is_multisite() ) {
-		wp_enqueue_script( 'wp-underscore', network_site_url( '/wp-includes/js/underscore.min.js' ), array(), '1.8.3', true );
-		wp_enqueue_script( 'uw_wp_theme-backbone', network_site_url( '/wp-content/themes/uw_wp_theme/js/libs/backbone-min.js' ), array(), '20190619', true );
-	} else {
-		wp_enqueue_script( 'underscore' );
-		wp_enqueue_script( 'uw_wp_theme-backbone', get_theme_file_uri( '/js/libs/backbone-min.js' ), array(), '20190619', true );
-	}
+	wp_enqueue_script( 'underscore' );
+	wp_enqueue_script( 'backbone');
 
 	// Enqueue skip-link-focus script.
-	if ( is_multisite() ) {
-		wp_enqueue_script( 'uw_wp_theme-skip-link-focus-fix', network_site_url( '/wp-content/themes/uw_wp_theme/js/skip-link-focus-fix.js' ), array(), '20180514', false );
-	} else {
-		wp_enqueue_script( 'uw_wp_theme-skip-link-focus-fix', get_theme_file_uri( '/js/skip-link-focus-fix.js' ), array(), '20180514', false );
-	}
+	wp_enqueue_script( 'uw_wp_theme-skip-link-focus-fix', $template_directory . '/js/skip-link-focus-fix.js', array(), $theme_version, false );
 
 	wp_script_add_data( 'uw_wp_theme-skip-link-focus-fix', 'defer', true );
 
-	// Enqueue comment script on singular post/page views only.
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+	// Enqueue left-to-right-arrow-nav script.
+	wp_enqueue_script( 'uw_wp_theme-left-to-right-arrow-nav', $template_directory . '/js/left-to-right-arrow-nav.js', array(), $theme_version, false );
+
+	wp_script_add_data( 'uw_wp_theme-left-to-right-arrow-nav', 'defer', true );
 
 }
 add_action( 'wp_enqueue_scripts', 'uw_wp_theme_scripts' );
@@ -395,7 +351,7 @@ require get_template_directory() . '/inc/image-sizes.php';
 /**
  * Implement the Custom Header feature.
  */
-require get_template_directory() . '/pluggable/custom-header.php';
+require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.
@@ -411,6 +367,11 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Global filters (adopted from uw-2014)
+ */
+require get_template_directory() . '/inc/filters.php';
 
 /**
  * Carryover from UW 2014 theme.

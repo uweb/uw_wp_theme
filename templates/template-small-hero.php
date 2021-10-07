@@ -2,84 +2,39 @@
 /**
  * Template Name: Small Hero
  */
+
+get_header();
+$sidebar = get_post_meta( $post->ID, 'sidebar' );	
+uw_header_template( 'small' );
 ?>
 
-<?php get_header();
-      $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
-      if(!$url){
-        $url = get_site_url() . "/wp-content/themes/uw-2014/assets/headers/suzzallo.jpg";
-      }
-      $mobileimagesrc = get_post_meta($post->ID, "mobileimage");
-      $hasmobileimage = '';
-      if( !empty($mobileimagesrc) && $mobileimagesrc[0] !== "") {
-        $mobileimage = $mobileimagesrc[0];
-        $hasmobileimage = 'hero-mobile-image';
-      }
-      $sidebar = get_post_meta($post->ID, "sidebar");
-      $banner = get_post_meta($post->ID, "banner");
-      $buttontext = get_post_meta($post->ID, "buttontext");
-      $buttonlink = get_post_meta($post->ID, "buttonlink");   ?>
+<div class="container-fluid ">
+<?php echo uw_breadcrumbs(); ?>
 
-
-<div class="uw-hero-image hero-height2 <?php echo $hasmobileimage ?>" style="background-image: url(<?php echo $url ?>);">
-    <?php if( isset($mobileimage)) { ?>
-        <div class="mobile-image" style="background-image: url(<?php echo $mobileimage ?>);"></div>
-      <?php } ?>
-
-      <div class="container-fluid">
-        <div id="hashtag" class="mask"><span><span><?php echo $banner[0] ? $banner[0] : ''; ?></span></span></div>
-        <?php if(!empty($banner) && $banner[0]){ ?>
-        <div id="hashtag"><span><span><?php echo $banner[0] ? $banner[0] : ''; ?></span></span></div>
-        <?php } ?>
-
-        <h1 class="uw-site-title2"><?php the_title(); ?></h1>
-        <span class="udub-slant"><span></span></span>
-        <?php if(!empty($buttontext) && $buttontext[0]){ ?>
-        <a class="btn btn-lg arrow white" href="<?php echo $buttonlink[0] ? $buttonlink[0] : ''; ?>"><span><?php echo $buttontext[0] ? $buttontext[0] : ''; ?></span><span class="arrow-box"><span class="arrow"></span></span></a>
-
-        <?php } ?>
-      </div>
 </div>
-
 <div class="container-fluid uw-body">
-  <div class="row">
-    <div class="hero-content col-md-<?php echo (($sidebar[0]!="on") ? "8" : "12" ) ?> uw-content" role='main'>
+	<div class="row">
 
-      <?php //uw_site_title(); ?>
-      <?php get_template_part( 'menu', 'mobile' ); ?>
-      <?php echo uw_breadcrumbs() ?>
-      <div id='main_content' class="uw-body-copy" tabindex="-1">
-
-        <?php
-          while ( have_posts() ) : the_post();
-
-            the_content();
-            get_template_part( 'content', 'page-noheader' );
-
-            // If comments are open or we have at least one comment, load up the comment template.
-            if ( comments_open() || get_comments_number() ) {
-              comments_template();
-            }
-
-          endwhile;
-
-        ?>
-
-      </div>
-
-    </div>
-
-    <!--<div id="sidebar" >-->
+		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>">
+		
 		<?php
-      if($sidebar[0]!="on"){
-        get_sidebar();
-      }
-    ?>
-	<!--</div>-->
+		while ( have_posts() ) : the_post();
 
-  </div>
+			get_template_part( 'template-parts/content', 'page' );
 
-</div>
+		endwhile; // End of the loop.
+		?>
 
-<?php get_footer(); ?>
+		</main><!-- #primary -->
 
+		<?php
+		if ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) {
+			get_sidebar();
+		}
+		?>
+
+	</div><!-- .row -->
+</div><!-- .container -->
+
+<?php
+get_footer();
