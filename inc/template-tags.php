@@ -8,45 +8,6 @@
  */
 
 /**
- * Determine whether this is an AMP response.
- *
- * Note that this must only be called after the parse_query action.
- *
- * @link https://github.com/Automattic/amp-wp
- * @return bool Is AMP endpoint (and AMP plugin is active).
- */
-function uw_wp_theme_is_amp() {
-	return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
-}
-
-/**
- * Determine whether amp-live-list should be used for the comment list.
- *
- * @return bool Whether to use amp-live-list.
- */
-function uw_wp_theme_using_amp_live_list_comments() {
-	if ( ! uw_wp_theme_is_amp() ) {
-		return false;
-	}
-	$amp_theme_support = get_theme_support( 'amp' );
-	return ! empty( $amp_theme_support[0]['comments_live_list'] );
-}
-
-/**
- * Add pagination reference point attribute for amp-live-list when theme supports AMP.
- *
- * This is used by the navigation_markup_template filter in the comments template.
- *
- * @link https://www.ampproject.org/docs/reference/components/amp-live-list#pagination
- *
- * @param string $markup Navigation markup.
- * @return string Markup.
- */
-function uw_wp_theme_add_amp_live_list_pagination_attribute( $markup ) {
-	return preg_replace( '/(\s*<[a-z0-9_-]+)/i', '$1 pagination ', $markup, 1 );
-}
-
-/**
  * Prints the header of the current displayed page based on its contents.
  */
 function uw_wp_theme_index_header() {
@@ -150,30 +111,6 @@ function uw_wp_theme_post_tags() {
 			/* translators: 1: list of tags. */
 			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'uw_wp_theme' ) . ' </span>', $tags_list ); // WPCS: XSS OK.
 		}
-	}
-}
-
-/**
- * Prints comments link when comments are enabled.
- */
-function uw_wp_theme_comments_link() {
-	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-		echo '<span class="comments-link">';
-		comments_popup_link(
-			sprintf(
-				wp_kses(
-					/* translators: %s: post title */
-					__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'uw_wp_theme' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				get_the_title()
-			)
-		);
-		echo ' </span>';
 	}
 }
 

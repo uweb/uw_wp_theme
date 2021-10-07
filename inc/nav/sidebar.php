@@ -1,12 +1,15 @@
 <?php
 if ( ! function_exists('uw_sidebar_menu') ) :
-
+	
 	function uw_sidebar_menu()
 	{
-	  echo sprintf( '<nav id="desktop-relative" aria-label="mobile menu that is not visible in the desktop version">%s</nav>', uw_list_pages() ) ;
+		global $post;
+		if ( get_post_meta( $post->ID, "sidebar_nav", true ) ) return;
+		
+		echo sprintf( '<nav id="desktop-relative" aria-label="mobile menu that is not visible in the desktop version">%s</nav>', uw_list_pages() ) ;
 	}
-
-  endif;
+	
+endif;
 if ( ! function_exists( 'uw_list_pages') ) :
 
 	function uw_list_pages( $mobile = false )

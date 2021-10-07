@@ -28,7 +28,7 @@ class UW_Campus_Map extends WP_Widget
 
     if ( !empty( $title ) ) {
 
-       $content .= "<h3 class=\"widget-title\"> $before_title $title $after_title </h3>";
+       $content .= "<h4 class=\"widget-title\"> $before_title $title $after_title </h4>";
     }
 
     $content .= '<div class="uw-campus-map-widget">

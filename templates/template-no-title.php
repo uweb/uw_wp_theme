@@ -2,55 +2,40 @@
 /**
  * Template Name: No title/image
  */
-?>
 
-<?php get_header();
-    $sidebar = get_post_meta($post->ID, "sidebar");  ?>
+get_header();
 
-<div class="uw-hero-image hero-blank no-title">
-  <h1 class="container-fluid uw-site-title-blank"><?php the_title(); ?></h1>
+$sidebar = get_post_meta($post->ID, "sidebar");  ?>
+
+<div class="container-fluid ">
+<?php echo uw_breadcrumbs(); ?>
+
 </div>
-
 <div class="container-fluid uw-body">
+	<div class="row">
 
-  <div class="row">
+		<main id="primary" class="site-main uw-body-copy col-md-<?php echo ( ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) ? '8' : '12' ); ?>">
+		
+		<?php
+		while ( have_posts() ) : the_post();
 
-    <div class="col-md-<?php echo (($sidebar[0]!="on") ? "8" : "12" ) ?> uw-content" role='main'>
+			get_template_part( 'template-parts/content', 'page-noheader' );
 
-      <?php //uw_site_title(); ?>
-      <?php get_template_part( 'menu', 'mobile' ); ?>
-      <?php echo uw_breadcrumbs() ?>
+		endwhile; // End of the loop.
+		?>
 
-      <div id='main_content' class="uw-body-copy" tabindex="-1">
+		</main><!-- #primary -->
 
+		<?php
+		if ( ! isset( $sidebar[0] ) || 'on' !== $sidebar[0] ) {
+			get_sidebar();
+		}
+		?>
 
-        <?php
-          // Start the Loop.
-          while ( have_posts() ) : the_post();
+	</div><!-- .row -->
+</div><!-- .container -->
 
-            //the_content();
-            get_template_part( 'template-parts/content', 'page-noheader' );
+<?php
 
-            // If comments are open or we have at least one comment, load up the comment template.
-            if ( comments_open() || get_comments_number() ) {
-              comments_template();
-            }
+get_footer();
 
-          endwhile;
-        ?>
-
-      </div>
-
-    </div>
-
-   <?php
-      if($sidebar[0]!="on"){
-        get_sidebar();
-      }
-    ?>
-
-  </div>
-
-</div>
-
-<?php get_footer(); ?>

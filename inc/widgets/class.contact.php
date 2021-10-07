@@ -143,7 +143,7 @@ class UW_Widget_Contact extends WP_Widget
       <span>
 
       <?php if ( ! empty( $title) ) : ?>
-      <h2 class="widgettitle"><?php echo $title; ?></h2>
+      <h4 class="widget-title"><?php echo $title; ?></h4>
       <?php endif; ?>
 
       </span>

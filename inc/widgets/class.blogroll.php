@@ -23,6 +23,7 @@ class UW_Blogroll extends WP_Widget
 
     }
 
+
     function form( $instance )
     {
         $title  = empty( $instance['title'] ) ? self::NAME : esc_attr( $instance['title'] );
@@ -66,7 +67,7 @@ class UW_Blogroll extends WP_Widget
         $title  = apply_filters( 'widget_title', $title );
 
         echo $args['before_widget'];
-        echo '<h2>' . $title .'</h2>';
+        echo '<h4>' . $title .'</h4>';
 
         $readmore = $read_more ? '' : 'readmore=\'off\'';
 
@@ -125,10 +126,9 @@ class UW_Blogroll extends WP_Widget
 
             if ( $this->is_true( $params->image ) )
             {
-                    $image = get_the_post_thumbnail( $post->ID , 'thumbnail' );
+                    $image = get_the_post_thumbnail( $post->ID , 'thumbnail', array('class' => 'float-left')  );
                     $class = ' class="pull-left"';
             }
-
             $author = $this->is_true( $params->author ) ? '<p class="author-info">' . get_the_author_meta( 'display_name', $post->post_author ) . '</p>' : '';
             $author_mini = $this->is_true( $params->author ) ? get_the_author_meta( 'display_name', $post->post_author ) : '';
 
@@ -152,9 +152,9 @@ class UW_Blogroll extends WP_Widget
                 }
                 $html .= sprintf("<li><a class='widget-thumbnail' href='%s'>%s</a><a class='widget-link' href='%s'>%s<span>%s</span></a></li>", $link, $image, $link, $post->post_title, $byline);
             } else if ($read_more == 'on') {
-                $html  .= "<li><span><{$params->titletag}><a href=\"$link\">{$post->post_title}</a><p class=\"date\">{$date}</p></{$params->titletag}>{$author}<span$class>{$image}</span>{$excerpt}<p><a href=\"$link\" class=\"more\" aria-label=\"Read more about {$post->post_title}\">Read more</a></p></span></li>";
+                $html  .= "<li><span><{$params->titletag}><a href=\"$link\">{$post->post_title}</a><p class=\"date\">{$date}</p></{$params->titletag}>{$author}{$image}{$excerpt}<p><a href=\"$link\" class=\"more\" aria-label=\"Read more about {$post->post_title}\">Read more</a></p></span></li>";
             } else {
-                $html  .= "<li><span><{$params->titletag}><a href=\"$link\">{$post->post_title}</a><p class=\"date\">{$date}</p></{$params->titletag}>{$author}<span$class>{$image}</span>{$excerpt}</span></li>";
+                $html  .= "<li><span><{$params->titletag}><a href=\"$link\">{$post->post_title}</a><p class=\"date\">{$date}</p></{$params->titletag}>{$author}{$image}{$excerpt}</span></li>";
             }
 
         }

@@ -107,11 +107,6 @@ add_filter( 'script_loader_tag', 'uw_wp_theme_filter_script_loader_tag', 10, 2 )
 	// 	$preloads['uw_wp_theme-widgets'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-widgets' );
 	// }
 
-	// Preload comments.css.
-	// if ( ! post_password_required() && is_singular() && ( comments_open() || get_comments_number() ) ) {
-	// 	$preloads['uw_wp_theme-comments'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-comments' );
-	// }
-
 	// Preload front-page.css.
 	// global $template;
 	// if ( 'front-page.php' === basename( $template ) ) {
@@ -200,10 +195,10 @@ add_filter( 'page_menu_link_attributes', 'uw_wp_theme_add_nav_menu_aria_current'
 if ( ! function_exists( 'uw_wp_theme_white_bar_menu') ) :
 	function uw_wp_theme_white_bar_menu()
 	{
-		if (has_nav_menu(UW_Dropdowns::LOCATION)) {
+		if ( has_nav_menu( UW_Dropdowns::LOCATION ) ) {
 				echo '<nav class="navbar navbar-expand-md navbar-light ' . UW_Dropdowns::LOCATION .'">
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . UW_Dropdowns::LOCATION .'" aria-controls="' . UW_Dropdowns::LOCATION .'" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
+							<span class="navbar-toggler-icon">Menu</span>
 						  </button><div class="container-fluid">';
 				echo  wp_nav_menu( array(
 							'theme_location'    => UW_Dropdowns::LOCATION,
@@ -212,15 +207,15 @@ if ( ! function_exists( 'uw_wp_theme_white_bar_menu') ) :
 							'container_class'   => 'collapse navbar-collapse',
 							'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
 							'walker'            => new WP_Bootstrap_Navwalker(),
-							'menu_class'        => 'navbar-nav',
-							'depth'				=> 2,
+							'menu_class'        => 'navbar-nav classic-menu-nav',
+							'depth'				=> 3,
 						) );
 				echo '</div></nav>';
 			}
 	}
 endif;
 
-if ( ! function_exists( 'uw_wp_theme_purple_bar_menu') ) :
+if ( ! function_exists( 'uw_wp_theme_purple_bar_menu' ) ) :
 	function uw_wp_theme_purple_bar_menu()
 	{
 		echo  wp_nav_menu( array(
@@ -232,12 +227,12 @@ if ( ! function_exists( 'uw_wp_theme_purple_bar_menu') ) :
 	}
 endif;
 
-if ( !function_exists('uw_site_title')):
+if ( !function_exists( 'uw_site_title' ) ):
 
 	function uw_site_title()
 	{
 		$classes = 'uw-site-title';
-		if (get_option('overly_long_title')){
+		if ( get_option( 'overly_long_title' ) ){
 			$classes .= ' long-title';
 		}
 		echo '<a href="' . home_url('/') . '" title="' . esc_attr( get_bloginfo() ) . '"><div class="' . $classes . '">' . get_bloginfo() . '</div></a>';
@@ -298,7 +293,12 @@ if ( ! function_exists('uw_breadcrumbs') ) :
   function uw_breadcrumbs()
   {
 
+	if ( get_option( 'breadcrumb-hide' ) ) :
+		return;
+	endif;
+		
     global $post;
+	
     $ancestors = array_reverse( get_post_ancestors( $post ) );
     $html = '<li><a href="' . home_url('/') . '" title="' . get_bloginfo('title') . '">' . get_bloginfo('title') . '</a>';
 
@@ -404,7 +404,7 @@ if ( ! function_exists( 'uw_wp_theme_mega_menu' ) ) :
 			// output the mega menu.
 			echo '<nav class="navbar white-bar navbar-expand-md navbar-light ' . UW_MegaMenu::LOCATION . '" aria-label="' . UW_MegaMenu::LOCATION . '">
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . UW_MegaMenu::LOCATION .'" aria-controls="' . UW_MegaMenu::LOCATION . '" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
+					<span class="navbar-toggler-icon">Menu</span>
 				</button>
 		  		<div class="container-fluid">';
 			echo wp_nav_menu(
@@ -415,7 +415,7 @@ if ( ! function_exists( 'uw_wp_theme_mega_menu' ) ) :
 					'container_class'   => 'collapse navbar-collapse',
 					'fallback_cb'       => 'Bootstrap_MegaMenu_Walker::fallback',
 					'walker'            => new Bootstrap_MegaMenu_Walker(),
-					'menu_class'        => 'navbar-nav',
+					'menu_class'        => 'navbar-nav megamenu-nav',
 					'depth'             => 3,
 				)
 			);
@@ -468,3 +468,128 @@ function dashboard_widget_display_enqueues( $hook ) {
 
 	wp_enqueue_style( 'dashboard-widget-styles', get_template_directory_uri( '', __FILE__ ) . '/dev/assets/admin/css/dashboard-widgets.css' );
 }
+
+
+/**
+ * Truncates the given string at the specified length.
+ *
+ * @param string $str The input string.
+ * @param int $width The number of chars at which the string will be truncated.
+ * @return string
+ */
+if ( !function_exists('uw_social_truncate') ) :
+	function uw_social_truncate( $str, $width ) {
+		return strtok( wordwrap( $str, $width, "...\n" ), "\n" );
+	}
+endif;
+
+
+if ( !function_exists( 'uw_meta_tags' ) ) :
+	function uw_meta_tags() {
+		
+		global $post;
+		
+		// Get the current site's URL
+		$url = network_site_url();
+		$site_url = home_url();
+		$has_post_thumbnail = isset( $post->ID ) ? has_post_thumbnail( $post->ID ) : false;
+		
+		if( $url="http://uw-multisite.local/" || $url = "http://cmsdev.uw.edu/cms/" || $url = "https://www.washington.edu/cms/" ) {
+			if ( $site_url === "https://www.washington.edu/cms/uwclimatesurvey" ) {
+				
+				$og_img = "https://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/164/2019/10/16193323/Campus-Climate-Survey-Social-Facebook-1200x630.jpg";
+				
+				echo '<meta property="og:image" content="' . $og_img . '" />' . PHP_EOL;
+			}
+			else if( !$has_post_thumbnail ) { 
+				//the post does not have featured image, use a default image
+				$default_image = "http://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/10/2019/06/21094817/Univ-of-Washington_Memorial-Way.jpg"; 
+				//replace this with a default image on your server or an image in your media library
+				
+				echo '<meta property="og:image" content="' . $default_image . '" />' . PHP_EOL;
+			}
+			else {
+				$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
+				
+				echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '" />' . PHP_EOL;
+			}
+			
+			echo '<meta name="twitter:card" content="summary" />' . PHP_EOL;
+			echo '<meta name="twitter:site" content="@uw" />' . PHP_EOL;
+			echo '<meta name="twitter:creator" content="@uw" />' . PHP_EOL;
+			echo '<meta name="twitter:card" content="summary_large_image" />' . PHP_EOL;
+			echo '<meta property="og:title" content="' . html_entity_decode( get_the_title() ) . '" />' . PHP_EOL;
+			// echo '<meta property="og:type" content="article"/>' . PHP_EOL;
+			$actual_link = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+			echo '<meta property="og:url" content="' . $actual_link . '" />' . PHP_EOL;
+			echo '<meta property="og:site_name" content="' . get_bloginfo( 'name' ) . '" />' . PHP_EOL;
+			
+			if ( !is_singular() ) //if it is not a post or a page
+			return;
+			
+			if ( trim( $post->post_excerpt ) != '' ) {
+				//If there's an excerpt that's what we'll use
+				$fb_desc = trim( $post->post_excerpt );
+			} else {
+				//If not we grab it from the content
+				$fb_desc = trim( $post->post_content );
+			}
+			//Trim description
+			$fb_desc = trim( str_replace( '&nbsp;', ' ', $fb_desc ) ); //Non-breaking spaces are usefull on a meta description. We'll just convert them to normal spaces to really trim it
+			$fb_desc = trim( wp_strip_all_tags( strip_shortcodes( stripslashes( $fb_desc ), true ) ) );
+			$fb_desc = uw_social_truncate( $fb_desc, 200 );
+			
+			echo '<meta property="og:description" content="' . $fb_desc . '" />' . PHP_EOL;
+			if ( isset( $post->type_meta ) && $post->type_meta == 'article' && isset( $post->author_meta ) && $post->author_meta != '' ) { '<meta property="article:author" content="' . $post->author_meta . '" />' . PHP_EOL; }
+			echo "
+			" . PHP_EOL;
+		}
+	}
+	add_action( 'wp_head', 'uw_meta_tags', 5 );
+endif;
+
+if ( !function_exists( 'uw_header_template' ) ) :
+	
+	function uw_header_template( $type ) {
+		
+		global $post;
+		
+		$version = $type == 'big' ? '' : '2';
+		
+		$background_url = get_post_thumbnail_id( $post->ID ) ? wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ) : get_template_directory_uri() . "/assets/headers/suzzallo.jpg";
+		
+		$mobileimage_url = get_post_meta( $post->ID, "mobileimage" );
+		$hasmobileimage = '';
+
+		if ( !empty( $mobileimage_url ) && $mobileimage_url[0] !== "" ) {
+			$mobileimage = $mobileimage_url[0];
+			$hasmobileimage = 'hero-mobile-image';
+		}
+
+		$banner = get_post_meta( $post->ID, "banner" );
+		$buttontext = get_post_meta( $post->ID, "buttontext" );
+		$buttonlink = get_post_meta( $post->ID, "buttonlink" );
+		?>
+		<div class="uw-hero-image <?php echo $hasmobileimage ?> hero-height<?php echo $version ?>" style="background-image: url(<?php echo $background_url ?>);">
+			<?php if( isset( $mobileimage ) ) { ?>
+				<div class="mobile-image" style="background-image: url(<?php echo $mobileimage ?>);"></div>
+			<?php } ?>
+
+			<div class="container-fluid">
+				<?php if( !empty( $banner ) && $banner[0] ) { ?>
+					<div id="hashtag"><span><span><?php echo $banner[0] ? $banner[0] : ''; ?></span></span></div>
+				<?php } ?>
+
+				<h1 class="uw-site-title<?php echo $version ?>"><?php the_title(); ?></h1>
+				<span class="udub-slant"><span></span></span>
+				<?php if( !empty( $buttontext ) && $buttontext[0] ) { ?>
+					<a class="btn btn-lg arrow white" href="<?php echo $buttonlink && $buttontext[0] ? $buttonlink[0] : ''; ?>"><span><?php echo $buttontext[0] ? $buttontext[0] : ''; ?></span><span class="arrow-box"><span class="arrow"></span></span></a>
+
+				<?php } ?>
+			</div>
+		</div>
+		<?php
+		
+	}
+	
+endif;

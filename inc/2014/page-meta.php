@@ -94,13 +94,22 @@ class UW_Page_Meta
 
 		<p><input type="checkbox" id="sidebar_id" name="sidebarcheck" value="on" <?php if( !empty($sidebar) ) { ?>checked="checked"<?php } ?> /><?php _e('No Sidebar') ?></p>
 
-		<p><strong><?php _e('Order') ?></strong></p>
-
-		<p><label class="screen-reader-text" for="menu_order"><?php _e('Order') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr($post->menu_order) ?>" /></p>
-
-		<p><?php if ( 'page' == $post->post_type ) _e( 'Need help? Use the Help tab in the upper right of your screen.' ); ?></p>
-
 		<?php
+		if ( 'page' == $post->post_type ) {
+			$sidebar_nav = get_post_meta( $post->ID, "sidebar_nav", true );
+			wp_nonce_field( 'sidebar_nav_nonce' , 'sidebar_nav_name' );
+			?>
+			
+			<p><input type="checkbox" id="sidebar_nav_id" name="sidebarnavcheck" value="on" <?php if( !empty($sidebar_nav) ) { ?>checked="checked"<?php } ?> /><?php _e('Hide Sidebar Navigation') ?></p>
+			
+			<p><strong><?php _e('Order') ?></strong></p>
+			
+			<p><label class="screen-reader-text" for="menu_order"><?php _e('Order') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr($post->menu_order) ?>" /></p>
+			
+			<p><?php if ( 'page' == $post->post_type ) _e( 'Need help? Use the Help tab in the upper right of your screen.' ); ?></p>
+			<?php
+		}
+
 	}
 
 	function page_template_dropdown( $default = '' , $post) {
@@ -215,6 +224,18 @@ class UW_Page_Meta
 						update_post_meta($post_ID, "sidebar", $_POST["sidebarcheck"]);
 					} else {
 						update_post_meta($post_ID, "sidebar", null);
+					}
+				}
+			}
+		}
+
+		if ( isset( $_POST['sidebar_nav_name'] ) ) {
+			if ( ! empty( $_POST ) && check_admin_referer( 'sidebar_nav_nonce', 'sidebar_nav_name') ) { //limit to only pages
+				if ($post_type) {
+					if(isset($_POST["sidebarnavcheck"])) {
+						update_post_meta($post_ID, "sidebar_nav", $_POST["sidebarnavcheck"]);
+					} else {
+						update_post_meta($post_ID, "sidebar_nav", null);
 					}
 				}
 			}

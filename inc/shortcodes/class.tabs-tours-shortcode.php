@@ -163,7 +163,7 @@ class UW_Tabs_Tours {
 				}
 
 				?>
-				<li class="nav-item"><a class="nav-link<?php echo esc_attr( $tab_class ); ?>" id="title-<?php echo esc_attr( $tid ); ?>" data-toggle="tab" href="#content-<?php echo esc_attr( $tid ); ?>" role="tab" aria-controls="<?php echo esc_attr( $tid ); ?>" aria-selected="<?php echo esc_attr( '' === $tab_class ? 'false' : 'true' ); ?>" <?php echo wp_kses_post( $i === $tab_active_item ? '' : 'tabindex="-1"' ); ?>><?php echo esc_attr( $title ); ?></a></li>
+				<li class="nav-item" role="tab"><a class="nav-link<?php echo esc_attr( $tab_class ); ?>" id="title-<?php echo esc_attr( $tid ); ?>" data-toggle="tab" href="#content-<?php echo esc_attr( $tid ); ?>"  aria-controls="content-<?php echo esc_attr( $tid ); ?>" aria-selected="<?php echo esc_attr( '' === $tab_class ? 'false' : 'true' ); ?>" <?php echo wp_kses_post( $i === $tab_active_item ? '' : 'tabindex="-1"' ); ?>><?php echo esc_attr( $title ); ?></a></li>
 				<?php
 				$i++;
 			}
@@ -190,7 +190,7 @@ class UW_Tabs_Tours {
 				}
 
 				?>
-				<div class="tab-pane fade show<?php echo esc_attr( $tab_class ); ?>" id="content-<?php echo esc_attr( $tid ); ?>" role="tabpanel" aria-labelledby="tab-<?php echo esc_attr( $tid ); ?>" tabindex="0"><?php echo wp_kses_post( $content ); ?></div><?php
+				<div class="tab-pane fade show<?php echo esc_attr( $tab_class ); ?>" id="content-<?php echo esc_attr( $tid ); ?>" role="tabpanel" aria-labelledby="title-<?php echo esc_attr( $tid ); ?>" tabindex="0"><?php echo wp_kses_post( $content ); ?></div><?php
 				// running php tags and closed </div> together to make WP happy by making phpcs angry. this removes empty <p></p> tag!
 				$i++;
 			} ?></div>
