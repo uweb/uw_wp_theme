@@ -31,10 +31,9 @@ class UW_MegaMenu {
 	 * @return void
 	 */
 	public function uw_wp_theme_enqueue_megamenu_script() {
-		if ( is_multisite() ) {
-			wp_register_script( 'uw_wp_theme-megamenu-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/megamenu.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210713', true );
-		} else {
-			wp_register_script( 'uw_wp_theme-megamenu-script', get_theme_file_uri( '/js/js/megamenu.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210713', true );
-		}
+		$template_directory = get_bloginfo( 'template_directory' );
+		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+
+		wp_register_script( 'uw_wp_theme-megamenu-script', $template_directory . '/js/megamenu.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210713', true );
 	}
 }

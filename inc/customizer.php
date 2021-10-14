@@ -64,10 +64,9 @@ function uw_wp_theme_customize_partial_blogdescription() {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function uw_wp_theme_customize_preview_js() {
-	if ( is_multisite() ) {
-		wp_enqueue_script( 'uw_wp_theme-customizer', network_site_url( '/wp-content/themes/uw_wp_theme/js/customizer.js' ), array( 'customize-preview' ), '20151215', true );
-	} else {
-		wp_enqueue_script( 'uw_wp_theme-customizer', get_theme_file_uri( '/js/customizer.js' ), array( 'customize-preview' ), '20151215', true );
-	}
+	$template_directory = get_bloginfo( 'template_directory' );
+	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+
+	wp_enqueue_script( 'uw_wp_theme-customizer', $template_directory. '/js/customizer.js', array( 'customize-preview' ), $theme_version, true );
 }
 add_action( 'customize_preview_init', 'uw_wp_theme_customize_preview_js' );

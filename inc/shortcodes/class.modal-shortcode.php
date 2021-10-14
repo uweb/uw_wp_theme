@@ -23,11 +23,10 @@ class UW_Modal {
 	 * @return void
 	 */
 	public function uw_wp_theme_enqueue_modal_script() {
-		if ( is_multisite() ) {
-			wp_register_script( 'uw_wp_theme-modal-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/modal.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210514', true );
-		} else {
-			wp_register_script( 'uw_wp_theme-modal-script', get_theme_file_uri( '/js/shortcodes/modal.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210514', true );
-		}
+		$template_directory = get_bloginfo( 'template_directory' );
+		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+		
+		wp_register_script( 'uw_wp_theme-modal-script', $template_directory . '/js/shortcodes/modal.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
 	}
 
 	/**

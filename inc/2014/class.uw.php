@@ -46,7 +46,10 @@ add_action( 'wp', 'uw_wp_theme_2014' );
  * Enqueue and defer 2014 script.
  */
 function uw_wp_theme_enqueue_2014_carryover() {
-	wp_enqueue_script( 'uw_wp_theme-2014-script', get_template_directory_uri() . '/js/2014.min.js', array( 'underscore', 'backbone' ), '20190708', true );
+	$template_directory = get_bloginfo( 'template_directory' );
+	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+
+	wp_enqueue_script( 'uw_wp_theme-2014-script', $template_directory . '/js/2014.min.js', array( 'underscore', 'backbone' ), $theme_version, true );
 
 	$site_parameters = array(
 		'style_dir' => site_url(),

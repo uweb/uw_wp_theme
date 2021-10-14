@@ -31,11 +31,10 @@ class UW_Tabs_Tours {
 	 * @return void
 	 */
 	public function uw_wp_theme_register_tabs_script() {
-		if ( is_multisite() ) {
-			wp_register_script( 'uw_wp_theme-tabs-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/tabs-tours.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210315', true );
-		} else {
-			wp_register_script( 'uw_wp_theme-tabs-script', get_theme_file_uri( '/js/shortcodes/tabs-tours.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210315', true );
-		}
+		$template_directory = get_bloginfo( 'template_directory' );
+		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+		
+		wp_register_script( 'uw_wp_theme-tabs-script', $template_directory . '/js/shortcodes/tabs-tours.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
 	}
 
 	/**

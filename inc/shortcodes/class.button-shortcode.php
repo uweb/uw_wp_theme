@@ -22,11 +22,10 @@ class UW_Button
 	 * @return void
 	 */
 	public function uw_wp_theme_enqueue_button_script() {
-		if ( is_multisite() ) {
-			wp_register_script( 'uw_wp_theme-button-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/button.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210921', true );
-		} else {
-			wp_register_script( 'uw_wp_theme-button-script', get_theme_file_uri( '/js/shortcodes/button.js' ), array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210921', true );
-		}
+		$template_directory = get_bloginfo( 'template_directory' );
+		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+		
+		wp_register_script( 'uw_wp_theme-button-script', $template_directory . '/js/shortcodes/button.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
 	}
 	function button_handler( $atts, $content = null )
 	{

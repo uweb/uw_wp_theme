@@ -65,9 +65,8 @@ add_action( 'wp_loaded', 'uw_wp_theme_shortcodes' );
  * Enqueue and defer shortcode scripts.
  */
 function uw_wp_theme_enqueue_shortcodes() {
-	if ( is_multisite() ) {
-		wp_enqueue_script( 'uw_wp_theme-custom-link-script', network_site_url( '/wp-content/themes/uw_wp_theme/js/shortcodes/custom-link.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200116', true );
-	} else {
-		wp_enqueue_script( 'uw_wp_theme-custom-link-script', get_theme_file_uri( '/js/shortcodes/custom-link.js' ), array( 'jquery', 'uw_wp_theme-popper' ), '20200116', true );
-	}
+	$template_directory = get_bloginfo( 'template_directory' );
+	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+	
+	wp_enqueue_script( 'uw_wp_theme-custom-link-script', $template_directory. '/js/shortcodes/custom-link.js', array( 'jquery', 'uw_wp_theme-popper' ), $theme_version, true );
 }
