@@ -1,5 +1,5 @@
 # UW WordPress Theme
-![UW WordPress Theme version 1.1.1](https://img.shields.io/static/v1?label=version&message=v1.1.1&color=green)
+![UW WordPress Theme version 1.2.0](https://img.shields.io/static/v1?label=version&message=v1.2.0&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
@@ -27,11 +27,12 @@ Are you a developer on this project? Please see the [developer documentation](ht
 
 ## Installation
 1. Download this repo as a zip file.
-2. Log into your WordPress admin, if not already.
-3. Go to Appearance > Themes and click the Add New button.
-4. Click the Upload Theme button.
-5. Drag and drop the UW WordPress Theme zip file to the file upload area and click the Install Now button.
-6.  Click the Activate link.
+2. If needed, rename the zip file or folder to `uw_wp_theme.zip`.
+3. Log into your WordPress admin, if not already.
+4. Go to Appearance > Themes and click the Add New button.
+5. Click the Upload Theme button.
+6. Drag and drop the UW WordPress Theme zip file to the file upload area and click the Install Now button.
+7. Click the Activate link.
 
 Do you need a child theme? If so, download and install our [starter child theme](https://github.com/uweb/uw_wp_theme_child).
 

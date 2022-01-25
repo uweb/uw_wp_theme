@@ -20,10 +20,8 @@
 		<?php if ( function_exists( 'coauthors' ) ) { coauthors(); } else { the_author(); } ?>
 		<p class="author-desc"> <small><?php the_author_meta(); ?></small></p>
 		</div>
-		
-		<?php endif; ?>
 
-	<?php uw_wp_theme_post_thumbnail(); ?>
+		<?php endif; ?>
 
 	<div class="entry-content">
 		<?php

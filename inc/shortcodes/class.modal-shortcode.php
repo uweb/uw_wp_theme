@@ -25,7 +25,7 @@ class UW_Modal {
 	public function uw_wp_theme_enqueue_modal_script() {
 		$template_directory = get_bloginfo( 'template_directory' );
 		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
-		
+
 		wp_register_script( 'uw_wp_theme-modal-script', $template_directory . '/js/shortcodes/modal.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
 	}
 
@@ -116,8 +116,8 @@ class UW_Modal {
 		$output = ob_get_clean();
 
 		if ( $content ) {
-			// allow other shortcodes inside the modal shortcode.
-			$output .= do_shortcode( $content );
+			// allow other shortcodes and embeds inside the modal shortcode.
+			$output .= apply_filters('the_content', $content );
 		} else {
 			$output .= '<strong>Please add content to this modal.</strong>';
 		}
