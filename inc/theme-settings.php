@@ -4,11 +4,9 @@
  *
  * @package uw_wp_theme
  */
-
-
 function theme_settings_page() {
-    ?>
-	    <div class="wrap">
+	?>
+		<div class="wrap">
 			<h1>Theme Panel</h1>
 
 			<?php settings_errors(); ?>
@@ -21,8 +19,8 @@ function theme_settings_page() {
 			<div style="float: left;">
 				<form method="post" action="options.php">
 					<?php
-						settings_fields( "section" );
-						do_settings_sections( "theme-options" );
+						settings_fields( 'section' );
+						do_settings_sections( 'theme-options' );
 						submit_button();
 					?>
 				</form>
@@ -52,38 +50,51 @@ function nav_menu_options() {
 	<?php
 }
 
+function toggle_search_options() {
+	$toggle_option = get_option( 'toggle_search_options' );
+
+	if ( ! isset( $toggle_option['uw_toggle_options'] ) ) {
+		$toggle_option['uw_toggle_options'] = 'uw';
+	}
+	?>
+		<select name="toggle_search_options[uw_toggle_options]" id="uw_toggle_options">
+			<option value="uw" <?php selected( $toggle_option['uw_toggle_options'], 'uw' ); ?>>All the UW</option>
+			<option value="site" <?php selected( $toggle_option['uw_toggle_options'], 'site' ); ?>>Current site</option>
+ 		</select>
+    <?php
+}
  function display_quicklinks_element() {
  	?>
-     	<input type="checkbox" name="quicklinks-hide" value="1" <?php checked( 1, get_option( 'quicklinks-hide' ), true ); ?> />
-     <?php
- }
+		<input type="checkbox" name="quicklinks-hide" value="1" <?php checked( 1, get_option( 'quicklinks-hide' ), true ); ?> />
+	<?php
+	}
 
  function display_breadcrumb_element() {
  	?>
-     	<input type="checkbox" name="breadcrumb-hide" value="1" <?php checked( 1, get_option( 'breadcrumb-hide' ), true ); ?> />
-     <?php
- }
+		<input type="checkbox" name="breadcrumb-hide" value="1" <?php checked( 1, get_option( 'breadcrumb-hide' ), true ); ?> />
+	<?php
+	}
 
  function display_search_element() {
 	 ?>
-     	<input type="checkbox" name="search-hide" value="1" <?php checked( 1, get_option( 'search-hide' ), true ); ?> />
+		<input type="checkbox" name="search-hide" value="1" <?php checked( 1, get_option( 'search-hide' ), true ); ?> />
 		 <?php
  }
 
  function display_overly_long_title() {
 	 ?>
-     	<input type="checkbox" name="overly_long_title" value="1" <?php checked( 1, get_option( 'overly_long_title' ), true ); ?> />
+		<input type="checkbox" name="overly_long_title" value="1" <?php checked( 1, get_option( 'overly_long_title' ), true ); ?> />
 		 <?php
  }
 
  function display_byline_on_posts() {
 	 ?>
-     	<input type="checkbox" name="show_byline_on_posts" value="1" <?php checked( 1, get_option( 'show_byline_on_posts' ), true ); ?> />
+		<input type="checkbox" name="show_byline_on_posts" value="1" <?php checked( 1, get_option( 'show_byline_on_posts' ), true ); ?> />
 		 <?php
  }
 
 function display_theme_panel_fields() {
-	add_settings_section( "section", "All Settings", null, "theme-options" );
+	add_settings_section( 'section', 'All Settings', null, 'theme-options' );
 
 	add_settings_field( 'uw_nav_options', 'Main navigation menu style', 'nav_menu_options', 'theme-options', 'section' );
 
@@ -97,6 +108,10 @@ function display_theme_panel_fields() {
 
     // add_settings_field("search-hide", "Hide Search menu button", "display_search_element", "theme-options", "section");
 
+    add_settings_field( 'uw_toggle_options', 'Toggle Search site', 'toggle_search_options', 'theme-options', 'section' );
+
+	  register_setting( 'section', 'toggle_search_options' );
+  
     // register_setting("section", "search-hide");
 
     register_setting( "section", "quicklinks-hide" );
@@ -110,5 +125,4 @@ function display_theme_panel_fields() {
 	register_setting( 'section', 'show_byline_on_posts' );
 }
 
-add_action("admin_init", "display_theme_panel_fields" );
-
+add_action( 'admin_init', 'display_theme_panel_fields' );

@@ -25,7 +25,52 @@
 <body <?php body_class(); ?>>
 <a class="sr-only sr-only-focusable skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'uw_wp_theme' ); ?></a>
 
-<div id="uwsearcharea" aria-hidden="true" class="uw-search-bar-container"></div>
+
+<?php $toggle_option = get_option( 'toggle_search_options' ) ? get_option( 'toggle_search_options' )['uw_toggle_options'] : 'uw';
+ ?>
+<div id="uwsearcharea" aria-hidden="true" class="uw-search-bar-container" data-search="<?php echo $toggle_option ?>" hidden>
+
+	<div class="container no-height" role="search">
+		<div class="center-block uw-search-wrapper">
+			<form class="uw-search" action="<?php echo ( 'uw' === $toggle_option ? 'http://uw.edu/search' : esc_url( home_url() ) );
+			?>">
+				<div class="search-form-wrapper">
+					<label class="screen-reader" for="uw-search-bar">Enter search text</label>
+					<input id="uw-search-bar" type="search"
+						name="<?php
+							echo ( 'uw' === $toggle_option ? 'q' : 's' );
+						?>"
+						value="" autocomplete="off" placeholder="Search" />
+				</div>
+				<select id="mobile-search-select" class="visible-xs" aria-label="Search scope">
+					<?php if ($toggle_option === 'uw') {  ?>
+						<option value="uw" >All the UW</option>
+						<option value="site">Current site</option>
+					<?php } else { ?>
+						<option value="site" >Current site</option>
+						<option value="uw">All the UW</option>
+					<?php } ?>
+				</select>
+				<input type="submit" value="search" class="search" tabindex="0"/>
+				<fieldset style="margin: 0; padding: 0; border: 1px solid #ffffff;">
+					<legend id="uw-search-label">Search scope</legend>
+					<div id="search-labels" class="labels hidden-xs">
+						<!--load these labels and input if UW is selected in Theme Settings -->
+					<?php if ( $toggle_option  ==='uw' ) { ?>
+						<label id="uw" class="radio checked"><input class="radiobtn" type="radio" name="search" value="uw" data-toggle="radio" checked />All the UW</label>
+						<label id="site" class="radio"><input  class="radiobtn" type="radio" name="search" value="site" data-toggle="radio" />Current site</label>
+
+					<!--OR load these labels and input if Site is selected in Theme Settings -->
+					<?php } else { ?>
+						<label id="site" class="radio checked"><input class="radiobtn" type="radio" name="search" value="site" data-toggle="radio" checked/>Current site</label>
+						<label id="uw" class="radio"><input class="radiobtn" type="radio" name="search" value="uw" data-toggle="radio" />All the UW</label>
+					<?php } ?>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
 
 <div id="page" class="site">
 <?php if ( ! get_option( 'quicklinks-hide' ) ) {
