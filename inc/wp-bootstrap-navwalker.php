@@ -55,16 +55,21 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param stdClass $args   An object of wp_nav_menu() arguments.
 		 */
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
-			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
-				$t = '';
-				$n = '';
+			if( $depth >= 1 ) {
+				$output .=  '';
 			} else {
-				$t = "\t";
-				$n = "\n";
-			}
 
-			$this->dropdown = true;
-			$output         .= $n . str_repeat( $t, $depth ) . '<ul class="dropdown-menu" role="menu">' . $n;
+				if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+					$t = '';
+					$n = '';
+				} else {
+					$t = "\t";
+					$n = "\n";
+				}
+
+				$this->dropdown = true;
+				$output         .= $n . str_repeat( $t, $depth ) . '<ul class="dropdown-menu">' . $n;
+			}
 		}
 
 		/**
@@ -79,16 +84,20 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param stdClass $args   An object of wp_nav_menu() arguments.
 		 */
 		public function end_lvl( &$output, $depth = 0, $args = array() ) {
-			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
-				$t = '';
-				$n = '';
+			if( $depth >= 1 ) {
+				$output .=  '';
 			} else {
-				$t = "\t";
-				$n = "\n";
-			}
+				if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+					$t = '';
+					$n = '';
+				} else {
+					$t = "\t";
+					$n = "\n";
+				}
 
-			$this->dropdown = false;
-			$output         .= $n . str_repeat( $t, $depth ) . '</ul>' . $n;
+				$this->dropdown = false;
+				$output         .= $n . str_repeat( $t, $depth ) . '</ul>' . $n;
+			}
 		}
 
 		/**
@@ -133,6 +142,10 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			if ( 0 < $depth ) {
 				$classes[] = 'dropdown-menu';
+			}
+
+			if ( 0 == $depth ) {
+				$classes[] = 'top-level-nav';
 			}
 
 			/**
@@ -204,10 +217,10 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 */
 			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 
-			if ( $args->walker->has_children ) {
+			if ( $args->walker->has_children && 0 == $depth ) {
 				$atts['data-toggle']   = 'dropdown';
-				$atts['aria-haspopup'] = 'true';
 				$atts['aria-expanded'] = 'false';
+				$atts['role'] = 'button';
 			}
 
 			$attributes = '';
@@ -251,7 +264,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			$item_classes = array( 'nav-link' );
 
-			if ( $args->walker->has_children ) {
+			if ( $args->walker->has_children && 0 == $depth ) {
 				$item_classes[] = 'dropdown-toggle';
 			}
 

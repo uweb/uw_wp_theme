@@ -40,7 +40,7 @@ class UW_Audience
 		//      then set that ID as the menu-item-parent-id for each child.  Then save each child.
 		foreach ( $this->menu_items as $menu_name => $menu_attributes ) {
 
-			$children = $menu_attributes['children'];
+			$children = isset( $menu_attributes['children'] ) ? $menu_attributes['children'] : NULL;
 
 			unset( $menu_attributes['children'] );
 
@@ -81,7 +81,7 @@ class UW_Audience
 	{
 		$item['menu-item-title']    = $name;
 		$item['menu-item-url']      = $url;
-		$item['menu-item-status'] = self::DEFAULT_STATUS;
+		$item['menu-item-status'] 	= self::DEFAULT_STATUS;
 
 
 		if ( $parent )

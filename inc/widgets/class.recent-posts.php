@@ -86,7 +86,7 @@ class UW_Recent_Posts extends WP_Widget
         <?php foreach ( $recent as $post ) : ?>
 
             <li>
-                <a class="widget-thumbnail" href="<?php echo get_the_permalink( $post->ID ) ?>" title="<?php echo esc_attr( get_the_title( $post->ID ) ) ?>">
+                <a class="widget-thumbnail" href="<?php echo get_the_permalink( $post->ID ) ?>" title="<?php echo esc_attr( get_the_title( $post->ID ) ) ?>" aria-role="presentation">
 
                     <?php if ( has_post_thumbnail( $post->ID ) ) : ?>
 

@@ -196,7 +196,7 @@ if ( ! function_exists( 'uw_wp_theme_white_bar_menu') ) :
 	function uw_wp_theme_white_bar_menu()
 	{
 		if ( has_nav_menu( UW_Dropdowns::LOCATION ) ) {
-				echo '<nav class="navbar navbar-expand-md navbar-light ' . UW_Dropdowns::LOCATION .'">
+				echo '<nav aria-label="main menu" class="navbar navbar-expand-md navbar-light ' . UW_Dropdowns::LOCATION .'">
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . UW_Dropdowns::LOCATION .'" aria-controls="' . UW_Dropdowns::LOCATION .'" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon">Menu</span>
 						  </button><div class="container-fluid">';
@@ -296,9 +296,9 @@ if ( ! function_exists('uw_breadcrumbs') ) :
 	if ( get_option( 'breadcrumb-hide' ) ) :
 		return;
 	endif;
-		
+
     global $post;
-	
+
     $ancestors = array_reverse( get_post_ancestors( $post ) );
     $html = '<li><a href="' . home_url('/') . '" title="' . get_bloginfo('title') . '">' . get_bloginfo('title') . '</a>';
 
@@ -486,34 +486,34 @@ endif;
 
 if ( !function_exists( 'uw_meta_tags' ) ) :
 	function uw_meta_tags() {
-		
+
 		global $post;
-		
+
 		// Get the current site's URL
 		$url = network_site_url();
 		$site_url = home_url();
 		$has_post_thumbnail = isset( $post->ID ) ? has_post_thumbnail( $post->ID ) : false;
-		
+
 		if( $url="http://uw-multisite.local/" || $url = "http://cmsdev.uw.edu/cms/" || $url = "https://www.washington.edu/cms/" ) {
 			if ( $site_url === "https://www.washington.edu/cms/uwclimatesurvey" ) {
-				
+
 				$og_img = "https://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/164/2019/10/16193323/Campus-Climate-Survey-Social-Facebook-1200x630.jpg";
-				
+
 				echo '<meta property="og:image" content="' . $og_img . '" />' . PHP_EOL;
 			}
-			else if( !$has_post_thumbnail ) { 
+			else if( !$has_post_thumbnail ) {
 				//the post does not have featured image, use a default image
-				$default_image = "http://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/10/2019/06/21094817/Univ-of-Washington_Memorial-Way.jpg"; 
+				$default_image = "http://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/10/2019/06/21094817/Univ-of-Washington_Memorial-Way.jpg";
 				//replace this with a default image on your server or an image in your media library
-				
+
 				echo '<meta property="og:image" content="' . $default_image . '" />' . PHP_EOL;
 			}
 			else {
 				$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
-				
+
 				echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '" />' . PHP_EOL;
 			}
-			
+
 			echo '<meta name="twitter:card" content="summary" />' . PHP_EOL;
 			echo '<meta name="twitter:site" content="@uw" />' . PHP_EOL;
 			echo '<meta name="twitter:creator" content="@uw" />' . PHP_EOL;
@@ -523,10 +523,10 @@ if ( !function_exists( 'uw_meta_tags' ) ) :
 			$actual_link = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 			echo '<meta property="og:url" content="' . $actual_link . '" />' . PHP_EOL;
 			echo '<meta property="og:site_name" content="' . get_bloginfo( 'name' ) . '" />' . PHP_EOL;
-			
+
 			if ( !is_singular() ) //if it is not a post or a page
 			return;
-			
+
 			if ( trim( $post->post_excerpt ) != '' ) {
 				//If there's an excerpt that's what we'll use
 				$fb_desc = trim( $post->post_excerpt );
@@ -538,7 +538,7 @@ if ( !function_exists( 'uw_meta_tags' ) ) :
 			$fb_desc = trim( str_replace( '&nbsp;', ' ', $fb_desc ) ); //Non-breaking spaces are usefull on a meta description. We'll just convert them to normal spaces to really trim it
 			$fb_desc = trim( wp_strip_all_tags( strip_shortcodes( stripslashes( $fb_desc ), true ) ) );
 			$fb_desc = uw_social_truncate( $fb_desc, 200 );
-			
+
 			echo '<meta property="og:description" content="' . $fb_desc . '" />' . PHP_EOL;
 			if ( isset( $post->type_meta ) && $post->type_meta == 'article' && isset( $post->author_meta ) && $post->author_meta != '' ) { '<meta property="article:author" content="' . $post->author_meta . '" />' . PHP_EOL; }
 			echo "
@@ -549,15 +549,15 @@ if ( !function_exists( 'uw_meta_tags' ) ) :
 endif;
 
 if ( !function_exists( 'uw_header_template' ) ) :
-	
+
 	function uw_header_template( $type ) {
-		
+
 		global $post;
-		
+
 		$version = $type == 'big' ? '' : '2';
-		
+
 		$background_url = get_post_thumbnail_id( $post->ID ) ? wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ) : get_template_directory_uri() . "/assets/headers/suzzallo.jpg";
-		
+
 		$mobileimage_url = get_post_meta( $post->ID, "mobileimage" );
 		$hasmobileimage = '';
 
@@ -589,7 +589,7 @@ if ( !function_exists( 'uw_header_template' ) ) :
 			</div>
 		</div>
 		<?php
-		
+
 	}
-	
+
 endif;

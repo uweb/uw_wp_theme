@@ -25,7 +25,7 @@ function uw_wp_theme_setup() {
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
-	
+
 	// Add theme support for Gallery post format
 	add_theme_support( 'post-formats', array( 'gallery' ) );
 
@@ -267,7 +267,7 @@ add_filter( 'wp_resource_hints', 'uw_wp_theme_resource_hints', 10, 2 );
 function uw_wp_theme_gutenberg_styles() {
 	$template_directory = get_bloginfo( 'template_directory' );
 	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
-	
+
 	// Add custom fonts, used in the main stylesheet.
 	wp_enqueue_style( 'uw_wp_theme-fonts', uw_wp_theme_fonts_url(), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
@@ -280,10 +280,10 @@ add_action( 'enqueue_block_editor_assets', 'uw_wp_theme_gutenberg_styles' );
  * Enqueue styles.
  */
 function uw_wp_theme_styles() {
-	
+
 	$template_directory = get_bloginfo( 'template_directory' );
 	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
-	
+
 	// Add custom fonts, used in the main stylesheet.
 	wp_enqueue_style( 'uw_wp_theme-fonts', uw_wp_theme_fonts_url(), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
@@ -295,7 +295,7 @@ function uw_wp_theme_styles() {
 	wp_enqueue_style( 'uw_wp_theme-content', $template_directory . '/css/content.css', array(), $theme_version );
 	wp_enqueue_style( 'uw_wp_theme-sidebar', $template_directory . '/css/sidebar.css', array(), $theme_version );
 	wp_enqueue_style( 'uw_wp_theme-widgets', $template_directory . '/css/widgets.css', array(), $theme_version );
-	
+
 }
 
 add_action( 'wp_enqueue_scripts', 'uw_wp_theme_styles' );
@@ -304,18 +304,10 @@ add_action( 'wp_enqueue_scripts', 'uw_wp_theme_styles' );
  * Enqueue scripts.
  */
 function uw_wp_theme_scripts() {
-	
+
 	$template_directory = get_bloginfo( 'template_directory' );
 	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
-	
-	// Enqueue the navigation script.
-	wp_enqueue_script( 'uw_wp_theme-navigation', $template_directory . '/js/navigation.js', array(), $theme_version, false );
 
-	wp_script_add_data( 'uw_wp_theme-navigation', 'async', true );
-	wp_localize_script( 'uw_wp_theme-navigation', 'uw_wp_themeScreenReaderText', array(
-		'expand'   => __( 'Expand child menu', 'uw_wp_theme' ),
-		'collapse' => __( 'Collapse child menu', 'uw_wp_theme' ),
-	));
 
 	// Add jQuery, Bootstrap, and popper.js scripts.
 	wp_deregister_script( 'jquery' ); // deregister first, just in case.
@@ -335,10 +327,10 @@ function uw_wp_theme_scripts() {
 
 	wp_script_add_data( 'uw_wp_theme-skip-link-focus-fix', 'defer', true );
 
-	// Enqueue left-to-right-arrow-nav script.
-	wp_enqueue_script( 'uw_wp_theme-left-to-right-arrow-nav', $template_directory . '/js/left-to-right-arrow-nav.js', array(), $theme_version, false );
+	// Enqueue additional navmenu keyboard accessibility script.
+	wp_enqueue_script( 'uw_wp_theme-keyboard-navmenu', $template_directory . '/js/keyboard-navmenu.js', array(), $theme_version, false );
 
-	wp_script_add_data( 'uw_wp_theme-left-to-right-arrow-nav', 'defer', true );
+	wp_script_add_data( 'uw_wp_theme-keyboard-navmenu', 'defer', true );
 
 }
 add_action( 'wp_enqueue_scripts', 'uw_wp_theme_scripts' );

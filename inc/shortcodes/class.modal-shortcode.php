@@ -108,7 +108,7 @@ class UW_Modal {
 			<div class="modal-dialog <?php echo esc_attr( $width_class ); ?> <?php echo 'true' === $modal_atts['scroll'] ? esc_attr( 'modal-dialog-scrollable' ) : ''; ?> <?php echo 'center' === $modal_atts['position'] ? esc_attr( 'modal-dialog-centered' ) : ''; ?>" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="<?php echo esc_attr( $modal_id ); ?>Title"><?php echo esc_attr( $modal_atts['title'] ); ?></h5>
+						<h2 class="h5 modal-title" id="<?php echo esc_attr( $modal_id ); ?>Title"><?php echo esc_attr( $modal_atts['title'] ); ?></h2>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					</div>
 					<div class="modal-body">

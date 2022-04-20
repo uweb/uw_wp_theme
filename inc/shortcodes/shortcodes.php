@@ -12,7 +12,7 @@ function uw_wp_theme_shortcodes() {
 
 	// If this is the admin page, do nothing.
 	// if ( is_admin() ) {
-	// 	return;
+	// return;
 	// }
 
 	$parent = get_template_directory() . '/inc/shortcodes/';
@@ -66,7 +66,7 @@ add_action( 'wp_loaded', 'uw_wp_theme_shortcodes' );
  */
 function uw_wp_theme_enqueue_shortcodes() {
 	$template_directory = get_bloginfo( 'template_directory' );
-	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
-	
-	wp_enqueue_script( 'uw_wp_theme-custom-link-script', $template_directory. '/js/shortcodes/custom-link.js', array( 'jquery', 'uw_wp_theme-popper' ), $theme_version, true );
+	$theme_version = wp_get_theme(get_template( ) )->get( 'Version');
+
+	wp_enqueue_script( 'uw_wp_theme-custom-link-script', $template_directory . '/js/shortcodes/custom-link.js', array( 'jquery', 'uw_wp_theme-popper' ), $theme_version, true );
 }

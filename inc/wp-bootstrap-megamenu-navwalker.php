@@ -70,6 +70,10 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 			$classes[] = ( $item->current || $item->current_item_ancestor ) ? 'active' : '';
 			$classes[] = 'nav-item-' . $item->ID;
 
+			if ( 0 === $depth ) {
+				$classes[] = 'top-level-nav';
+			}
+
 			if ( $depth && $args->has_children ) {
 				$classes[] = 'nav-group ';
 			}
@@ -93,7 +97,7 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
 
 			if ( 0 === $depth && $args->has_children ) {
-				$attributes .= ' class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"';
+				$attributes .= ' class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="button"';
 			} elseif ( 1 === $depth && $args->has_children ) {
 				$attributes .= ' class="nav-link"';
 			} else {
