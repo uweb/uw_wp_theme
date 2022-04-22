@@ -38,6 +38,7 @@ class UW_Jumbotron {
 				'overlay' => '', // optional overlay for text on jumbotrons without them by default (default, simple).
 				'image'   => '', // url for the image from the media library. uses new-burke image if none set.
 				'title'   => '', // required. headline.
+				'titletag' => 'h2', // title tag, supports h1, h2, h3
 				'button'  => '', // required. button text.
 				'link'    => '', // required. button link.
 			),
@@ -178,7 +179,7 @@ class UW_Jumbotron {
 				<?php } elseif ( 'block-center' === $style ) { ?>
 					<div class="container">
 				<?php } ?>
-				<h2 class="display-3"><?php echo esc_attr( $jumbotron_title ); ?></h2>
+				<<?php echo esc_attr( $jumbotron_atts['titletag'] ); ?> class="display-3"><?php echo esc_attr( $jumbotron_title ); ?></<?php echo esc_attr( $jumbotron_atts['titletag'] ); ?>>
 				<?php if ( 'simple' === $jumbotron_atts['style'] || empty( $jumbotron_atts['style'] ) ) { ?>
 					<div class="udub-slant-divider"><span></span></div>
 				<?php } ?>

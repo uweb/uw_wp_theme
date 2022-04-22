@@ -53,6 +53,7 @@ class UW_Card {
 				'alt'      => '', // alt text for the image.
 				'icon'     => '', // used for step style card only.
 				'title'    => '', // required. headline.
+				'titletag' => 'h2', // title tag, only coded for h2, h3 and h4
 				'subtitle' => '', // used for step style card only.
 				'button'   => '', // button text.
 				'link'     => '', // button link.
@@ -227,7 +228,7 @@ class UW_Card {
 			// block head card.
 			if ( 'block' === $style ) {
 				?>
-				<h4 class="card-title"><?php echo wp_kses_post( $card_title ); ?></h4>
+				<<?php echo esc_attr( $card_atts['titletag'] ); ?> class="card-title"><?php echo wp_kses_post( $card_title ); ?></<?php echo esc_attr( $card_atts['titletag'] ); ?>>
 			<?php } ?>
 			<div class="card-body">
 				<?php
@@ -256,7 +257,7 @@ class UW_Card {
 				// block card.
 				if ( 'block' !== $style ) {
 					?>
-					<h4 class="card-title <?php if ( 'no-image' === $card_class || 'image-top' === $card_class || 'text-link' === $card_class || 'step' === $style ) { echo esc_attr( 'card-title-slant' ); } ?>"><?php echo wp_kses_post( $card_title ); ?></h4>
+					<<?php echo esc_attr( $card_atts['titletag'] ); ?> class="card-title <?php if ( 'no-image' === $card_class || 'image-top' === $card_class || 'text-link' === $card_class || 'step' === $style ) { echo esc_attr( 'card-title-slant' ); } ?>"><?php echo wp_kses_post( $card_title ); ?></<?php echo esc_attr( $card_atts['titletag'] ); ?>>
 					<?php
 					// no-image, image-top, text-link, or step card.
 					if ( 'no-image' === $card_class || 'image-top' === $card_class || 'text-link' === $card_class || 'step' === $style ) {

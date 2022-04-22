@@ -1,5 +1,5 @@
 # UW WordPress Theme
-![UW WordPress Theme version 1.2.0](https://img.shields.io/static/v1?label=version&message=v1.2.0&color=green)
+![UW WordPress Theme version 1.3.1](https://img.shields.io/static/v1?label=version&message=v1.3.1&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
@@ -205,6 +205,7 @@ Attributes:
 * **alt**: Sets the alt text for the image. Use with inset, image-top, block, large, and full-width cards. (_Default: none_)
 * **icon**: Only used with step cards. [Available icons](https://www.washington.edu/brand/web/guides-and-how-tos/html-templates/web-icons/) are listed on the UW Brand site. Use without the period at the beginning: e.g. `.ic-check` should be `ic-check`. (_Default: none_)
 * **title**: Title or heading for the card. Required for all cards. (_Default: Add a title!_)
+* **titletag**: Heading tag used for the title. Supported tags: h2, h3, h4 (_Default: h2_)
 * **subtitle**: Only used with step cards. (_Default: none_)
 * **button**: Button text. Required for all cards except block (no button). (_Default: ADD BUTTON TEXT!_)
 * **link**: Button link. Required for all cars except block (no button). (_Default: none_
@@ -348,6 +349,7 @@ Attributes:
 * **align**: right (_Default: none_) Optional, for block and block-slant styles only. Adjusts the overlay positioning.
 * **image**: background image URL (_Default: aerial new burke image_)
 * **title**: Title for jumbotron (_Default: Add a title!_) Required.
+* **titletag**: Heading tag used for the title. Supported tags: h1, h2, h3 (_Default: h2_)
 * **button**: Text for jumbotron button (_Default: Add button text!_) Required.
 * **link**: URL for jumbotron button (_Default: none_) Required.
 

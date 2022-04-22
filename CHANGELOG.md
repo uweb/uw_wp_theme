@@ -1,5 +1,11 @@
 # Changelog
 
+## 2021-04-21 - 1.3.1
+
+- bugfix: search escape key
+- bugfix: fixed showing featured image as default template banner
+- feature: added title tag option to card and jumbotron shortcodes
+
 ## 2021-04-20 - 1.3.0
 
 - feature: added theme option to change default search option
