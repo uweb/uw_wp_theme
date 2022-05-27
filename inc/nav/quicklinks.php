@@ -42,9 +42,9 @@ class UW_QuickLinks {
 			foreach ( $items as $index => $item ) {
 				// Only keep the necessary keys of the $item.
 				if ( ! empty( $item->classes[0] ) ) {
-					$biglinks .= '<li><span class="' . $item->classes[0] . '"></span><a href="' . $item->url . '" tabindex="0">' . $item->title . '</a></li>';
+					$biglinks .= '<li><span class="' . $item->classes[0] . '"></span><a href="' . $item->url . '" tabindex="-1">' . $item->title . '</a></li>';
 				} else {
-					$littlelinks .= '<li><a href="' . $item->url . '" tabindex="0">' . $item->title . '</a></li>';
+					$littlelinks .= '<li><a href="' . $item->url . '" tabindex="-1">' . $item->title . '</a></li>';
 
 				}
 			}

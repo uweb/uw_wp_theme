@@ -1,12 +1,17 @@
 # Changelog
 
-## 2021-04-21 - 1.3.1
+## 2022-05-27 - 1.3.2
+
+*  bugfix: quicklinks and skiplink tab navigation bugs
+*  bugfix: search url defaulting to the main site URL and not a subpage
+
+## 2022-04-21 - 1.3.1
 
 - bugfix: search escape key
 - bugfix: fixed showing featured image as default template banner
 - feature: added title tag option to card and jumbotron shortcodes
 
-## 2021-04-20 - 1.3.0
+## 2022-04-20 - 1.3.0
 
 - feature: added theme option to change default search option
 - a11y: various navigation navigation fixes (white bar, quicklinks, audeince menu), including updates to keyboard navigation, arial labels, and JAWS interactivity
@@ -20,7 +25,7 @@
 - cleanup: reorganized assets
 
 
-## 2021-01-25 - 1.2.0
+## 2022-01-25 - 1.2.0
 
 - Allow youtube embeds in modal shorcodes
 - updated/modernized quicklinks and footer links

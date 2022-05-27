@@ -23,7 +23,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-<a class="sr-only sr-only-focusable skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'uw_wp_theme' ); ?></a>
+<a class="screen-reader-shortcut" href="#primary"><?php esc_html_e( 'Skip to content', 'uw_wp_theme' ); ?></a>
 
 
 <?php $toggle_option = get_option( 'toggle_search_options' ) ? get_option( 'toggle_search_options' )['uw_toggle_options'] : 'uw';
@@ -32,8 +32,7 @@
 
 	<div class="container no-height" role="search">
 		<div class="center-block uw-search-wrapper">
-			<form class="uw-search" action="<?php echo ( 'uw' === $toggle_option ? 'http://uw.edu/search' : esc_url( home_url() ) );
-			?>">
+			<form class="uw-search" data-sitesearch="<?php echo esc_url( home_url() ) . '/'; ?>" action="<?php echo ( 'uw' === $toggle_option ? 'https://uw.edu/search' : esc_url( home_url() ) . '/' ); ?>">
 				<div class="search-form-wrapper">
 					<label class="screen-reader" for="uw-search-bar">Enter search text</label>
 					<input id="uw-search-bar" type="search"
@@ -80,7 +79,7 @@
 		<header id="masthead" class="site-header">
 			<div class="navbar navbar-expand-lg">
 				<div class="navbar-brand site-branding">
-					<a href="http://uw.edu" title="University of Washington Home" class="uw-patch">University of Washington</a>
+					<a href="http://uw.edu" title="University of Washington Home" class="uw-patch" tabindex="0">University of Washington</a>
 					<a href="http://uw.edu" title="University of Washington Home" class="uw-wordmark" tabindex="-1" aria-hidden="true">University of Washington</a>
 				</div><!-- .site-branding -->
 
