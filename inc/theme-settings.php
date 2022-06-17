@@ -21,6 +21,7 @@ function theme_settings_page() {
 					<?php
 						settings_fields( 'section' );
 						do_settings_sections( 'theme-options' );
+						do_settings_sections( 'post-options' );
 						submit_button();
 					?>
 				</form>
@@ -93,6 +94,38 @@ function toggle_search_options() {
 		 <?php
  }
 
+ function display_author_on_posts() {
+	?>
+	   <input type="checkbox" name="show_author_on_posts" value="1" <?php checked( 1, get_option( 'show_author_on_posts' ), true ); ?> />
+	   Note: need to enable "Show bylines on single posts and archives?" for this to work
+		<?php
+}
+
+ function display_date_on_posts() {
+	?>
+	   <input type="checkbox" name="show_date_on_posts" value="1" <?php checked( 1, get_option( 'show_date_on_posts' ), true ); ?> />
+	   Note: need to enable "Show bylines on single posts and archives?" for this to work
+		<?php
+}
+
+ function display_categories_on_posts() {
+	?>
+	   <input type="checkbox" name="show_categories_on_posts" value="1" <?php checked( 1, get_option( 'show_categories_on_posts' ), true ); ?> />
+		<?php
+}
+
+ function display_tags_on_posts() {
+	?>
+	   <input type="checkbox" name="show_tags_on_posts" value="1" <?php checked( 1, get_option( 'show_tags_on_posts' ), true ); ?> />
+		<?php
+}
+
+ function display_edit_on_posts() {
+	?>
+	   <input type="checkbox" name="show_edit_on_posts" value="1" <?php checked( 1, get_option( 'show_edit_on_posts' ), true ); ?> />
+		<?php
+}
+
 function display_theme_panel_fields() {
 	add_settings_section( 'section', 'All Settings', null, 'theme-options' );
 
@@ -100,29 +133,49 @@ function display_theme_panel_fields() {
 
 	add_settings_field( 'overly_long_title', 'Does your site title take two lines on desktop?', 'display_overly_long_title', 'theme-options', 'section' );
 
-	add_settings_field( 'show_byline_on_posts', 'Show bylines on single posts and archives?', 'display_byline_on_posts', 'theme-options', 'section' );
+	add_settings_field( 'breadcrumb-hide', 'Hide Breadcrumbs from site', 'display_breadcrumb_element', 'theme-options', 'section' );
 
-    add_settings_field("breadcrumb-hide", "Hide Breadcrumbs from site", "display_breadcrumb_element", "theme-options", "section");
+	// add_settings_field("quicklinks-hide", "Hide Quicklinks menu button", "display_quicklinks_element", "theme-options", "section" );
 
-    add_settings_field("quicklinks-hide", "Hide Quicklinks menu button", "display_quicklinks_element", "theme-options", "section");
+	// add_settings_field("search-hide", "Hide Search menu button", "display_search_element", "theme-options", "section" );
 
-    // add_settings_field("search-hide", "Hide Search menu button", "display_search_element", "theme-options", "section");
+	add_settings_field( 'uw_toggle_options', 'Toggle Search site', 'toggle_search_options', 'theme-options', 'section' );
 
-    add_settings_field( 'uw_toggle_options', 'Toggle Search site', 'toggle_search_options', 'theme-options', 'section' );
+	add_settings_section( 'section', 'Post Options', null, 'post-options' );
 
-	  register_setting( 'section', 'toggle_search_options' );
-  
-    // register_setting("section", "search-hide");
+	add_settings_field( 'show_byline_on_posts', 'Show bylines on single posts and archives?', 'display_byline_on_posts', 'post-options', 'section' );
 
-    register_setting( "section", "quicklinks-hide" );
+	add_settings_field( 'show_author_on_posts', 'Show author name on posts?', 'display_author_on_posts', 'post-options', 'section' );
 
-    register_setting( "section", "breadcrumb-hide" );
+	add_settings_field( 'show_date_on_posts', 'Show post date on posts?', 'display_date_on_posts', 'post-options', 'section' );
+
+	add_settings_field( 'show_categories_on_posts', 'Show categories on posts?', 'display_categories_on_posts', 'post-options', 'section' );
+
+	add_settings_field( 'show_tags_on_posts', 'Show tags on posts?', 'display_tags_on_posts', 'post-options', 'section' );
+
+	add_settings_field( 'show_edit_on_posts', 'Show an edit option on posts?', 'display_edit_on_posts', 'post-options', 'section' );
+
+	register_setting( 'section', 'toggle_search_options' );
+
+	// register_setting("section", "search-hide");
+
+	register_setting( 'section', 'breadcrumb-hide' );
 
 	register_setting( 'section', 'nav_menu_options' );
 
 	register_setting( 'section', 'overly_long_title' );
 
 	register_setting( 'section', 'show_byline_on_posts' );
+
+	register_setting( 'section', 'show_author_on_posts' );
+
+	register_setting( 'section', 'show_date_on_posts' );
+
+	register_setting( 'section', 'show_categories_on_posts' );
+
+	register_setting( 'section', 'show_tags_on_posts' );
+
+	register_setting( 'section', 'show_edit_on_posts' );
 }
 
 add_action( 'admin_init', 'display_theme_panel_fields' );

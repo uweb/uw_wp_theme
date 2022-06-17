@@ -1,5 +1,11 @@
 # Changelog
 
+## 2022-06-17 1.3.3
+
+- bugfix: pdf attachment pages
+- added top level links for academics and research
+- theme panel: new post options section with additional post meta options
+
 ## 2022-05-27 - 1.3.2
 
 *  bugfix: quicklinks and skiplink tab navigation bugs

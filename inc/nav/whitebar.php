@@ -83,6 +83,7 @@ class UW_Dropdowns
 
 		// The default Academics dropdown.
 		$this->add_menu_item( 'Academics', '//uw.edu/about/academics/' );
+		$this->add_menu_item( 'Academics at the UW', '//uw.edu/about/academics/' );
 		$this->add_menu_item( 'Academic calendar', '//uw.edu/calendar/academic/', $parent = 'Academics' );
 		$this->add_menu_item( 'Academic departments', '//uw.edu/about/academics/departments/', $parent = 'Academics' );
 		$this->add_menu_item( 'Colleges and schools', '//uw.edu/about/academics/', $parent = 'Academics' );
@@ -113,6 +114,7 @@ class UW_Dropdowns
 
 		// The default Research the UW dropdown.
 		$this->add_menu_item( 'Research', '//uw.edu/research/' );
+		$this->add_menu_item( 'Research at the UW', '//uw.edu/research/' );
 		$this->add_menu_item( 'Office of Research', '//uw.edu/research/or/', $parent = 'Research' );
 		$this->add_menu_item( 'Research Lifecycle', '//uw.edu/research/myresearch-lifecycle/', $parent = 'Research' );
 		$this->add_menu_item( 'Resources', '//uw.edu/research/resources/', $parent = 'Research' );

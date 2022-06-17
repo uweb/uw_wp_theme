@@ -22,8 +22,12 @@
 			?>
 			<div class="entry-meta">
 				<?php
+				if ( get_option( 'show_date_on_posts' ) ) {
 					uw_wp_theme_posted_on();
+				}
+				if ( get_option( 'show_author_on_posts' ) ) {
 					uw_wp_theme_posted_by();
+				}
 				?>
 			</div><!-- .entry-meta -->
 			<?php
@@ -59,9 +63,15 @@
 
 	<footer class="entry-footer">
 		<?php
-		uw_wp_theme_post_categories();
-		uw_wp_theme_post_tags();
-		uw_wp_theme_edit_post_link();
+		if ( get_option( 'show_categories_on_posts' ) ) {
+			uw_wp_theme_post_categories();
+		}
+		if ( get_option( 'show_tags_on_posts' ) ) {
+			uw_wp_theme_post_tags();
+		}
+		if ( get_option( 'show_edit_on_posts' ) ) {
+			uw_wp_theme_edit_post_link();
+		}
 		?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

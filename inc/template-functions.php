@@ -593,3 +593,11 @@ if ( !function_exists( 'uw_header_template' ) ) :
 	}
 
 endif;
+
+if ( ! function_exists( 'is_pdf' ) ):
+
+	function is_pdf() {
+	  return get_post_mime_type() == 'application/pdf';
+	}
+
+  endif;

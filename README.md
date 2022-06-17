@@ -1,5 +1,5 @@
 # UW WordPress Theme
-![UW WordPress Theme version 1.3.2](https://img.shields.io/static/v1?label=version&message=v1.3.1&color=green)
+![UW WordPress Theme version 1.3.3](https://img.shields.io/static/v1?label=version&message=v1.3.3&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
@@ -437,7 +437,7 @@ This shortcode embeds a Tagboard feed onto the page. Tagboards that you wish to 
 
 Attributes:
 
-* **id**: the ID of your Tagboard. This can be found by visiting your Tagboard's dashboard and looking for the 4-digit ID at the end of the url. (_Default: none_)
+* **slug**: the ID of your Tagboard. This can be found by visiting your Tagboard's dashboard and looking for the 6-digit ID at the end of the url. (_Default: none_)
 * **layout**: the layout of the Tagboard. Options: grid, waterfall, carousel. (_Default: grid_)
 * **post-count**: the number of posts to display. (_Default: 50_)
 * **mobile-count**: the number of posts to display on mobile. (_Default: 50_)
@@ -447,7 +447,7 @@ Attributes:
 Example:
 
 ```
-[tagboard id="4354" layout="waterfall" post-count="30" mobile-count="15" toolbar="none" feed-type="auto"]
+[tagboard slug="435487" layout="waterfall" post-count="30" mobile-count="15" toolbar="none" feed-type="auto"]
 ```
 
 ### Tile Box
