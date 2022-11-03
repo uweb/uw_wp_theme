@@ -25,7 +25,17 @@ class UW_Recent_Posts extends WP_Widget
                 'classname'   => self::ID
             )
         );
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'uw_wp_theme_enqueue_recent_posts_script' ) );
     }
+
+	// Enqueue recent posts script.
+	public function uw_wp_theme_enqueue_recent_posts_script() {
+		$template_directory = get_bloginfo( 'template_directory' );
+		$theme_version = wp_get_theme( get_template() )->get( 'Version' );
+
+		wp_register_script( 'uw_wp_theme-recent-posts-script', $template_directory . '/js/2014/recent-posts.js', array( 'jquery' ), $theme_version, true );
+	}
 
   // Outputs the widget HTML
     function widget( $args, $instance )
@@ -48,7 +58,7 @@ class UW_Recent_Posts extends WP_Widget
         <h4><?php  echo $title; ?>
 
         <?php if ( $feed )  : ?>
-            <a class="feed" id="rssfeed" href="<?php echo bloginfo('rss2_url'); ?>" alt=”subscribe via rss” style="float:right; font-size:14px; text-align:center; color:#4b2e83; margin-top:-7px">
+            <a class="feed" id="rssfeed" href="<?php echo bloginfo('rss2_url'); ?>" alt="subscribe via rss" style="float:right; font-size:14px; text-align:center; color:#4b2e83; margin-top:-7px">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22.564px" height="22.948px" viewBox="0 0 22.564 22.948" enable-background="new 0 0 22.564 22.948" xml:space="preserve">
                     <g>
                         <path fill="none" stroke="#4C2F83" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M2.239,12.029
@@ -108,15 +118,6 @@ class UW_Recent_Posts extends WP_Widget
         <?php if ( get_option( 'page_for_posts' ) && $more )  : ?>
             <a class="more" href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>">More</a>
         <?php endif; ?>
-
-        <script type="text/javascript">
-            $("a.feed").unbind('click').on("click" , function(event){
-                event.preventDefault();
-                $("p.feed").toggleClass("hide");
-                $("p.feed > input").select();
-            });
-
-        </script>
 
         <?php echo $after_widget;
     }

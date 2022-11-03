@@ -35,8 +35,11 @@ class UW_Filters
             add_filter( 'body_class', array( $this, 'add_site_title_body_class' ) );
         }
 
-        // Custom except ending
+        // Custom excerpt ending
         add_filter( 'excerpt_more', array( $this, 'custom_excerpt_more' ) );
+
+		// custom excerpt length.
+		add_filter( 'excerpt_length', array( $this, 'uw_excerpt_length' ) );
 
         //allow username less than 4 characters
         add_filter( 'wpmu_validate_user_signup', 'short_user_names' );
@@ -45,6 +48,16 @@ class UW_Filters
 
     function custom_excerpt_more( $more ) {
         return '...';
+    }
+
+	function uw_excerpt_length( $length ) {
+		return 80;
+	}
+
+	// Adds a more link to the end of the excerpt
+    function excerpt_more_override( $excerpt ) {
+
+        return $excerpt . '<div><a class="more-link" href="' . get_permalink() . '">Continue reading <span class="screen-reader-text">' . get_the_title() . '</span></a></div>';
     }
 
     function modify_post_mime_types( $post_mime_types ) {
@@ -74,12 +87,6 @@ class UW_Filters
             }
         }
         return $classes;
-    }
-
-    // Adds a more link to the end of the excerpt
-    function excerpt_more_override( $excerpt ) {
-
-        return $excerpt . '<div><a class="more" href="' . get_permalink() . '">Read more</a></div>';
     }
 
     // Allow short usernames to match NetID standards

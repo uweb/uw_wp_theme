@@ -48,7 +48,7 @@ class UW_Widget_Cards extends WP_Widget
 		<input data-posttype="post" class="widefat wp-get-posts" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
     <p>
-      <div class="card-image-preview wp-get-posts-image-preview" style="width:33%; display:block;">
+      <div class="card-image-preview wp-get-posts-image-preview" style="display:block;">
         <img src="<?php echo wp_get_attachment_url( $image ); ?>" width="100%" class="wp-get-posts-image" />
       </div>
 

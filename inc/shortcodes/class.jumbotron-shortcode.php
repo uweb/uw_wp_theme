@@ -167,7 +167,8 @@ class UW_Jumbotron {
 		}
 
 		// build the SVG slash pattern for full-width jumbotrons.
-		$svg_slash = '<div><svg class="slant-pattern"><defs><pattern id="pattern-stripe" width="14" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><rect width="1" height="10" transform="translate(0,0)" fill="white"></rect></pattern><mask id="mask-stripe"><rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-stripe)" /></mask></defs><rect class="hbar white-lines" x="0" y="0" width="100%" height="100"></rect></svg></div>';
+		$random_id = rand(); // get a random number to append to id, in case of multiple cards on page.
+		$svg_slash = '<div><svg class="slant-pattern"><defs><pattern id="pattern-stripe-' . $random_id . '" width="14" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><rect width="1" height="10" transform="translate(0,0)" fill="white"></rect></pattern><mask id="mask-stripe"><rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-stripe-' . $random_id . ')" /></mask></defs><rect class="hbar white-lines" x="0" y="0" width="100%" height="100"></rect></svg></div>';
 
 		// build the shortcode output.
 		ob_start();
@@ -187,12 +188,16 @@ class UW_Jumbotron {
 				<?php if ( 'block-center' === $style ) { ?>
 					</div>
 				<?php } ?>
-				<?php if ( 'block-slant' === $style ) { ?>
-					<p class="button"><a href="<?php echo esc_url( $jumbotron_atts['link'] ); ?>" class="btn btn-lg secondary"><span><?php echo wp_kses_post( $button_text ); ?></span></a></p>
-				<?php } elseif ( 'block-center' === $style ) { ?>
-					<p class="button"><a href="<?php echo esc_url( $jumbotron_atts['link'] ); ?>" class="btn btn-sm primary"><span><?php echo wp_kses_post( $button_text ); ?></span></a></p>
-				<?php } else { ?>
-					<p class="button"><a href="<?php echo esc_url( $jumbotron_atts['link'] ); ?>" class="btn btn-lg arrow <?php echo $button_class ? esc_attr( $button_class ) : esc_attr( 'primary purple' ); ?>"><span><?php echo wp_kses_post( $button_text ); ?></span><span class="arrow-box"><span class="arrow"></span></span></a></p>
+
+				<?php //if the button attribute is set, show the button.
+				if ( $jumbotron_atts['button'] ) { ?>
+					<?php if ( 'block-slant' === $style ) { ?>
+						<p class="button"><a href="<?php echo esc_url( $jumbotron_atts['link'] ); ?>" class="btn btn-lg secondary"><span><?php echo wp_kses_post( $button_text ); ?></span></a></p>
+					<?php } elseif ( 'block-center' === $style ) { ?>
+						<p class="button"><a href="<?php echo esc_url( $jumbotron_atts['link'] ); ?>" class="btn btn-sm primary"><span><?php echo wp_kses_post( $button_text ); ?></span></a></p>
+					<?php } else { ?>
+						<p class="button"><a href="<?php echo esc_url( $jumbotron_atts['link'] ); ?>" class="btn btn-lg arrow <?php echo $button_class ? esc_attr( $button_class ) : esc_attr( 'primary purple' ); ?>"><span><?php echo wp_kses_post( $button_text ); ?></span><span class="arrow-box"><span class="arrow"></span></span></a></p>
+					<?php } ?>
 				<?php } ?>
 				<?php
 				if ( 'block' === $style ) {

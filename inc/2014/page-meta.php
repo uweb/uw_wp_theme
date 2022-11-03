@@ -1,7 +1,6 @@
 <?php
 
-class UW_Page_Meta
-{
+class UW_Page_Meta {
 
 	const ID = 'pageparentdiv';
 	const TITLE = 'Page Attributes';
@@ -9,8 +8,7 @@ class UW_Page_Meta
 	const POSITION = 'side';
 	const PRIORITY = 'core';
 
-	function __construct()
-	{
+	function __construct() {
 		$this->HIDDEN = array( 'No Sidebar' );
 		add_action( 'add_meta_boxes', array( $this, 'replace_meta_box' ) );
 		add_action( 'save_post', array( $this, 'save_postdata' ) );
@@ -18,25 +16,22 @@ class UW_Page_Meta
 
 	}
 
-	function replace_meta_box()
-	{
-			remove_meta_box( 'pageparentdiv', 'page', 'side');
+	function replace_meta_box() {
+			remove_meta_box( 'pageparentdiv', 'page', 'side' );
 			add_meta_box( 'uwpageparentdiv', 'Page Attributes', array( $this, 'page_attributes_meta_box' ), 'page', 'side', 'core' );
 	}
 
-	function page_attributes_meta_box( $post )
-	{
+	function page_attributes_meta_box( $post ) {
 
 		$post_type_object = get_post_type_object( $post->post_type );
 
-		if ( $post_type_object->hierarchical )
-		{
+		if ( $post_type_object->hierarchical ) {
 			$dropdown_args = array(
 				'post_type'        => $post->post_type,
 				'exclude_tree'     => $post->ID,
 				'selected'         => $post->post_parent,
 				'name'             => 'parent_id',
-				'show_option_none' => __('(no parent)'),
+				'show_option_none' => __( '(no parent)' ),
 				'sort_column'      => 'menu_order, post_title, sidebar, parent',
 				'echo'             => 0,
 			);
@@ -55,66 +50,89 @@ class UW_Page_Meta
 
 					$pages = wp_dropdown_pages( $dropdown_args );
 
-					if ( ! empty( $pages ) )
-					{ ?>
+					if ( ! empty( $pages ) ) {
+				?>
 
-						<p><strong><?php _e('Parent') ?></strong></p>
-						<label class="screen-reader-text" for="parent_id"><?php _e('Parent') ?></label>
-
-						<?php echo $pages;
-									$parent = get_post_meta($post->ID, "parent", true);
-									wp_nonce_field( 'parent_nonce' , 'parent_name' );
-						?>
-
-						<p><input type="checkbox" id="parent_id" name="parentcheck" value="on" <?php if( !empty($parent) ) { ?>checked="checked"<?php } ?> /><?php _e('Hide from menu') ?></p>
+						<p><strong><?php _e( 'Parent' ) ?></strong></p>
+						<label class="screen-reader-text" for="parent_id"><?php _e( 'Parent' ) ?></label>
 
 						<?php
-					} // end empty pages check
+							echo $pages;
+									$parent = get_post_meta( $post->ID, 'parent', true );
+									wp_nonce_field( 'parent_nonce', 'parent_name' );
+				?>
+
+						<p><input type="checkbox" id="parent_id" name="parentcheck" value="on" <?php
+						if ( ! empty( $parent ) ) {
+							?>
+							checked="checked"<?php } ?> /><?php _e( 'Hide from menu' )
+							?>
+						</p>
+
+						<?php
+			} // end empty pages check
 		} // end hierarchical check.
 
 		if ( 'page' == $post->post_type && 0 != count( get_page_templates( $post ) ) ) {
-			$template = !empty($post->page_template) ? $post->page_template : 'default';
+			$template = ! empty( $post->page_template ) ? $post->page_template : 'default';
 			?>
 
 
-		<p><strong><?php _e('Template') ?></strong></p>
+		<p><strong><?php _e( 'Template' ) ?></strong></p>
 
-		<label class="screen-reader-text" for="page_template"><?php _e('Page Template') ?></label>
+		<label class="screen-reader-text" for="page_template"><?php _e( 'Page Template' ); ?></label>
 
-		<?php $this->page_template_dropdown($template , $post); ?>
+			<?php $this->page_template_dropdown( $template, $post ); ?>
 
-		<?php }
-		$sidebar = get_post_meta($post->ID, "sidebar", true);
-		wp_nonce_field( 'sidebar_nonce' , 'sidebar_name' );
+			<?php
+		}
+		$sidebar = get_post_meta( $post->ID, 'sidebar', true );
+		wp_nonce_field( 'sidebar_nonce', 'sidebar_name' );
 		?>
 
-		<p><strong><?php _e('Sidebar') ?></strong></p>
+		<p><strong><?php _e( 'Sidebar' ); ?></strong></p>
 
-		<label class="screen-reader-text" for="sidebar"><?php _e('Sidebar') ?></label>
+		<label class="screen-reader-text" for="sidebar"><?php _e( 'Sidebar' ); ?></label>
 
-		<p><input type="checkbox" id="sidebar_id" name="sidebarcheck" value="on" <?php if( !empty($sidebar) ) { ?>checked="checked"<?php } ?> /><?php _e('No Sidebar') ?></p>
+		<p><input type="checkbox" id="sidebar_id" name="sidebarcheck" value="on" <?php if( ! empty( $sidebar ) ) {
+			?>
+			checked="checked"<?php } ?> /><?php _e( 'No Sidebar' ) ?></p>
 
 		<?php
 		if ( 'page' == $post->post_type ) {
-			$sidebar_nav = get_post_meta( $post->ID, "sidebar_nav", true );
-			wp_nonce_field( 'sidebar_nav_nonce' , 'sidebar_nav_name' );
+			$sidebar_nav = get_post_meta( $post->ID, 'sidebar_nav', true );
+			wp_nonce_field( 'sidebar_nav_nonce', 'sidebar_nav_name' );
 			?>
-			
-			<p><input type="checkbox" id="sidebar_nav_id" name="sidebarnavcheck" value="on" <?php if( !empty($sidebar_nav) ) { ?>checked="checked"<?php } ?> /><?php _e('Hide Sidebar Navigation') ?></p>
-			
-			<p><strong><?php _e('Order') ?></strong></p>
-			
-			<p><label class="screen-reader-text" for="menu_order"><?php _e('Order') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr($post->menu_order) ?>" /></p>
-			
+
+			<p><input type="checkbox" id="sidebar_nav_id" name="sidebarnavcheck" value="on" <?php if( ! empty( $sidebar_nav ) ) { ?>
+				checked="checked"<?php } ?> /><?php _e( 'Hide Sidebar Navigation' ) ?></p>
+
+			<?php
+			$breadcrumbs = get_post_meta( $post->ID, 'breadcrumbs', true );
+			wp_nonce_field( 'breadcrumbs_nonce', 'breadcrumbs_name' );
+			?>
+			<p><strong><?php _e( 'Breadcrumbs' ) ?></strong></p>
+
+
+			<p><input type="checkbox" id="breadcrumbs_id" name="breadcrumbscheck" value="on" <?php if( ! empty( $breadcrumbs ) ) { ?>
+				checked="checked"<?php } ?> /><?php _e( 'Hide Breadcrumbs' ) ?></p>
+
+
+			<p><strong><?php _e( 'Order' ) ?></strong></p>
+
+			<p><label class="screen-reader-text" for="menu_order"><?php _e( 'Order ') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr( $post->menu_order ) ?>" /></p>
+
 			<p><?php if ( 'page' == $post->post_type ) _e( 'Need help? Use the Help tab in the upper right of your screen.' ); ?></p>
+
+
 			<?php
 		}
 
 	}
 
-	function page_template_dropdown( $default = '' , $post) {
+	function page_template_dropdown( $default = '' , $post ) {
 
-		$previews = array('Big Hero' => '/assets/images/template-big-hero.jpg', 'Small Hero' => '/assets/images/template-small-hero.jpg', 'No image' => '/assets/images/template-no-image.jpg', 'No title/image' => '/assets/images/template-no-title.jpg', 'Default Template' => '/assets/images/template-default.jpg');
+		$previews = array('Big Hero' => '/assets/images/template-big-hero.jpg', 'Small Hero' => '/assets/images/template-small-hero.jpg', 'No image' => '/assets/images/template-no-image.jpg', 'No title/image' => '/assets/images/template-no-title.jpg', 'Default Template' => '/assets/images/template-default.jpg', 'Jumbotron Hero' => '/assets/images/template-jumbo.jpg',);
 
 		$templates = get_page_templates( get_post() );
 
@@ -135,24 +153,60 @@ class UW_Page_Meta
 			echo "<p><input type='radio' name='page_template' value='" . $templates[ $template ] . "' $checked >$template</input> " . ( array_key_exists( $template , $previews ) ? "(<a id='enchanced-preview' href='#'>preview<span><img src='" . get_template_directory_uri() . $previews[$template] . "' alt='' width='300px' height='' />
 </span></a>)" : "") . "</p>";
 		}
-		echo "</div>";
-		if ($default === "templates/template-big-hero.php" || $default === "templates/template-small-hero.php") {
-			if (is_super_admin()) {
-				$banner = get_post_meta($post->ID, "banner", true);
-				wp_nonce_field( 'banner_nonce' , 'banner_name' );
+		echo '</div>';
+		if ( 'templates/template-big-hero.php' === $default || 'templates/template-small-hero.php' === $default ) {
+			if ( is_super_admin() ) {
+				$banner = get_post_meta( $post->ID, 'banner', true );
+				wp_nonce_field( 'banner_nonce', 'banner_name' );
 
-				$buttontext = get_post_meta($post->ID, "buttontext", true);
-				wp_nonce_field( 'buttontext_nonce' , 'buttontext_name' );
+				$buttontext = get_post_meta( $post->ID, 'buttontext', true );
+				wp_nonce_field( 'buttontext_nonce', 'buttontext_name' );
 
-				$buttonlink = get_post_meta($post->ID, "buttonlink", true);
-				wp_nonce_field( 'buttonlink_nonce' , 'buttonlink_name' );
+				$buttonlink = get_post_meta( $post->ID, 'buttonlink', true );
+				wp_nonce_field( 'buttonlink_nonce', 'buttonlink_name' );
 
-				$mobileimage = get_post_meta($post->ID, "mobileimage", true);
-				wp_nonce_field( 'mobileimage_nonce' , 'mobileimage_name' );
+				$mobileimage = get_post_meta( $post->ID, 'mobileimage', true );
+				wp_nonce_field( 'mobileimage_nonce', 'mobileimage_name' );
+
+
+				$pagetitle = get_post_meta($post->ID, "pagetitle", true);
+				wp_nonce_field( 'pagetitle_nonce' , 'pagetitle_name' );
 
 				echo "<p><b>Banner</b></br><input type='text' name='bannertext' value='" . $banner . "'></p>";
 				echo "<p><b>Button</b></br>Text</br><input type='text' name='buttontext' value='" . $buttontext . "'></br>Link</br><input type='text' name='buttonlink' value='" . $buttonlink . "'></p>";
 				echo "<p><b>Mobile Header Image</b></br><input type='text' name='mobileimagetext' value='" . $mobileimage . "'></p>";
+
+				echo "<p><b>Page title </b></br>
+				<input type='checkbox' id='' name='pagetitlecheck' value='on' ";
+				if ( ! empty ( $pagetitle ) ) {
+					echo 'checked = "checked"';
+				}
+				echo '<label>Display the page title below the featured image (instead of on the featured image).</label> </br>';
+			}
+		}
+
+		if ( 'templates/template-jumbotron.php' === $default) {
+			if ( is_super_admin() ) {
+				$banner = get_post_meta( $post->ID, 'banner', true );
+				wp_nonce_field( 'banner_nonce', 'banner_name' );
+
+				$buttontext = get_post_meta( $post->ID, 'buttontext', true );
+				wp_nonce_field( 'buttontext_nonce', 'buttontext_name' );
+
+				$buttonlink = get_post_meta( $post->ID, 'buttonlink', true );
+				wp_nonce_field( 'buttonlink_nonce', 'buttonlink_name' );
+
+				$mobileimage = get_post_meta( $post->ID, 'mobileimage', true );
+				wp_nonce_field( 'mobileimage_nonce', 'mobileimage_name' );
+
+				$subhead = get_post_meta( $post->ID, 'subhead', true );
+				wp_nonce_field( 'subhead_nonce', 'subhead_name' );
+
+				echo "<p><b>Banner</b></br><input type='text' name='bannertext' value='" . esc_attr( $banner ) . "'></p>";
+				echo "<p><b>Button</b></br>Text</br><input type='text' name='buttontext' value='" . esc_attr( $buttontext ) . "'></br>Link</br><input type='text' name='buttonlink' value='" . $buttonlink . "'></p>";
+				echo "<p><b>Subhead text</b></br><input type='text' name='subheadtext' value='" . esc_attr( $subhead ) . "'></p>";
+
+				echo "<p><b>Mobile Header Image</b></br><input type='text' name='mobileimagetext' value='" . esc_attr( $mobileimage ). "'></p>";
 			}
 		}
 	}
@@ -216,6 +270,41 @@ class UW_Page_Meta
 				}
 			}
 		}
+		if ( isset( $_POST['pagetitle_name'] ) ) {
+			if ( ! empty( $_POST ) && check_admin_referer( 'pagetitle_nonce', 'pagetitle_name') ) { //limit to only pages
+				if ( $post_type ) {
+					if( isset( $_POST["pagetitlecheck"] ) ) {
+						update_post_meta( $post_ID, "pagetitle", $_POST["pagetitlecheck"] );
+					} else {
+						update_post_meta( $post_ID, "pagetitle", null );
+					}
+				}
+			}
+		}
+
+		if ( isset( $_POST['breadcrumbs_name'] ) ) {
+			if ( ! empty( $_POST ) && check_admin_referer( 'breadcrumbs_nonce', 'breadcrumbs_name') ) { //limit to only pages
+				if ( $post_type ) {
+					if( isset( $_POST['breadcrumbscheck'] ) ) {
+						update_post_meta( $post_ID, 'breadcrumbs', $_POST['breadcrumbscheck'] );
+					} else {
+						update_post_meta( $post_ID, 'breadcrumbs', null );
+					}
+				}
+			}
+		}
+
+		if ( isset( $_POST['subhead_name'] ) ) {
+			if ( ! empty( $_POST ) && check_admin_referer( 'subhead_nonce', 'subhead_name') ) { //limit to only pages
+				if ($post_type) {
+					if(isset($_POST["subheadtext"])) {
+						update_post_meta($post_ID, "subhead", $_POST["subheadtext"]);
+					} else {
+						update_post_meta($post_ID, "subhead", null);
+					}
+				}
+			}
+		}
 
 		if ( isset( $_POST['sidebar_name'] ) ) {
 			if ( ! empty( $_POST ) && check_admin_referer( 'sidebar_nonce', 'sidebar_name') ) { //limit to only pages
@@ -252,8 +341,7 @@ class UW_Page_Meta
 				}
 			}
 		}
-
-	 return $post_ID;
+		return $post_ID;
 	}
 
 }

@@ -7,12 +7,9 @@
  * structure: [uw_button style="arrow" size="large" color="purple" target="#"](button copy)[/uw_button]
  */
 
-class UW_Button
-{
-	function __construct()
-	{
+class UW_Button {
+	function __construct() {
 		add_shortcode( 'uw_button', array( $this, 'button_handler' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'uw_wp_theme_enqueue_button_script' ) );
 	}
 
 
@@ -21,21 +18,11 @@ class UW_Button
 	 *
 	 * @return void
 	 */
-	public function uw_wp_theme_enqueue_button_script() {
-		$template_directory = get_bloginfo( 'template_directory' );
-		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
-		
-		wp_register_script( 'uw_wp_theme-button-script', $template_directory . '/js/shortcodes/button.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
-	}
-	function button_handler( $atts, $content = null )
-	{
-		// only enqueue script when shortcode is present!
-		wp_enqueue_script( 'uw_wp_theme-button-script' );
-
+	function button_handler( $atts, $content = null ) {
 		// Attributes.
 		$atts = shortcode_atts(
 			array(
-				'style'  => '', // type of button.
+				'style'  => '', // type of button. arrow (default), plus, play, primary, secondary.
 				'size'   => '', // button size (large or small).
 				'color'  => '', // button color.
 				'target' => '', // where the button links to.
@@ -43,12 +30,37 @@ class UW_Button
 			$atts
 		);
 
-		$style = isset( $atts['style'] ) ? $atts['style'] : 'square-outline';
+		if ( isset( $atts['style'] ) ) {
+			if ( 'plus' === strtolower( $atts['style'] ) ) {
+				$style = $atts['style'] . ' arrow';
+			} elseif ( 'play' === strtolower( $atts['style'] ) ) {
+				$style = $atts['style'] . ' arrow';
+			} elseif ( 'arrow' === strtolower( $atts['style'] ) ) {
+				$style = 'arrow';
+			} elseif ( 'square-outline' === strtolower( $atts['style'] ) ) {
+				$style = 'square-outline';
+			} else {
+				$style = $atts['style'];
+			}
+		} else {
+			$style = '';
+		}
+
 		$size = 'btn-lg';
+
 		if ( isset( $atts['size'] ) ) {
 			$size = $atts['size'] === 'small' && strpos( $style, 'square-outline' ) === false ? 'btn-sm' : 'btn-lg';
 		}
-		$color = isset( $atts['color'] ) && strpos( $style, 'square-outline' ) === false ? ' ' . $atts['color'] : '';
+
+		if ( isset( $atts['color'] ) ) {
+			if ( false === strpos( $style, 'square-outline' ) ) {
+				$color = ' ' . $atts['color'];
+			} else {
+				$color = ' ' . $atts['color'];
+			}
+		} else {
+			$color = '';
+		}
 
 		ob_start();
 		?>
@@ -62,7 +74,15 @@ class UW_Button
 			$output .= 'Please add button text.';
 		}
 
-		$output .= strpos( $atts['style'], 'arrow' ) !== false || strpos( $atts['style'], 'square-outline' ) !== false ? '</span><span class="arrow-box"><span class="arrow"></span></span></a>' : '</span></span></a>';
+		if ( 'arrow' === strtolower( $atts['style'] ) || 'square-outline' === strtolower( $atts['style'] ) ) {
+			$output .= '</span><span class="arrow-box"><span class="arrow"></span></span></a>';
+		} elseif ( 'plus' === strtolower( $atts['style'] ) ) {
+			$output .= '</span><span class="arrow-box"><span class="ic-plus"></span></span></a>';
+		} elseif ( 'play' === strtolower( $atts['style'] ) ) {
+			$output .= '</span><span class="arrow-box"><span class="ic-play"></span></span></a>';
+		} else {
+			$output .= '</span></span></a>';
+		}
 
 		return $output;
 	}

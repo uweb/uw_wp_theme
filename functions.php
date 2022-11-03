@@ -332,6 +332,10 @@ function uw_wp_theme_scripts() {
 
 	wp_script_add_data( 'uw_wp_theme-keyboard-navmenu', 'defer', true );
 
+	// Enqueue additional button keyboard accessibility script.
+	wp_enqueue_script( 'uw_wp_theme-keyboard-button', $template_directory . '/js/keyboard-button.js', array(), $theme_version, false );
+
+	wp_script_add_data( 'uw_wp_theme-keyboard-button', 'defer', true );
 }
 add_action( 'wp_enqueue_scripts', 'uw_wp_theme_scripts' );
 
@@ -416,5 +420,8 @@ require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';
 // Register Custom Navigation Walker for the Mega Menu.
 require get_template_directory() . '/inc/wp-bootstrap-megamenu-navwalker.php';
 
-// Register Custom Navigation Walker for function.php
+// Register Custom Navigation Walker for function.php.
 require get_template_directory() . '/inc/theme-settings.php';
+
+// Register Site Alert.
+require get_template_directory() . '/inc/site-notif-banner.php';

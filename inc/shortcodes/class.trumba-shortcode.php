@@ -38,9 +38,15 @@ class UW_Trumba
         if ( isset( $attributes->base ) ) {
             $teaser = $attributes->base;
         }
+        if ( isset( $attributes->url ) ) {
+            $url = $attributes->url;
+        }
         $trumba .= sprintf( '$Trumba.addSpud({webName:"%s",spudType:"%s",BorderColor:"#FFFFFF",marginTop:0', $name, $type );
         if ( isset( $teaser ) ) {
             $trumba .= sprintf( ',teaserBase:"%s"', $teaser );
+        }
+		if ( isset( $url ) ) {
+            $trumba .= sprintf( ',url : { %s } ', $url );
         }
         $trumba .= '});';
         $return .= sprintf( '<script type="text/javascript" id="trumba%d">%s</script>', $rand, $trumba );

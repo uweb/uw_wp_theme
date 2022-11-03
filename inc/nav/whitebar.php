@@ -88,7 +88,7 @@ class UW_Dropdowns
 		$this->add_menu_item( 'Academic departments', '//uw.edu/about/academics/departments/', $parent = 'Academics' );
 		$this->add_menu_item( 'Colleges and schools', '//uw.edu/about/academics/', $parent = 'Academics' );
 		$this->add_menu_item( 'Course descriptions', '//uw.edu/students/crscat/', $parent = 'Academics' );
-		$this->add_menu_item( 'Registration', 'https://helpcenter.uw.edu/registration-resources/', $parent = 'Academics' );
+		$this->add_menu_item( 'Registration', 'https://registrar.washington.edu/registration/', $parent = 'Academics' );
 		$this->add_menu_item( 'Student guide', '//uw.edu/students/', $parent = 'Academics' );
 		$this->add_menu_item( 'Time schedule', '//uw.edu/students/timeschd/', $parent = 'Academics');
 
@@ -107,10 +107,12 @@ class UW_Dropdowns
 		// The default News dropdown.
 		$this->add_menu_item( 'News & Events', '//uw.edu/news/' );
 		$this->add_menu_item( 'UW News', '//uw.edu/news/', $parent = 'News & Events' );
+		$this->add_menu_item( 'Featured stories', '//uw.edu/boundless/', $parent = 'News & Events' );
 		$this->add_menu_item( 'Arts UW', 'https://artsuw.org/', $parent = 'News & Events' );
 		$this->add_menu_item( 'Calendar', '//uw.edu/calendar/', $parent = 'News & Events' );
-		$this->add_menu_item( 'Columns Magazine', 'https://magazine.washington.edu/', $parent = 'News & Events' );
+		$this->add_menu_item( 'UW Magazine', 'https://magazine.washington.edu/', $parent = 'News & Events' );
 		$this->add_menu_item( 'Husky sports', 'https://gohuskies.com/', $parent = 'News & Events' );
+		$this->add_menu_item( 'Newsletter', '//uw.edu/newsletter/', $parent = 'News & Events' );
 
 		// The default Research the UW dropdown.
 		$this->add_menu_item( 'Research', '//uw.edu/research/' );
@@ -118,7 +120,7 @@ class UW_Dropdowns
 		$this->add_menu_item( 'Office of Research', '//uw.edu/research/or/', $parent = 'Research' );
 		$this->add_menu_item( 'Research Lifecycle', '//uw.edu/research/myresearch-lifecycle/', $parent = 'Research' );
 		$this->add_menu_item( 'Resources', '//uw.edu/research/resources/', $parent = 'Research' );
-		$this->add_menu_item( 'Collaboration', '//uw.edu/research/collaboration/', $parent = 'Research' );
+		$this->add_menu_item( 'Centers and Institutes', '//uw.edu/research/centers-and-institutes/', $parent = 'Research' );
 		$this->add_menu_item( 'Stats and rankings', '//uw.edu/research/research-stats-rankings/', $parent = 'Research' );
 
 		// The default Campuses the UW dropdown.
@@ -129,9 +131,8 @@ class UW_Dropdowns
 
 		// The default Support the UW dropdown.
 		$this->add_menu_item( 'Give', '//uw.edu/boundless/' );
-		$this->add_menu_item( 'Give now', '//uw.edu/boundless/', $parent = 'Give' );
-		$this->add_menu_item( 'Be Boundless Campaign', '//uw.edu/boundless/about/', $parent = 'Give' );
-		$this->add_menu_item( 'Ways to give', '//uw.edu/boundless/ways-to-give/', $parent = 'Give' );
+		$this->add_menu_item( 'Give now', '//uw.edu/make-a-gift/', $parent = 'Give' );
+		$this->add_menu_item( 'Ways to give', '//uw.edu/giving/how-to-give/', $parent = 'Give' );
 		$this->add_menu_item( 'My UW Giving', 'https://myuwgiving.gifts.washington.edu/', $parent = 'Give' );
 
 

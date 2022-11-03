@@ -42,6 +42,10 @@ class UW_Gallery {
 		?>
 		<script type="text/html" id="tmpl-uw-gallery-setting">
 			<label class="setting">
+				<span>Masonry layout</span>
+				<input type="checkbox" data-setting="uw_photo_masonry" />
+			</label>
+			<label class="setting">
 				<span>Disable space between images</span>
 				<input type="checkbox" data-setting="uw_photo_grid_gap" />
 			</label>
@@ -71,7 +75,8 @@ class UW_Gallery {
 					uw_carousel: '',
 					uw_carousel_fullwidth: '',
 					uw_carousel_captions: '',
-					uw_photo_grid_gap: ''
+					uw_photo_grid_gap: '',
+					uw_photo_masonry: ''
 				});
 
 				// merge default gallery settings template with yours
@@ -173,6 +178,20 @@ class UW_Gallery {
 		} else {
 			$grid_gap = false;
 			$grid_gap_class = '';
+		}
+
+		// get setting for turning on masonry layout for gallery/grid.
+		if ( isset( $attr['uw_photo_masonry'] ) ) {
+			if ( 'true' === $attr['uw_photo_masonry'] ) {
+				$masonry = true;
+				$masonry_class = ' gallery-masonry';
+			} else {
+				$masonry = false;
+				$masonry_class = '';
+			}
+		} else {
+			$masonry = false;
+			$masonry_class = '';
 		}
 
 		// gallery/photo grid: get number of columns and set the grid column class based on that.
@@ -360,7 +379,7 @@ class UW_Gallery {
 			wp_enqueue_script( 'uw-gallery-script' );
 
 			// if carousel is not checked we want to revert to a responsive photo grid.
-			$output .= '<div id="photo-grid-' . $instance . '" class="photo-grid' . $grid_columns_class . $grid_gap_class . '" tabindex="0">';
+			$output .= '<div id="photo-grid-' . $instance . '" class="photo-grid' . $grid_columns_class . $grid_gap_class . $masonry_class . '" tabindex="0">';
 
 			// if linking to the image file, we want it to pop up in our modal, so let's set that up.
 			if ( isset( $attr['link'] ) ) {

@@ -13,21 +13,18 @@ class UW_Audience
 	const DISPLAY_NAME   = 'Audience menu';
 	const DEFAULT_STATUS = 'publish';
 
-	function __construct()
-	{
+	function __construct() {
 		$this->menu_items = array();
-		add_action( 'after_setup_theme', array( $this, 'register_purple_bar_menu') );
-		add_action( 'after_setup_theme', array( $this, 'install_default_purple_bar_menu') );
-		add_action( 'wp_update_nav_menu', array( $this, 'save_purple_bar') );
+		add_action( 'after_setup_theme', array( $this, 'register_purple_bar_menu' ) );
+		add_action( 'after_setup_theme', array( $this, 'install_default_purple_bar_menu' ) );
+		add_action( 'wp_update_nav_menu', array( $this, 'save_purple_bar' ) );
 	}
 
-	function register_purple_bar_menu()
-	{
+	function register_purple_bar_menu() {
 		register_nav_menu( self::LOCATION, __( self::NAME ) );
 	}
 
-	function install_default_purple_bar_menu()
-	{
+	function install_default_purple_bar_menu() {
 
 		$this->generate_menu_list();
 		$this->MENU_ID = wp_create_nav_menu( self::DISPLAY_NAME );

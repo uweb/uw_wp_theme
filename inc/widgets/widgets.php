@@ -20,3 +20,11 @@ require_once( $parent . 'class.rss.php' );
 require_once( $parent . 'class.contact.php' );
 require_once( $parent . 'class.recent-posts.php' );
 require_once( $parent . 'class.twitter.php' );
+
+// Initialize the banner region.
+
+//require_once( $parent . 'class.uw-widget-area.php' );
+
+//require_once( $parent . 'class.site-banner.php' );
+
+

@@ -100,6 +100,8 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 				$attributes .= ' class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="button"';
 			} elseif ( 1 === $depth && $args->has_children ) {
 				$attributes .= ' class="nav-link"';
+			} elseif ( 2 <= $depth && $args->has_children ) {
+				$attributes .= '';
 			} else {
 				$attributes .= 'class="nav-link"';
 			}
@@ -134,7 +136,9 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 				$n = "\n";
 			}
 
-			if ( $depth && $args->has_children ) {
+			if ( 1 <= $depth && $args->has_children ) {
+				$output .= '';
+			} elseif ( $depth && $args->has_children ) {
 				$output .= $n . str_repeat( $t, $depth ) . '</li></div>' . $n;
 			} else {
 				$output .= $n . str_repeat( $t, $depth ) . '</li>' . $n;

@@ -1,13 +1,13 @@
 # UW WordPress Theme
-![UW WordPress Theme version 1.3.3](https://img.shields.io/static/v1?label=version&message=v1.3.3&color=green)
+![UW WordPress Theme version 2.0.0](https://img.shields.io/static/v1?label=version&message=v2.0.0&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
 You can also follow along on our progress and learn more about our [development roadmap](https://github.com/uweb/uw_wp_theme/projects/1) and [backlog](https://github.com/uweb/uw_wp_theme/projects/2).
 
 ## Requirements
-- [PHP](https://php.net/) 7.2
-- [WordPress](https://wordpress.org/) 5.4
+- [PHP](https://php.net/) 7.x
+- [WordPress](https://wordpress.org/) 5.4 or higher
 
 ## Theme features
 
@@ -35,6 +35,50 @@ Are you a developer on this project? Please see the [developer documentation](ht
 7. Click the Activate link.
 
 Do you need a child theme? If so, download and install our [starter child theme](https://github.com/uweb/uw_wp_theme_child).
+
+## Blog
+
+The theme has styled templates for the blog:
+
+- posts page
+- single post
+- archive page for categories & tags
+
+### Follow these instructions to create your blog (as a separate page on your site).
+
+1. Log into your WordPress admin, if not already.
+2. Create a page and call it whatever you'd like your blog called.
+   - If you'd like any intro text to appear on your blog, edit your blog page to add the content in the editor area.
+   - If you'd like a header image for your blog section, set it using the featured image on the blog page.
+3. Go to Settings > Reading.
+4. Under "Your homepage displays" select "A static page"
+   - For Homepage, choose the home/front page you'd like to display.
+   - For Posts page, choose the page you just created for your blog.
+5. Click the Save Changes button.
+
+### Theme settings related to the blog
+
+These are all checkboxes you can use to enable these features.
+
+- Show bylines on single posts and archives (author and date)
+- Show author name on posts. Note: need to enable "Show bylines on single posts and archives?" for this to work
+- Show post date on posts. Note: need to enable "Show bylines on single posts and archives" for this to work
+- Show categories on posts
+- Show tags on posts
+- Show all blog posts as excerpts on the posts page
+- Show blog intro on all posts pages (e.g. page 2, 3, 4)
+
+### Other notes about the blog
+
+On a single post page, the posts navigation will display a thumbnail of the featured image for the post. If no featured image is set, a W icon is displayed as a placeholder.
+
+A sticky post will pin to the top of your posts page and have a similar look and feel to our cards. To set, edit Visibility in the Publish section of a blog post and check the box for "Stick this post to the front page".
+
+Categories and tags use a UW-branded Bootstrap badge styling.
+
+To make for a cohesive user experience, the page header for all blog-related pages will follow what is set for the posts page: featured image, title, and link.
+
+If enabled, breadcrumbs will show the blog page in the hierarchy before the home page.
 
 ## Navigation Menus
 
@@ -87,7 +131,21 @@ Top Level 3 (2 columns, 2 rows)
 
 To apply the **heading styling** in the mega menu, go to Screen Options and enable the Advanced menu property for CSS Classes. Now, add the `heading` class to the navigation items you want to show as headings.
 
-If you want to create column with a single item, you can add the `nav-group` class to the top-level item you wish to be a column. You can also combine this with the `heading` class.
+If you want to create a column with a single item, you can add the `nav-group` class to the top-level item you wish to be a column. You can also combine this with the `heading` class.
+
+
+### Button or icon button
+To add a button or an icon button to the top-level navigation menu, add the `button` class to the menu item. To add an icon, use any of the [`ic-*` classes](https://www.washington.edu/brand/web/guides-and-how-tos/html-templates/web-icons/).
+
+The default button is purple background with white text. To change to a dark gold button, use the `darkgold` class. To change to a gold button, use the `gold` class.
+
+This example would create a dark gold button with the heart icon:
+```
+button darkgold ic-heart
+```
+
+Note: Only the `button` class is required to activate this feature. Other classes are optional.
+
 
 ## Quicklinks
 
@@ -106,6 +164,13 @@ icon-myuw
 icon-uwtoday
 ```
 
+## Site-wide Notification Banner
+
+A site notification banner can be displayed on each page of your site. Notification messages should be brief and temporary (e.g. announcing an important change, a temporary closure or other short-lived announcement). The site notification will display at the top of each page, just below the navigation menu. Users can dismiss the message on a page. It will persist across the site until it is turned off in the admin area.
+
+To use, select Appearance > Site Notification Banner. Add your message to the text field, select a color option and check "Turn on banner". The message will display on every page of your site. Uncheck "Turn on banner" to remove it.
+
+
 
 ## Shortcodes
 
@@ -122,6 +187,7 @@ Example:
     [section title="Example"] Section[/section]
 [/accordion]
 ```
+Note: the accordion name will not show up on the page. However, it is important to include a name, as it is used to generate the unique ID of the accordion. The name will also be read by screen-reader assistive technology. If you want a name (title) of an accordion, add text above the accordion shortcode
 
 Options include defaulting an accordion open. For example:
 
@@ -170,7 +236,7 @@ Attributes:
 
 > Example:
 ```
-  [blogroll number=3 trim=true readmore='off']
+  [blogroll number="3" trim="true" readmore="off"]
 ```
 
 
@@ -180,7 +246,7 @@ This is a UW-branded button. Add the button text between the `[uw_button][/uw_bu
 
 Attributes:
 
-* **style**:  Adjusts the image of the button. Options: arrow, primary, secondary, square-outline. (_Default: square-outline_)
+* **style**:  Adjusts the image of the button. Options: arrow, plus, play, primary, secondary, square-outline. (_Default: square-outline_)
 * **size**:  Adjusts the size of the button. Options: large, small. (_Default: large_)
 * **color**:  The color of the button. Options: white, purple, light-gold, gold. (_Default: none_)
 * **target**:  The URL for the link or download that you want to direct the user to on click. (_Default: none_)
@@ -265,7 +331,7 @@ Attributes:
 Example:
 
 ```
-[custommenu menu=Menu-name-here]
+[custommenu menu="Menu-name-here"]
 ```
 
 ### Gallery/Carousel
@@ -312,16 +378,21 @@ Optional shortcode:
 
 For dividing your content into columns of various widths. Uses [Bootstrap grid](https://getbootstrap.com/docs/4.6/layout/grid/) classes.
 
-Options:
+Options for ```[row]```
 
 * **class**: any Bootstrap class (_Default: row_)
 * **height**: equal: sets all columns to equal height (_Default: none_)
+* **width**: full-width: sets the container to full-widt (edge-to-edge) (_Default: none_)
+* **background**: Sets background color. Options: gold, purple, gray (grey also works), none. Also sets <h*> and <p> color. (_Default: none_)
+* **image**: Sets background image. Recommended size is 1920px x 1280px. Use background color option to change text color.  (_Default: none_)
+
+**_Note_:** On pages with a sidebar, the full-width option should not be used or you will see unexpected behavior.
 
 Example:
 
 ```
 [row]
-    [col class='col-md-12']Text[/col]
+    [col class="col-md-12"]Text[/col]
 [/row]
 ```
 
@@ -369,7 +440,7 @@ Attributes:
 
 * **id**: The id of the modal. Used to connect button to modal window. (_Default: none_)
 * **title**: Title that shows at the top of the modal window.
-* **button**: Trigger button text. (_Default: 'Set button text'_)
+* **button**: Trigger button text. (_Default: "Set button text"_)
 * **width**: narrow, wide, default/none (medium-width). Sets width of modal. (_Default: none_)
 * **color**: gold, purple. Sets the color of the trigger button. (_Default: purple_)
 * **scroll**: true. Set to `true` if scroll inside modal. (_Default: none_)
@@ -393,7 +464,7 @@ Attributes:
 Example:
 
 ```
-[subpage-list link="More information here" tilebox=true ]
+[subpage-list link="More information here" tilebox="true" ]
 ```
 
 ### Tabs and Tours
@@ -437,17 +508,13 @@ This shortcode embeds a Tagboard feed onto the page. Tagboards that you wish to 
 
 Attributes:
 
-* **slug**: the ID of your Tagboard. This can be found by visiting your Tagboard's dashboard and looking for the 6-digit ID at the end of the url. (_Default: none_)
-* **layout**: the layout of the Tagboard. Options: grid, waterfall, carousel. (_Default: grid_)
-* **post-count**: the number of posts to display. (_Default: 50_)
-* **mobile-count**: the number of posts to display on mobile. (_Default: 50_)
-* **toolbar**: whether or not the toolbar is displayed. Options: default, none. (_Default: default_)
-* **feed-type**: Choosing auto will only show featured posts. If toolbar="default", choosing default will allow the user to show latest posts or featured posts. Options: auto, default. (_Default: default_)
+* **id**: the ID of your Tagboard. This can be found by visiting your Tagboard's dashboard and looking for the ID at the end of the url. (_Default: none_)
+
 
 Example:
 
 ```
-[tagboard slug="435487" layout="waterfall" post-count="30" mobile-count="15" toolbar="none" feed-type="auto"]
+[tagboard id="4354"]
 ```
 
 ### Tile Box
@@ -481,16 +548,17 @@ Attributes:
 
 * **name**: Required Trumba web name of the desired calendar. (_Default: none_)
 * **type**: The Trumba spud type of the desired calendar. Changing the type will change how the calendar is displayed. A list of all spud types can be found here. (_Default: none_)
-* **base**: The full url of the desired base calendar. This can be embedded on your site with the spud type='main' (_Default: none_)
+* **base**: The full url of the desired base calendar. This can be embedded on your site with the spud type="main" (_Default: none_)
+* **url**: Optional URL parameters to add additional Trumba parameters to your embed.[See Trumba documentation for more details.](https://www.trumba.com/help/api/urlparameters.aspx) (_Default: none_)
 
 ```
-[trumba name='my web name' type='desired spud type' base='teaser base url']
+[trumba name="my web name" type="desired spud type" base="teaser base url"]
 ```
 
 Example:
 
 ```
-[trumba name='sea_campus' type='main' base='https://www.washington.edu/calendar']
+[trumba name="sea_campus" type="main" base="https://www.washington.edu/calendar"]
 ```
 
 
@@ -507,7 +575,7 @@ Attributes:
 Example:
 
 ```
-[trumba-rss url='calendar rss url' category='true' description='false']
+[trumba-rss url="calendar rss url" category="true" description="false"]
 ```
 
 ## Widgets
@@ -519,7 +587,7 @@ Example:
 > Options:
 
 > - **Title** : The title of the widget (*Default: None*)
-> - **Building code** : The UW campus building code for the desired building to embed, ie: 'kne' for Kane Hall. (*Default: None*)
+> - **Building code** : The UW campus building code for the desired building to embed, ie: "kne" for Kane Hall. (*Default: None*)
 
 
 ### UW Image Card ###
@@ -604,8 +672,4 @@ Options:
 Simply copy and paste the YouTube video URL to embed videos and playlists.
 
 ## Changelog
-1.1.0
-- Initial public release
-
-1.0.0-beta
-- Initial beta release
+moved to [CHANGELOG.md](CHANGELOG.md)

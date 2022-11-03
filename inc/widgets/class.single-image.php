@@ -14,7 +14,7 @@ class UW_Widget_Single_Image extends WP_Widget
 
   function __construct()
   {
-		parent::__construct( $id = 'pic-text', $name = 'Single Image', $options = array( 'description' => 'Display an image with some featured text.', 'classname' => 'pic-text-widget' ) );
+		parent::__construct( $id = 'pic-text', $name = 'UW Single Image', $options = array( 'description' => 'Display an image with some featured text.', 'classname' => 'pic-text-widget' ) );
 
     if ( is_admin() )
       add_action('admin_enqueue_scripts', array( __CLASS__, 'scripts') );
@@ -45,7 +45,7 @@ class UW_Widget_Single_Image extends WP_Widget
 		</p>
 
     <p>
-      <div class="image-preview wp-get-posts-image-preview" style="width:33%; display:block;">
+      <div class="image-preview wp-get-posts-image-preview" style="display:block;">
         <img src="<?php echo wp_get_attachment_url( $image ); ?>" width="100%" class="wp-get-posts-image" />
       </div>
 

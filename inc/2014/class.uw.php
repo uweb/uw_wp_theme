@@ -19,6 +19,7 @@ class UW {
 		require get_template_directory() . '/inc/nav/sidebar-walker.php';
 		require get_template_directory() . '/inc/2014/page-meta.php';
 		require get_template_directory() . '/inc/nav/megamenu.php';
+		require get_template_directory() . '/inc/nav/footermenu.php';
 		require get_template_directory() . '/inc/shortcodes/class.media-credit.php';
 	}
 
@@ -30,6 +31,7 @@ class UW {
 		$this->SquishBugs        = new UW_SquishBugs();
 		$this->UW_Page_Meta      = new UW_Page_Meta();
 		$this->UW_MegaMenu       = new UW_MegaMenu();
+		$this->UW_FooterMenu     = new UW_FooterMenu();
 		$this->UW_Media_Credit   = new UW_Media_Credit();
 	}
 }

@@ -144,7 +144,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$classes[] = 'dropdown-menu';
 			}
 
-			if ( 0 == $depth ) {
+			if ( 0 === $depth ) {
 				$classes[] = 'top-level-nav';
 			}
 
@@ -217,7 +217,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 */
 			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 
-			if ( $args->walker->has_children && 0 == $depth ) {
+			if ( $args->walker->has_children && 0 === $depth ) {
 				$atts['data-toggle']   = 'dropdown';
 				$atts['aria-expanded'] = 'false';
 				$atts['role'] = 'button';
@@ -264,7 +264,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			$item_classes = array( 'nav-link' );
 
-			if ( $args->walker->has_children && 0 == $depth ) {
+			if ( $args->walker->has_children && 0 === $depth ) {
 				$item_classes[] = 'dropdown-toggle';
 			}
 
@@ -320,8 +320,8 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			// $output .= $this->dropdown ? '' : str_repeat( $t, $depth ) . '</li>' . $n;
 
-			if ( $depth && $args->walker->has_children ) {
-				$output .= $n . str_repeat( $t, $depth ) . '</li></div>' . $n;
+			if ( 1 < $depth && $args->walker->has_children ) {
+				$output .= '';
 			} else {
 				$output .= $n . str_repeat( $t, $depth ) . '</li>' . $n;
 			}

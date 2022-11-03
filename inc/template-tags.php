@@ -71,13 +71,10 @@ function uw_wp_theme_posted_on() {
  * Prints HTML with meta information for the current author.
  */
 function uw_wp_theme_posted_by() {
-	$byline = sprintf(
-		/* translators: %s: post author. */
-		esc_html_x( 'by %s', 'post author', 'uw_wp_theme' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-	);
+	$written_by = esc_html_x( 'Written by', 'byline', 'uw_wp_theme' );
+	$byline = '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>';
 
-	echo '<span class="byline"> ' . $byline . ' </span>'; // WPCS: XSS OK.
+	echo wp_kses_post( '<div class="meta-author">' . $written_by . ' <span class="byline">' . $byline . ' </span></div>' );
 }
 
 /**
@@ -89,10 +86,10 @@ function uw_wp_theme_post_categories() {
 	// Only show categories on post types that have categories.
 	if ( 'post' === get_post_type() ) {
 		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ', ', 'uw_wp_theme' ) );
+		$categories_list = get_the_category_list( esc_html( ' ', 'uw_wp_theme' ) );
 		if ( $categories_list ) {
 			/* translators: 1: list of categories. */
-			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'uw_wp_theme' ) . ' </span>', $categories_list ); // WPCS: XSS OK.
+			printf( '<span class="cat-links"><span class="screen-reader-text">' . esc_attr( 'Post categories: ', 'uw_wp_theme' ) . '</span>' . wp_kses_post( $categories_list ) . ' </span>' );
 		}
 	}
 }
@@ -106,10 +103,10 @@ function uw_wp_theme_post_tags() {
 	// Only show tags on post types that have categories.
 	if ( 'post' === get_post_type() ) {
 		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'uw_wp_theme' ) );
+		$tags_list = get_the_tag_list( '', esc_html( ' ', 'list item separator', 'uw_wp_theme' ) );
 		if ( $tags_list ) {
 			/* translators: 1: list of tags. */
-			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'uw_wp_theme' ) . ' </span>', $tags_list ); // WPCS: XSS OK.
+			echo wp_kses_post( '<span class="tags-links"><span class="screen-reader-text">' . esc_attr( 'Post tags: ', 'uw_wp_theme' ) . '</span>' . wp_kses_post( $tags_list ) . ' </span>' );
 		}
 	}
 }

@@ -7,9 +7,9 @@
  * @package uw_wp_theme
  */
 
-if ( ! is_active_sidebar( 'sidebar' ) ) {
-	return;
-}
+//if ( ! is_active_sidebar( 'sidebar' ) ) {
+	//return;
+//}
 ?>
 
 <?php //wp_print_styles( array( 'uw_wp_theme-sidebar', 'uw_wp_theme-widgets' ) ); ?>
