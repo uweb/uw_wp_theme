@@ -1,5 +1,46 @@
 # Changelog
 
+## 2022-11-02 2.0.0
+
+- Theme Panel renamed to UW Theme Settings and given updated labels and styles
+- Added mobile Jumbotron styles
+- Updated Page Template mobile styles for Big and Small Hero template
+- Updated visual styles for bulleted lists and links across card and jumbotron styles
+- tweaks and updates to the grid shortcodes to work with Bootstrp layouting
+- ReadMe updates
+
+### Accessibility
+- Updated cards to have title above image in html code
+- Unnecessary headings removed from footer
+- Fixed quicklinks tab focus accessibility issue
+
+### New Features
+- Additional button styles for downloads and videos
+- Option to remove title overlay from Big and Small hero template and show the title lower on the page
+- Options to turn off breadcrumbs and quicklinks on the site
+- Site-wide Notification banner utilizing Bootstrap alert styles
+- Blog options, styles, and templates added
+- Jumbotron Hero Template option for pages
+- Attachment pages
+- Changed footer menu to a WordPress menu location for easy update and customization
+- Buttons optional on jumbtrons
+- Added favicon to theme
+- Masonry gallery layout option
+- Added URL parameter to Trumba shortcode
+
+### Bug fixes
+- Various mobile CSS tweaks and bug fixes
+- Fixed an issue with single accordions not rendering properly
+- Fixed and issue with buttons in Safari
+- Fixed widget image card upload button bug
+- Fixed nesting headings under headings on the Mega Menu
+- Fixed mobile menun button appearing above UW Alert
+- Fixed header breakpoint issues with search and quicklinks button
+- Fixed current page indicator on sidebar navigation
+- Fixed sidebar navigation not appearing when no widgets were enabled
+- Fixed tagboard shortcode to match new embed version
+- Various javascript bug fixes
+
 ## 2022-06-17 1.3.3
 
 - bugfix: pdf attachment pages
