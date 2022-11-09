@@ -1,5 +1,11 @@
 # Changelog
 
+## 2022-11-08 2.0.1
+
+- Removed non-brand color options to Site Notification Banner
+- Bug: Changed notification banner field to textarea
+- Bug: Fixed default header mobile site title css
+
 ## 2022-11-02 2.0.0
 
 - Theme Panel renamed to UW Theme Settings and given updated labels and styles

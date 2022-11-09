@@ -46,28 +46,21 @@ function uw_activate_banner() {
 function display_banner_message() {
 	?>
 
-	<input type="text" name="banner_message" value="<?php  echo get_option( 'banner_message' ) ?>" size="50">
+	<textarea name="banner_message" rows="3" cols="50"><?php  echo get_option( 'banner_message' ); ?></textarea>
 
 	<?php
 }
 
 function display_banner_color_options() {
 	?>
-	<input type="radio" id="alert-primary" name="banner_color" value="alert-primary" <?php if( get_option ( 'banner_color' ) == 'alert-primary' ) echo 'checked="checked" '; ?> >
+			<input type="radio" id="alert-primary" name="banner_color" value="alert-primary" <?php if( get_option ( 'banner_color' ) == 'alert-primary' ) echo 'checked="checked" '; ?> >
 			<label for="alert-primary">Primary alert (purple) </label><br>
+
 			<input type="radio" id="alert-secondary" name="banner_color" value="alert-secondary" <?php if( get_option ( 'banner_color' ) == 'alert-secondary' ) echo 'checked="checked" '; ?>>
 			<label for="alert-secondary">Secondary alert (gold)</label><br>
-			<input type="radio" id="alert-success" name="banner_color" value="alert-success" <?php if( get_option ( 'banner_color' ) == 'alert-success' ) echo 'checked="checked" '; ?>>
-			<label for="alert-success">Success alert (green)</label><br>
-			<input type="radio" id="alert-danger" name="banner_color" value="alert-danger" <?php if( get_option ( 'banner_color' ) == 'alert-danger' ) echo 'checked="checked" '; ?>>
-			<label for="alert-danger">Danger alert (red)</label><br>
-			<input type="radio" id="alert-warning" name="banner_color" value="alert-warning" <?php if( get_option ( 'banner_color' ) == 'alert-warning' ) echo 'checked="checked" '; ?>>
-			<label for="alert-warning">Warning alert (yellow)</label><br>
-			<input type="radio" id="alert-info" name="banner_color" value="alert-info" <?php if( get_option ( 'banner_color' ) == 'alert-info' ) echo 'checked="checked" '; ?>>
-			<label for="alert-info">Info alert (blue)</label><br>
+
 			<input type="radio" id="alert-dark" name="banner_color" value="alert-dark" <?php if( get_option ( 'banner_color' ) == 'alert-dark' ) echo 'checked="checked" '; ?>>
 			<label for="alert-dark">Dark alert (grey)</label><br>
-			<div class="uw-admin-banners">(<a id='enchanced-preview' href='#'>Preview Banner styles<span><img src='https://uw-s3-cdn.s3.us-west-2.amazonaws.com/wp-content/uploads/sites/193/2022/10/31134455/uw-banner-boostrap-alert-styles.png' alt='' width='500px' height='' /></span></a>)</div>
 	<?php
 }
 

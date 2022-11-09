@@ -264,17 +264,17 @@ add_filter( 'wp_resource_hints', 'uw_wp_theme_resource_hints', 10, 2 );
 /**
  * Enqueue WordPress theme styles within Gutenberg.
  */
-function uw_wp_theme_gutenberg_styles() {
-	$template_directory = get_bloginfo( 'template_directory' );
-	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+// function uw_wp_theme_gutenberg_styles() {
+// 	$template_directory = get_bloginfo( 'template_directory' );
+// 	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
 
-	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'uw_wp_theme-fonts', uw_wp_theme_fonts_url(), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+// 	// Add custom fonts, used in the main stylesheet.
+// 	wp_enqueue_style( 'uw_wp_theme-fonts', uw_wp_theme_fonts_url(), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
-	// Enqueue main stylesheet.
-	wp_enqueue_style( 'uw_wp_theme-base-style', $template_directory . '/css/editor-styles.css', array(), $theme_version );
-}
-add_action( 'enqueue_block_editor_assets', 'uw_wp_theme_gutenberg_styles' );
+// 	// Enqueue main stylesheet.
+// 	wp_enqueue_style( 'uw_wp_theme-base-style', $template_directory . '/css/editor-styles.css', array(), $theme_version );
+// }
+// add_action( 'enqueue_block_editor_assets', 'uw_wp_theme_gutenberg_styles' );
 
 /**
  * Enqueue styles.
