@@ -37,7 +37,7 @@ class UW_Accordion {
 	public function uw_wp_theme_enqueue_accordion_script() {
 		$template_directory = get_bloginfo( 'template_directory' );
 		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
-		
+
 		wp_register_script( 'uw_wp_theme-accordion-script', $template_directory  . '/js/shortcodes/accordion.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
 	}
 
@@ -129,7 +129,7 @@ class UW_Accordion {
 		$output = do_shortcode( $content );
 
 		return sprintf(
-			'<div class="card"><div class="card-header" id="accordion-header"><h3 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button</h3></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion">%s</div></div>',
+			'<div class="card"><div class="card-header" id="accordion-header"><h3 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button></h3></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion">%s</div></div>',
 			$active_tab,
 			$section_atts['title'],
 			$class,

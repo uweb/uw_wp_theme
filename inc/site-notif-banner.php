@@ -46,7 +46,7 @@ function uw_activate_banner() {
 function display_banner_message() {
 	?>
 
-	<textarea name="banner_message" rows="3" cols="50"><?php  echo get_option( 'banner_message' ); ?></textarea>
+	<textarea name="banner_message" rows="3" cols="50"><?php echo wp_kses_post( get_option( 'banner_message' ) ); ?></textarea>
 
 	<?php
 }
@@ -54,13 +54,22 @@ function display_banner_message() {
 function display_banner_color_options() {
 	?>
 			<input type="radio" id="alert-primary" name="banner_color" value="alert-primary" <?php if( get_option ( 'banner_color' ) == 'alert-primary' ) echo 'checked="checked" '; ?> >
-			<label for="alert-primary">Primary alert (purple) </label><br>
+			<label for="alert-primary">Purple</label><br>
 
 			<input type="radio" id="alert-secondary" name="banner_color" value="alert-secondary" <?php if( get_option ( 'banner_color' ) == 'alert-secondary' ) echo 'checked="checked" '; ?>>
-			<label for="alert-secondary">Secondary alert (gold)</label><br>
+			<label for="alert-secondary">Light gold</label><br>
+
+			<input type="radio" id="alert-gold" name="banner_color" value="alert-gold" <?php if( get_option ( 'banner_color' ) == 'alert-gold' ) echo 'checked="checked" '; ?>>
+			<label for="alert-gold">Gold</label><br>
+
+			<input type="radio" id="alert-darkgold" name="banner_color" value="alert-darkgold" <?php if( get_option ( 'banner_color' ) == 'alert-darkgold' ) echo 'checked="checked" '; ?>>
+			<label for="alert-darkgold">Dark gold</label><br>
 
 			<input type="radio" id="alert-dark" name="banner_color" value="alert-dark" <?php if( get_option ( 'banner_color' ) == 'alert-dark' ) echo 'checked="checked" '; ?>>
-			<label for="alert-dark">Dark alert (grey)</label><br>
+			<label for="alert-dark">Light grey</label><br>
+
+			<input type="radio" id="alert-black" name="banner_color" value="alert-black" <?php if( get_option ( 'banner_color' ) == 'alert-black' ) echo 'checked="checked" '; ?>>
+			<label for="alert-black">Black</label><br>
 	<?php
 }
 

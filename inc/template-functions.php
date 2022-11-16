@@ -662,7 +662,7 @@ if ( ! function_exists( 'is_pdf' ) ):
   if ( ! function_exists( 'add_sitewide_banner' ) ):
 	function add_sitewide_banner() {
 		if (  get_option( 'uw_activate_banner' ) && get_option( 'banner_message' )   ){
-			echo '<div class="banner alert ' . get_option( 'banner_color' ) .' alert-dismissible fade show " role="alert"> ' . get_option( 'banner_message' ) .' <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			echo '<div class="banner alert ' . get_option( 'banner_color' ) .' alert-dismissible fade show " role="alert"><p>' . wp_kses_post( get_option( 'banner_message' ) ) .'</p> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button></div>';
 		}

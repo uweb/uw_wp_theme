@@ -39,7 +39,7 @@ class UW_Grid {
 			$bgimage = '';
 		}
 
-		$result  = '<div class="' . $class . ' ' . $height . '' . $width . ' ' . $background . ' " ' . $bgimage . '>';
+		$result  = '<div class="' . $class . ' ' . $height . ' ' . $width . ' ' . $background . ' " ' . $bgimage . '>';
 		$result .= do_shortcode( $content );
 		$result .= '</div>';
 		return $result;

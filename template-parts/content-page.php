@@ -15,13 +15,18 @@
 	</header><!-- .entry-header -->
 	<?php
 	if ( ( is_single() || is_home() ) && get_option( 'show_byline_on_posts' ) ) :
-		?>
-		<div class="author-info">
-		<?php if ( function_exists( 'coauthors' ) ) { coauthors(); } else { the_author(); } ?>
-		<p class="author-desc"> <small><?php the_author_meta(); ?></small></p>
-		</div>
 
-		<?php endif; ?>
+		if ( get_option( 'show_author_on_posts' ) ) {
+			?>
+			<div class="author-info">
+			<?php if ( function_exists( 'coauthors' ) ) { coauthors(); } else { the_author(); } ?>
+			<p class="author-desc"> <small><?php the_author_meta(); ?></small></p>
+			</div>
+
+			<?php
+		}
+	endif;
+	?>
 
 	<div class="entry-content">
 		<?php

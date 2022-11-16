@@ -9,12 +9,18 @@ class UW_FooterMenu {
 	const LOCATION       = 'footer-links';
 	const DISPLAY_NAME   = 'Footer menu';
 	const DEFAULT_STATUS = 'publish';
+	const ALLOWED_BLOG	 =	1;
+
 
 	function __construct() {
+		$this->MULTISITE = is_multisite();
 		$this->menu_items = array();
-		add_action( 'after_setup_theme', array( $this, 'register_footer_menu' ) );
-		add_action( 'after_setup_theme', array( $this, 'install_default_footer_menu' ) );
 		add_action( 'wp_update_nav_menu', array( $this, 'save_footer_menu' ) );
+		add_action( 'after_setup_theme', array( $this, 'install_default_footer_menu' ) );
+
+		if ( ! $this->MULTISITE || $this->MULTISITE && get_current_blog_id() === self::ALLOWED_BLOG ) {
+			add_action( 'after_setup_theme', array( $this, 'register_footer_menu' ) );
+		}
 	}
 
 	function register_footer_menu() {
@@ -83,8 +89,8 @@ class UW_FooterMenu {
 	}
 	function save_footer_menu( $menu_id ) {
 		$menu_object = wp_get_nav_menu_object( $menu_id );
-		if ( 'dropdowns' === $menu_object->slug ) {
-			if ( ! current_user_can( 'Super Admin' ) ) {
+		if ( 'footer-menu' === $menu_object->slug ) {
+			if ( is_multisite() && ! current_user_can( 'Super Admin' ) ) {
 				wp_die( 'Insufficient permission: can not edit the default footer menu.' );
 			}
 		}
@@ -92,7 +98,7 @@ class UW_FooterMenu {
 
 	// Fallback function to render standard menu if this menu isn't enabled.
 	public static function fallback_menu( ) {
-		wp_nav_menu( array( 'menu' => 'footer-menu', 'container' => 'ul', 'menu_class' => 'footer-links', ) );
+		wp_nav_menu( array( 'menu' => 'footer-menu', 'container' => 'ul', 'menu_class' => self::LOCATION, ) );
 	}
 
 }

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2022-11-15 2.1.0
+
+- Changed brand colors in Site Notification Banner to better align with the brand
+- Bug: fixed footer link alignment
+- Bug: added proper markup to site notification banner output
+- Bug: fixed link colors on site notification banner
+- Bug: fixed accordion button output missing tag closure
+- Bug: fixed attachment template author byline output
+- Bug: equal height and width adjustments to grid shortcode
+
 ## 2022-11-08 2.0.1
 
 - Removed non-brand color options to Site Notification Banner
