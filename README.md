@@ -1,5 +1,5 @@
 # UW WordPress Theme
-![UW WordPress Theme version 2.1.0](https://img.shields.io/static/v1?label=version&message=v2.1.0&color=green)
+![UW WordPress Theme version 2.1.1](https://img.shields.io/static/v1?label=version&message=v2.1.1&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
@@ -673,3 +673,24 @@ Simply copy and paste the YouTube video URL to embed videos and playlists.
 
 ## Changelog
 moved to [CHANGELOG.md](CHANGELOG.md)
+
+## Notes on Accessible Text Colors
+
+WCAG 2.0 level AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text. Large text is defined as 18px and bold or larger, or 24px (normal weight) or larger. Test contrast with this [contrast checker](https://webaim.org/resources/contrastchecker/).
+
+Quick guide for UW Colors:
+**Bold** = Pass. Contrast is sufficient.
+
+|                  | TEXT COLOR | Pure black | Black   | Purple  | Dark gray | Dark gold | Gold    | Light gray | Light gold | White   | Link blue |
+| ---------------- | ---------- | ---------- | ------- | ------- | --------- | --------- | ------- | ---------- | ---------- | ------- | --------- |
+|                  |            | #000000    | #373a3c | #4b2e83 | #5a5a5a   | #85754d   | #b7a57a | #c9c9c9    | #e8e3d3    | #ffffff | #1a62c7   |
+| **BACKGROUND COLOR** |      ---     |     ---       |    ---   |     ---    |       CONTRAST      |     RATIOS      |   ---      |      ---    |       ---     |      ---   |     ---      |
+| **White**            | #ffffff    | **21**         | **11.45**   | **10.4**    | **6.89**      | **4.51**      | 1.86    | 1.65       | 3.51       |  -       | **5.8**       |
+| **Light gold**       | #e8e3d3    | **16.35**      | **8.95**    | **8.13**    | **5.37**      | 3.52      | 1.89    | 1.29       |     -       | 1.27    | 4.5       |
+| **Light gray**       | #c9c9c9    | **12.68**      | **8.01**    | **7.27**    | 4.16      | 3.15      | 1.69    |       -     | 1.11       | 1.43    | 4.06      |
+| **Gold**             | #b7a57a    | **8.67**       | **4.73**    | 4.3     | 2.84      | 1.86      |     -    | 1.46       | 1.88       | 2.42    | 2.39      |
+| **Dark gold**        | #85754d    | **4.64**       | 2.53    | 2.3     | 1.52      |      -     | 1.86    | 2.72       | 3.51       | 4.51    | 1.28      |
+| **Dark gray**        | #5a5a5a    | 3.04       | 1.66    | 1.5     |   -        | 1.52      | 2.84    | 4.16       | 5.37       | **6.89**    | 1.18      |
+| **Purple**           | #4b2e83    | 2.01       | 1.1     |      -   | 1.5       | 2.3       | 4.3     | **6.28**       | **8.13**       | **10.4**    | 1.79      |
+| **Black**            | #373a3c    | 1.83       |     -    | 1.1     | 1.66      | 2.53      | 1.86    | **6.91**       | **8.92**       | **11.45**   | 1.97      |
+| **Pure black**       | #000000    |       -     | 1.83    | 2.01    | 3.04      | **4.64**      | **8.67**    | **12.68**      | **16.35**      | **21**      | 3.61      |

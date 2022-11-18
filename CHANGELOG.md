@@ -1,5 +1,10 @@
 # Changelog
 
+## 2022-11-17 2.1.1
+
+- Added accessible text reference to README
+- Updated UW Recent Posts widget to add class to title
+
 ## 2022-11-15 2.1.0
 
 - Changed brand colors in Site Notification Banner to better align with the brand
