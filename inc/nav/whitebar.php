@@ -78,7 +78,7 @@ class UW_Dropdowns
 		$this->add_menu_item( 'Leadership', '//uw.edu/leadership/', $parent = 'About' );
 		$this->add_menu_item( 'Maps', '//uw.edu/maps/', $parent = 'About' );
 		$this->add_menu_item( 'Population Health', '//uw.edu/populationhealth/', $parent = 'About' );
-		$this->add_menu_item( 'Sustainability', 'https://green.uw.edu/', $parent = 'About' );
+		$this->add_menu_item( 'Sustainability', 'https://sustainability.uw.edu', $parent = 'About' );
 		$this->add_menu_item( 'Visit', '//uw.edu/visit/', $parent = 'About' );
 
 		// The default Academics dropdown.
@@ -155,8 +155,8 @@ class UW_Dropdowns
 
 	function save_white_bar($menu_id){
 		$menu_object = wp_get_nav_menu_object( $menu_id );
-		if($menu_object->slug === 'dropdowns'){
-			if (!current_user_can('Super Admin')){
+		if( $menu_object->slug === 'dropdowns' ){
+			if ( !current_user_can( 'activate_plugins' ) ){
 				wp_die('Insufficient permission: can not edit the default dropdowns menu.');
 			}
 		}

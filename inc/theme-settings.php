@@ -126,6 +126,12 @@ function display_automatic_post_excerpts() {
 		<?php
 }
 
+function display_feature_photo() {
+	?>
+	   <input type="checkbox" name="show_feature_photo" value="1" <?php checked( 1, get_option( 'show_feature_photo' ), true ); ?> />
+		<?php
+}
+
 function display_blog_intro_all() {
 	?>
 	   <input type="checkbox" name="show_blog_intro_all" value="1" <?php checked( 1, get_option( 'show_blog_intro_all' ), true ); ?> />
@@ -161,6 +167,8 @@ function display_theme_settings_fields() {
 
 	add_settings_field( 'show_auto_excerpts', 'Show all blog posts as excerpts on the posts page', 'display_automatic_post_excerpts', 'post-options', 'uw_settings_section' );
 
+	add_settings_field( 'show_feature_photo', 'Show all blog post feature photos on the feature photo page', 'display_feature_photo', 'post-options', 'uw_settings_section' );
+
 	add_settings_field( 'show_blog_intro_all', 'Show blog intro on all posts pages (e.g. page 2, 3, 4)', 'display_blog_intro_all', 'post-options', 'uw_settings_section' );
 
 	register_setting( 'uw_settings_section', 'toggle_search_options' );
@@ -184,6 +192,8 @@ function display_theme_settings_fields() {
 	register_setting( 'uw_settings_section', 'show_categories_on_posts' );
 
 	register_setting( 'uw_settings_section', 'show_tags_on_posts' );
+
+	register_setting( 'uw_settings_section', 'show_feature_photo' );
 
 	register_setting( 'uw_settings_section', 'show_auto_excerpts' );
 

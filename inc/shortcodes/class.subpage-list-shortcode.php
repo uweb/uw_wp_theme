@@ -38,9 +38,6 @@ class UW_SubpageList
 
             if ( $attributes->tilebox === 'false' ) {
               $output = $output . sprintf( "<h2 class='subpage-header'><a href='%s'>%s</a></h2>", $permalink, $page->post_title );
-              if ( get_option( 'show_byline_on_posts' ) ) {
-                $output = $output . sprintf( "<div class='author-info'><p class='author-desc'><small>%s</small></p></div>", get_the_author_meta( 'display_name', $page->post_author ) );
-              }
               $output = $output . sprintf( '<p>%s</p>', $page->post_excerpt );
               if ( !empty( $attributes->link ) ) {
                 $output = $output . '<div class="subpage-button">' . do_shortcode( '[uw_button style="square-outline" target="' . $permalink . '"]' . $attributes->link . '[/uw_button]' ) . '</div>';
@@ -53,9 +50,6 @@ class UW_SubpageList
               $output = $output . "<div class='tile'>";
               $output = $output . sprintf( "<div>%s</div>", get_the_post_thumbnail( $page->ID, 'half' ) );
               $output = $output . sprintf( "<h3 class='subpage-list-tile'><a href='%s'>%s</a></h3>", $permalink, $page->post_title );
-              if ( get_option( 'show_byline_on_posts' ) ) {
-                $output = $output . sprintf( "<div class='author-info'><p class='author-desc'><small>%s</small></p></div>", get_the_author_meta( 'display_name', $page->post_author ) );
-              }
               $output = $output . sprintf( '<p>%s</p>', $page->post_excerpt );
               $output = $output . "</div>";
               $tiles = $tiles + 1;

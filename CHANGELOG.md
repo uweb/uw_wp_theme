@@ -1,5 +1,16 @@
 # Changelog
 
+## 2022-1-27 2.2.0
+
+- Added option to enable feature images displaying on posts and blog listing
+- Removed unused mobile menu template file
+- Updated iframe allow list
+- Removed Super Admin requirement on page meta boxes
+- Bug: corrected UW Web Strategy Team email in Dashboard widget
+- Bug: removed author from subpage list shortcode output
+- Bug: removed author line from non-post content templates
+- Bug: updated permissions check on menus to function on single site installs
+
 ## 2022-11-17 2.1.1
 
 - Added accessible text reference to README

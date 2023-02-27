@@ -469,7 +469,7 @@ function uw_dashboard_widget_function() {
 	echo '<p><a href="https://www.washington.edu/brand/web/web-council/">Web Council </a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
 	echo '<p><a href="https://sites.uw.edu/wpug/">WordPress Users Group </a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
 	echo '<br>';
-	echo '<p><strong>Need help?</strong> Contact the  <a href="mailto:uweb@uw.com">UW Web Team</a>. </p>';
+	echo '<p><strong>Need help?</strong> Contact the  <a href="mailto:uweb@uw.edu">UMAC Web Strategy Team</a>. </p>';
 	echo '</div>';
 }
 

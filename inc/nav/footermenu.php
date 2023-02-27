@@ -90,7 +90,7 @@ class UW_FooterMenu {
 	function save_footer_menu( $menu_id ) {
 		$menu_object = wp_get_nav_menu_object( $menu_id );
 		if ( 'footer-menu' === $menu_object->slug ) {
-			if ( is_multisite() && ! current_user_can( 'Super Admin' ) ) {
+			if ( is_multisite() && ! current_user_can( 'activate_plugins' ) ) {
 				wp_die( 'Insufficient permission: can not edit the default footer menu.' );
 			}
 		}

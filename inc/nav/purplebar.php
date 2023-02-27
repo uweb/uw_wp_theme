@@ -90,9 +90,9 @@ class UW_Audience
 
 	function save_purple_bar($menu_id){
 		$menu_object = wp_get_nav_menu_object( $menu_id );
-		if($menu_object->slug === 'dropdowns'){
-			if (!current_user_can('Super Admin')){
-				wp_die('Insufficient permission: can not edit the default dropdowns menu.');
+		if($menu_object->slug === 'audience-menu'){
+			if (!current_user_can( 'activate_plugins' )){
+				wp_die('Insufficient permission: can not edit the default audience menu.');
 			}
 		}
 	}

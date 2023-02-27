@@ -155,59 +155,55 @@ class UW_Page_Meta {
 		}
 		echo '</div>';
 		if ( 'templates/template-big-hero.php' === $default || 'templates/template-small-hero.php' === $default ) {
-			if ( is_super_admin() ) {
-				$banner = get_post_meta( $post->ID, 'banner', true );
-				wp_nonce_field( 'banner_nonce', 'banner_name' );
+			$banner = get_post_meta( $post->ID, 'banner', true );
+			wp_nonce_field( 'banner_nonce', 'banner_name' );
 
-				$buttontext = get_post_meta( $post->ID, 'buttontext', true );
-				wp_nonce_field( 'buttontext_nonce', 'buttontext_name' );
+			$buttontext = get_post_meta( $post->ID, 'buttontext', true );
+			wp_nonce_field( 'buttontext_nonce', 'buttontext_name' );
 
-				$buttonlink = get_post_meta( $post->ID, 'buttonlink', true );
-				wp_nonce_field( 'buttonlink_nonce', 'buttonlink_name' );
+			$buttonlink = get_post_meta( $post->ID, 'buttonlink', true );
+			wp_nonce_field( 'buttonlink_nonce', 'buttonlink_name' );
 
-				$mobileimage = get_post_meta( $post->ID, 'mobileimage', true );
-				wp_nonce_field( 'mobileimage_nonce', 'mobileimage_name' );
+			$mobileimage = get_post_meta( $post->ID, 'mobileimage', true );
+			wp_nonce_field( 'mobileimage_nonce', 'mobileimage_name' );
 
 
-				$pagetitle = get_post_meta($post->ID, "pagetitle", true);
-				wp_nonce_field( 'pagetitle_nonce' , 'pagetitle_name' );
+			$pagetitle = get_post_meta($post->ID, "pagetitle", true);
+			wp_nonce_field( 'pagetitle_nonce' , 'pagetitle_name' );
 
-				echo "<p><b>Banner</b></br><input type='text' name='bannertext' value='" . $banner . "'></p>";
-				echo "<p><b>Button</b></br>Text</br><input type='text' name='buttontext' value='" . $buttontext . "'></br>Link</br><input type='text' name='buttonlink' value='" . $buttonlink . "'></p>";
-				echo "<p><b>Mobile Header Image</b></br><input type='text' name='mobileimagetext' value='" . $mobileimage . "'></p>";
+			echo "<p><b>Banner</b></br><input type='text' name='bannertext' value='" . $banner . "'></p>";
+			echo "<p><b>Button</b></br>Text</br><input type='text' name='buttontext' value='" . $buttontext . "'></br>Link</br><input type='text' name='buttonlink' value='" . $buttonlink . "'></p>";
+			echo "<p><b>Mobile Header Image</b></br><input type='text' name='mobileimagetext' value='" . $mobileimage . "'></p>";
 
-				echo "<p><b>Page title </b></br>
-				<input type='checkbox' id='' name='pagetitlecheck' value='on' ";
-				if ( ! empty ( $pagetitle ) ) {
-					echo 'checked = "checked"';
-				}
-				echo '<label>Display the page title below the featured image (instead of on the featured image).</label> </br>';
+			echo "<p><b>Page title </b></br>
+			<input type='checkbox' id='' name='pagetitlecheck' value='on' ";
+			if ( ! empty ( $pagetitle ) ) {
+				echo 'checked = "checked"';
 			}
+			echo '<label>Display the page title below the featured image (instead of on the featured image).</label> </br>';
 		}
 
 		if ( 'templates/template-jumbotron.php' === $default) {
-			if ( is_super_admin() ) {
-				$banner = get_post_meta( $post->ID, 'banner', true );
-				wp_nonce_field( 'banner_nonce', 'banner_name' );
+			$banner = get_post_meta( $post->ID, 'banner', true );
+			wp_nonce_field( 'banner_nonce', 'banner_name' );
 
-				$buttontext = get_post_meta( $post->ID, 'buttontext', true );
-				wp_nonce_field( 'buttontext_nonce', 'buttontext_name' );
+			$buttontext = get_post_meta( $post->ID, 'buttontext', true );
+			wp_nonce_field( 'buttontext_nonce', 'buttontext_name' );
 
-				$buttonlink = get_post_meta( $post->ID, 'buttonlink', true );
-				wp_nonce_field( 'buttonlink_nonce', 'buttonlink_name' );
+			$buttonlink = get_post_meta( $post->ID, 'buttonlink', true );
+			wp_nonce_field( 'buttonlink_nonce', 'buttonlink_name' );
 
-				$mobileimage = get_post_meta( $post->ID, 'mobileimage', true );
-				wp_nonce_field( 'mobileimage_nonce', 'mobileimage_name' );
+			$mobileimage = get_post_meta( $post->ID, 'mobileimage', true );
+			wp_nonce_field( 'mobileimage_nonce', 'mobileimage_name' );
 
-				$subhead = get_post_meta( $post->ID, 'subhead', true );
-				wp_nonce_field( 'subhead_nonce', 'subhead_name' );
+			$subhead = get_post_meta( $post->ID, 'subhead', true );
+			wp_nonce_field( 'subhead_nonce', 'subhead_name' );
 
-				echo "<p><b>Banner</b></br><input type='text' name='bannertext' value='" . esc_attr( $banner ) . "'></p>";
-				echo "<p><b>Button</b></br>Text</br><input type='text' name='buttontext' value='" . esc_attr( $buttontext ) . "'></br>Link</br><input type='text' name='buttonlink' value='" . $buttonlink . "'></p>";
-				echo "<p><b>Subhead text</b></br><input type='text' name='subheadtext' value='" . esc_attr( $subhead ) . "'></p>";
+			echo "<p><b>Banner</b></br><input type='text' name='bannertext' value='" . esc_attr( $banner ) . "'></p>";
+			echo "<p><b>Button</b></br>Text</br><input type='text' name='buttontext' value='" . esc_attr( $buttontext ) . "'></br>Link</br><input type='text' name='buttonlink' value='" . $buttonlink . "'></p>";
+			echo "<p><b>Subhead text</b></br><input type='text' name='subheadtext' value='" . esc_attr( $subhead ) . "'></p>";
 
-				echo "<p><b>Mobile Header Image</b></br><input type='text' name='mobileimagetext' value='" . esc_attr( $mobileimage ). "'></p>";
-			}
+			echo "<p><b>Mobile Header Image</b></br><input type='text' name='mobileimagetext' value='" . esc_attr( $mobileimage ). "'></p>";
 		}
 	}
 

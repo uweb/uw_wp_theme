@@ -51,7 +51,7 @@
 
 	<?php
 	// if the post has a featured image, display the featured image.
-	if ( has_post_thumbnail() ) {
+	if ( has_post_thumbnail() &&  get_option( 'show_feature_photo' ) ) {
 		echo '<div class="featured-image">';
 		the_post_thumbnail();
 		echo '</div>';
