@@ -1,6 +1,6 @@
 # Changelog
 
-## 2022-1-27 2.2.0
+## 2023-2-27 2.2.0
 
 - Added option to enable feature images displaying on posts and blog listing
 - Removed unused mobile menu template file
