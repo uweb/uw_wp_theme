@@ -1,5 +1,9 @@
 # Changelog
 
+## 2023-3-16 2.2.1
+
+- Hotfix: Default navigation update
+
 ## 2023-2-27 2.2.0
 
 - Added option to enable feature images displaying on posts and blog listing
