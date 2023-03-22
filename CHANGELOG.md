@@ -1,5 +1,9 @@
 # Changelog
 
+## 2023-3-22 2.2.2
+
+- Default navigation updated URLs to minimize redirects
+
 ## 2023-3-16 2.2.1
 
 - Hotfix: Default navigation update
