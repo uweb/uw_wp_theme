@@ -29,7 +29,7 @@ get_template_part( 'template-parts/header', 'image' );
 					<div class="col-md-10 align-self-center offset-md-1">
 						<h1>Not what you were expecting?</h1>
 						<p>Dubs tells us this page might not be what you had in mind when you set out on your journey through the UW Web. Don&#146;t worry, you&#146;re not in the Dawg House! Here are some of Dubs&#146; favorite pages if you feel like exploring: </p>
-						
+
 						<ul style="column-count: 2">
 							<li><a href="//uw.edu/?utm_source=error&utm_medium=click&utm_campaign=links&utm_term=uwhomepage">UW home page</a></li>
 							<li><a href="//uw.edu/contact/?utm_source=error&utm_medium=click&utm_campaign=links&utm_term=contactus">Contact us</a></li>
@@ -48,12 +48,12 @@ get_template_part( 'template-parts/header', 'image' );
 
 						<p>Or, search the UW web:</p>
 						<?php get_search_form(); ?>
-						
+
 					</div>
 
-					
+
 				</div>
-			</article> 
+			</article>
 		</main><!-- #primary -->
 
 	</div><!-- .row -->

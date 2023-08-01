@@ -72,7 +72,7 @@ add_filter( 'wp_get_attachment_image_attributes', 'uw_wp_theme_post_thumbnail_si
 add_action( 'after_setup_theme', 'uw_wp_theme_image_sizes' );
 
 function uw_wp_theme_image_sizes( ) {
-	
+
 	add_image_size( 'mug-shot', 150, 250, true );
 	add_image_size( 'sidebar-width', 375, 9999, false );
 	add_image_size( 'full-content', 1200, 9999, false );
@@ -81,13 +81,13 @@ function uw_wp_theme_image_sizes( ) {
 add_filter( 'image_size_names_choose', 'uw_wp_theme_image_size_choose' );
 
 function uw_wp_theme_image_size_choose( $sizes ) {
-	
+
     return array_merge( $sizes, array(
-		
+
         'mug-shot' => __( 'Portrait' ),
 		'sidebar-width' => _( 'Sidebar' ),
 		'full-content' => _( 'Content width' )
-		
+
     ) );
-	
+
 }

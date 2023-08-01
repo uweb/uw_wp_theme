@@ -130,7 +130,7 @@ class UW_Page_Meta {
 
 	}
 
-	function page_template_dropdown( $default = '' , $post ) {
+	function page_template_dropdown( $post, $default = '' ) {
 
 		$previews = array('Big Hero' => '/assets/images/template-big-hero.jpg', 'Small Hero' => '/assets/images/template-small-hero.jpg', 'No image' => '/assets/images/template-no-image.jpg', 'No title/image' => '/assets/images/template-no-title.jpg', 'Default Template' => '/assets/images/template-default.jpg', 'Jumbotron Hero' => '/assets/images/template-jumbo.jpg',);
 
@@ -144,7 +144,7 @@ class UW_Page_Meta {
 </span></a>)</p>";
 		foreach ( array_keys( $templates ) as $template )
 		{
-			if( in_array($template, $this->HIDDEN ))
+			if( in_array( $template, $this->HIDDEN ) )
 			{
 				continue;
 			}

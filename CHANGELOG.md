@@ -1,5 +1,14 @@
 # Changelog
 
+## 2023-7-31 2.3
+
+- Removed unneeded dev files
+- Updated dev packages
+- Removed unneeded dev packages
+- Removed unnecessary gulp tasks
+- Moved sass sourcemaps into css folder
+- PHP 8 error mitigation
+
 ## 2023-3-22 2.2.2
 
 - Default navigation updated URLs to minimize redirects

@@ -292,10 +292,6 @@ function uw_wp_theme_styles() {
 
 	// Register component styles that are printed as needed.
 	wp_enqueue_style( 'uw_wp_theme-bootstrap', $template_directory . '/css/bootstrap.css', array(), $theme_version );
-	wp_enqueue_style( 'uw_wp_theme-content', $template_directory . '/css/content.css', array(), $theme_version );
-	wp_enqueue_style( 'uw_wp_theme-sidebar', $template_directory . '/css/sidebar.css', array(), $theme_version );
-	wp_enqueue_style( 'uw_wp_theme-widgets', $template_directory . '/css/widgets.css', array(), $theme_version );
-
 }
 
 add_action( 'wp_enqueue_scripts', 'uw_wp_theme_styles' );

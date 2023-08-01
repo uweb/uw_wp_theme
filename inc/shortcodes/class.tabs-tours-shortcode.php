@@ -33,7 +33,7 @@ class UW_Tabs_Tours {
 	public function uw_wp_theme_register_tabs_script() {
 		$template_directory = get_bloginfo( 'template_directory' );
 		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
-		
+
 		wp_register_script( 'uw_wp_theme-tabs-script', $template_directory . '/js/shortcodes/tabs-tours.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
 	}
 
