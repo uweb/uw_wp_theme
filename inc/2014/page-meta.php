@@ -82,7 +82,7 @@ class UW_Page_Meta {
 
 		<label class="screen-reader-text" for="page_template"><?php _e( 'Page Template' ); ?></label>
 
-			<?php $this->page_template_dropdown( $template, $post ); ?>
+			<?php $this->page_template_dropdown( $post, $template ); ?>
 
 			<?php
 		}

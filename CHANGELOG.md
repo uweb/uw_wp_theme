@@ -1,5 +1,9 @@
 # Changelog
 
+## 2023-8-4 2.3.1
+
+- Fixed a fatal error affecting some versions of PHP & WordPress
+
 ## 2023-7-31 2.3
 
 - Removed unneeded dev files
