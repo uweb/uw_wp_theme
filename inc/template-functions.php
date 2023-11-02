@@ -70,59 +70,6 @@ function uw_wp_theme_filter_script_loader_tag( $tag, $handle ) {
 add_filter( 'script_loader_tag', 'uw_wp_theme_filter_script_loader_tag', 10, 2 );
 
 /**
- * Generate preload markup for stylesheets.
- *
- * @param object $wp_styles Registered styles.
- * @param string $handle The style handle.
- */
-// function uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, $handle ) {
-// 	$preload_uri = $wp_styles->registered[ $handle ]->src . '?ver=' . $wp_styles->registered[ $handle ]->ver;
-// 	return $preload_uri;
-// }
-
-/**
- * Adds preload for in-body stylesheets depending on what templates are being used.
- * Disabled when AMP is active as AMP injects the stylesheets inline.
- *
- * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
- */
-// function uw_wp_theme_add_body_style() {
-
-	// If AMP is active, do nothing.
-	// if ( uw_wp_theme_is_amp() ) {
-	// 	return;
-	// }
-
-	// Get registered styles.
-	// $wp_styles = wp_styles();
-
-	// $preloads = array();
-
-	// Preload content.css.
-	// $preloads['uw_wp_theme-content'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-content' );
-
-	// Preload sidebar.css and widget.css.
-	// if ( is_active_sidebar( 'sidebar-1' ) ) {
-	// 	$preloads['uw_wp_theme-sidebar'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-sidebar' );
-	// 	$preloads['uw_wp_theme-widgets'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-widgets' );
-	// }
-
-	// Preload front-page.css.
-	// global $template;
-	// if ( 'front-page.php' === basename( $template ) ) {
-	// 	$preloads['uw_wp_theme-front-page'] = uw_wp_theme_get_preload_stylesheet_uri( $wp_styles, 'uw_wp_theme-front-page' );
-	// }
-
-	// Output the preload markup in <head>.
-// 	foreach ( $preloads as $handle => $src ) {
-// 		echo '<link rel="preload" id="' . esc_attr( $handle ) . '-preload" href="' . esc_url( $src ) . '" as="style" />';
-// 		echo "\n";
-// 	}
-
-// }
-// add_action( 'wp_head', 'uw_wp_theme_add_body_style' );
-
-/**
  * Add dropdown symbol to nav menu items with children.
  *
  * Adds the dropdown markup after the menu link element,
@@ -195,6 +142,9 @@ add_filter( 'page_menu_link_attributes', 'uw_wp_theme_add_nav_menu_aria_current'
 if ( ! function_exists( 'uw_wp_theme_white_bar_menu') ) :
 	function uw_wp_theme_white_bar_menu() {
 		if ( has_nav_menu( UW_Dropdowns::LOCATION ) ) {
+			// only enqueue script when mega menu is present!
+			wp_enqueue_script( 'uw_wp_theme-classic-script' );
+
 				echo '<nav aria-label="main menu" class="navbar navbar-expand-md navbar-light ' . UW_Dropdowns::LOCATION .'">
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . UW_Dropdowns::LOCATION .'" aria-controls="' . UW_Dropdowns::LOCATION .'" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon">Menu</span>
@@ -296,7 +246,6 @@ if ( ! function_exists( 'uw_list_front_page_menu_items' ) ) :
 				'menu_class'      => '',
 				'fallback_cb'     => '',
 				'echo' => false,
-			// 'walker'          => new UW_Dropdowns_Walker_Menu()
 			)
 		);
 
@@ -478,7 +427,6 @@ function dashboard_widget_display_enqueues( $hook ) {
 
 	wp_enqueue_style( 'dashboard-widget-styles', get_template_directory_uri( '', __FILE__ ) . '/assets/admin/css/dashboard-widgets.css' );
 }
-
 
 /**
  * Truncates the given string at the specified length.
@@ -684,4 +632,3 @@ function error_notice(){
 	}
 }
 add_action('admin_notices', 'error_notice');
-

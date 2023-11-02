@@ -15,7 +15,6 @@ class UW_FooterMenu {
 	function __construct() {
 		$this->MULTISITE = is_multisite();
 		$this->menu_items = array();
-		add_action( 'wp_update_nav_menu', array( $this, 'save_footer_menu' ) );
 		add_action( 'after_setup_theme', array( $this, 'install_default_footer_menu' ) );
 
 		if ( ! $this->MULTISITE || $this->MULTISITE && get_current_blog_id() === self::ALLOWED_BLOG ) {
@@ -85,14 +84,6 @@ class UW_FooterMenu {
 			$this->menu_items[ $parent ]['children'][$name] = $item;
 		} else {
 			$this->menu_items[$name] = $item;
-		}
-	}
-	function save_footer_menu( $menu_id ) {
-		$menu_object = wp_get_nav_menu_object( $menu_id );
-		if ( 'footer-menu' === $menu_object->slug ) {
-			if ( is_multisite() && ! current_user_can( 'activate_plugins' ) ) {
-				wp_die( 'Insufficient permission: can not edit the default footer menu.' );
-			}
 		}
 	}
 

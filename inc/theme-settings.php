@@ -30,7 +30,7 @@ function theme_settings_page() {
 	<?php
 }
 function add_theme_menu_item() {
-	add_menu_page( "UW Theme Settings", "UW Theme Settings", "manage_options", "uw-theme-settings", "theme_settings_page", null, 61 );
+	add_menu_page( "UW Theme Settings", "UW Theme Settings", "manage_options", "uw-theme-settings", "theme_settings_page", 'dashicons-w', 61 );
 }
 
 add_action( "admin_menu", "add_theme_menu_item" );
@@ -138,6 +138,12 @@ function display_blog_intro_all() {
 		<?php
 }
 
+function hide_blog_nav_thumbs() {
+	?>
+	   <input type="checkbox" name="hide_blog_nav_thumbs" value="1" <?php checked( 1, get_option( 'hide_blog_nav_thumbs' ), true ); ?> />
+		<?php
+}
+
 function display_theme_settings_fields() {
 	add_settings_section( 'uw_settings_section', 'All Settings', null, 'theme-options' );
 
@@ -171,6 +177,8 @@ function display_theme_settings_fields() {
 
 	add_settings_field( 'show_blog_intro_all', 'Show blog intro on all posts pages (e.g. page 2, 3, 4)', 'display_blog_intro_all', 'post-options', 'uw_settings_section' );
 
+	add_settings_field( 'hide_blog_nav_thumbs', 'Hide prev/next thumbnail images on single blog posts', 'hide_blog_nav_thumbs', 'post-options', 'uw_settings_section' );
+
 	register_setting( 'uw_settings_section', 'toggle_search_options' );
 
 	// register_setting( 'uw_settings_section', 'search-hide' );
@@ -198,6 +206,8 @@ function display_theme_settings_fields() {
 	register_setting( 'uw_settings_section', 'show_auto_excerpts' );
 
 	register_setting( 'uw_settings_section', 'show_blog_intro_all' );
+
+	register_setting( 'uw_settings_section', 'hide_blog_nav_thumbs' );
 }
 
 add_action( 'admin_init', 'display_theme_settings_fields' );

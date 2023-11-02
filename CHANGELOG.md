@@ -1,5 +1,33 @@
 # Changelog
 
+## 2023-8-4 3.0.0
+
+- Upgraded jQuery version
+- New card shortcode style option: Half Block
+- Updated the mobile version of Tours to match Tabs
+- Added a branded caption option to the gallery shortcode
+- Added post dates to search results page
+- Added option to turn sidebar on for attachment pages
+- Added option to enable sidebar navigation on homepage
+- Added option to change position of mega menu dropdowns
+- Added option to toggle post thumbnail output on Prev / Next Post links on the bottom of single blog/post pages
+- Added external link icon for navigation menus items
+- Added image credit field to attachment pages
+- Added unique IDs to all shortcode output
+- Added ability to expand/link to Accordion section from a URL
+- Added setting to add custom text to the 404 pages
+- Added light grey background option to grid shortcode
+- Added stretch link option to card shortcode
+- Removed Super Admin / Admin permissions checks for menu updates
+- Removed iFrame allow list from theme
+- a11y: output mobile jumbotron image above the text
+- Bug: fixed heading clear issue
+- Bug: Fix media modal popup errors when linked to attachment pages
+- Bug: Fixed contact widget displaying improperly when multiple long entries are added
+- Bug: Fixed grid shortcode mobile spacing issue
+- Bug: Classic menu automatically wraps when there are more than 8 items
+
+
 ## 2023-8-4 2.3.1
 
 - Fixed a fatal error affecting some versions of PHP & WordPress

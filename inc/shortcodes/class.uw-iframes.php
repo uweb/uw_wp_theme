@@ -2,7 +2,6 @@
 
 /**
  * This shortcode allows iFrames for editors.
- * Only certain domains are allowed, listed in /inc/helper-functions.php
  * [iframe src='' width='' height='']
  */
 class UW_Iframes
@@ -10,7 +9,6 @@ class UW_Iframes
 
   function __construct()
   {
-    $this->ALLOWED_IFRAMES = $this->get_iframe_domains();
     add_shortcode( 'iframe', array( $this, 'add_iframe' ) );
   }
 
@@ -28,8 +26,15 @@ class UW_Iframes
         return '';
 
       $parsed = parse_url($params['src']);
-      if ( array_key_exists('host', $parsed) && !in_array($parsed['host'], $this->ALLOWED_IFRAMES ) )
-        return '';
+
+	  /**
+	   * Remove the require iFrame allow list unless the CMS_Iframes class exists.
+	   */
+	  if ( class_exists( 'CMS_Iframes' ) ) {
+
+		if ( array_key_exists( 'host', $parsed ) && !in_array( $parsed['host'], $this->get_iframe_domains() ) )
+		  return '';
+	}
 
       $iframeSrc = html_entity_decode($params['src']);
       $iframeQueryString = parse_url($iframeSrc, PHP_URL_QUERY);
@@ -50,86 +55,6 @@ class UW_Iframes
       $iframeSrc = esc_url($iframeSrc, array('http', 'https'));
 
       return "<iframe src=\"$iframeSrc\" width=\"{$params['width']}\" height=\"{$params['height']}\" style=\"border:0\"></iframe>";
-  }
-
-  function get_iframe_domains()
-  {
-    return array(
-      'uw.edu',
-      'washington.edu',
-      'uwtv.org',
-      'tvw.org',
-      'www.uwtv.org',
-      'google.com',
-	  'calendar.google.com',
-      'docs.google.com',
-      'drive.google.com',
-      'youtube.com',
-      'excition.com',
-      'uwregents.wufoo.com',
-      'www.uw.edu',
-      'catalyst.uw.edu',
-      'www.washington.edu',
-      'depts.washington.edu',
-      'online.gifts.washington.edu',
-      'secure.gifts.washington.edu',
-      'payroll.gifts.washington.edu',
-      'helperapps.gifts.washington.edu',
-      'uwfoundation.org',
-      'support.gifts.washington.edu',
-      'www.uwfoundation.org',
-      'www.surveygizmo.com',
-      'www.google.com',
-      'www.excition.com',
-      'www.youtube.com',
-      'pgcalc.com',
-      'www.pgcalc.com',
-      'matchinggifts.com',
-      'www.matchinggifts.com',
-      'embed.pac-12.com',
-      'storify.com',
-      'w.soundcloud.com',
-      'api.soundcloud.com',
-      'flickr.com',
-      'vimeo.com',
-      'player.vimeo.com',
-      'www.facebook.com',
-      'form.jotform.com',
-      'oga-dev.s.uw.edu', //testing
-      'bitools.uw.edu', //testing
-      'tableau.washington.edu',
-      'www.iqmediacorp.com',
-      'fusiontables.google.com',
-      'myuwgiving.gifts.washington.edu',
-      'cdn.knightlab.com',
-      'uploads.knightlab.com',
-      'yeatmanlab.github.io',
-      'livestream.com',
-      'uwphotos.smugmug.com',
-      'www.smugmug.com',
-      'smugmug.com',
-      'universityphotography.smugmug.com',
-      'modelo.io',
-      'app.modelo.io',
-      'webcasts.weforum.org',
-      'weforum.org',
-      'storymaps.arcgis.com',
-      'h5p.org',
-      'app.powerbi.com',
-      'powerbi.com',
-      'www.powerbi.com',
-      'acuityscheduling.com',
-      'app.acuityscheduling.com',
-      'video.ibm.com',
-      'ibm.com',
-      'www.ustream.tv',
-      'ustream.tv',
-      'display-prod2.sprinklr.com',
-      'sprinklr.com',
-      'datawrapper.dwcdn.net',
-      'dwcdn.net',
-	  'uwintellectualhouse.mid.as',
-    );
   }
 
 }

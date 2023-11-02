@@ -19,27 +19,30 @@ class UW_Grid {
 		// Attributes.
 		$atts    = shortcode_atts(
 			array(
-				'class'  => 'row',
-				'height' => '', // equal.
-				'width'  => '', // full-width.
+				'class'      => 'row',
+				'height'     => '', // equal.
+				'width'      => '', // full-width.
 				'background' => '', // Sets background color. Options: gold, purple, gray (grey also works), none. Also sets <h*> and <p> color. Default = none.
-				'image' => '', // url of background image. Use background attribute to control text color.
+				'image'      => '', // url of background image. Use background attribute to control text color.
+				'id'         => '', // optional id.
 			),
 			$atts
 		);
-		$content = preg_replace( '/<br class="nc".\/>/', '', $content );
-		$class   = isset( $atts['class'] ) ? 'grid ' . $atts['class'] : ' row';
-		$height  = isset( $atts['height'] ) ? $atts['height'] : '';
-		$width   = isset( $atts['width'] ) ? $atts['width'] : '';
-		$image   = isset( $atts['image'] ) ? $atts['image'] : '';
-		$background   = isset( $atts['background'] ) ? $atts['background'] : '';
+		$content    = preg_replace( '/<br class="nc".\/>/', '', $content );
+		$class      = isset( $atts['class'] ) ? 'grid ' . $atts['class'] : ' row';
+		$height     = isset( $atts['height'] ) ? $atts['height'] : '';
+		$width      = isset( $atts['width'] ) ? $atts['width'] : '';
+		$image      = isset( $atts['image'] ) ? $atts['image'] : '';
+		$col_id     = ! empty( $atts['id'] ) ? 'id="' . esc_attr( $atts['id'] ) . '"' : '';
+		$background = isset( $atts['background'] ) ? $atts['background'] : '';
+
 		if ( ! empty( $atts['image'] ) ) {
 			$bgimage = ' style="background-image: url(' . $image . '); padding:6rem;background-size:cover; background-repeat:no-repeat;"';
 		} else {
 			$bgimage = '';
 		}
 
-		$result  = '<div class="' . $class . ' ' . $height . ' ' . $width . ' ' . $background . ' " ' . $bgimage . '>';
+		$result  = '<div '. $col_id .' class="' . $class . ' ' . $height . ' ' . $width . ' ' . $background . ' " ' . $bgimage . '>';
 		$result .= do_shortcode( $content );
 		$result .= '</div>';
 		return $result;
@@ -48,12 +51,14 @@ class UW_Grid {
 	function bs_span( $atts, $content = null ) {
 		$atts = shortcode_atts(
 			array(
-				'class' => 'col-sm-1',
+				'class' => 'col-sm-1', // default class.
+				'id'    => '', // optional id.
 			),
 			$atts
 		);
 		$class   = isset( $atts['class'] ) ? $atts['class'] : 'row';
-		$result  = '<div class="' . $class . '">';
+		$row_id  = !empty( $atts['id'] ) ? 'id="' . esc_attr( $atts['id'] ) . '"' : '';
+		$result  = '<div '. $row_id .' class="' . $class . '">';
 		$result .= do_shortcode( $content );
 		$result .= '</div>';
 		return $result;

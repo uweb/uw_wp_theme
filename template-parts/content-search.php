@@ -11,7 +11,14 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php the_title( sprintf( '<h2 class="h3 entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+		<?php the_title( sprintf( '<h2 class="h3 content-search entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+		<?php
+
+		if ( get_option( 'show_byline_on_posts' ) && 'post' === get_post_type() && get_option( 'show_date_on_posts' ) ) {
+				echo get_the_date();
+		}
+
+		?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-summary">

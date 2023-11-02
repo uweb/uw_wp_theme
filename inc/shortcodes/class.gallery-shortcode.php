@@ -30,7 +30,7 @@ class UW_Gallery {
 	 */
 	public function enqueue_gallery_script() {
 
-		wp_register_script( 'uw-gallery-script', get_bloginfo( 'template_directory' ) . '/js/shortcodes/gallery.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210603', true );
+		wp_enqueue_script( 'uw-gallery-script', get_bloginfo( 'template_directory' ) . '/js/shortcodes/gallery.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), wp_get_theme( get_template( ) )->get( 'Version' ), true );
 
 	}
 
@@ -49,6 +49,10 @@ class UW_Gallery {
 				<span>Disable space between images</span>
 				<input type="checkbox" data-setting="uw_photo_grid_gap" />
 			</label>
+			<label class="setting">
+				<span>Enable simple captions</span>
+				<input type="checkbox" data-setting="uw_carousel_captions" />
+			</label><br />
 
 			<h3 style="clear:both;">Carousel settings</h3>
 			<span><em>Note: Link To, Columns, and "Disable space between images" from above are not used for carousel settings.</em></span>
@@ -59,10 +63,6 @@ class UW_Gallery {
 			<label class="setting">
 				<span>Enable full-width</span>
 				<input type="checkbox" data-setting="uw_carousel_fullwidth" />
-			</label>
-			<label class="setting">
-				<span>Enable simple captions</span>
-				<input type="checkbox" data-setting="uw_carousel_captions" />
 			</label>
 		</script>
 
@@ -375,8 +375,6 @@ class UW_Gallery {
 
 			return $output;
 		} else {
-			// only enqueue script when shortcode is present AND we're outputting in gallery mode!
-			wp_enqueue_script( 'uw-gallery-script' );
 
 			// if carousel is not checked we want to revert to a responsive photo grid.
 			$output .= '<div id="photo-grid-' . $instance . '" class="photo-grid' . $grid_columns_class . $grid_gap_class . $masonry_class . '" tabindex="0">';
@@ -392,7 +390,9 @@ class UW_Gallery {
 						$credit = get_post_meta( $att_id, '_media_credit', true );
 						$source_url = get_post_meta( $att_id, "_source_url", true );
 
-						$output .= '<a href="#" data-toggle="modal" data-target="#photoGridModal" ><img src="' . $image_src_url[0] . '" alt="' . $image_src_alt . '" data-image="' . $image_src_url[0] . '" data-caption="' . $image_caption . '" data-credit="' . $credit . '" data-source="' . $source_url . '"></a>';
+
+						$output .= '<a href="#" data-toggle="modal" data-target="#photoGridModal" ><img class="gallery-img" src="' . $image_src_url[0] . '" alt="' . $image_src_alt . '" data-image="' . $image_src_url[0] . '" data-caption="' . $image_caption . '" data-credit="' . $credit . '" data-source="' . $source_url . '"></a>';
+
 					}
 
 					// output the modal code.
@@ -403,8 +403,27 @@ class UW_Gallery {
 					foreach ( $attachments as $att_id => $attachment ) {
 						$image_src_url = wp_get_attachment_image_src( $att_id, $gallery_attr['size'] );
 						$image_src_alt = get_post_meta( $att_id, '_wp_attachment_image_alt', true );
+						// Display the caption below the image if available.
+						if ( isset( $attr['uw_carousel_captions'] ) ) {
+							if ( 'true' === $attr['uw_carousel_captions'] ) {
+								$image_caption = wp_get_attachment_caption( $att_id );
+							} else {
+								$image_caption = '';
+							}
+						}
 
-						$output .= '<img src="' . $image_src_url[0] . '" alt="' . $image_src_alt . '">';
+						// Add an image container div for positioning.
+						$output .= '<figure class="photo-container" tabindex="0">';
+						// Add the caption overlay.
+
+							$output .= '<img id="gallery-img-' . $att_id . '" src="' . $image_src_url[0] . '" data-caption=" ' . $image_caption . ' " alt="' . $image_src_alt . '">';
+							$output .= '<firgurecaption class="caption-overlay">' . esc_html( $image_caption ) . '</firgurecaption>';
+
+						// Close the photo container div.
+						$output .= '</figure>';
+
+
+
 					}
 				} else {
 					// link to the image attachment page.

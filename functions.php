@@ -206,6 +206,18 @@ function uw_wp_theme_embed_dimensions( array $dimensions ) {
 }
 add_filter( 'embed_defaults', 'uw_wp_theme_embed_dimensions' );
 
+
+/**
+ * Add wp-img class for modal popup reference. See /js/shortcodes/gallery.js
+ */
+add_filter('get_image_tag_class','uw_modal_add_image_class');
+
+function uw_modal_add_image_class ( $class ) {
+	$class .= ' wp-img';
+	return $class;
+}
+
+
 /**
  * Register Google Fonts
  */
@@ -381,24 +393,6 @@ if ( ! function_exists( 'setup_uw_object' ) ) {
 $UW = setup_uw_object();
 
 /**
- * Suppresses WordPress update notices to non-super admin. Also from 2014.
- */
-if ( ! function_exists( 'suppress_updates' ) ) {
-	/**
-	 * If suppress_updates() does not exist elsewhere, use this suppress_updates() function to prevent showing update notices to non-admin users
-	 */
-	function suppress_updates() {
-		if ( ( ! is_super_admin() ) && is_multisite() ) {
-			remove_action( 'admin_notices', 'update_nag', 3 );
-			remove_action( 'admin_notices', 'maintenance_nag', 10 );
-			remove_action( 'network_admin_notices', 'update_nag', 3 );
-			remove_action( 'network_admin_notices', 'maintenance_nag', 10 );
-		}
-	}
-}
-add_action( 'admin_head', 'suppress_updates', 1 );
-
-/**
  * Theme shortcodes.
 */
 require get_template_directory() . '/inc/shortcodes/shortcodes.php';
@@ -421,3 +415,6 @@ require get_template_directory() . '/inc/theme-settings.php';
 
 // Register Site Alert.
 require get_template_directory() . '/inc/site-notif-banner.php';
+
+// Register custom 404 content settings page.
+require get_template_directory() . '/inc/custom-404-page.php';

@@ -17,17 +17,16 @@ class UW_Audience
 		$this->menu_items = array();
 		add_action( 'after_setup_theme', array( $this, 'register_purple_bar_menu' ) );
 		add_action( 'after_setup_theme', array( $this, 'install_default_purple_bar_menu' ) );
-		add_action( 'wp_update_nav_menu', array( $this, 'save_purple_bar' ) );
 	}
 
 	function register_purple_bar_menu() {
-		register_nav_menu( self::LOCATION, __( self::NAME ) );
+		register_nav_menu( UW_Audience::LOCATION, __( UW_Audience::NAME ) );
 	}
 
 	function install_default_purple_bar_menu() {
 
 		$this->generate_menu_list();
-		$this->MENU_ID = wp_create_nav_menu( self::DISPLAY_NAME );
+		$this->MENU_ID = wp_create_nav_menu( UW_Audience::DISPLAY_NAME );
 
 		// wp_create_nav_menu returns a WP_Error if the menu already exists;
 		if ( is_wp_error( $this->MENU_ID ) ) return;
@@ -78,7 +77,7 @@ class UW_Audience
 	{
 		$item['menu-item-title']    = $name;
 		$item['menu-item-url']      = $url;
-		$item['menu-item-status'] 	= self::DEFAULT_STATUS;
+		$item['menu-item-status'] 	= UW_Audience::DEFAULT_STATUS;
 
 
 		if ( $parent )
@@ -86,15 +85,6 @@ class UW_Audience
 		else
 			$this->menu_items[$name] = $item;
 
-	}
-
-	function save_purple_bar($menu_id){
-		$menu_object = wp_get_nav_menu_object( $menu_id );
-		if($menu_object->slug === 'audience-menu'){
-			if (!current_user_can( 'activate_plugins' )){
-				wp_die('Insufficient permission: can not edit the default audience menu.');
-			}
-		}
 	}
 
 }

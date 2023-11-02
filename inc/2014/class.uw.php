@@ -21,6 +21,8 @@ class UW {
 		require get_template_directory() . '/inc/nav/megamenu.php';
 		require get_template_directory() . '/inc/nav/footermenu.php';
 		require get_template_directory() . '/inc/shortcodes/class.media-credit.php';
+		require get_template_directory() . '/inc/2014/attachment-meta.php';
+
 	}
 
 	private function initialize() {
@@ -33,6 +35,7 @@ class UW {
 		$this->UW_MegaMenu       = new UW_MegaMenu();
 		$this->UW_FooterMenu     = new UW_FooterMenu();
 		$this->UW_Media_Credit   = new UW_Media_Credit();
+		$this->UW_Attachment_Meta =	new UW_Attachment_Meta();
 	}
 }
 /**

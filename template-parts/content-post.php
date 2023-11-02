@@ -100,7 +100,8 @@
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <?php
-if ( is_singular() ) :
+// if single post and hide prev/next thumbnails is NOT turned on, use prev/next with thumbnail images.
+if ( is_singular() && ! get_option( 'hide_blog_nav_thumbs' ) ) :
 	$next_post = get_next_post();
 	$prev_post = get_previous_post();
 
@@ -120,6 +121,16 @@ if ( is_singular() ) :
 		array(
 			'prev_text' => $prev_post_thumb . '<div class="prev-post-text-link"><div class="post-navigation-sub"><span class="prev-arrow"></span><span>' . esc_html__( 'Previous article', 'uw_wp_theme' ) . '</span></div><span class="post-navigation-title">%title</span></div>',
 			'next_text' => '<div class="next-post-text-link"><div class="post-navigation-sub"><span>' . esc_html__( 'Next article', 'uw_wp_theme' ) . '</span><span class="next-arrow"></span></div><span class="post-navigation-title">%title</span></div>' . $next_post_thumb,
+		)
+	);
+endif;
+
+// if single post and hide prev/next thumbnails IS turned on, use prev/next without thumbnail images.
+if ( is_singular() && get_option( 'hide_blog_nav_thumbs' ) ) :
+	the_post_navigation(
+		array(
+			'prev_text' => '<div class="prev-post-text-link"><div class="post-navigation-sub"><span class="prev-arrow"></span><span>' . esc_html__( 'Previous article', 'uw_wp_theme' ) . '</span></div><span class="post-navigation-title">%title</span></div>',
+			'next_text' => '<div class="next-post-text-link"><div class="post-navigation-sub"><span>' . esc_html__( 'Next article', 'uw_wp_theme' ) . '</span><span class="next-arrow"></span></div><span class="post-navigation-title">%title</span></div>',
 		)
 	);
 endif;

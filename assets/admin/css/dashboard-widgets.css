@@ -15,3 +15,9 @@
 .toplevel_page_uw-theme-settings a:hover {
 	background-color: inherit;
 }
+.dashicons-w:before{
+	content: '';
+	background: url(../../svg/w.svg) no-repeat 0 0 transparent;
+	background-size: contain;
+	background-position: center center;
+}

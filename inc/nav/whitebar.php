@@ -18,12 +18,12 @@ class UW_Dropdowns
 		$this->menu_items = array();
 		add_action( 'after_setup_theme', array( $this, 'register_white_bar_menu') );
 		add_action( 'after_setup_theme', array( $this, 'install_default_white_bar_menu') );
-		add_action( 'wp_update_nav_menu', array( $this, 'save_white_bar') );
 	}
 
 	function register_white_bar_menu()
 	{
 		register_nav_menu( self::LOCATION, __( self::NAME ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'uw_wp_theme_enqueue_classic_script' ) );
 	}
 
 	function install_default_white_bar_menu()
@@ -153,13 +153,17 @@ class UW_Dropdowns
 
 	}
 
-	function save_white_bar($menu_id){
-		$menu_object = wp_get_nav_menu_object( $menu_id );
-		if( $menu_object->slug === 'dropdowns' ){
-			if ( !current_user_can( 'activate_plugins' ) ){
-				wp_die('Insufficient permission: can not edit the default dropdowns menu.');
-			}
-		}
+
+	/**
+	 * Load classic menu JS.
+	 *
+	 * @return void
+	 */
+	public function uw_wp_theme_enqueue_classic_script() {
+		$template_directory = get_bloginfo( 'template_directory' );
+		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+
+		wp_register_script( 'uw_wp_theme-classic-script', $template_directory . '/js/classic-menu.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
 	}
 
 }

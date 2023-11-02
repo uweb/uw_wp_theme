@@ -26,9 +26,13 @@ class UW_Button {
 				'size'   => '', // button size (large or small).
 				'color'  => '', // button color.
 				'target' => '', // where the button links to.
+				'id'     => '', // optional ID.
 			),
 			$atts
 		);
+
+		// get the button ID, if there is one.
+		$btn_id = ! empty( $atts['id'] ) ? 'id="' . esc_attr( $atts['id'] ) . '"' : '';
 
 		if ( isset( $atts['style'] ) ) {
 			if ( 'plus' === strtolower( $atts['style'] ) ) {
@@ -65,7 +69,7 @@ class UW_Button {
 		ob_start();
 		?>
 
-		<a href="<?php echo esc_attr( $atts['target'] ); ?>" class="btn <?php echo esc_attr( $size ); ?> <?php echo esc_attr( $style ); ?><?php echo esc_attr( $color ); ?>"><span><?php
+		<a href="<?php echo esc_attr( $atts['target'] ); ?>" <?php echo $btn_id; ?> class="btn <?php echo esc_attr( $size ); ?> <?php echo esc_attr( $style ); ?><?php echo esc_attr( $color ); ?>"><span><?php
 		$output = ob_get_clean();
 
 		if ( $content ) {

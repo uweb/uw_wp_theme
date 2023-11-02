@@ -3,7 +3,7 @@
  * Shortcode for embedding cards style module
  *
  * Template:
- * [uw_card style="" align="" color="" image="" alt="" icon="" title="" subtitle="" button="" link=""]content goes here[/uw_card]
+ * [uw_card style="" align="" color="" image="" alt="" icon="" title="" subtitle="" button="" link="" image_and_title_link=""]content goes here[/uw_card]
  *
  * SMALL CARDS STYLES.
  * - inset: inset image color background.
@@ -46,21 +46,22 @@ class UW_Card {
 		// get shortcode attributes.
 		$card_atts = shortcode_atts(
 			array(
-				'style'    => '', // different nanes for small + large, full-width.
+				'style'    => '', // different names for small + large, full-width.
 				'align'    => '', // left, right, center.
 				'color'    => '', // pull these options from STM Fast Facts?
 				'image'    => '', // url for the image from the media library.
 				'alt'      => '', // alt text for the image.
 				'icon'     => '', // used for step style card only.
 				'title'    => '', // required. headline.
-				'titletag' => 'h2', // title tag, only coded for h2, h3 and h4
+				'titletag' => 'h2', // title tag, only coded for h2, h3 and h4.
 				'subtitle' => '', // used for step style card only.
 				'button'   => '', // button text.
 				'link'     => '', // button link.
+				'stretched_link'   => '', // if set to true, the image and title will also activate the link provided.
+				'id'       => '', // optional ID.
 			),
 			$atts
 		);
-
 		// Update kses to allow SVG in output.
 		$kses_defaults = wp_kses_allowed_html( 'post' );
 
@@ -85,6 +86,13 @@ class UW_Card {
 			),
 		);
 		$allowed_tags = array_merge( $kses_defaults, $svg_args );
+
+		// if there's an ID, set it up. otherwise, leave empty.
+		if ( ! empty( $card_atts['id'] ) ) {
+			$card_id = 'id="' . esc_attr( strtolower( $card_atts['id'] ) ) . '"';
+		} else {
+			$card_id = '';
+		}
 
 		// if the style is set, get the style.
 		if ( empty( $card_atts['style'] ) ) {
@@ -120,8 +128,20 @@ class UW_Card {
 					$card_class = 'large';
 					$text_class = 'text-left';
 					break;
+				case 'half-block-large':
+					$card_class = 'large half-block';
+					$text_class = 'text-left';
+					break;
 				case 'full-width':
 					$card_class = 'full-width uw-slant-border';
+					$text_class = 'text-left';
+					break;
+				case 'half-block-full':
+					$card_class = 'full-width half-block';
+					$text_class = 'text-left';
+					break;
+				case 'half-block-full-width':
+					$card_class = 'full-width half-block';
 					$text_class = 'text-left';
 					break;
 				default:
@@ -152,9 +172,9 @@ class UW_Card {
 		}
 
 		// set the widths for the cards.
-		if ( 'full-width' === strtolower( $style ) ) {
+		if ( 'full-width' === strtolower( $style ) || 'half-block-full' === strtolower( $style ) || 'half-block-full-width' === strtolower( $style ) ) {
 			$card_width = '100vw';
-		} elseif ( 'large' === strtolower( $style ) ) {
+		} elseif ( 'large' === strtolower( $style ) || 'half-block-large' === strtolower( $style ) ) {
 			$card_width = '100%';
 		} else {
 			$card_width = '100%';
@@ -172,7 +192,7 @@ class UW_Card {
 		}
 
 		// do background image stuff for large and full-width cards.
-		if ( 'large' === strtolower( $style ) || 'full-width' === strtolower( $style ) ) {
+		if ( 'large' === strtolower( $style ) || 'full-width' === strtolower( $style ) || 'half-block-large' === strtolower( $style ) || 'half-block-full' === strtolower( $style ) || 'half-block-full-width' === strtolower( $style ) ) {
 			if ( ! empty( $card_atts['image'] ) ) {
 				$background = ' style="background-image: url(' . $image . ');"';
 			} else {
@@ -195,7 +215,7 @@ class UW_Card {
 		}
 
 		// get the alignment for large and full width cards and set up classes accordingly.
-		if ( 'full-width' === strtolower( $style ) || 'large' === strtolower( $style ) ) {
+		if ( 'full-width' === strtolower( $style ) || 'large' === strtolower( $style ) || 'half-block-large' === strtolower( $style ) || 'half-block-full' === strtolower( $style ) || 'half-block-full-width' === strtolower( $style ) ) {
 			if ( 'left' === strtolower( $card_atts['align'] ) ) {
 				$align_class = 'img-right';
 			} else {
@@ -203,6 +223,13 @@ class UW_Card {
 			}
 		} else {
 			$align_class = null;
+		}
+
+		// add stretch-link to title and image.
+		if ( 'true' === $card_atts['stretched_link'] ) {
+			$link_class = 'stretched-link';
+		} else {
+			$link_class = '';
 		}
 
 		// build the shortcode output. what a mess!
@@ -216,62 +243,62 @@ class UW_Card {
 
 		if ( 'inset' === strtolower( $style ) ) {
 			// built out the image inset or default style card.
-			$output  = '<div class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="card-image-inset"><img src="' . esc_attr( $image ) . '" class="card-img card-img-inset" alt="' . esc_attr( $alt ) . '"></div>';
-			$output .= wp_kses_post( $content );
+			$output .= apply_filters( 'the_content', $content );
 			if ( ! empty( $card_atts['link'] ) ) {
-				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-sm ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span></a></p>';
+				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-sm ' . esc_attr( $button_color ) . ' ' . esc_attr( $link_class ) .'"><span>' . esc_attr( $button_text ) . '</span></a></p>';
 			}
 			$output .= '</div></div>';
 		} elseif ( 'image-top' === strtolower( $style ) ) {
 			// build out the image top style card.
-			$output  = '<div class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="card-image-top"><img src="' . esc_attr( $image ) . '" class="card-img card-img-top" alt="' . esc_attr( $alt ) . '"></div>';
 			$output .= '<div class="udub-slant-divider"><span></span></div>';
-			$output .= '<div class="card-content">' . wp_kses_post( $content ) . '</div>';
+			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
-				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
+				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . ' ' . esc_attr( $link_class ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
 			$output .= '</div></div>';
 		} elseif ( 'no-image' === strtolower( $style ) ) {
 			// build out the no-image style card.
-			$output  = '<div class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="udub-slant-divider"><span></span></div>';
-			$output .= '<div class="card-content">' . wp_kses_post( $content ) . '</div>';
+			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
 			$output .= '</div></div>';
 		} elseif ( 'block' === strtolower( $style ) ) {
 			// build out the block top style card.
-			$output  = '<div class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="card-body">';
-			$output .= '<div class="card-content">' . wp_kses_post( $content ) . '</div>';
+			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
-				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-sm ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span></a></p>';
+				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-sm ' . esc_attr( $button_color ) . ' ' . esc_attr( $link_class ) . '"><span>' . esc_attr( $button_text ) . '</span></a></p>';
 			}
 			$output .= '</div></div>';
 		} elseif ( 'text-link' === strtolower( $style ) ) {
 			// build out the text link style card.
-			$output  = '<div class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="udub-slant-divider"><span></span></div>';
-			$output .= '<div class="card-content">' . wp_kses_post( $content ) . '</div>';
+			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p><a href="' . esc_url( $card_atts['link'] ) . '" class="link-arrow-box"><span>' . esc_attr( $button_text ) . '<span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
 			$output .= '</div></div>';
 		} elseif ( 'step' === strtolower( $style ) ) {
 			// build out the step style card.
-			$output  = '<div class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			if ( ! empty( $card_atts['subtitle'] ) ) {
 				$output .= '<div class="subtitle">' . esc_attr( $card_atts['subtitle'] ) . '</div>';
@@ -281,31 +308,31 @@ class UW_Card {
 			}
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="udub-slant-divider"><span></span></div>';
-			$output .= '<div class="card-content">' . wp_kses_post( $content ) . '</div>';
+			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p><a href="' . esc_url( $card_atts['link'] ) . '" class="link-arrow-box"><span>' . esc_attr( $button_text ) . '<span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
 			$output .= '</div></div>';
-		} elseif ( 'large' === strtolower( $style ) ) {
+		} elseif ( 'large' === strtolower( $style ) || 'half-block-large' === strtolower( $style ) ) {
 			// build out the large card.
-			$output  = '<div class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="image-large"' . wp_kses_post( $background ) . '></div>';
 			$output .= '<div class="card-body">';
 			$output .= '<div class="inner-card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
-			$output .= wp_kses_post( $content );
+			$output .= apply_filters( 'the_content', $content );
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
 			$output .= '</div></div></div>';
-		} elseif ( 'full-width' === strtolower( $style ) ) {
+		} elseif ( 'full-width' === strtolower( $style ) || 'half-block-full' === strtolower( $style ) || 'half-block-full-width' === strtolower( $style ) ) {
 			// build out the full-width card.
-			$output  = '<div class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="image-large"' . wp_kses_post( $background ) . '></div>';
 			$output .= '<div class="card-body">';
 			$output .= '<div class="inner-card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
-			$output .= wp_kses_post( $content );
+			$output .= apply_filters( 'the_content', $content );
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
@@ -315,12 +342,10 @@ class UW_Card {
 		}
 
 		if ( 'full-width' !== strtolower( $style ) ) {
-			echo wp_kses_post( $output );
+			echo apply_filters( 'the_content', $output );
 		} else {
 			echo wp_kses( $output, $allowed_tags );
 		}
-
-
 
 		// return the shortcode output.
 		return ob_get_clean();

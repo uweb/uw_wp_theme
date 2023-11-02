@@ -33,7 +33,7 @@
 
 	<div class="container no-height" role="search">
 		<div class="center-block uw-search-wrapper">
-			<form class="uw-search" data-sitesearch="<?php echo esc_url( home_url() ) . '/'; ?>" action="<?php echo ( 'uw' === $toggle_option ? 'https://uw.edu/search' : esc_url( home_url() ) . '/' ); ?>">
+			<form class="uw-search" data-sitesearch="<?php echo esc_url( home_url() ) . '/'; ?>" action="<?php echo ( 'uw' === $toggle_option ? 'https://www.washington.edu/search/' : esc_url( home_url() ) . '/' ); ?>">
 				<div class="search-form-wrapper">
 					<label class="screen-reader" for="uw-search-bar">Enter search text</label>
 					<input id="uw-search-bar" type="search"
@@ -82,8 +82,8 @@
 		<header id="masthead" class="site-header">
 			<div class="navbar navbar-expand-lg">
 				<div class="navbar-brand site-branding">
-					<a href="https://www.washington.edu" title="University of Washington Home" class="uw-patch" tabindex="0">University of Washington</a>
-					<a href="https://www.washington.edu" title="University of Washington Home" class="uw-wordmark" tabindex="-1" aria-hidden="true">University of Washington</a>
+					<a href="https://www.washington.edu/" title="University of Washington Home" class="uw-patch" tabindex="0">University of Washington</a>
+					<a href="https://www.washington.edu/" title="University of Washington Home" class="uw-wordmark" tabindex="-1" aria-hidden="true">University of Washington</a>
 				</div><!-- .site-branding -->
 
 				<div id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Main menu', 'uw_wp_theme' ); ?>">

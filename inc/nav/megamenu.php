@@ -34,6 +34,6 @@ class UW_MegaMenu {
 		$template_directory = get_bloginfo( 'template_directory' );
 		$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
 
-		wp_register_script( 'uw_wp_theme-megamenu-script', $template_directory . '/js/megamenu.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), '20210713', true );
+		wp_register_script( 'uw_wp_theme-megamenu-script', $template_directory . '/js/megamenu.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
 	}
 }

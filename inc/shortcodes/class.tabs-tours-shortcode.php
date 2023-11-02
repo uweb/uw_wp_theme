@@ -90,26 +90,38 @@ class UW_Tabs_Tours {
 		// default layout is tabs. set tour to true to enable tour layout.
 		$tabs_atts = shortcode_atts(
 			array(
-				'name'  => '',
-				'style' => '',
-				'tour'  => false,
+				'name'  => '', // set the name for the tabs.
+				'style' => '', // set the style for the tabs.
+				'tour'  => false, // set the shortcode to tour. Default is false (tabs).
+				'id'    => '', // optional ID.
 			),
 			$atts
 		);
 
-		// if no name set, use default 'tab-tour'. We use this for a unique ID on the tabs. this will be changed on the JS side to something unique, if necessary.
-		if ( empty( $tabs_atts['name'] ) ) {
-			$tabs_name = 'tab-tour';
+		// if id is set, use that. If not, check for name or use default.
+		if ( $tabs_atts['id'] ) {
+			$tabs_name = strtolower( $tabs_atts['id'] );
 		} else {
-			// otherwise, get the name from the atts.
-			$tabs_name = strtolower( $tabs_atts['name'] );
+			if ( empty( $tabs_atts['name'] ) ) {
+				$tabs_name = 'tab-tour';
+			} else {
+				// otherwise, get the name from the atts.
+				$tabs_name = strtolower( $tabs_atts['name'] );
+			}
+
 			// Make name alphanumeric (removes all other characters).
 			$tabs_name = preg_replace( '/[^a-z0-9_\s-]/', '', $tabs_name );
 			// Clean up multiple dashes or whitespaces in name.
 			$tabs_name = preg_replace( '/[\s-]+/', ' ', $tabs_name );
 			// Convert whitespaces and underscore to dash.
 			$tabs_name = preg_replace( '/[\s_]/', '-', $tabs_name );
+
+			// check if the $tabs_name starts with a number and if so, prepend tabs- so it doesn't start with a number (not allowed).
+			if ( preg_match( '/^[0-9]+/', $tabs_name ) ) {
+				$tabs_name = 'tabs-' . $tabs_name;
+			}
 		}
+
 		$uw_tabs_tours['tabs_name'] = $tabs_name;
 
 		// if we are doing a tour instead of a tab...

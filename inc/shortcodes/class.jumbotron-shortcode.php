@@ -33,14 +33,15 @@ class UW_Jumbotron {
 		// get shortcode attributes.
 		$jumbotron_atts = shortcode_atts(
 			array(
-				'style'   => '', // block, block-slant, block-center, simple, default.
-				'align'   => '', // right. optional alignment for block and block-slant (left-aligned by default).
-				'overlay' => '', // optional overlay for text on jumbotrons without them by default (default, simple).
-				'image'   => '', // url for the image from the media library. uses new-burke image if none set.
-				'title'   => '', // required. headline.
-				'titletag' => 'h2', // title tag, supports h1, h2, h3
-				'button'  => '', // required. button text.
-				'link'    => '', // required. button link.
+				'style'    => '', // block, block-slant, block-center, simple, default.
+				'align'    => '', // right. optional alignment for block and block-slant (left-aligned by default).
+				'overlay'  => '', // optional overlay for text on jumbotrons without them by default (default, simple).
+				'image'    => '', // url for the image from the media library. uses new-burke image if none set.
+				'title'    => '', // required. headline.
+				'titletag' => 'h2', // title tag, supports h1, h2, h3.
+				'button'   => '', // required. button text.
+				'link'     => '', // required. button link.
+				'id'       => '', // optional ID.
 			),
 			$atts
 		);
@@ -69,6 +70,9 @@ class UW_Jumbotron {
 			),
 		);
 		$allowed_tags = array_merge( $kses_defaults, $svg_args );
+
+		// get optional ID.
+		$jumbotron_id = ! empty( $jumbotron_atts['id'] ) ? 'id="' . esc_attr( $jumbotron_atts['id'] ) . '"' : '';
 
 		// overlays and button options specific to overlay.
 		if ( 'simple' === $jumbotron_atts['style'] || 'default' === $jumbotron_atts['style'] || empty( $jumbotron_atts['style'] ) ) {
@@ -173,7 +177,7 @@ class UW_Jumbotron {
 		// build the shortcode output.
 		ob_start();
 		?>
-		<div class="jumbotron jumbotron-fluid <?php echo esc_attr( $jumbotron_class ); ?> <?php echo esc_attr( $overlay_class ); ?> <?php if ( 'block' === $style ) { echo esc_attr( $align_class ); } ?>" <?php if ( ! empty( $jumbotron_atts['image'] ) && $image ) { ?> style="background-image: url(<?php echo esc_url( $image ); ?>);" <?php } ?>>
+		<div <?php echo $jumbotron_id; ?> class="jumbotron jumbotron-fluid <?php echo esc_attr( $jumbotron_class ); ?> <?php echo esc_attr( $overlay_class ); ?> <?php if ( 'block' === $style ) { echo esc_attr( $align_class ); } ?>" <?php if ( ! empty( $jumbotron_atts['image'] ) && $image ) { ?> style="background-image: url(<?php echo esc_url( $image ); ?>);" <?php } ?>><img class="mobile-img" src="<?php echo $image ?>">
 			<div class="<?php echo esc_attr( $inner_class ); ?> <?php if ( 'block-slant' === $style ) { echo esc_attr( $align_class ); } ?>">
 				<?php if ( 'block-slant' === $style ) { ?>
 					<div class="inner-overlay">
@@ -184,7 +188,7 @@ class UW_Jumbotron {
 				<?php if ( 'simple' === $jumbotron_atts['style'] || empty( $jumbotron_atts['style'] ) ) { ?>
 					<div class="udub-slant-divider"><span></span></div>
 				<?php } ?>
-				<p><?php echo wp_kses_post( $content ); ?></p>
+				<p><?php echo apply_filters( 'the_content', $content ); ?></p>
 				<?php if ( 'block-center' === $style ) { ?>
 					</div>
 				<?php } ?>

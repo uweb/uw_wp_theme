@@ -26,7 +26,6 @@ function uw_wp_theme_shortcodes() {
 	require_once( $parent . 'class.tagboard-shortcode.php' );
 	require_once( $parent . 'class.grid-shortcode.php' );
 	require_once( $parent . 'class.subpage-list-shortcode.php' );
-	require_once( $parent . 'class.custom-link-shortcode.php' );
 	require_once( $parent . 'class.accordion-shortcode.php' );
 	require_once( $parent . 'class.tabs-tours-shortcode.php' );
 	require_once( $parent . 'class.youtube-shortcode.php' );
@@ -46,7 +45,6 @@ function uw_wp_theme_shortcodes() {
 	$tagboard    = new UW_Tagboard();
 	$grid        = new UW_Grid();
 	$subpageList = new UW_SubpageList();
-	$customLink  = new UW_CustomLinks();
 	$accordion   = new UW_Accordion();
 	$tabsTours   = new UW_Tabs_Tours();
 	$youtube     = new UW_Youtube();
@@ -68,5 +66,4 @@ function uw_wp_theme_enqueue_shortcodes() {
 	$template_directory = get_bloginfo( 'template_directory' );
 	$theme_version = wp_get_theme(get_template( ) )->get( 'Version');
 
-	wp_enqueue_script( 'uw_wp_theme-custom-link-script', $template_directory . '/js/shortcodes/custom-link.js', array( 'jquery', 'uw_wp_theme-popper' ), $theme_version, true );
 }

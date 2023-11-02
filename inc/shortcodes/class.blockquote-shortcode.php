@@ -33,6 +33,7 @@ class UW_Blockquote {
 				'align' => '', // left, right, center. Default is left.
 				'name'  => '', // source attribution name.
 				'title' => '', // source's title or other information.
+				'id'    => '', // custom id.
 			),
 			$atts
 		);
@@ -40,6 +41,13 @@ class UW_Blockquote {
 		// if there's no content, display a message with instructions on how to add the required structure.
 		if ( empty( $content ) ) {
 			return 'No content inside the blockquote module. Make sure your close your blockquote. Required stucture: [blockquote style="" align="" name="" title=""] blockquote text [/blockquote]';
+		}
+
+		// set the ID if provided, otherwise set to empty string.
+		if ( ! empty( $blockquote_atts['id'] ) ) {
+			$blockquote_id = 'id="' . esc_attr( $blockquote_atts['id'] ) . '" ';
+		} else {
+			$blockquote_id = '';
 		}
 
 		// get the style flag.
@@ -75,7 +83,7 @@ class UW_Blockquote {
 		?>
 
 		<figure id="quote-block" class="quote-block <?php echo esc_attr( $blockquote_style_class ); ?>">
-			<div class="mb-0 <?php echo esc_attr( $blockquote_align ); ?>">
+			<div <?php echo $blockquote_id; ?>class="mb-0 <?php echo esc_attr( $blockquote_align ); ?>">
 				<blockquote><?php echo wp_kses_post( $content ); ?></blockquote>
 				<?php if ( $blockquote_atts['name'] ) : ?>
 					<figcaption><?php echo esc_attr( $blockquote_atts['name'] ); ?><span class="uw-slant-inline"></span><span class="quote-source-title"><?php echo esc_attr( $blockquote_atts['title'] ); ?></span></figcaption>
