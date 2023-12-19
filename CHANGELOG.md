@@ -1,5 +1,9 @@
 # Changelog
 
+## 2023-12-19 3.0.1
+
+- Bug fix: radio buttons and checkboxes not displaying properly
+
 ## 2023-8-4 3.0.0
 
 - Upgraded jQuery version
