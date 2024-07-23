@@ -417,7 +417,7 @@ class UW_Gallery {
 						// Add the caption overlay.
 
 							$output .= '<img id="gallery-img-' . $att_id . '" src="' . $image_src_url[0] . '" data-caption=" ' . $image_caption . ' " alt="' . $image_src_alt . '">';
-							$output .= '<firgurecaption class="caption-overlay">' . esc_html( $image_caption ) . '</firgurecaption>';
+							$output .= '<figcaption class="caption-overlay">' . esc_html( $image_caption ) . '</figcaption>';
 
 						// Close the photo container div.
 						$output .= '</figure>';

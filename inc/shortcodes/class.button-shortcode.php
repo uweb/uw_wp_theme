@@ -34,11 +34,26 @@ class UW_Button {
 		// get the button ID, if there is one.
 		$btn_id = ! empty( $atts['id'] ) ? 'id="' . esc_attr( $atts['id'] ) . '"' : '';
 
+		$style_list = ['check', 'flag', 'minus', 'person', 
+		'plus', 'camera', 'mail', 'search',
+		'key', 'clipboard', 'bookmark', 'ticket', 
+		'heart', 'watch', 'letter', 'marker',
+		'social', 'close', 'calendat', 'pencil',
+		'computer', 'page', 'view', 'eating', 
+		'book', 'stop', 'compass', 'home',
+		'play', 'picture', 'address-book', 'map',
+		'music', 'settings', 'tools', 'globe',
+		'briefcase', 'pause', 'trash', 'right-arrow-full',
+		'list', 'page2', 'right-arrow', 'podium',
+		'directions', 'capitol', 'map-marker', 'passport',
+		'administration', 'plane', 'handshake', 'suitcase',
+		'globe2', 'umbrella', 'ribbon', 'money',
+		'checkmark', 'external', 'simple-arrow', 'check2',
+		'people', 'clipboard-check'];
+
 		if ( isset( $atts['style'] ) ) {
-			if ( 'plus' === strtolower( $atts['style'] ) ) {
-				$style = $atts['style'] . ' arrow';
-			} elseif ( 'play' === strtolower( $atts['style'] ) ) {
-				$style = $atts['style'] . ' arrow';
+			if ( in_array( strtolower( $atts['style'] ), $style_list ) ) {
+				$style = $atts['style'] . ' arrow icon-link';
 			} elseif ( 'arrow' === strtolower( $atts['style'] ) ) {
 				$style = 'arrow';
 			} elseif ( 'square-outline' === strtolower( $atts['style'] ) ) {
@@ -80,10 +95,10 @@ class UW_Button {
 
 		if ( 'arrow' === strtolower( $atts['style'] ) || 'square-outline' === strtolower( $atts['style'] ) ) {
 			$output .= '</span><span class="arrow-box"><span class="arrow"></span></span></a>';
-		} elseif ( 'plus' === strtolower( $atts['style'] ) ) {
-			$output .= '</span><span class="arrow-box"><span class="ic-plus"></span></span></a>';
-		} elseif ( 'play' === strtolower( $atts['style'] ) ) {
-			$output .= '</span><span class="arrow-box"><span class="ic-play"></span></span></a>';
+		} elseif ( in_array( strtolower( $atts['style'] ), $style_list ) ){
+			$output .= '</span><span class="arrow-box"><span class="icon ic-';
+			$output .= strtolower( $atts['style'] );
+			$output .= '"></span></span></a>';
 		} else {
 			$output .= '</span></span></a>';
 		}

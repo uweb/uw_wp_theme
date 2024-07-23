@@ -86,11 +86,19 @@ class UW_Accordion {
 				$accordion_name = 'accordion-' . $accordion_name;
 			}
 		}
+		
+		$class = '';
 
-		if ( 'uppercase-title' === $accordion_atts['style'] ) {
-			$class = 'uppercase-title';
-		} else {
-			$class = '';
+		if (str_contains($accordion_atts['style'], 'uppercase-title')) {
+			$class .= 'uppercase-title';
+		}
+
+		if (str_contains($accordion_atts['style'], 'non-bold')) {
+			if (strlen($class) > 0) {
+				$class .= ' non-bold';
+			} else {
+				$class .= 'non-bold';
+			}
 		}
 
 		// if there's no content, display a message with instructions on how to add the required structure.

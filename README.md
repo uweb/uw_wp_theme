@@ -1,5 +1,5 @@
 # UW WordPress Theme
-![UW WordPress Theme version 3.0.1](https://img.shields.io/static/v1?label=version&message=v3.0.1&color=green)
+![UW WordPress Theme version 3.1](https://img.shields.io/static/v1?label=version&message=v3.1&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
@@ -211,7 +211,7 @@ This accordion shortcode uses the [Bootstrap collapse](https://getbootstrap.com/
 
 Attributes:
 
-* **style**: Set the accordion titles to uppercase. Options: **uppercase-title**. (_Default: none_)
+* **style**: Set the accordion titles to uppercase or non-bold. Options: **uppercase-title**, **non-bold** (_Default: none_)
 * **name**: Set the name for the accordion.
 * **id**: Specify an ID to use for the accordion. _Make sure to start your ID with a letter (no numbers or special characters). Default: auto-generated on accordion, none on section_
 
@@ -287,7 +287,9 @@ This is a UW-branded button. Add the button text between the `[uw_button][/uw_bu
 
 Attributes:
 
-* **style**:  Adjusts the image of the button. Options: arrow, plus, play, primary, secondary, square-outline. (_Default: square-outline_)
+* **style**:  Adjusts the image of the button. Options: primary, secondary, square-outline, and all the icons on [UW Web icons page](https://www.washington.edu/docs/web-icons/). (_Default: square-outline_).
+
+  Please use the icon name for shortcode style without ".ic-". For example, the icon name for the flag is ".ic-flag". The style attribute of a button shortcode with flag icon is `style="flag"`.
 * **size**:  Adjusts the size of the button. Options: large, small. (_Default: large_)
 * **color**:  The color of the button. Options: white, purple, light-gold, gold. (_Default: none_)
 * **target**:  The URL for the link or download that you want to direct the user to on click. (_Default: none_)
@@ -530,19 +532,31 @@ Attributes:
 * **style**: Enables the styling for the tabs. Options: alt-tab (_Default: false_)
 * **name**: Sets the name for the tabs.
 * **tour**: Enables the tour (vertical tabs) layout when set to _true_. Options: true, false. (_Default: false_)
-* **id**: Specify an ID to use for the tabs or tour. _Make sure to start your ID with a letter (no numbers or special characters)._
+* **id**: Specify an ID to use for the tabs or tour. This will be used for the link URL. _Make sure to start your ID with a letter (no numbers or special characters)._
+
+Section Attributes:
+
+* **title**: Sets the name for the tabs.
+* **id**: Specify an ID to use for the section. This will be used for the link URL. _See Note 3 below. Make sure to start your ID with a letter (no numbers or special characters)._
+
 
 _Note 1:_ the tabs name will not show up on the page. However, it is important to include a name, as it is used to generate the unique ID of the tabs. The name will also be read by screen-reader assistive technology. If you want a name (title) of a tabs set, add text above the tabs shortcode.
 
 _Note 2:_ If an **id** is set, this will override the name or generated ID.
 
+_Note 3:_ **id** should be all lower case characters, `-`, `_`, or numbers. Do not use spaces. Numbers and special characters should not be the first character. [See MDN Web Documentation for more information](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id).
+
+#### Linking to sections
+
+To link directly to a tab section, copy the URL from the address bar after it's clicked or copy the URL from the section link.
+
 Example:
 
 ```
 [uw_tabs name="tabs name"]
-	[tabs_section title="section title"] content [/tabs_section]
-	[tabs_section title="section title"] content [/tabs_section]
-	[tabs_section title="section title"] content [/tabs_section]
+	[tabs_section title="section title" id="first-tab"] content [/tabs_section]
+	[tabs_section title="section title" id="second"] content [/tabs_section]
+	[tabs_section title="section title" id="tab_number_3"] content [/tabs_section]
 [/uw_tabs]
 ```
 

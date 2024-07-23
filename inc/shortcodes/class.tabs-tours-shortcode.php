@@ -150,11 +150,28 @@ class UW_Tabs_Tours {
 					<div class="col-3">
 				<?php
 			}
+
+			// Initialize an array to store the tab IDs
+		$tab_ids = array();
+
+		// for loop for each of the tab titles.
+		$i = 0;
+		foreach ($uw_tabs_tours['tabs_titles'] as $title) {
+			$tid = $uw_tabs_tours['tabs_ids'][$i];
+			$tid = preg_replace('![^0-9A-Za-z_]+!u', "-", $tid);
+			// Store the $tid in the array
+			$tab_ids[] = $tid;
+			
+			$i++;
+		}
+		// ** Define the ID to be used for the <ul> element
+		$ul_id = !empty($tid) ? esc_attr($tabs_name). $tid : esc_attr($tabs_name);
 			?>
-			<ul class="nav <?php echo esc_attr( $tour_flag ? 'flex-column nav-pills' : 'nav-tabs' ); ?>" id="<?php echo esc_attr( $tabs_name ); ?>" role="tablist" <?php echo wp_kses_post( $tour_flag ? 'aria-orientation="vertical"' : '' ); ?><?php echo wp_kses_post( $tabs_atts['name'] ? 'aria-label="' . $tabs_atts['name'] . '"' : '' ); ?>>
+			
+			<ul class="nav <?php echo esc_attr( $tour_flag ? 'flex-column nav-pills' : 'nav-tabs' ); ?>" id="<?php echo esc_attr( $ul_id); ?>" role="tablist" <?php echo wp_kses_post( $tour_flag ? 'aria-orientation="vertical"' : '' ); ?><?php echo wp_kses_post( $tabs_atts['name'] ? 'aria-label="' . $tabs_atts['name'] . '"' : '' ); ?>>
 			<?php
 			// for loop for each of the tab titles.
-			$i = 0;
+			$i = 0; 
 			foreach ( $uw_tabs_tours['tabs_titles'] as $title ) {
 				$tid = $uw_tabs_tours['tabs_ids'][ $i ];
 
@@ -172,9 +189,9 @@ class UW_Tabs_Tours {
 				} else {
 					$tab_class = '';
 				}
-
+				$tid = preg_replace('![^0-9A-Za-z_]+!u', "-", $tid);
 				?>
-				<li class="nav-item" role="tab"><a class="nav-link<?php echo esc_attr( $tab_class ); ?>" id="title-<?php echo esc_attr( $tid ); ?>" data-toggle="tab" href="#content-<?php echo esc_attr( $tid ); ?>"  aria-controls="content-<?php echo esc_attr( $tid ); ?>" aria-selected="<?php echo esc_attr( '' === $tab_class ? 'false' : 'true' ); ?>" <?php echo wp_kses_post( $i === $tab_active_item ? '' : 'tabindex="-1"' ); ?>><?php echo esc_attr( $title ); ?></a></li>
+				<li class="nav-item" role="tab"><a class="nav-link<?php echo esc_attr( $tab_class ); ?>" id="title-<?php echo esc_attr( $tid ); ?>" data-toggle="tab" href="#<?php echo esc_attr( $tid ); ?>"  aria-controls="<?php echo esc_attr( $tid ); ?>" aria-selected="<?php echo esc_attr( '' === $tab_class ? 'false' : 'true' ); ?>" <?php echo wp_kses_post( $i === $tab_active_item ? '' : 'tabindex="-1"' ); ?>><?php echo esc_attr( $title ); ?></a></li>
 				<?php
 				$i++;
 			}
@@ -193,7 +210,7 @@ class UW_Tabs_Tours {
 			$i = 0;
 			foreach ( $uw_tabs_tours['tabs_content'] as $content ) {
 				$tid = $uw_tabs_tours['tabs_ids'][ $i ];
-
+				$tid = preg_replace('![^0-9A-Za-z_]+!u', "-", $tid);
 				if ( $i === $tab_active_item ) {
 					$tab_class = ' active';
 				} else {
@@ -201,7 +218,7 @@ class UW_Tabs_Tours {
 				}
 
 				?>
-				<div class="tab-pane fade show<?php echo esc_attr( $tab_class ); ?>" id="content-<?php echo esc_attr( $tid ); ?>" role="tabpanel" aria-labelledby="title-<?php echo esc_attr( $tid ); ?>" tabindex="0"><?php echo wp_kses_post( $content ); ?></div><?php
+				<div class="tab-pane fade show<?php echo esc_attr( $tab_class ); ?>" id="<?php echo esc_attr( $tid ); ?>" role="tabpanel" aria-labelledby="title-<?php echo esc_attr( $tid ); ?>" tabindex="0"><?php echo wp_kses_post( $content ); ?></div><?php
 				// running php tags and closed </div> together to make WP happy by making phpcs angry. this removes empty <p></p> tag!
 				$i++;
 			} ?></div>

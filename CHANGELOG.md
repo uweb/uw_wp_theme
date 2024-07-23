@@ -1,5 +1,15 @@
 # Changelog
 
+## 2024-7-23 3.1
+
+- Added feature to use any web icon on buttons
+- Added ability to link directly to Tabs/Tours
+- Added non-bold text option to accordion style
+- Bug: fixed issues with radio button and checkbox styles, converted to CSS
+- Bug: fixed figure caption typo on galleries
+- Bug: various blogroll & RSS widget image fixes
+- Bug: fix image alignment issue on blogs
+
 ## 2023-12-19 3.0.1
 
 - Bug fix: radio buttons and checkboxes not displaying properly

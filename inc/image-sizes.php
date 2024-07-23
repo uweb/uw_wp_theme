@@ -85,8 +85,8 @@ function uw_wp_theme_image_size_choose( $sizes ) {
     return array_merge( $sizes, array(
 
         'mug-shot' => __( 'Portrait' ),
-		'sidebar-width' => _( 'Sidebar' ),
-		'full-content' => _( 'Content width' )
+		'sidebar-width' => __( 'Sidebar' ),
+		'full-content' => __( 'Content width' )
 
     ) );
 
