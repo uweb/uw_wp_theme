@@ -201,7 +201,7 @@ class UW_Media_Credit
 			);
 
 			$form_fields["source_url"] = array(
-				"label" => _("Credit URL"),
+				"label" => __("Credit URL"),
 				"input" => "text",
 				"value" => get_post_meta( $post->ID, '_source_url', true ),
 			);

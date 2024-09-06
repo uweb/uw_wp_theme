@@ -17,7 +17,7 @@ if ( get_option( 'page_for_posts', true ) && ( is_home() || is_single() || is_ar
 }
 ?>
 
-<div class="uw-hero-image" <?php echo $header_image; ?>>
+<div class="uw-hero-image" <?php echo $header_image; ?> role="region" aria-label="site title and banner">
 	<div class="container-fluid">
 		<?php uw_site_title(); ?>
 

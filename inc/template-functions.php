@@ -535,8 +535,9 @@ if ( !function_exists( 'uw_header_template' ) ) :
 		$buttontext = get_post_meta( $post->ID, 'buttontext' );
 		$buttonlink = get_post_meta( $post->ID, 'buttonlink' );
 		$pagetitle = get_post_meta( $post->ID, 'pagetitle' );
+
 		?>
-		<div class="uw-hero-image <?php echo esc_attr( $hasmobileimage ); ?> hero-height<?php echo esc_attr( $version ); ?>" style="background-image: url( <?php echo esc_url( $background_url ); ?> );">
+		<div class="uw-hero-image <?php echo esc_attr( $hasmobileimage ); ?> hero-height<?php echo esc_attr( $version ); ?>" style="background-image: url( <?php echo esc_url( $background_url ); ?> );" <?php echo ('jumbotron' == $type) ? 'role="region" aria-label="page title and banner"' : 'role="presentation"' ?>>
 			<?php if ( isset( $mobileimage ) ) { ?>
 				<div class="mobile-image" style="background-image: url( <?php echo $mobileimage ?> );"></div>
 			<?php } ?>
@@ -586,7 +587,7 @@ if ( !function_exists( 'uw_header_template' ) ) :
 			</div>
 		</div>
 		<?php if ( ! empty( $pagetitle ) && $pagetitle[0] ) { ?>
-			<div class="container-fluid mt-3">
+			<div role="region" aria-label="page title" class="container-fluid mt-3">
 				<h1 class="uw-site-title<?php echo esc_attr( $version ); ?> below-hero"><?php the_title(); ?></h1>
 			</div>
 				<?php } else { ?>

@@ -8,7 +8,7 @@ class UW_Widget_Area{
 	const NAME          = 'UW Widget Area';
 	const ID            = 'uw-widget-area';
 	const DESCRIPTION   = 'Widget area at the top of a page. Use the "UW Sitewide Banner" only';
-	const BEFORE_WIDGET = '<span role="complementary" aria-label="banner HELLO?" id="%1$s" class="widget %2$s">';
+	const BEFORE_WIDGET = '<span aria-label="banner HELLO?" id="%1$s" class="widget %2$s">';
 	const AFTER_WIDGET  = '</span>';
 
 	function __construct() {

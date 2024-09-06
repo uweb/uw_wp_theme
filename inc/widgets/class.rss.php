@@ -174,7 +174,7 @@ class UW_RSS extends WP_Widget
         } else {
           $title = apply_filters( 'widget_title', $title);
         }
-        
+
         foreach ( $rss_items as $index=>$item )
         {
           $title = $item->get_title();
@@ -184,7 +184,7 @@ class UW_RSS extends WP_Widget
           $src = $enclosure->link;
 
           $attr  = esc_attr(strip_tags($title));
-          
+
           // set image based on whether RSS feed is from UW
           if (str_contains( $link, 'washington.edu')) {
             $ext = strrchr($src, '.');
@@ -193,7 +193,7 @@ class UW_RSS extends WP_Widget
 
             $image = ( $ext != ".mp4" && $show_image !== 'false' ) ?
               //  "<a class='widget-thumbnail' href='$link' title='$attr'><img src='$src' title='$attr' /></a>" : '';
-            "<a class='widget-thumbnail' href='$link' title='$attr' role='presentation' tabindex='-1'><img alt='' src='$src' /></a>" : "<a class='widget-thumbnail' href='$link' title='$attr' role='presentation' tabindex='-1'><img class='default_image' alt='UW big-W logo' src='$default_image_src' /></a>";
+            "<a class='widget-thumbnail' href='$link' title='$attr' aria-hidden='true' tabindex='-1'><img alt='' src='$src' /></a>" : "<a class='widget-thumbnail' href='$link' title='$attr' aria-hidden='true' tabindex='-1'><img class='default_image' alt='UW big-W logo' src='$default_image_src' /></a>";
           } else {
             $image = '';
           }
@@ -216,10 +216,10 @@ class UW_RSS extends WP_Widget
           }
 
           $title = "<a class='widget-link' href='$link' title='$attr'>$attr<span>$date$desc</span></a>";
-          
+
           $content .= "<li>$image$title</li>";
         }
-        
+
         if(count($rss_items) == 0) {
           $content .= "<li><p>No story available for this feed. Click the link below to visit UW News.</p></li>";
         }
@@ -227,7 +227,7 @@ class UW_RSS extends WP_Widget
         $content .= '</ul>';
 
         if ( $show_more !== 'false' ) {
-          $content .= "<a class=\"widget-more more\" href=\"$url\">More</a>";
+          $content .= "<a class=\"widget-more more\" href=\"$url\" aria-label=\"Read more articles from this RSS feed\">More</a>";
         }
       }
 

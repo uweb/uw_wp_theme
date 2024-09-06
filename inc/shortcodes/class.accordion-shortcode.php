@@ -86,7 +86,7 @@ class UW_Accordion {
 				$accordion_name = 'accordion-' . $accordion_name;
 			}
 		}
-		
+
 		$class = '';
 
 		if (str_contains($accordion_atts['style'], 'uppercase-title')) {
@@ -160,7 +160,7 @@ class UW_Accordion {
 		$output = do_shortcode( $content );
 
 		return sprintf(
-			'<div class="card"%s><div class="card-header" id="accordion-header"><h3 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button></h3></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion">%s</div></div>',
+			'<div class="card"%s><div class="card-header" id="accordion-header"><h3 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button></h3></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion" role="region">%s</div></div>',
 			$section_id,
 			$active_tab,
 			$section_atts['title'],

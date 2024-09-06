@@ -339,9 +339,9 @@ class UW_Gallery {
 
 
 				if ( 1 === $slidecount ) {
-					$output .= '<figure class="carousel-item active" role="group" aria-roledescription="slide" aria-label="' . $image_src_alt . '">';
+					$output .= '<figure class="carousel-item active" aria-roledescription="slide" aria-label="' . $image_src_alt . '">';
 				} else {
-					$output .= '<figure class="carousel-item" role="group" aria-roledescription="slide" aria-label="' . $image_src_alt . '">';
+					$output .= '<figure class="carousel-item" aria-roledescription="slide" aria-label="' . $image_src_alt . '">';
 				}
 
 				$output .= '<img src="' . $image_src_url[0] . '" class="d-block w-100" alt="' . $image_src_alt . '">';
@@ -365,12 +365,12 @@ class UW_Gallery {
 
 			$output .= '</div>';
 			// Prev and Next buttons.
-			$output .= '<a class="carousel-control-prev" href="#carousel-' . $id . '-' . $instance . '" role="button" data-slide="prev">';
+			$output .= '<button class="carousel-control-prev" href="#carousel-' . $id . '-' . $instance . '" type="button" data-slide="prev">';
 			$output .= '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous image</span>';
-			$output .= '</a>';
-			$output .= '<a class="carousel-control-next" href="#carousel-' . $id . '-' . $instance . '" role="button" data-slide="next">';
+			$output .= '</button>';
+			$output .= '<button class="carousel-control-next" href="#carousel-' . $id . '-' . $instance . '" type="button" data-slide="next">';
 			$output .= '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next image</span>';
-			$output .= '</a>';
+			$output .= '</button>';
 			$output .= '</div>';
 
 			return $output;
@@ -391,7 +391,7 @@ class UW_Gallery {
 						$source_url = get_post_meta( $att_id, "_source_url", true );
 
 
-						$output .= '<a href="#" data-toggle="modal" data-target="#photoGridModal" ><img class="gallery-img" src="' . $image_src_url[0] . '" alt="' . $image_src_alt . '" data-image="' . $image_src_url[0] . '" data-caption="' . $image_caption . '" data-credit="' . $credit . '" data-source="' . $source_url . '"></a>';
+						$output .= '<a href="#" data-toggle="modal" data-target="#photoGridModal"><img class="gallery-img" src="' . $image_src_url[0] . '" alt="' . $image_src_alt . '" data-image="' . $image_src_url[0] . '" data-caption="' . $image_caption . '" data-credit="' . $credit . '" data-source="' . $source_url . '"></a>';
 
 					}
 
@@ -435,6 +435,7 @@ class UW_Gallery {
 				// if not set, link to attachment page (default).
 				foreach ( $attachments as $att_id => $attachment ) {
 					$output .= wp_get_attachment_link( $att_id, $gallery_attr['size'], true );
+
 				}
 			}
 

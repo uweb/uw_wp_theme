@@ -119,8 +119,8 @@ if ( is_singular() && ! get_option( 'hide_blog_nav_thumbs' ) ) :
 
 	the_post_navigation(
 		array(
-			'prev_text' => $prev_post_thumb . '<div class="prev-post-text-link"><div class="post-navigation-sub"><span class="prev-arrow"></span><span>' . esc_html__( 'Previous article', 'uw_wp_theme' ) . '</span></div><span class="post-navigation-title">%title</span></div>',
-			'next_text' => '<div class="next-post-text-link"><div class="post-navigation-sub"><span>' . esc_html__( 'Next article', 'uw_wp_theme' ) . '</span><span class="next-arrow"></span></div><span class="post-navigation-title">%title</span></div>' . $next_post_thumb,
+			'prev_text' => $prev_post_thumb . '<div class="prev-post-text-link"><div class="post-navigation-sub"><span class="prev-arrow"></span><span><strong>' . esc_html__( 'Previous article', 'uw_wp_theme' ) . '</strong></span></div><span class="post-navigation-title">%title</span></div>',
+			'next_text' => '<div class="next-post-text-link"><div class="post-navigation-sub"><span><strong>' . esc_html__( 'Next article', 'uw_wp_theme' ) . '</strong></span><span class="next-arrow"></span></div><span class="post-navigation-title">%title</span></div>' . $next_post_thumb,
 		)
 	);
 endif;
@@ -129,8 +129,8 @@ endif;
 if ( is_singular() && get_option( 'hide_blog_nav_thumbs' ) ) :
 	the_post_navigation(
 		array(
-			'prev_text' => '<div class="prev-post-text-link"><div class="post-navigation-sub"><span class="prev-arrow"></span><span>' . esc_html__( 'Previous article', 'uw_wp_theme' ) . '</span></div><span class="post-navigation-title">%title</span></div>',
-			'next_text' => '<div class="next-post-text-link"><div class="post-navigation-sub"><span>' . esc_html__( 'Next article', 'uw_wp_theme' ) . '</span><span class="next-arrow"></span></div><span class="post-navigation-title">%title</span></div>',
+			'prev_text' => '<div class="prev-post-text-link"><div class="post-navigation-sub"><span class="prev-arrow"></span><span><strong>' . esc_html__( 'Previous article', 'uw_wp_theme' ) . '</strong></span></div><span class="post-navigation-title">%title</span></div>',
+			'next_text' => '<div class="next-post-text-link"><div class="post-navigation-sub"><span><strong>' . esc_html__( 'Next article', 'uw_wp_theme' ) . '</strong></span><span class="next-arrow"></span></div><span class="post-navigation-title">%title</span></div>',
 		)
 	);
 endif;

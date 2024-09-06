@@ -6,7 +6,7 @@ class UW_Sidebar
   const NAME          = 'Sidebar';
   const ID            = 'sidebar';
   const DESCRIPTION   = 'Right column widgets';
-  const BEFORE_WIDGET = '<section role="complementary" aria-label="sidebar" id="%1$s" class="widget %2$s">';
+  const BEFORE_WIDGET = '<section aria-label="%2$s widget" id="%1$s" class="widget %2$s">';
   const AFTER_WIDGET  = '</section>';
 
   function __construct() {

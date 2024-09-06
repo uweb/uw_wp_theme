@@ -1,5 +1,27 @@
 # Changelog
 
+## 2024-9-6 3.2
+
+- Improved Bootstrap styling
+-- Fixed description list alignment
+-- Fixed form styling & layout
+-- Added form styles for Contact Form 7 and Gravity Forms
+-- Corrected contrast issues on small.muted-text, code element, and alerts
+-- Corrected mark styling to have color and background color
+- Added ARIA role="navigation" to audience menu
+- Added ARIA role="region” for hero area in all templates
+- Corrected sidebar search submit button low contrast
+- Corrected empty h4 in Recent Posts widget if no title provided
+- Removed role="complementary" from widgets that are in the sidebar <aside>
+- Improved aria labels for sidebar, widgets, and page title banner to more accurately describe sections
+- Added ARIA role=”region” to accordion collapse element
+- Removed unneeded role=”presentation” on RSS, Recent Posts, and Blogroll widget links, added aria-hidden to image only
+- Added title to generic “more” link on RSS widget to elaborate on link context
+- On the blog single posts, updated Previous and Next links to use <strong> markup instead of CSS font-weight property.
+- Restored plus and play icon button styling (bug introduced in 3.1)
+- Potentially breaking change: Changed Tabs to use a button instead of an a:link for the tab trigger. Existing functionality remains but because we changed from a to button, if anyone has built off expecting this being a link in your child theme, you’ll need to update your child theme to reflect button vs a.
+- Potentially breaking change: Changed Carousel previous & next buttons to be buttons instead of links. Styling did not change but if the links were used in a child theme override you’ll need to update your child theme to reflect they are now buttons vs links.
+
 ## 2024-7-23 3.1
 
 - Added feature to use any web icon on buttons

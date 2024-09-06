@@ -86,8 +86,7 @@
 					<a href="https://www.washington.edu/" title="University of Washington Home" class="uw-wordmark" tabindex="-1" aria-hidden="true">University of Washington</a>
 				</div><!-- .site-branding -->
 
-				<div id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Main menu', 'uw_wp_theme' ); ?>">
-
+				<div id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'audience menu', 'uw_wp_theme' ); ?>" role="navigation">
 					<div class="audience-menu-container collapse navbar-collapse">
 						<?php uw_wp_theme_purple_bar_menu(); ?>
 					</div>

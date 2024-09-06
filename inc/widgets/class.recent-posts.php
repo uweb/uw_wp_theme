@@ -55,7 +55,7 @@ class UW_Recent_Posts extends WP_Widget
 
         <?php echo $before_widget; ?>
 
-        <h4 class="widget-title"><?php  echo $title; ?>
+        <h4 class="widget-title"><?php echo $title ? $title : __('Recent Posts', 'uw_wp_theme' ); ?>
 
         <?php if ( $feed )  : ?>
             <a class="feed" id="rssfeed" href="<?php echo bloginfo('rss2_url'); ?>" alt="subscribe via rss" style="float:right; font-size:14px; text-align:center; color:#4b2e83; margin-top:-7px">
@@ -96,7 +96,7 @@ class UW_Recent_Posts extends WP_Widget
         <?php foreach ( $recent as $post ) : ?>
 
             <li>
-                <a class="widget-thumbnail" href="<?php echo get_the_permalink( $post->ID ) ?>" title="<?php echo esc_attr( get_the_title( $post->ID ) ) ?>" aria-role="presentation">
+                <a class="widget-thumbnail" href="<?php echo get_the_permalink( $post->ID ) ?>" title="<?php echo esc_attr( get_the_title( $post->ID ) ) ?>" aria-hidden="true" tabindex="-1">
 
                     <?php if ( has_post_thumbnail( $post->ID ) ) : ?>
 
@@ -116,7 +116,7 @@ class UW_Recent_Posts extends WP_Widget
         </ul>
 
         <?php if ( get_option( 'page_for_posts' ) && $more )  : ?>
-            <a class="more" href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>">More</a>
+            <a class="more" href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>" aria-label="Read more articles from this feed feed">More</a>
         <?php endif; ?>
 
         <?php echo $after_widget;
