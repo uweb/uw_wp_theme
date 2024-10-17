@@ -55,7 +55,7 @@ class UW_Recent_Posts extends WP_Widget
 
         <?php echo $before_widget; ?>
 
-        <h4 class="widget-title"><?php echo $title ? $title : __('Recent Posts', 'uw_wp_theme' ); ?>
+        <h2 class="widget-title h4"><?php echo $title ? $title : __('Recent Posts', 'uw_wp_theme' ); ?>
 
         <?php if ( $feed )  : ?>
             <a class="feed" id="rssfeed" href="<?php echo bloginfo('rss2_url'); ?>" alt="subscribe via rss" style="float:right; font-size:14px; text-align:center; color:#4b2e83; margin-top:-7px">
@@ -91,7 +91,7 @@ class UW_Recent_Posts extends WP_Widget
 
         <?php endif; ?>
 
-        </h4>
+        </h2>
         <ul class="recent-posts">
         <?php foreach ( $recent as $post ) : ?>
 

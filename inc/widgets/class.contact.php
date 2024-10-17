@@ -140,14 +140,9 @@ class UW_Widget_Contact extends WP_Widget
     <?php  echo $before_widget; ?>
 
     <div class="contact-widget-inner">
-      <span>
-
       <?php if ( ! empty( $title) ) : ?>
-      <h4 class="widget-title"><?php echo $title; ?></h4>
+      <h2 class="widget-title h4"><?php echo $title; ?></h2>
       <?php endif; ?>
-
-      </span>
-
    <?php
 
     if (isset($instance['person_name'])) {

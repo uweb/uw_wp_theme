@@ -1,5 +1,5 @@
 # UW WordPress Theme
-![UW WordPress Theme version 3.2.1](https://img.shields.io/static/v1?label=version&message=v3.2.1&color=green)
+![UW WordPress Theme version 3.3.0](https://img.shields.io/static/v1?label=version&message=v3.3.0&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 

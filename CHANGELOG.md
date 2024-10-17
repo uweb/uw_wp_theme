@@ -1,5 +1,22 @@
 # Changelog
 
+## 2024-10-17 3.3.0
+
+- Added visual hierarchy styling to headings used inside card body that are not card title
+- Updated markup order for step cards, while maintaining visual layout
+- Fixed green success badge/button so it used the correct, accessible background color
+- Adjusted Bootstrap custom checkbox label spacing
+- Updated all widget titles (both core WordPress widgets and custom UW widgets) to be h2s, while keeping same styling from h4s
+- Removed unneeded aria-hidden and role=”search” from search toggle, fixed aria-hidden on search area disclosure (leftover from 2014)
+- In search disclosure, moved search form options to the left side of the search field instead of after the submit button, updated initial focus to be with the search options (first form field) instead of the search term input field; modernized layout markup, related tweaks for mobile
+- Replaced slash separator in breadcrumbs with a border element instead of a content slash, moved from :before to :after to more accurately reflect where it is; added color change on hover to match other links
+- Removed unneeded aria-hidden on Quicklinks button
+- Updated audience menu and footer hover color, other footer hover/active/focus behavior; modernized the footer code while keeping layout, including replacing slash separator with a border element
+- Updated sidebar page nav use an aria-label that matches the text of the top-level item so it is announced to assistive technology correctly as “<top-level item> navigation”
+- Updated aria-labels to be more clear in header, footer, and widgets
+- Fixed role and aria-label application for hero image in various header options
+- Bugfix for jumbotron shortcode
+
 ## 2024-9-6 3.2
 
 - Improved Bootstrap styling

@@ -397,12 +397,10 @@ $UW = setup_uw_object();
 */
 require get_template_directory() . '/inc/shortcodes/shortcodes.php';
 
-
 /**
  * Theme widgets.
  */
 require get_template_directory() . '/inc/widgets/widgets.php';
-
 
 // Register Custom Navigation Walker for the default Bootstrap menu (aka updated 2014 menu).
 require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';

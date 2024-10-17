@@ -13,7 +13,7 @@
 
 		<footer id="colophon" class="site-footer">
 			<a href="https://www.washington.edu/" class="footer-wordmark">University of Washington</a>
-			<a href="https://www.washington.edu/boundless/"><div class="be-boundless">Be boundless</div></a>
+			<a href="https://www.washington.edu/boundless/" class="be-boundless">Be boundless</a>
 
 			<div class="h4" id="social_preface">Connect with us:</div>
 			<nav aria-labelledby="social_preface">
@@ -27,11 +27,8 @@
 				</ul>
 			</nav>
 
-			<nav aria-label="footer navigation">
-				<!--<ul class="footer-links"> -->
+			<nav aria-label="footer">
 				<?php uw_wp_theme_footer_menu(); ?>
-
-				<!-- </ul> -->
 			</nav>
 
 			<div class="site-info">

@@ -145,7 +145,7 @@ if ( ! function_exists( 'uw_wp_theme_white_bar_menu') ) :
 			// only enqueue script when mega menu is present!
 			wp_enqueue_script( 'uw_wp_theme-classic-script' );
 
-				echo '<nav aria-label="main menu" class="navbar navbar-expand-md navbar-light ' . UW_Dropdowns::LOCATION .'">
+				echo '<nav aria-label="primary" class="navbar navbar-expand-md navbar-light ' . UW_Dropdowns::LOCATION .'">
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . UW_Dropdowns::LOCATION .'" aria-controls="' . UW_Dropdowns::LOCATION .'" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon">Menu</span>
 						  </button><div class="container-fluid">';
@@ -364,7 +364,7 @@ if ( ! function_exists( 'uw_wp_theme_mega_menu' ) ) :
 			wp_enqueue_script( 'uw_wp_theme-megamenu-script' );
 
 			// output the mega menu.
-			echo '<nav class="navbar white-bar navbar-expand-md navbar-light ' . UW_MegaMenu::LOCATION . '" aria-label="' . UW_MegaMenu::LOCATION . '">
+			echo '<nav class="navbar white-bar navbar-expand-md navbar-light ' . UW_MegaMenu::LOCATION . '" aria-label="primary">
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . UW_MegaMenu::LOCATION .'" aria-controls="' . UW_MegaMenu::LOCATION . '" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">Menu</span>
 				</button>
@@ -537,7 +537,7 @@ if ( !function_exists( 'uw_header_template' ) ) :
 		$pagetitle = get_post_meta( $post->ID, 'pagetitle' );
 
 		?>
-		<div class="uw-hero-image <?php echo esc_attr( $hasmobileimage ); ?> hero-height<?php echo esc_attr( $version ); ?>" style="background-image: url( <?php echo esc_url( $background_url ); ?> );" <?php echo ('jumbotron' == $type) ? 'role="region" aria-label="page title and banner"' : 'role="presentation"' ?>>
+		<div class="uw-hero-image <?php echo esc_attr( $hasmobileimage ); ?> hero-height<?php echo esc_attr( $version ); ?>" style="background-image: url( <?php echo esc_url( $background_url ); ?> );" <?php echo ('jumbotron' == $type || ( ! isset($pagetitle[0]) || $pagetitle[0] !== 'on' ) ) ? 'role="region" aria-label="page title and banner"' : 'role="presentation"' ?>>
 			<?php if ( isset( $mobileimage ) ) { ?>
 				<div class="mobile-image" style="background-image: url( <?php echo $mobileimage ?> );"></div>
 			<?php } ?>

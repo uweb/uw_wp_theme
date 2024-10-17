@@ -127,11 +127,11 @@ class UW_Widget_Cards extends WP_Widget
       <div class='card-image' style='background-image:url(<?php echo  $the_image[0]; ?>)'></div>
 
       <span>
-      <h3>
+      <h2 class="widget-title h4">
         <?php if ( ! empty( $link) ) : ?>
         <a href="<?php echo $link; ?>" class="pic-title"><?php endif; ?><?php echo $title; ?><?php if ( ! empty( $link) ) : ?></a>
         <?php endif; ?>
-      </h3>
+      </h2>
 
       <span class="udub-slant"><span></span></span>
 

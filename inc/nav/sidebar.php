@@ -1,19 +1,40 @@
 <?php
+/**
+ * Load sidebar menu JS.
+ */
+function uw_wp_theme_enqueue_sidebar_nav_script() {
+	$template_directory = get_bloginfo( 'template_directory' );
+	$theme_version = wp_get_theme( get_template( ) )->get( 'Version' );
+
+	wp_register_script( 'uw_wp_theme-sidebar-nav-script', $template_directory . '/js/sidebar-nav.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), $theme_version, true );
+}
+add_action( 'wp_enqueue_scripts', 'uw_wp_theme_enqueue_sidebar_nav_script' );
+
 if ( ! function_exists('uw_sidebar_menu') ) :
 
 	function uw_sidebar_menu()
 	{
 		global $post;
+		$args = array (
+			'parent' => $post->ID
+		);
+
+		$children = get_pages( $args );
+
+		$sidebarnavcheck = get_post_meta( $post->ID, 'sidebarnavcheck', true );
+
 		if ( isset( $post ) && get_post_meta( $post->ID, 'sidebar_nav', true ) ) {
 			return;
 		}
 
-		echo sprintf( '<nav id="desktop-relative" aria-label="sidebar menu">%s</nav>', uw_list_pages() ) ;
+		// If this page is a parent page with children or a child page with a parent and therefore uses the sidebar navigation, display it - UNLESS the checkbox for "Hide Sidebar Navigation" is checked in the page template settings. Without this if statement, an empty nav will announce itself to screen readers on all pages with a sidebar and no nav.
+		if ( $sidebarnavcheck !== 'on' && ( ( is_page() && $post->post_parent > 0 ) || ( is_page() && count( $children ) > 0 ) ) ) {
+			echo sprintf( '<nav id="desktop-relative">%s</nav>', uw_list_pages() );
+		}
 	}
 
 endif;
 if ( ! function_exists( 'uw_list_pages') ) :
-
 	function uw_list_pages( $mobile = false )
 	{
 	  global $UW;
@@ -39,7 +60,7 @@ if ( ! function_exists( 'uw_list_pages') ) :
 	  $ids = array_map( function($sibling) { return $sibling->ID; }, $siblings );
 
 	  $pages = wp_list_pages(array(
-		'title_li'     => '<a href="'.get_bloginfo('url').'" title="Home" class="homelink">Home</a>',
+		'title_li'     => '<a href="'.get_bloginfo('url').'" title="Section home" class="homelink">Home</a>',
 		'child_of'     => $parent->post_parent,
 		'exclude_tree' => $ids,
 		'depth'        => 3,
@@ -49,8 +70,9 @@ if ( ! function_exists( 'uw_list_pages') ) :
 
 	  $bool = strpos($pages , 'child-page-existance-tester');
 
-	  return  $bool && !is_search() ? sprintf( '%s<ul class="%s first-level">%s</ul>', $toggle, $class, $pages ) : '';
+	  wp_enqueue_script( 'uw_wp_theme-sidebar-nav-script' );
 
+	  return  $bool && !is_search() ? sprintf( '%s<ul class="%s first-level">%s</ul>', $toggle, $class, $pages ) : '';
 	}
 
   endif;

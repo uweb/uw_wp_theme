@@ -26,7 +26,7 @@ class UW_RSS extends WP_Widget
     'url'     => null,
     'number'  => 5,
     'title'   => null,
-    'heading' => 'h3',
+    'heading' => 'h2',
     'span'    => 4,
     'show_image'   => true,
     'show_date'    => true,

@@ -300,17 +300,17 @@ class UW_Card {
 			// build out the step style card.
 			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			if ( ! empty( $card_atts['subtitle'] ) ) {
 				$output .= '<div class="subtitle">' . esc_attr( $card_atts['subtitle'] ) . '</div>';
 			}
 			if ( ! empty( $card_atts['icon'] ) ) {
 				$output .= '<div class="icon ' . esc_attr( $card_atts['icon'] ) . '" aria-hidden="true"></div>';
 			}
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="udub-slant-divider"><span></span></div>';
 			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
-				$output .= '<p><a href="' . esc_url( $card_atts['link'] ) . '" class="link-arrow-box"><span>' . esc_attr( $button_text ) . '<span class="arrow-box"><span class="arrow"></span></span></a></p>';
+				$output .= '<p class="link-with-arrow-box"><a href="' . esc_url( $card_atts['link'] ) . '" class="link-arrow-box"><span>' . esc_attr( $button_text ) . '<span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
 			$output .= '</div></div>';
 		} elseif ( 'large' === strtolower( $style ) || 'half-block-large' === strtolower( $style ) ) {

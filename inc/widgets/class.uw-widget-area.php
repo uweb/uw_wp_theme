@@ -24,8 +24,8 @@ class UW_Widget_Area{
 				'description'   => esc_html__( self::DESCRIPTION, 'uw_wp_theme' ),
 				'before_widget' => self::BEFORE_WIDGET,
 				'after_widget'  => self::AFTER_WIDGET,
-				'before_title'  => '<h4 class="widget-title">',
-				'after_title'   => '</h4><span class="udub-slant-divider gold"><span></span></span>',
+				'before_title'  => '<h2 class="widget-title h4">',
+				'after_title'   => '</h2><span class="udub-slant-divider gold"><span></span></span>',
 			)
 		);
 	}

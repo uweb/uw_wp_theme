@@ -67,7 +67,7 @@ class UW_Blogroll extends WP_Widget
         $title  = apply_filters( 'widget_title', $title );
 
         echo $args['before_widget'];
-        echo '<h4>' . $title .'</h4>';
+        echo '<h2 class="widget-title h4">' . $title .'</h2>';
 
         $readmore = $read_more ? '' : 'readmore=\'off\'';
 

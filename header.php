@@ -34,15 +34,7 @@
 	<div class="container no-height" role="search">
 		<div class="center-block uw-search-wrapper">
 			<form class="uw-search" data-sitesearch="<?php echo esc_url( home_url() ) . '/'; ?>" action="<?php echo ( 'uw' === $toggle_option ? 'https://www.washington.edu/search/' : esc_url( home_url() ) . '/' ); ?>">
-				<div class="search-form-wrapper">
-					<label class="screen-reader" for="uw-search-bar">Enter search text</label>
-					<input id="uw-search-bar" type="search"
-						name="<?php
-							echo ( 'uw' === $toggle_option ? 'q' : 's' );
-						?>"
-						value="" autocomplete="off" placeholder="Search" />
-				</div>
-				<select id="mobile-search-select" class="visible-xs" aria-label="Search scope">
+				<select id="mobile-search-select" class="visible-xs custom-select" aria-label="Search scope">
 					<?php if ($toggle_option === 'uw') {  ?>
 						<option value="uw" >All the UW</option>
 						<option value="site">Current site</option>
@@ -51,8 +43,8 @@
 						<option value="uw">All the UW</option>
 					<?php } ?>
 				</select>
-				<input type="submit" value="search" class="search" tabindex="0"/>
-				<fieldset style="margin: 0; padding: 0; border: 1px solid #ffffff;">
+
+				<fieldset id="search-options">
 					<legend id="uw-search-label">Search scope</legend>
 					<div id="search-labels" class="labels hidden-xs">
 						<!--load these labels and input if UW is selected in Theme Settings -->
@@ -67,6 +59,15 @@
 					<?php } ?>
 					</div>
 				</fieldset>
+				<div class="search-form-wrapper">
+					<label class="screen-reader" for="uw-search-bar">Enter search text</label>
+					<input id="uw-search-bar" type="search"
+						name="<?php
+							echo ( 'uw' === $toggle_option ? 'q' : 's' );
+						?>"
+						value="" autocomplete="off" placeholder="Search" />
+				</div>
+				<input type="submit" value="search" class="search" tabindex="0"/>
 			</form>
 		</div>
 	</div>
@@ -86,7 +87,7 @@
 					<a href="https://www.washington.edu/" title="University of Washington Home" class="uw-wordmark" tabindex="-1" aria-hidden="true">University of Washington</a>
 				</div><!-- .site-branding -->
 
-				<div id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'audience menu', 'uw_wp_theme' ); ?>" role="navigation">
+				<div id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'related links', 'uw_wp_theme' ); ?>" role="navigation">
 					<div class="audience-menu-container collapse navbar-collapse">
 						<?php uw_wp_theme_purple_bar_menu(); ?>
 					</div>

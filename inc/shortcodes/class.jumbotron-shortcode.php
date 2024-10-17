@@ -154,6 +154,8 @@ class UW_Jumbotron {
 		// if the image is set, get the image.
 		if ( ! empty( $jumbotron_atts['image'] ) ) {
 			$image = $jumbotron_atts['image'];
+		} else {
+			$image = '';
 		}
 
 		// get the button text. use default prompting if not provided.

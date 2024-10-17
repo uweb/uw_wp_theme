@@ -102,13 +102,13 @@ class UW_Widget_Single_Image extends WP_Widget
       <span>
 
       <?php if ( ! empty( $link) ) : ?>
-      <h3><a href="<?php echo $link; ?>" class="pic-title">
+      <h2 class="widget-title h4"><a href="<?php echo $link; ?>" class="pic-title">
       <?php endif; ?>
 
           <?php echo $title; ?>
 
       <?php if ( ! empty( $link) ) : ?>
-        </a></h3>
+        </a></h2>
       <?php endif; ?>
 
       <?php echo wpautop($text); ?>
