@@ -1,5 +1,9 @@
 # Changelog
 
+## 2024-10-28 3.3.1
+
+- Bug fix: RSS shortcode from UW sources showing image when show_image is set to false
+
 ## 2024-10-17 3.3.0
 
 - Added visual hierarchy styling to headings used inside card body that are not card title

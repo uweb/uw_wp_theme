@@ -186,10 +186,11 @@ class UW_RSS extends WP_Widget
           $attr  = esc_attr(strip_tags($title));
 
           // set image based on whether RSS feed is from UW
-          if (str_contains( $link, 'washington.edu')) {
+          if (str_contains( $link, 'washington.edu') && $show_image !== 'false' ) {
             $ext = strrchr($src, '.');
 
-            $default_image_src = get_site_url().'/wp-content/themes/golden-snitch/assets/svg/w.svg';
+			$template_directory = get_bloginfo( 'template_directory' );
+            $default_image_src = $template_directory. '/assets/svg/w.svg';
 
             $image = ( $ext != ".mp4" && $show_image !== 'false' ) ?
               //  "<a class='widget-thumbnail' href='$link' title='$attr'><img src='$src' title='$attr' /></a>" : '';
