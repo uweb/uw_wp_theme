@@ -1,5 +1,13 @@
 # Changelog
 
+## 2025-02-18 3.4
+
+- Various PHP syntax changes for PHP 8.2.x error mitigation
+- Bug fix: Formidible Form CSS conflicts with checkboxes and radio buttons
+- Bug fix: mediacredit.js only included on admin pages
+- Changed excerpt output modifications to only include Continue reading links in template loops
+- Quicklinks link update for it.uw.edu
+
 ## 2024-10-28 3.3.1
 
 - Bug fix: RSS shortcode from UW sources showing image when show_image is set to false

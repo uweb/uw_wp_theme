@@ -313,7 +313,7 @@ class UW_Widget_Conditions
 
         // New multi widget (WP_Widget)
         if ( ! is_null( $widget_number ) ) {
-          if ( isset( $settings[$id_base][$widget_number] ) && false === self::filter_widget( $settings[$id_base][$widget_number] ) ) {
+          if ( isset( $settings[$id_base][$widget_number] )  && is_array( $settings[$id_base] ) && false === self::filter_widget( $settings[$id_base][$widget_number] ) ) {
             unset( $widget_areas[$widget_area][$position] );
           }
         }
@@ -344,107 +344,110 @@ class UW_Widget_Conditions
 
     $condition_result = false;
 
-    foreach ( $instance['conditions']['rules'] as $rule ) {
-      switch ( $rule['major'] ) {
-        case 'date':
-          switch ( $rule['minor'] ) {
-            case '':
-              $condition_result = is_date();
-            break;
-            case 'month':
-              $condition_result = is_month();
-            break;
-            case 'day':
-              $condition_result = is_day();
-            break;
-            case 'year':
-              $condition_result = is_year();
-            break;
-          }
-        break;
-        case 'page':
-          // Previously hardcoded post type options.
-          if ( 'post' == $rule['minor'] )
-            $rule['minor'] = 'post_type-post';
-          else if ( ! $rule['minor'] )
-            $rule['minor'] = 'post_type-page';
+	if ( isset( $post ) ) {
 
-          switch ( $rule['minor'] ) {
-            case '404':
-              $condition_result = is_404();
-            break;
-            case 'search':
-              $condition_result = is_search();
-            break;
-            case 'archive':
-              $condition_result = is_archive();
-            break;
-            case 'posts':
-              $condition_result = $wp_query->is_posts_page;
-            break;
-            case 'home':
-              $condition_result = is_home();
-            break;
-            case 'front':
-              if ( current_theme_supports( 'infinite-scroll' ) )
-                $condition_result = is_front_page();
-              else {
-                $condition_result = is_front_page() && !is_paged();
-              }
-            break;
-            default:
-              if ( substr( $rule['minor'], 0, 10 ) == 'post_type-' )
-                $condition_result = is_singular( substr( $rule['minor'], 10 ) );
-              else {
-                // $rule['minor'] is a page ID
-                $condition_result = is_page( $rule['minor'] );
-              }
-            break;
-          }
-        break;
-        case 'tag':
-          if ( ! $rule['minor'] && is_tag() )
-            $condition_result = true;
-          else if ( is_singular() && $rule['minor'] && has_tag( $rule['minor'] ) )
-            $condition_result = true;
-          else {
-            $tag = get_tag( $rule['minor'] );
+		foreach ( $instance['conditions']['rules'] as $rule ) {
+		  switch ( $rule['major'] ) {
+			case 'date':
+			  switch ( $rule['minor'] ) {
+				case '':
+				  $condition_result = is_date();
+				break;
+				case 'month':
+				  $condition_result = is_month();
+				break;
+				case 'day':
+				  $condition_result = is_day();
+				break;
+				case 'year':
+				  $condition_result = is_year();
+				break;
+			  }
+			break;
+			case 'page':
+			  // Previously hardcoded post type options.
+			  if ( 'post' == $rule['minor'] )
+				$rule['minor'] = 'post_type-post';
+			  else if ( ! $rule['minor'] )
+				$rule['minor'] = 'post_type-page';
 
-            if ( $tag && ! is_wp_error( $tag ) && is_tag( $tag->slug ) )
-              $condition_result = true;
-          }
-        break;
-        case 'category':
-          if ( ! $rule['minor'] && is_category() )
-            $condition_result = true;
-          else if ( is_category( $rule['minor'] ) )
-            $condition_result = true;
-          else if ( is_singular() && $rule['minor'] && in_array( 'category', get_post_taxonomies() ) &&  has_category( $rule['minor'] ) )
-            $condition_result = true;
-        break;
-        case 'author':
-          if ( ! $rule['minor'] && is_author() )
-            $condition_result = true;
-          else if ( $rule['minor'] && is_author( $rule['minor'] ) )
-            $condition_result = true;
-          else if ( is_singular() && $rule['minor'] && $rule['minor'] == $post->post_author )
-            $condition_result = true;
-        break;
-        case 'taxonomy':
-          $term = explode( '_tax_', $rule['minor'] ); // $term[0] = taxonomy name; $term[1] = term id
-          $terms = get_the_terms( $post->ID, $rule['minor'] ); // Does post have terms in taxonomy?
-          if ( is_tax( $term[0], $term[1] ) )
-            $condition_result = true;
-          else if ( is_singular() && $term[1] && has_term( $term[1], $term[0] ) )
-            $condition_result = true;
-          else if ( is_singular() && $terms & !is_wp_error( $terms ) )
-            $condition_result = true;
-        break;
-      }
+			  switch ( $rule['minor'] ) {
+				case '404':
+				  $condition_result = is_404();
+				break;
+				case 'search':
+				  $condition_result = is_search();
+				break;
+				case 'archive':
+				  $condition_result = is_archive();
+				break;
+				case 'posts':
+				  $condition_result = $wp_query->is_posts_page;
+				break;
+				case 'home':
+				  $condition_result = is_home();
+				break;
+				case 'front':
+				  if ( current_theme_supports( 'infinite-scroll' ) )
+					$condition_result = is_front_page();
+				  else {
+					$condition_result = is_front_page() && !is_paged();
+				  }
+				break;
+				default:
+				  if ( substr( $rule['minor'], 0, 10 ) == 'post_type-' )
+					$condition_result = is_singular( substr( $rule['minor'], 10 ) );
+				  else {
+					// $rule['minor'] is a page ID
+					$condition_result = is_page( $rule['minor'] );
+				  }
+				break;
+			  }
+			break;
+			case 'tag':
+			  if ( ! $rule['minor'] && is_tag() )
+				$condition_result = true;
+			  else if ( is_singular() && $rule['minor'] && has_tag( $rule['minor'] ) )
+				$condition_result = true;
+			  else {
+				$tag = get_tag( $rule['minor'] );
 
-      if ( $condition_result )
-        break;
-    }
+				if ( $tag && ! is_wp_error( $tag ) && is_tag( $tag->slug ) )
+				  $condition_result = true;
+			  }
+			break;
+			case 'category':
+			  if ( ! $rule['minor'] && is_category() )
+				$condition_result = true;
+			  else if ( is_category( $rule['minor'] ) )
+				$condition_result = true;
+			  else if ( is_singular() && $rule['minor'] && in_array( 'category', get_post_taxonomies() ) &&  has_category( $rule['minor'] ) )
+				$condition_result = true;
+			break;
+			case 'author':
+			  if ( ! $rule['minor'] && is_author() )
+				$condition_result = true;
+			  else if ( $rule['minor'] && is_author( $rule['minor'] ) )
+				$condition_result = true;
+			  else if ( is_singular() && $rule['minor'] && $rule['minor'] == $post->post_author )
+				$condition_result = true;
+			break;
+			case 'taxonomy':
+			  $term = explode( '_tax_', $rule['minor'] ); // $term[0] = taxonomy name; $term[1] = term id
+			  $terms = get_the_terms( $post->ID, $rule['minor'] ); // Does post have terms in taxonomy?
+			  if ( is_tax( $term[0], $term[1] ) )
+				$condition_result = true;
+			  else if ( is_singular() && $term[1] && has_term( $term[1], $term[0] ) )
+				$condition_result = true;
+			  else if ( is_singular() && $terms && !is_wp_error( $terms ) )
+				$condition_result = true;
+			break;
+		  }
+
+		  if ( $condition_result )
+			break;
+		}
+	}
 
     if ( ( 'show' == $instance['conditions']['action'] && ! $condition_result ) || ( 'hide' == $instance['conditions']['action'] && $condition_result ) )
       return false;

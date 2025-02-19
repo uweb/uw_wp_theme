@@ -26,7 +26,9 @@ class UW_Media_Credit
 	 */
 
 	function add_media_credit_shortcode_to_tinymce( $plugins ) {
-		$plugin_array[ 'mediacredit' ] = get_template_directory_uri() . '/assets/admin/js/media-credit.js';
+		if ( is_admin() ) {
+			$plugin_array[ 'mediacredit' ] = get_template_directory_uri() . '/assets/admin/js/media-credit.js';
+		}
 		return $plugin_array;
 	}
 
@@ -75,7 +77,7 @@ class UW_Media_Credit
 
 		preg_match('/([\d]+)/', $atts['id'] , $match);
 
-		$credit = get_post_meta( $match[0], '_media_credit', true );
+		$credit = isset( $match[0] ) ? get_post_meta( $match[0], '_media_credit', true ) : '';
 
 		if ( ( $atts['width'] < 1 || empty( $atts['caption'] ) ) && empty($credit) ) {
 			return $content;
@@ -116,7 +118,7 @@ class UW_Media_Credit
 		}
 
 
-		$source_url = get_post_meta( $match[0], "_source_url", true );
+		$source_url = isset ( $match[0] ) ? get_post_meta( $match[0], "_source_url", true ) : '';
 
 
 		if ( $source_url != '' ) {

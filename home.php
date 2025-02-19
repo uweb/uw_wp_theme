@@ -16,7 +16,7 @@
 
 get_header();
 
-$sidebar = get_post_meta( $post->ID, 'sidebar' );
+$sidebar = isset( $post ) ? get_post_meta( $post->ID, 'sidebar' ) : '';
 
 // get the image header.
 get_template_part( 'template-parts/header', 'image' );

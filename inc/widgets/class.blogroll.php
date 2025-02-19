@@ -108,7 +108,7 @@ class UW_Blogroll extends WP_Widget
         foreach ( $posts as $post ) {
 
             $link = get_permalink( $post->ID );
-
+			$excerpt = '';
             if ( $this->is_true( $params->excerpt ) )
             {
 

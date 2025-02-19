@@ -459,17 +459,18 @@ if ( !function_exists( 'uw_meta_tags' ) ) :
 
 				echo '<meta property="og:image" content="' . $og_img . '" />' . PHP_EOL;
 			}
-			else if( !$has_post_thumbnail ) {
+			elseif ( $has_post_thumbnail ) {
+				$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
+
+				echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '" />' . PHP_EOL;
+
+			}
+			else {
 				//the post does not have featured image, use a default image
 				$default_image = "http://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/10/2019/06/21094817/Univ-of-Washington_Memorial-Way.jpg";
 				//replace this with a default image on your server or an image in your media library
 
 				echo '<meta property="og:image" content="' . $default_image . '" />' . PHP_EOL;
-			}
-			else {
-				$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
-
-				echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '" />' . PHP_EOL;
 			}
 
 			echo '<meta name="twitter:card" content="summary" />' . PHP_EOL;

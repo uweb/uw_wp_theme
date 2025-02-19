@@ -15,6 +15,7 @@ if ( ! function_exists('uw_sidebar_menu') ) :
 	function uw_sidebar_menu()
 	{
 		global $post;
+		if ( !isset( $post ) ) return;
 		$args = array (
 			'parent' => $post->ID
 		);

@@ -314,7 +314,7 @@ class UW_Gallery {
 		if ( is_feed() ) {
 			$output = "\n";
 			foreach ( $attachments as $att_id => $attachment ) {
-				$output .= wp_get_attachment_link( $att_id, $size, true ) . "\n";
+				$output .= wp_get_attachment_link( $att_id, $gallery_attr['size'], true ) . "\n";
 			}
 			return $output;
 		}
@@ -404,12 +404,10 @@ class UW_Gallery {
 						$image_src_url = wp_get_attachment_image_src( $att_id, $gallery_attr['size'] );
 						$image_src_alt = get_post_meta( $att_id, '_wp_attachment_image_alt', true );
 						// Display the caption below the image if available.
-						if ( isset( $attr['uw_carousel_captions'] ) ) {
-							if ( 'true' === $attr['uw_carousel_captions'] ) {
+						if ( isset( $attr['uw_carousel_captions'] ) && 'true' === $attr['uw_carousel_captions'] ) {
 								$image_caption = wp_get_attachment_caption( $att_id );
-							} else {
-								$image_caption = '';
-							}
+						} else {
+							$image_caption = '';
 						}
 
 						// Add an image container div for positioning.

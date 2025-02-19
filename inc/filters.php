@@ -42,7 +42,7 @@ class UW_Filters
 		add_filter( 'excerpt_length', array( $this, 'uw_excerpt_length' ) );
 
         //allow username less than 4 characters
-        add_filter( 'wpmu_validate_user_signup', 'short_user_names' );
+        add_filter( 'wpmu_validate_user_signup', array( $this, 'short_user_names' ) );
 
     }
 
@@ -56,8 +56,11 @@ class UW_Filters
 
 	// Adds a more link to the end of the excerpt
     function excerpt_more_override( $excerpt ) {
-
-        return $excerpt . '<div><a class="more-link" href="' . get_permalink() . '">Continue reading <span class="screen-reader-text">' . get_the_title() . '</span></a></div>';
+		if ( is_home() || in_the_loop() ) {
+			return $excerpt . '<div><a class="more-link" href="' . get_permalink() . '">Continue reading <span class="screen-reader-text">' . get_the_title() . '</span></a></div>';
+		} else {
+			return $excerpt;
+		}
     }
 
     function modify_post_mime_types( $post_mime_types ) {
@@ -94,7 +97,7 @@ class UW_Filters
 
         $error_name = $result[ 'errors' ]->get_error_message( 'user_name' );
 
-        if ( empty ( $error_name ) || $error_name !== __( 'Username must be at least 4 characters.' ) ) {
+        if ( empty ( $error_name ) || $error_name !== __( 'Username must be at least 4 characters.' ) || $error_name !== __('Sorry, usernames must have letters too!') ) {
             return $result;
         }
 

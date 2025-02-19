@@ -246,7 +246,11 @@ class UW_Card {
 			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
-			$output .= '<div class="card-image-inset"><img src="' . esc_attr( $image ) . '" class="card-img card-img-inset" alt="' . esc_attr( $alt ) . '"></div>';
+			if ( isset( $image ) ) {
+
+				$output .= '<div class="card-image-inset"><img src="' . esc_attr( $image ) . '" class="card-img card-img-inset" alt="' . esc_attr( $alt ) . '"></div>';
+
+			}
 			$output .= apply_filters( 'the_content', $content );
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-sm ' . esc_attr( $button_color ) . ' ' . esc_attr( $link_class ) .'"><span>' . esc_attr( $button_text ) . '</span></a></p>';
@@ -257,7 +261,11 @@ class UW_Card {
 			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
-			$output .= '<div class="card-image-top"><img src="' . esc_attr( $image ) . '" class="card-img card-img-top" alt="' . esc_attr( $alt ) . '"></div>';
+			if ( isset( $image ) ) {
+
+				$output .= '<div class="card-image-top"><img src="' . esc_attr( $image ) . '" class="card-img card-img-top" alt="' . esc_attr( $alt ) . '"></div>';
+
+			}
 			$output .= '<div class="udub-slant-divider"><span></span></div>';
 			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {

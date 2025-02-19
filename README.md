@@ -1,12 +1,12 @@
 # UW WordPress Theme
-![UW WordPress Theme version 3.3.1](https://img.shields.io/static/v1?label=version&message=v3.3.1&color=green)
+![UW WordPress Theme version 3.4](https://img.shields.io/static/v1?label=version&message=v3.4&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
 You can also follow along on our progress and learn more about our [development roadmap](https://github.com/uweb/uw_wp_theme/projects/1) and [backlog](https://github.com/uweb/uw_wp_theme/projects/2).
 
 ## Requirements
-* [PHP](https://php.net/) 7.x
+* [PHP](https://php.net/) 7.4 or higher, 8.2.x recommended
 * [WordPress](https://wordpress.org/) 5.4 or higher
 
 ## Theme features
