@@ -8,6 +8,8 @@ class UW_Page_Meta {
 	const POSITION = 'side';
 	const PRIORITY = 'core';
 
+	public $HIDDEN;
+
 	function __construct() {
 		$this->HIDDEN = array( 'No Sidebar' );
 		add_action( 'add_meta_boxes', array( $this, 'replace_meta_box' ) );

@@ -5,6 +5,17 @@
  */
 class UW {
 
+	public $UW_Dropdowns;
+	public $SidebarMenuWalker;
+	public $UW_Audience;
+	public $Quicklinks;
+	public $SquishBugs;
+	public $UW_Page_Meta;
+	public $UW_MegaMenu;
+	public $UW_FooterMenu;
+	public $UW_Media_Credit;
+	public $UW_Attachment_Meta;
+
 	function __construct() {
 		$this->includes();
 		$this->initialize();
