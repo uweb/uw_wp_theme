@@ -25,7 +25,7 @@ class UW_Media_Credit
 	 * editor
 	 */
 
-	function add_media_credit_shortcode_to_tinymce( $plugins ) {
+	function add_media_credit_shortcode_to_tinymce( $plugin_array ) {
 		if ( is_admin() ) {
 			$plugin_array[ 'mediacredit' ] = get_template_directory_uri() . '/assets/admin/js/media-credit.js';
 		}
