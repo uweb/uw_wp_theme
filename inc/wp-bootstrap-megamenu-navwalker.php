@@ -151,7 +151,7 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 		 * Display Element
 		 *
 		 */
-		public function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
+		public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
 			if ( ! $element ) {
 				return;
 			}
