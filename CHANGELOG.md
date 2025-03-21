@@ -1,10 +1,15 @@
 # Changelog
 
+## 2025-02-18 3.4.1
+
+- a11y: Adjusted blog tags to remove background opacity and improve contrast.
+- Bug fix: Tabs and tour targeting via URL.
+- Bug fix: Pointer access to the search field.
+
 ## 2025-02-18 3.4
 
 - Various PHP syntax changes for PHP 8.2.x error mitigation
 - Bug fix: Formidible Form CSS conflicts with checkboxes and radio buttons
-- Bug fix: mediacredit.js only included on admin pages
 - Changed excerpt output modifications to only include Continue reading links in template loops
 - Quicklinks link update for it.uw.edu
 
