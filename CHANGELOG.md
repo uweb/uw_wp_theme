@@ -1,6 +1,10 @@
 # Changelog
 
-## 2025-02-18 3.4.1
+## 2025-03-21 3.4.2
+
+- Font encoding fix
+
+## 2025-03-21 3.4.1
 
 - a11y: Adjusted blog tags to remove background opacity and improve contrast.
 - Bug fix: Tabs and tour targeting via URL.
