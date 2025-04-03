@@ -1,5 +1,10 @@
 # Changelog
 
+## 2025-04-03 3.5
+
+- Updated URLs to reduce redirects
+- Bug fix: Footer menus on multisites to be controlled by blog 1
+
 ## 2025-03-21 3.4.2
 
 - Font encoding fix

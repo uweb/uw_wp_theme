@@ -180,15 +180,17 @@ if ( ! function_exists( 'uw_wp_theme_purple_bar_menu' ) ) :
 endif;
 if ( ! function_exists( 'uw_wp_theme_footer_menu' ) ) :
 	function uw_wp_theme_footer_menu() {
-		echo wp_nav_menu(
-			array(
-				'theme_location'    => UW_FooterMenu::LOCATION,
-				'menu_id'           => UW_FooterMenu::LOCATION,
-				'container'         => 'ul',
-				'menu_class'        => 'footer-links',
-				'fallback_cb'		=> 'UW_FooterMenu::fallback_menu',
-			)
-		);
+		if ( is_multisite() ) switch_to_blog( 1 );
+			echo wp_nav_menu(
+				array(
+					'theme_location'    => UW_FooterMenu::LOCATION,
+					'menu_id'           => UW_FooterMenu::LOCATION,
+					'container'         => 'ul',
+					'menu_class'        => 'footer-links',
+					'fallback_cb'		=> 'UW_FooterMenu::fallback_menu',
+				)
+			);
+		if ( is_multisite() ) restore_current_blog();
 	}
 endif;
 
@@ -467,7 +469,7 @@ if ( !function_exists( 'uw_meta_tags' ) ) :
 			}
 			else {
 				//the post does not have featured image, use a default image
-				$default_image = "http://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/10/2019/06/21094817/Univ-of-Washington_Memorial-Way.jpg";
+				$default_image = "https://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/10/2019/06/21094817/Univ-of-Washington_Memorial-Way.jpg";
 				//replace this with a default image on your server or an image in your media library
 
 				echo '<meta property="og:image" content="' . $default_image . '" />' . PHP_EOL;
