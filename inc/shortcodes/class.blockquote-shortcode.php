@@ -6,15 +6,10 @@
  * [blockquote style="" align="" name="Dubs Husky" title="Official Live Mascot"] blockquote text [/blockquote]
  */
 class UW_Blockquote {
-	const PRIORITY = 12;
-
 	/**
 	 * Blockquote constructor.
 	 */
 	public function __construct() {
-		remove_filter( 'the_content', 'wpautop' );
-		add_filter( 'the_content', 'wpautop', self::PRIORITY );
-
 		add_shortcode( 'blockquote', array( $this, 'blockquote_handler' ) );
 	}
 

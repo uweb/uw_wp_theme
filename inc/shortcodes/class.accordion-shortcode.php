@@ -10,18 +10,10 @@
  * [/accordion]
  */
 class UW_Accordion {
-	const PRIORITY = 12;
-
 	/**
 	 * Accordion constructor.
 	 */
 	public function __construct() {
-		remove_filter( 'the_content', 'wpautop' );
-		add_filter( 'the_content', 'wpautop', self::PRIORITY );
-
-		remove_filter( 'the_excerpt', 'wpautop' );
-		add_filter( 'the_excerpt', 'wpautop', self::PRIORITY );
-
 		add_shortcode( 'accordion', array( $this, 'accordion_handler' ) );
 		add_shortcode( 'section', array( $this, 'section_handler' ) );
 		add_shortcode( 'subsection', array( $this, 'subsection_handler' ) );
