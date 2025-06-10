@@ -91,7 +91,7 @@ class UW_Dropdowns
 		$this->add_menu_item( 'Academic departments', 'https://www.washington.edu/about/academics/departments/', $parent = 'Academics' );
 		$this->add_menu_item( 'Colleges and schools', 'https://www.washington.edu/about/academics/', $parent = 'Academics' );
 		$this->add_menu_item( 'Course descriptions', 'https://www.washington.edu/students/crscat/', $parent = 'Academics' );
-		$this->add_menu_item( 'Registration', 'https://registrar.washington.edu/registration/', $parent = 'Academics' );
+		$this->add_menu_item( 'Registration', 'https://registrar.washington.edu/register/', $parent = 'Academics' );
 		$this->add_menu_item( 'Student guide', 'https://www.washington.edu/students/', $parent = 'Academics' );
 		$this->add_menu_item( 'Time schedule', 'https://www.washington.edu/students/timeschd/', $parent = 'Academics');
 
@@ -100,10 +100,10 @@ class UW_Dropdowns
 		$this->add_menu_item( 'Admissions', 'https://www.washington.edu/admissions/', $parent = 'Apply' );
 		$this->add_menu_item( 'Financial Aid', 'https://www.washington.edu/financialaid/', $parent = 'Apply' );
 		$this->add_menu_item( 'Continuing education', 'https://www.pce.uw.edu/', $parent = 'Apply' );
-		$this->add_menu_item( 'Majors', 'http://www.washington.edu/uaa/advising/degree-overview/majors/list-of-undergraduate-majors/', $parent = 'Apply' );
+		$this->add_menu_item( 'Majors', 'https://advising.uw.edu/degree-overview/majors/list-of-undergraduate-majors/', $parent = 'Apply' );
 		$this->add_menu_item( 'Student housing', 'https://www.washington.edu/about/housing/', $parent = 'Apply' );
 		$this->add_menu_item( 'Transfer students', 'https://admit.washington.edu/apply/transfer/', $parent = 'Apply' );
-		$this->add_menu_item( 'Tuition and fees', 'https://finance.uw.edu/sfs/tuition/', $parent = 'Apply' );
+		$this->add_menu_item( 'Tuition and fees', 'https://finance.uw.edu/sfs/tuition-fees/tuition-overview', $parent = 'Apply' );
 		$this->add_menu_item( 'Undocumented students', 'https://www.washington.edu/admissions/undocumented/', $parent = 'Apply' );
 		$this->add_menu_item( 'UW Online', 'https://www.pce.uw.edu/online', $parent = 'Apply' );
 
@@ -127,9 +127,9 @@ class UW_Dropdowns
 
 		// The default Campuses the UW dropdown.
 		$this->add_menu_item( 'Campuses', 'https://www.washington.edu/about/' );
-		$this->add_menu_item( 'Bothell', 'https://www.uwb.edu/', $parent = 'Campuses' );
+		$this->add_menu_item( 'Bothell', 'https://www.uwb.edu', $parent = 'Campuses' );
 		$this->add_menu_item( 'Seattle', 'https://www.washington.edu/about/', $parent = 'Campuses' );
-		$this->add_menu_item( 'Tacoma', 'https://www.tacoma.uw.edu/', $parent = 'Campuses' );
+		$this->add_menu_item( 'Tacoma', 'https://www.tacoma.uw.edu', $parent = 'Campuses' );
 
 		// The default Support the UW dropdown.
 		$this->add_menu_item( 'Give', 'https://www.washington.edu/giving/' );

@@ -67,15 +67,15 @@ class UW_FooterMenu {
 	function generate_menu_list() {
 
 		// The default footer menu.
-		$this->add_menu_item( 'Accessibility', 'http://www.uw.edu/accessibility' );
-		$this->add_menu_item( 'Contact Us', 'http://uw.edu/contact' );
-		$this->add_menu_item( 'Jobs', 'http://www.washington.edu/jobs' );
-		$this->add_menu_item( 'Campus Safety', 'http://www.washington.edu/safety' );
-		$this->add_menu_item( 'My UW', 'http://my.uw.edu/' );
-		$this->add_menu_item( 'Rules Docket', 'http://www.washington.edu/rules/wac' );
-		$this->add_menu_item( 'Privacy', 'http://www.washington.edu/online/privacy/' );
-		$this->add_menu_item( 'Terms', 'http://www.washington.edu/online/terms/' );
-		$this->add_menu_item( 'Newsletter', 'http://www.washington.edu/newsletter/' );
+		$this->add_menu_item( 'Accessibility', 'https://www.washington.edu/accessibility/' );
+		$this->add_menu_item( 'Contact Us', 'https://www.washington.edu/contact/' );
+		$this->add_menu_item( 'Jobs', 'https://www.washington.edu/jobs/' );
+		$this->add_menu_item( 'Campus Safety', 'https://www.washington.edu/safety/' );
+		$this->add_menu_item( 'My UW', 'https://my.uw.edu/' );
+		$this->add_menu_item( 'Rules Docket', 'https://www.washington.edu/rules/wac/' );
+		$this->add_menu_item( 'Privacy', 'https://www.washington.edu/online/privacy/' );
+		$this->add_menu_item( 'Terms', 'https://www.washington.edu/online/terms/' );
+		$this->add_menu_item( 'Newsletter', 'https://www.washington.edu/newsletter/' );
 	}
 
 	function add_menu_item( $name, $url, $parent = null ) {
