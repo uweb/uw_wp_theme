@@ -42,6 +42,7 @@ class UW_Jumbotron {
 				'button'   => '', // required. button text.
 				'link'     => '', // required. button link.
 				'id'       => '', // optional ID.
+				'alt'      => '', // optional alt tag for the image
 			),
 			$atts
 		);
@@ -158,6 +159,13 @@ class UW_Jumbotron {
 			$image = '';
 		}
 
+		// if the image alt tag is set, get it.
+		if ( ! empty( $jumbotron_atts['alt'] ) ) {
+			$alt = $jumbotron_atts['alt'];
+		} else {
+			$alt = '';
+		}
+
 		// get the button text. use default prompting if not provided.
 		if ( $jumbotron_atts['button'] ) {
 			$button_text = $jumbotron_atts['button'];
@@ -179,7 +187,7 @@ class UW_Jumbotron {
 		// build the shortcode output.
 		ob_start();
 		?>
-		<div <?php echo $jumbotron_id; ?> class="jumbotron jumbotron-fluid <?php echo esc_attr( $jumbotron_class ); ?> <?php echo esc_attr( $overlay_class ); ?> <?php if ( 'block' === $style ) { echo esc_attr( $align_class ); } ?>" <?php if ( ! empty( $jumbotron_atts['image'] ) && $image ) { ?> style="background-image: url(<?php echo esc_url( $image ); ?>);" <?php } ?>><img class="mobile-img" src="<?php echo $image ?>">
+		<div <?php echo $jumbotron_id; ?> class="jumbotron jumbotron-fluid <?php echo esc_attr( $jumbotron_class ); ?> <?php echo esc_attr( $overlay_class ); ?> <?php if ( 'block' === $style ) { echo esc_attr( $align_class ); } ?>" <?php if ( ! empty( $jumbotron_atts['image'] ) && $image ) { ?> style="background-image: url(<?php echo esc_url( $image ); ?>);" <?php } ?>><img class="mobile-img" src="<?php echo $image ?>" alt="<?php echo $alt ?>">
 			<div class="<?php echo esc_attr( $inner_class ); ?> <?php if ( 'block-slant' === $style ) { echo esc_attr( $align_class ); } ?>">
 				<?php if ( 'block-slant' === $style ) { ?>
 					<div class="inner-overlay">
