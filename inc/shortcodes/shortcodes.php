@@ -34,6 +34,7 @@ function uw_wp_theme_shortcodes() {
 	require_once( $parent . 'class.blockquote-shortcode.php' );
 	require_once( $parent . 'class.gallery-shortcode.php' );
 	require_once( $parent . 'class.jumbotron-shortcode.php' );
+	require_once( $parent . 'class.cta-shortcode.php' );
 
 	$tilebox     = new UW_TileBox();
 	$button      = new UW_Button();
@@ -53,6 +54,7 @@ function uw_wp_theme_shortcodes() {
 	$blockquote  = new UW_Blockquote();
 	$gallery     = new UW_Gallery();
 	$jumbotron   = new UW_Jumbotron();
+	$cta		 = new UW_Call_To_Action();
 
 	// call the enqueue scripts for shortcodes.
 	add_action( 'wp_enqueue_scripts', 'uw_wp_theme_enqueue_shortcodes' );

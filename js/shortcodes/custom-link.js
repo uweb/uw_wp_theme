@@ -1,1 +1,1 @@
-jQuery(document).ready(function(a){a("a.uw-custom-link").addClass("disable_a_href")});
+"use strict";jQuery(document).ready(function(a){a("a.uw-custom-link").addClass("disable_a_href")});

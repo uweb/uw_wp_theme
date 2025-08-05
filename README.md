@@ -1,5 +1,5 @@
 # UW WordPress Theme
-![UW WordPress Theme version 3.5](https://img.shields.io/static/v1?label=version&message=v3.5&color=green)
+![UW WordPress Theme version 3.6](https://img.shields.io/static/v1?label=version&message=v3.6&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
@@ -298,6 +298,35 @@ Attributes:
 Example:
 ```
 [uw_button style="arrow" size="large" color="gold" target="#"](button copy)[/uw_button]
+```
+
+### Call to Action
+
+There are 2 types of a call to action: image or no image. The image type has 3 style options: purple, gold, and white. The no image option is purple with a subtle 15-degree angle pattern. All call to action modules include a heading, brief copy, and a link to the target page.
+
+Image guidance can be found in the [Shortcode Cookbook](https://www.washington.edu/docs/shortcode-cookbook/) in the Web Strategy Documentation Library.
+
+_Note:_ The full-width option does not work on a page with a sidebar.
+
+Attributes:
+
+* **type**: Options: image, noimage. (_Default is image_).
+* **style**: Only available for type image. Adjusts the background color, text, and link. Options: purple, gold, white (_Default is purple_).
+* **full_width**: Enables full width. Any other options (or no options) makes the module content-width, even if on a page with no sidebar. Option: true (_Default is false_).
+* **img** – Sets the URL for the image
+* **spacing** : Default includes top/bottom margin, top removes top margin, bottom removes bottom margin, all removes both top and bottom margin. Options: default, top, bottom, all (_Default is default_).
+* **id** – Optional unique ID for the module
+* **heading** – Sets the heading text for the module
+* **heading_level** – Default is h2. Can be set to any heading level with the styling of an h2
+* **link_text** – Sets the link text for module
+* **target** – Sets the URL for module link
+
+The CTA body copy is wrapped in the shortcode. It is recommended to keep it short.
+
+Example:
+
+```
+[uw_cta type="image" style="purple" img="(url)" full_width="true" spacing="" id="" heading="Heading text" heading_level="h2" link_text="Link text" target="#"](CTA copy)[/uw_cta]
 ```
 
 ### Cards
