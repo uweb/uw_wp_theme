@@ -105,9 +105,9 @@ class UW_Call_To_Action {
 				<div class="row">
 					<div class="cta-content">
 						<div class="cta-body">
-							<<?php echo esc_html( $heading_level ); ?> class="h2"><?php echo esc_html( $atts['heading'] ); ?></<?php echo esc_html( $heading_level ); ?>>
-							<p><?php echo esc_html( $content ); ?></p>
-							<p class="button"><a href="<?php echo esc_attr( $atts['target'] ); ?>" class="btn btn-lg arrow <?php echo $button_class ? esc_attr( $button_class ) : esc_attr( 'primary purple' ); ?>"><span><?php echo esc_attr( $atts['link_text'] ); ?></span><span class="arrow-box"><span class="arrow"></span></span></a></p>
+							<<?php echo esc_attr( $heading_level ); ?> class="h2"><?php echo esc_html( $atts['heading'] ); ?></<?php echo esc_attr( $heading_level ); ?>>
+							<p><?php echo wp_kses_post( $content ); ?></p>
+							<p class="button"><a href="<?php echo esc_url( $atts['target'] ); ?>" class="btn btn-lg arrow <?php echo $button_class ? esc_attr( $button_class ) : esc_attr( 'primary purple' ); ?>"><span><?php echo esc_attr( $atts['link_text'] ); ?></span><span class="arrow-box"><span class="arrow"></span></span></a></p>
 						</div><!-- .cta-body -->
 					</div><!-- .cta-content -->
 					<?php if ( 'image' === $atts['type'] && $atts['img'] ) : ?>

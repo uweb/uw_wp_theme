@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025-08-14
+
+- Minor tweaks to Call to Action output
+
 ## 2025-08-12 3.6
 
 - Added new Call to Action module & shortcode with 2 types and 3 variations
