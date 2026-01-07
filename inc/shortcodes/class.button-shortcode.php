@@ -34,12 +34,12 @@ class UW_Button {
 		// get the button ID, if there is one.
 		$btn_id = ! empty( $atts['id'] ) ? 'id="' . esc_attr( $atts['id'] ) . '"' : '';
 
-		$style_list = ['check', 'flag', 'minus', 'person', 
+		$style_list = ['check', 'flag', 'minus', 'person',
 		'plus', 'camera', 'mail', 'search',
-		'key', 'clipboard', 'bookmark', 'ticket', 
+		'key', 'clipboard', 'bookmark', 'ticket',
 		'heart', 'watch', 'letter', 'marker',
-		'social', 'close', 'calendat', 'pencil',
-		'computer', 'page', 'view', 'eating', 
+		'social', 'close', 'calendar', 'pencil',
+		'computer', 'page', 'view', 'eating',
 		'book', 'stop', 'compass', 'home',
 		'play', 'picture', 'address-book', 'map',
 		'music', 'settings', 'tools', 'globe',

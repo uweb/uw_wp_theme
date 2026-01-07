@@ -1,1 +1,1 @@
-"use strict";var dropdownMenus;document.querySelector("#white-bar")&&(dropdownMenus=document.querySelectorAll(".dropdown-menu")).forEach(function(e){8<e.querySelectorAll("li").length&&e.classList.add("two-columns")});
+if(document.querySelector("#white-bar")){let e=document.querySelectorAll(".dropdown-menu");e.forEach(function(e){8<e.querySelectorAll("li").length&&e.classList.add("two-columns")})}

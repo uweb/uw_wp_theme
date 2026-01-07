@@ -1,0 +1,1 @@
+let addFilter=wp.hooks.addFilter;addFilter("blocks.registerBlockType","uw_wp_theme/cover",function(e,r){return"core/cover"!==r?e:{...e,attributes:{...e.attributes,allowedBlocks:{type:"array",default:["core/paragraph","core/image","core/heading","core/separator","core/buttons"]}}}});

@@ -7,21 +7,51 @@
  */
 class UW_Gallery {
 
-	/**
-	 * Gallery/Carousel constructor.
-	 */
 	public function __construct() {
+		// Check for the gallery block when loading the block editor
+		add_action('enqueue_block_editor_assets', array($this, 'check_for_gallery_block_editor'));
 
-		add_action( 'print_media_templates', array( $this, 'gallery_carousel_admin' ) );
-
-		// Remove built-in shortcode.
-		remove_shortcode( 'gallery', 'gallery_shortcode' );
-		// add our version of the shortcode.
-		add_shortcode( 'gallery', array( $this, 'uw_gallery_handler' ) );
-
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_gallery_script' ) );
-
+		// Check for the gallery shortcode when loading a page
+		add_action('wp', array($this, 'check_for_gallery_shortcode'));
 	}
+
+	// this one is for block editor
+	public function check_for_gallery_block_editor() {
+		// check if post
+		if (isset($_GET['post']) && is_numeric($_GET['post'])) {
+
+			$post_id = intval($_GET['post']);
+			$post_content = get_post($post_id)->post_content;
+
+			// make sure there is no gallery block
+			if (!has_block('core/gallery', $post_content)) {
+
+				add_action('print_media_templates', array($this, 'gallery_carousel_admin'));
+				remove_shortcode('gallery', 'gallery_shortcode');
+				add_shortcode('gallery', array($this, 'uw_gallery_handler'));
+				add_action('wp_enqueue_scripts', array($this, 'enqueue_gallery_script'));
+			}
+		}
+	}
+
+	// this one is for classic editor
+	public function check_for_gallery_shortcode() {
+		// check if single page or post
+		if (is_singular()) {
+			global $post;
+			$post_content = $post->post_content;
+
+			// make sure the gallery shortcode isn't present
+			if (strpos($post_content, '[gallery') !== false) {
+
+				add_action('print_media_templates', array($this, 'gallery_carousel_admin'));
+				remove_shortcode('gallery', 'gallery_shortcode');
+				add_shortcode('gallery', array($this, 'uw_gallery_handler'));
+				add_action('wp_enqueue_scripts', array($this, 'enqueue_gallery_script'));
+			}
+		}
+	}
+
 
 	/**
 	 * Load gallery JS.

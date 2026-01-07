@@ -1,9 +1,7 @@
 # UW WordPress Theme
-![UW WordPress Theme version 3.6.1](https://img.shields.io/static/v1?label=version&message=v3.6.1&color=green)
+![UW WordPress Theme version 3.7](https://img.shields.io/static/v1?label=version&message=v3.7&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
-
-You can also follow along on our progress and learn more about our [development roadmap](https://github.com/uweb/uw_wp_theme/projects/1) and [backlog](https://github.com/uweb/uw_wp_theme/projects/2).
 
 ## Requirements
 * [PHP](https://php.net/) 7.4 or higher, 8.2.x recommended
@@ -13,13 +11,16 @@ You can also follow along on our progress and learn more about our [development 
 
 The UW WordPress Theme theme includes the following features.
 
-* [Bootstrap 4](https://getbootstrap.com/) integration
+* [Bootstrap 4.6](https://getbootstrap.com/docs/4.6/) integration
 * UW brand styled shortcodes and components
 * Mobile-first
 * Progressive enhancement
 * Modern styling and layouts using grid and flexbox
 * Modern JavaScript
+* Hybrid theme with block editor support and UW brand styled options
 * Starter child theme
+
+For additional information about the theme, including working examples, please visit the [Web Strategy Documentation Library](https://www.washington.edu/docs/).
 
 ## For Developers
 

@@ -1,0 +1,3 @@
+.wp-block-video{display:grid}.wp-block-video video{grid-column:1;grid-row:1}.wp-block-video .play-pause-button{grid-column:1;grid-row:1;align-self:start;justify-self:end;margin:35px 35px 0 0;text-indent:-999px;overflow-x:hidden;width:45px;height:45px;border:none;background:url(./pause.svg) no-repeat 0 0 transparent;z-index:2}.wp-block-video .play-pause-button:hover{background-position-x:-47px}.wp-block-video .play-pause-button.active{background:url(./pause.svg) no-repeat 0 -50px transparent}.wp-block-video .play-pause-button.active:hover{background-position-x:-47px}
+
+/*# sourceMappingURL=../maps/video/video.css.map */

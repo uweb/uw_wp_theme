@@ -6,6 +6,26 @@
  */
 function theme_settings_page() {
 	?>
+		<style>
+			.all-settings {
+				display: flex;
+				flex-direction: column;
+			}
+			@media screen and (min-width: 769px) {
+				.all-settings {
+					flex-direction: row;
+					justify-content: space-between;
+					gap: 2rem;
+				}
+			}
+			.main-content {
+				max-width: 70%;
+			}
+			.card-sidebar {
+				max-width: 30%;
+				align-self: flex-start;
+			}
+		</style>
 		<div class="wrap">
 			<h1>UW WordPress Theme Settings</h1>
 
@@ -13,18 +33,20 @@ function theme_settings_page() {
 			<div class="notice notice-info is-dismissible">
 				<p>Check out the <a href="https://github.com/uweb/uw_wp_theme#readme" target="_blank">theme documentation</a> for more information on these settings.</p>
 			</div>
-			<div class="card" style="float: right;">
-				<?php uw_dashboard_widget_function(); ?>
-			</div>
-			<div style="float: left;">
-				<form method="post" action="options.php">
-					<?php
-						settings_fields( 'uw_settings_section' );
-						do_settings_sections( 'theme-options' );
-						do_settings_sections( 'post-options' );
-						submit_button();
-					?>
-				</form>
+			<div class="all-settings">
+				<div class="main-content">
+					<form method="post" action="options.php">
+						<?php
+							settings_fields( 'uw_settings_section' );
+							do_settings_sections( 'theme-options' );
+							do_settings_sections( 'post-options' );
+							submit_button();
+						?>
+					</form>
+				</div>
+				<div class="card card-sidebar">
+					<?php uw_dashboard_widget_function(); ?>
+				</div>
 			</div>
 		</div>
 	<?php
@@ -64,6 +86,13 @@ function toggle_search_options() {
  		</select>
     <?php
 }
+
+function enable_uw_wp_blocks() {
+	?>
+		<input type="checkbox" name="enable-uw-blocks" value="1" <?php checked( 1, get_option( 'enable-uw-blocks' ), true ); ?> />
+	<?php
+}
+
  function display_quicklinks_element() {
  	?>
 		<input type="checkbox" name="quicklinks-hide" value="1" <?php checked( 1, get_option( 'quicklinks-hide' ), true ); ?> />
@@ -155,6 +184,8 @@ function display_theme_settings_fields() {
 
 	add_settings_field('quicklinks-hide', 'Hide Quicklinks menu button', 'display_quicklinks_element', 'theme-options', 'uw_settings_section' );
 
+	add_settings_field( 'enable-uw-blocks', 'Enable UW WP Blocks (Experimental, use at your own risk)', 'enable_uw_wp_blocks', 'theme-options', 'uw_settings_section' );
+
 	// add_settings_field('search-hide', 'Hide Search menu button', 'display_search_element', 'theme-options', 'uw_settings_section' );
 
 	add_settings_field( 'uw_toggle_options', 'Change default search scope', 'toggle_search_options', 'theme-options', 'uw_settings_section' );
@@ -184,6 +215,8 @@ function display_theme_settings_fields() {
 	// register_setting( 'uw_settings_section', 'search-hide' );
 
 	register_setting( 'uw_settings_section', 'quicklinks-hide' );
+
+	register_setting( 'uw_settings_section', 'enable-uw-blocks' );
 
 	register_setting( 'uw_settings_section', 'breadcrumb-hide' );
 
