@@ -59,6 +59,7 @@ class UW_Accordion {
 				'name'  => '',
 				'style' => '',
 				'id'    => '',
+				'sectionheading' => ''
 			),
 			$atts
 		);
@@ -87,6 +88,13 @@ class UW_Accordion {
 			}
 		}
 
+		// Regex used to check the hN structure
+		$reHn = '/([h])([1-6])/m';
+		$defaultHN_Level=3;
+		preg_match_all($reHn, $accordion_atts['sectionheading'], $matches, PREG_SET_ORDER, 0);
+		if(count($matches)>0) {
+			$defaultHN_Level=$matches[0][2];
+		}
 		$class = '';
 
 		if (str_contains($accordion_atts['style'], 'uppercase-title')) {
@@ -100,6 +108,9 @@ class UW_Accordion {
 				$class .= 'non-bold';
 			}
 		}
+
+		// Re-inject heading level inside section shortcode attributes
+		$content=str_replace('[section ', sprintf( '[section sectionheading="%d" ', $defaultHN_Level), $content);
 
 		// if there's no content, display a message with instructions on how to add the required structure.
 		if ( empty( $content ) ) {
@@ -130,11 +141,13 @@ class UW_Accordion {
 				'title'  => '',
 				'active' => false,
 				'id'     => '',
+				'sectionheading' => ''
 			),
 			$atts
 		);
 
 		$class = '';
+		$defaultHN_Level=$section_atts['sectionheading'];
 
 		if ( isset( $section_atts['id'] ) ) {
 			if ( $section_atts['id'] ) {
@@ -160,10 +173,12 @@ class UW_Accordion {
 		$output = do_shortcode( $content );
 
 		return sprintf(
-			'<div class="card"%s><div class="card-header" id="accordion-header"><h3 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button></h3></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion" role="region">%s</div></div>',
+			'<div class="card"%s><div class="card-header" id="accordion-header"><h%d class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button></h%d></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion" role="region">%s</div></div>',
 			$section_id,
+			$defaultHN_Level,
 			$active_tab,
 			$section_atts['title'],
+			$defaultHN_Level,
 			$class,
 			apply_filters( 'the_content', $output )
 		);
