@@ -2,7 +2,7 @@
 
 ## 2026-01-16 3.7
 
-- Added optional Block Editor support for core blocks. Must use Classic Editor and Classic Widgets plugins and must enable the "Enable UW WP Blocks" feature in UW Theme Settings to use the Block Editor support.
+- Added optional Block Editor support for core blocks. Must use Classic Editor and Classic Widgets plugins and must enable the "Enable UW WP Blocks" feature in UW Theme Settings to use the Block Editor support. This is a BETA feature. Use at your own risk.
 
 ## 2025-09-10 3.6.3
 

@@ -76,9 +76,6 @@ function uw_wp_theme_setup() {
 	 */
 	add_theme_support( 'align-wide' );
 
-	// Remove WooCommerce block CSS
-	wp_dequeue_style( 'wc-blocks-style' );
-
 	if ( ! isset( $blocks_enabled ) || $blocks_enabled !== '1' ) {
 		/**
 		 * Add support for block color palettes.
