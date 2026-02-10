@@ -1,0 +1,1 @@
+{"version":3,"file":"../../postslist/postslist.css","sources":["postslist/postslist.scss"],"sourcesContent":[".wp-block-latest-posts.wp-block-latest-posts__list {\n    margin-left: 0;\n}"],"names":[],"mappings":"AAAA,AAAA,sBAAsB,AAAA,4BAA4B,AAAC,CAC/C,WAAW,CAAE,CAAC,CACjB"}

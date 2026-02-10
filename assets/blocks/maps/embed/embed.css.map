@@ -1,0 +1,1 @@
+{"version":3,"file":"../../embed/embed.css","sources":["embed/embed.scss"],"sourcesContent":["blockquote.tiktok-embed{\n    border-left: 0;\n    margin: 0;\n    padding-left: 0;\n}\n"],"names":[],"mappings":"AAAA,AAAA,UAAU,AAAA,aAAa,AAAA,CACnB,WAAW,CAAE,CAAC,CACd,MAAM,CAAE,CAAC,CACT,YAAY,CAAE,CAAC,CAClB"}
