@@ -4,6 +4,9 @@
  *
  * Template:
  * [blockquote style="" align="" name="Dubs Husky" title="Official Live Mascot"] blockquote text [/blockquote]
+ *  ------ OR -------
+ * [quote style="" align="" name="Dubs Husky" title="Official Live Mascot"] blockquote text [/quote]
+ *
  */
 class UW_Blockquote {
 	const PRIORITY = 12;
@@ -16,6 +19,7 @@ class UW_Blockquote {
 		add_filter( 'the_content', 'wpautop', self::PRIORITY );
 
 		add_shortcode( 'blockquote', array( $this, 'blockquote_handler' ) );
+		add_shortcode( 'quote', array( $this, 'blockquote_handler' ) );
 	}
 
 	/**

@@ -18,7 +18,8 @@ class UW_Iframes
       $params = shortcode_atts( array(
         'src' => '',
         'height' => get_option('embed_size_h'),
-        'width' => get_option('embed_size_w')
+        'width' => get_option('embed_size_w'),
+        'title' => '',
       ), $atts );
 
       $params['src'] = esc_url($params['src'], array('http','https'));
@@ -54,7 +55,7 @@ class UW_Iframes
 
       $iframeSrc = esc_url($iframeSrc, array('http', 'https'));
 
-      return "<iframe src=\"$iframeSrc\" width=\"{$params['width']}\" height=\"{$params['height']}\" style=\"border:0\"></iframe>";
+      return "<iframe src=\"$iframeSrc\" title=\"{$params['title']}\" width=\"{$params['width']}\" height=\"{$params['height']}\" style=\"border:0\"></iframe>";
   }
 
 }

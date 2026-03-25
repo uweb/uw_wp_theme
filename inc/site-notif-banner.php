@@ -11,13 +11,13 @@ function uw_site_notif_banner_page() { ?>
 		<h3>Use this to add a site-wide notification message near the top of every page on your site.</h3>
 		<p> The banner will appear just under your main navigation menu.
 			Users can dismiss the banner on a page, but the banner will persist across other pages. </p>
-		<p></p>
+
 
 		<form name="banner_form" method="post" action="options.php">
 			<?php
-						settings_fields( 'sitenotif_section' );
-						do_settings_sections( 'sitewide-banner' );
-						submit_button();
+				settings_fields( 'sitenotif_section' );
+				do_settings_sections( 'sitewide-banner' );
+				submit_button();
 			?>
 		</form>
 
@@ -43,10 +43,30 @@ function uw_activate_banner() {
 		<input type="checkbox" name="uw_activate_banner" value="1" <?php checked( 1, get_option( 'uw_activate_banner' ), true ); ?> />
 	<?php
 }
-function display_banner_message() {
-	?>
+function uw_allowed_banner_shortcodes() {
+	return array(
+		'uw_button',
+		'uw_modal',
+		'intro'
+	);
+}
 
-	<textarea name="banner_message" rows="3" cols="50"><?php echo wp_kses_post( get_option( 'banner_message' ) ); ?></textarea>
+function display_banner_message( $args ) {
+
+		$content   = get_option( 'banner_message' );;
+		$editor_id = 'banner_message';
+		$settings  = array(
+				'media_buttons' 	=> false,
+				'teeny'				=> true,
+				'textarea_name' 	=> $editor_id
+			);
+if ( ! empty( $args['description'] ) ) {
+			echo '<p class="description">' . esc_html( $args['description'] ) . '</p>';
+		}
+		wp_editor( $content, $editor_id, $settings );
+
+
+	?>
 
 	<?php
 }
@@ -79,13 +99,17 @@ function display_subpage_fields() {
 
 	add_settings_field( 'uw_activate_banner', 'Turn on banner', 'uw_activate_banner', 'sitewide-banner', 'sitenotif_section' );
 
-	add_settings_field( 'banner_message', 'Banner message', 'display_banner_message', 'sitewide-banner', 'sitenotif_section' );
+	add_settings_field( 'banner_message', 'Banner message', 'display_banner_message', 'sitewide-banner', 'sitenotif_section', array(
+		'description' => 'You can include HTML tags and these shortcodes: [uw_button] or  [uw_modal].'
+	) );
 
 	add_settings_field( 'banner_color', 'Banner color options', 'display_banner_color_options', 'sitewide-banner', 'sitenotif_section' );
 
 
 	register_setting( 'sitenotif_section', 'uw_activate_banner' );
-	register_setting( 'sitenotif_section', 'banner_message' );
+	register_setting( 'sitenotif_section', 'banner_message', [
+		'sanitize_callback' => 'wp_kses_post'
+	]  );
 	register_setting( 'sitenotif_section', 'banner_color' );
 }
 add_action( 'admin_init', 'display_subpage_fields' );

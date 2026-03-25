@@ -1,1 +1,0 @@
-{"version":3,"file":"../../rss/rss.css","sources":["rss/rss.scss"],"sourcesContent":["ul.wp-block-rss {\n    margin-left: 0 !important;\n    li{\n        padding: 5px 0;\n    }\n}"],"names":[],"mappings":"AAAA,AAAA,EAAE,AAAA,aAAa,AAAC,CACZ,WAAW,CAAE,YAAY,CAI5B,AALD,AAEI,EAFF,AAAA,aAAa,CAEX,EAAE,AAAA,CACE,OAAO,CAAE,KAAK,CACjB"}

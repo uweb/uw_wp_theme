@@ -408,18 +408,23 @@ function uw_dashboard_setup_function() {
 function uw_dashboard_widget_function() {
     // widget content goes here
 
-	echo '<div class="colums2">';
-	echo '<p style="font-weight: 600;">Documentation and guides</p>';
-	echo '<p><a href="https://github.com/uweb/uw_wp_theme" target="_blank">UW WordPress Theme repo</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
- 	echo '<p><a href="https://github.com/uweb/uw_wp_theme#readme" target="_blank">README.md</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
-	echo '<p><a href="https://www.washington.edu/brand/" target="_blank">UW Brand Portal</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
-	echo '</div>';
+	echo '<div id="theme-resources">';
+	echo '<h3 style="font-size: .9rem;">Documentation and guides</h3>';
+	echo '<ul><li> <a href="https://www.washington.edu/docs/">Web Strategy\'s Documentation Library</a> <span aria-hidden="true" class="dashicons dashicons-external"></span>(aka "The Docs Site")</li>';
+	echo '<li><a href="https://github.com/uweb/uw_wp_theme" target="_blank">UW WordPress Theme repo</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></li>';
+ 	echo '<li><a href="https://github.com/uweb/uw_wp_theme#readme" target="_blank">README.md</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></li>';
+	echo '<li><a href="https://www.washington.edu/brand/" target="_blank">UW Brand Portal</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></li></ul>';
 
-	echo '<div class="colums2">';
-	echo '<p style="font-weight: 600;">Meetups</p>';
-	echo '<p><a href="https://www.washington.edu/brand/web/web-council/">Web Council </a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
-	echo '<p><a href="https://sites.uw.edu/wpug/">WordPress Users Group </a> <span aria-hidden="true" class="dashicons dashicons-external"></span></p>';
-	echo '<br>';
+
+	echo '<h3 style="font-size: .9rem;">Communities of Practice</h3>';
+	echo '<ul><li><a href="https://www.washington.edu/webcouncil/">Web Council </a> <span aria-hidden="true" class="dashicons dashicons-external"></span></li>';
+	echo '<li><a href="https://sites.uw.edu/frontend/">Front-end Technologies</a> <span aria-hidden="true" class="dashicons dashicons-external"></span></li>';
+	echo '<li><a href="https://teams.microsoft.com/l/team/19%3Ay6SLpKSwfcksM60SbUGc6k86X6sJwT7NpnpZaQtXAOM1%40thread.tacv2/conversations?groupId=83b3c1a9-18e4-4ea9-8592-917d24df7f63&tenantId=f6b6dd5b-f02f-441a-99a0-162ac5060bd2">Digital Marketing Insights </a><span aria-hidden="true" class="dashicons dashicons-external"></span> - (Teams channel) </li>';
+	echo '<li><a href="https://www.washington.edu/webcouncil/uw-resources/">UW Resources </a><span aria-hidden="true" class="dashicons dashicons-external"></span></li>';
+	echo '<li><a href="https://sites.uw.edu/wpug/">WordPress Users Group </a> <span aria-hidden="true" class="dashicons dashicons-external"></span></li>';
+	echo '<li><a href="mailto:uwcontent@uw.edu">Word Nerds </a> <span aria-hidden="true" class="dashicons dashicons-email-alt"></span></li></ul>';
+
+	echo '<hr>';
 	echo '<p><strong>Need help?</strong> Contact the  <a href="mailto:uweb@uw.edu">UMAC Web Strategy Team</a>. </p>';
 	echo '</div>';
 }
@@ -624,10 +629,21 @@ if ( ! function_exists( 'is_pdf' ) ):
 
   if ( ! function_exists( 'add_sitewide_banner' ) ):
 	function add_sitewide_banner() {
-		if (  get_option( 'uw_activate_banner' ) && get_option( 'banner_message' )   ){
-			echo '<div class="banner alert ' . get_option( 'banner_color' ) .' alert-dismissible fade show " role="alert"><p>' . wp_kses_post( get_option( 'banner_message' ) ) .'</p> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		$banner_message = get_option( 'banner_message' );
+		if (  get_option( 'uw_activate_banner' ) && $banner_message  ){
+			$allowed = uw_allowed_banner_shortcodes();
+			preg_match_all( '/' . get_shortcode_regex() . '/', $banner_message, $matches, PREG_SET_ORDER );
+			foreach ( $matches as $shortcode ) {
+				if ( ! in_array( $shortcode[2], $allowed, true ) ) {
+					$banner_message = str_replace( $shortcode[0], '', $banner_message );
+				}
+			}
+
+			echo '<div class="banner alert ' . get_option( 'banner_color' ) .' alert-dismissible fade show " role="alert"><p>' . do_shortcode( $banner_message ) .'</p> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button></div>';
+
+
 		}
 	}
 

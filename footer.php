@@ -24,6 +24,7 @@
 					<li><a class="youtube" href="https://www.youtube.com/user/uwhuskies">YouTube</a></li>
 					<li><a class="linkedin" href="https://www.linkedin.com/school/university-of-washington">LinkedIn</a></li>
 					<li><a class="pinterest" href="https://www.pinterest.com/uofwa/">Pinterest</a></li>
+					<li><a class="tiktok" href="https://www.tiktok.com/@uofwa">TikTok</a></li>
 				</ul>
 			</nav>
 

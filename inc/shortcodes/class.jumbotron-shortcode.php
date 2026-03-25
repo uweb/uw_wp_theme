@@ -20,7 +20,19 @@ class UW_Jumbotron {
 	 */
 	public function __construct() {
 		add_shortcode( 'uw_jumbotron', array( $this, 'jumbotron_handler' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_jumbotron_script' ) );
 	}
+
+ 	/**
+     * Load jumbotron JS.
+     *
+     * @return void
+     */
+    public function enqueue_jumbotron_script() {
+
+        wp_enqueue_script( 'uw-jumbotron-script', get_bloginfo( 'template_directory' ) . '/js/shortcodes/jumbotron.js', array( 'jquery', 'uw_wp_theme-bootstrap' ), wp_get_theme( get_template( ) )->get( 'Version' ), true );
+
+    }
 
 	/**
 	 * Jumbotron handler
@@ -38,6 +50,7 @@ class UW_Jumbotron {
 				'overlay'  => '', // optional overlay for text on jumbotrons without them by default (default, simple).
 				'image'    => '', // url for the image from the media library. uses new-burke image if none set.
 				'title'    => '', // required. headline.
+				'alt'      => '', // alt text for the image.
 				'titletag' => 'h2', // title tag, supports h1, h2, h3.
 				'button'   => '', // required. button text.
 				'link'     => '', // required. button link.
@@ -154,8 +167,15 @@ class UW_Jumbotron {
 		// if the image is set, get the image.
 		if ( ! empty( $jumbotron_atts['image'] ) ) {
 			$image = $jumbotron_atts['image'];
+			if ( ! empty( $jumbotron_atts['alt'] ) ) {
+				$alt = $jumbotron_atts['alt'];
+			} else {
+				$alt = '';
+			}
+
 		} else {
-			$image = '';
+			$image = get_template_directory_uri() . '/assets/images/new-burke-aerial.png';
+			$alt = '';
 		}
 
 		// get the button text. use default prompting if not provided.
@@ -179,7 +199,7 @@ class UW_Jumbotron {
 		// build the shortcode output.
 		ob_start();
 		?>
-		<div <?php echo $jumbotron_id; ?> class="jumbotron jumbotron-fluid <?php echo esc_attr( $jumbotron_class ); ?> <?php echo esc_attr( $overlay_class ); ?> <?php if ( 'block' === $style ) { echo esc_attr( $align_class ); } ?>" <?php if ( ! empty( $jumbotron_atts['image'] ) && $image ) { ?> style="background-image: url(<?php echo esc_url( $image ); ?>);" <?php } ?>><img class="mobile-img" src="<?php echo $image ?>">
+		<div <?php echo $jumbotron_id; ?> aria-labeledby="<?php echo wp_kses_post( $alt )?>" class="jumbotron jumbotron-fluid <?php echo esc_attr( $jumbotron_class ); ?> <?php echo esc_attr( $overlay_class );  ?> <?php if ( 'block' === $style ) { echo esc_attr( $align_class ); } ?>" <?php if ( ! empty( $jumbotron_atts['image'] ) && $image ) { ?> style="background-image: url(<?php echo esc_url( $image ); ?>);" <?php } ?>><img class="mobile-img" src="<?php echo $image ?>" alt="<?php echo esc_attr($alt )?>" >
 			<div class="<?php echo esc_attr( $inner_class ); ?> <?php if ( 'block-slant' === $style ) { echo esc_attr( $align_class ); } ?>">
 				<?php if ( 'block-slant' === $style ) { ?>
 					<div class="inner-overlay">

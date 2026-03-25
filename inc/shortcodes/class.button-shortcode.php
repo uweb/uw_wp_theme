@@ -27,6 +27,7 @@ class UW_Button {
 				'color'  => '', // button color.
 				'target' => '', // where the button links to.
 				'id'     => '', // optional ID.
+				'textalign'     => '', // optional button text alignment
 			),
 			$atts
 		);
@@ -34,27 +35,16 @@ class UW_Button {
 		// get the button ID, if there is one.
 		$btn_id = ! empty( $atts['id'] ) ? 'id="' . esc_attr( $atts['id'] ) . '"' : '';
 
-		$style_list = ['check', 'flag', 'minus', 'person',
-		'plus', 'camera', 'mail', 'search',
-		'key', 'clipboard', 'bookmark', 'ticket',
-		'heart', 'watch', 'letter', 'marker',
-		'social', 'close', 'calendar', 'pencil',
-		'computer', 'page', 'view', 'eating',
-		'book', 'stop', 'compass', 'home',
-		'play', 'picture', 'address-book', 'map',
-		'music', 'settings', 'tools', 'globe',
-		'briefcase', 'pause', 'trash', 'right-arrow-full',
-		'list', 'page2', 'right-arrow', 'podium',
-		'directions', 'capitol', 'map-marker', 'passport',
-		'administration', 'plane', 'handshake', 'suitcase',
-		'globe2', 'umbrella', 'ribbon', 'money',
-		'checkmark', 'external', 'simple-arrow', 'check2',
-		'people', 'clipboard-check'];
+		$style_list = [ 'external', 'marker', 'money', 'play', 'plus' ];
+
+
 
 		if ( isset( $atts['style'] ) ) {
 			if ( in_array( strtolower( $atts['style'] ), $style_list ) ) {
 				$style = $atts['style'] . ' arrow icon-link';
-			} elseif ( 'arrow' === strtolower( $atts['style'] ) ) {
+			}elseif   ( !in_array( strtolower( $atts['style'] ), $style_list ) ){
+				$style = 'arrow';
+			}elseif ( 'arrow' === strtolower( $atts['style'] ) ) {
 				$style = 'arrow';
 			} elseif ( 'square-outline' === strtolower( $atts['style'] ) ) {
 				$style = 'square-outline';
@@ -70,6 +60,9 @@ class UW_Button {
 		if ( isset( $atts['size'] ) ) {
 			$size = $atts['size'] === 'small' && strpos( $style, 'square-outline' ) === false ? 'btn-sm' : 'btn-lg';
 		}
+		if ( isset( $atts['textalign'] ) ) {
+			$textalign = $atts['textalign'] === 'left' ? 'text-left' : 'text-center';
+		}
 
 		if ( isset( $atts['color'] ) ) {
 			if ( false === strpos( $style, 'square-outline' ) ) {
@@ -84,7 +77,7 @@ class UW_Button {
 		ob_start();
 		?>
 
-		<a href="<?php echo esc_attr( $atts['target'] ); ?>" <?php echo $btn_id; ?> class="btn <?php echo esc_attr( $size ); ?> <?php echo esc_attr( $style ); ?><?php echo esc_attr( $color ); ?>"><span><?php
+		<a href="<?php echo esc_attr( $atts['target'] ); ?>" <?php echo $btn_id; ?> class="btn <?php echo esc_attr( $size ); ?> <?php echo esc_attr( $style ); ?><?php echo esc_attr( $color ); ?>"><span class="<?php echo esc_attr( $textalign ); ?>"><?php
 		$output = ob_get_clean();
 
 		if ( $content ) {
@@ -93,7 +86,7 @@ class UW_Button {
 			$output .= 'Please add button text.';
 		}
 
-		if ( 'arrow' === strtolower( $atts['style'] ) || 'square-outline' === strtolower( $atts['style'] ) ) {
+		if ( 'arrow' === strtolower( $atts['style'] ) || 'square-outline' === strtolower( $atts['style'] ) || !in_array( strtolower( $atts['style'] ), $style_list )  ) {
 			$output .= '</span><span class="arrow-box"><span class="arrow"></span></span></a>';
 		} elseif ( in_array( strtolower( $atts['style'] ), $style_list ) ){
 			$output .= '</span><span class="arrow-box"><span class="icon ic-';

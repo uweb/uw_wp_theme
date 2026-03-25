@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-03-25 3.8
+
+- List of changes coming...
+
 ## 2026-02-04 3.7.1
 
 - Fixed bug with build process and restored admin widget JS files

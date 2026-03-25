@@ -215,6 +215,7 @@ Attributes:
 * **style**: Set the accordion titles to uppercase or non-bold. Options: **uppercase-title**, **non-bold** (_Default: none_)
 * **name**: Set the name for the accordion.
 * **id**: Specify an ID to use for the accordion. _Make sure to start your ID with a letter (no numbers or special characters). Default: auto-generated on accordion, none on section_
+* **titletag**: Set the title tag for each section of the accordion. Options: h2, h3, h4. (_Default: h3_)
 
 _Note 1:_ the accordion name will not show up on the page. However, it is important to include a name, as it is used to generate the unique ID of the accordion. The name will also be read by screen-reader assistive technology. If you want a name (title) of an accordion, add text above the accordion shortcode.
 
@@ -223,7 +224,7 @@ _Note 2:_ If an **id** is set on accordion, this will override the name or gener
 Example:
 
 ```
-[accordion name="Accessible Accordion" id=""]
+[accordion name="Accessible Accordion" id="" titletag=""]
     [section title="Example" id=""] Section[/section]
     [section title="Example" id=""] Section[/section]
     [section title="Example" id=""] Section[/section]
@@ -255,6 +256,11 @@ Attributes:
 
 ```
 [blockquote style="" align="" name="Dubs Husky" title="Official Live Mascot" ] blockquote text [/blockquote]
+```
+ **----- OR -----**
+ (either format is acceptable)
+```
+[quote style="" align="" name="Dubs Husky" title="Official Live Mascot" ] blockquote text [/quote]
 ```
 
 ### Blogroll ###
@@ -295,10 +301,11 @@ Attributes:
 * **color**:  The color of the button. Options: white, purple, light-gold, gold. (_Default: none_)
 * **target**:  The URL for the link or download that you want to direct the user to on click. (_Default: none_)
 * **id**: Specify an ID to use for the button. _Make sure to start your ID with a letter (no numbers or special characters)._
+* **textalign**: Set alignment of button text to left. (_Default: center_)
 
 Example:
 ```
-[uw_button style="arrow" size="large" color="gold" target="#"](button copy)[/uw_button]
+[uw_button textalign='left' style="arrow" size="large" color="gold" target="#"](button copy)[/uw_button]
 ```
 
 ### Call to Action

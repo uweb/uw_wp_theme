@@ -106,10 +106,10 @@ class UW_RSS extends WP_Widget
 		$instance['url']          = esc_url_raw( strip_tags( $new_instance['url'] ) );
 		$instance['title']        = strip_tags( $new_instance['title'] );
 		$instance['items']        = (int) ( $new_instance['items'] );
-		$instance['show_image']   = (int) ( $new_instance['show_image'] );
-		$instance['show_summary'] = (int) ( $new_instance['show_summary'] );
-		$instance['show_author']  = (int) ( $new_instance['show_author'] );
-		$instance['show_date']    = (bool) ( $new_instance['show_date'] );
+		$instance['show_image']   = (int) ( $new_instance['show_image'] ?? 0 );
+		$instance['show_summary'] = (int) ( $new_instance['show_summary'] ?? 0 );
+		$instance['show_author']  = (int) ( $new_instance['show_author'] ?? 0 );
+		$instance['show_date']    = (bool) ( $new_instance['show_date'] ?? false );
 
     // todo: this still necessary?
 		if ( current_user_can('unfiltered_html') )
@@ -164,9 +164,7 @@ class UW_RSS extends WP_Widget
         $maxitems  = $number;
 
         $rss_items = $rss->get_items(0, $maxitems);
-        $content  .= "<ul class=\"uw-widget-rss\">";
-
-        // if $title is set then it's a shortcode, otherwise it's a widget
+          // if $title is set then it's a shortcode, otherwise it's a widget
         // widget sets the title in the widget function so the title only needs to be added
         // when it's not creating a feed in the sidebar
         if ($title) {
@@ -174,6 +172,7 @@ class UW_RSS extends WP_Widget
         } else {
           $title = apply_filters( 'widget_title', $title);
         }
+        $content  .= "<ul class=\"uw-widget-rss\">";
 
         foreach ( $rss_items as $index=>$item )
         {
@@ -181,12 +180,12 @@ class UW_RSS extends WP_Widget
           $link  = $item->get_link();
           $desc = $item->get_description();
           $enclosure = $item->get_enclosure();
-          $src = $enclosure->link;
+          $src = $enclosure?->link ?? '';
 
           $attr  = esc_attr(strip_tags($title));
 
           // set image based on whether RSS feed is from UW
-          if (str_contains( $link, 'washington.edu') && $show_image !== 'false' ) {
+		  if (str_contains( $link, 'washington.edu') && !empty($src) && $show_image !== 'false' ) {
             $ext = strrchr($src, '.');
 
 			$template_directory = get_bloginfo( 'template_directory' );

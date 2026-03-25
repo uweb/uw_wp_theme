@@ -62,6 +62,7 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 			$indent        = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 			$li_attributes = '';
 			$class_names   = '';
+			$arialabel = '';
 
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
@@ -92,6 +93,11 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 
 			if ( $item->current ) {
 				$attributes .= ' aria-current="page"';
+			}
+
+			if (str_contains( $class_names, 'ic-external')){
+				$arialabel .= 'aria-label="external site, opens in new tab"';
+				$attributes .= ' ' . $arialabel  . ' ';
 			}
 
 			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';

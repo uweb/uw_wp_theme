@@ -377,7 +377,7 @@ class UW_Gallery {
         } else {
 
             // if carousel is not checked we want to revert to a responsive photo grid.
-            $output .= '<div id="photo-grid-' . $instance . '" class="photo-grid' . $grid_columns_class . $grid_gap_class . $masonry_class . '" tabindex="0">';
+            $output .= '<div id="photo-grid-' . $instance . '" class="photo-grid' . $grid_columns_class . $grid_gap_class . $masonry_class . '" >';
 
             // if linking to the image file, we want it to pop up in our modal, so let's set that up.
             if ( isset( $attr['link'] ) ) {

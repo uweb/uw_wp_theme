@@ -20,6 +20,6 @@
 	</div><!-- .entry-summary -->
 
 
-	<iframe class="uw-pdf-view" style="<?php echo( is_pdf() ? 'width:100%; height:900px;' : 'width:0px; height:0px;' ); ?>" src="<?php echo wp_get_attachment_url( get_the_ID() ); ?>?<?php echo time() ?>"></iframe>
+	<iframe class="uw-pdf-view" title="<?php the_title(); ?>" style="<?php echo( is_pdf() ? 'width:100%; height:900px;' : 'width:0px; height:0px;' ); ?>" src="<?php echo wp_get_attachment_url( get_the_ID() ); ?>?<?php echo time() ?>"></iframe>
 
 </article><!-- #post-<?php the_ID(); ?> -->

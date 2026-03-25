@@ -253,8 +253,12 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$classes[] = ( $item->current ) ? 'current_page_item' : '';
 			$classes[] = ( $item->current || $item->current_item_ancestor ) ? 'active' : '';
 			$classes[] = 'nav-item-' . $item->ID;
-
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+			$arialabel = '';
+
+			if (str_contains( $class_names, 'ic-external')){
+				$arialabel .= 'aria-label="external site, opens in new tab"';
+			}
 			$class_names = ' class="nav-item ' . esc_attr( $class_names ) . '"';
 
 			$id = apply_filters( 'nav_menu_item_id', 'nav-item-' . $item->ID, $item, $args );
@@ -275,7 +279,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 
 			$item_output = $args->before;
-			$item_output .= '<a class="' . implode( ' ', $item_classes ) . '" ' . $attributes . '>';
+			$item_output .= '<a '. $arialabel . '  class="' . implode( ' ', $item_classes ) . '" ' . $attributes . '>';
 			$item_output .= $args->link_before . $title . $args->link_after;
 			$item_output .= '</a>';
 			$item_output .= $args->after;

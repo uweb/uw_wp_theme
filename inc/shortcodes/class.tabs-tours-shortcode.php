@@ -23,6 +23,15 @@ class UW_Tabs_Tours {
 		add_shortcode( 'tabs_section', array( $this, 'tabs_section_handler' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'uw_wp_theme_register_tabs_script' ) );
+		add_filter('wp_kses_allowed_html', function ($tags, $context) {
+		if ($context === 'post') {
+			$tags['time'] = [
+				'datetime' => true,
+				'class'    => true,
+			];
+		}
+	return $tags;
+	}, 10, 2);
 	}
 
 	/**

@@ -163,8 +163,10 @@ class UW_Card {
 		} elseif ( 'block' === strtolower( $style ) ) {
 			if ( 'gold' === strtolower( $card_atts['color'] ) ) {
 				$card_color = 'gold';
+				$button_color = 'secondary white';
 			} else {
 				$card_color = 'purple';
+				$button_color = 'purple';
 			}
 		} else {
 			$card_color   = 'lightgold';
@@ -210,6 +212,8 @@ class UW_Card {
 		// get the card title.
 		if ( $card_atts['title'] ) {
 			$card_title = $card_atts['title'];
+			$card_title_id = strtolower(trim($card_title));
+			$card_title_id = str_replace(' ', '-', $card_title_id);
 		} else {
 			$card_title = 'Add a title!';
 		}
@@ -239,13 +243,14 @@ class UW_Card {
 		$card_classes .= ' ' . $card_class;
 		$card_classes .= ' ' . $card_color;
 		$card_classes .= ' ' . $align_class;
-		$random_id = rand(); // get a random number to append to id, in case of multiple cards on page.
+		$random_id = rand(0, 99); // get a random number to append to id, in case of multiple cards on page.
 
 		if ( 'inset' === strtolower( $style ) ) {
 			// built out the image inset or default style card.
-			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output = '<section aria-labeledby="'.esc_attr( $card_title_id ) . $random_id . '">';
+			$output  .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'. esc_attr( $card_title_id ) .  $random_id . '" class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			if ( isset( $image ) ) {
 
 				$output .= '<div class="card-image-inset"><img src="' . esc_attr( $image ) . '" class="card-img card-img-inset" alt="' . esc_attr( $alt ) . '"></div>';
@@ -255,12 +260,13 @@ class UW_Card {
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-sm ' . esc_attr( $button_color ) . ' ' . esc_attr( $link_class ) .'"><span>' . esc_attr( $button_text ) . '</span></a></p>';
 			}
-			$output .= '</div></div>';
+			$output .= '</div></div></section>';
 		} elseif ( 'image-top' === strtolower( $style ) ) {
 			// build out the image top style card.
-			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) .  $random_id . '">';
+			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) .  $random_id .'"   class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			if ( isset( $image ) ) {
 
 				$output .= '<div class="card-image-top"><img src="' . esc_attr( $image ) . '" class="card-img card-img-top" alt="' . esc_attr( $alt ) . '"></div>';
@@ -271,22 +277,24 @@ class UW_Card {
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . ' ' . esc_attr( $link_class ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
-			$output .= '</div></div>';
+			$output .= '</div></div></section>';
 		} elseif ( 'no-image' === strtolower( $style ) ) {
 			// build out the no-image style card.
-			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) .  $random_id .'">';
+			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="udub-slant-divider"><span></span></div>';
 			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
-			$output .= '</div></div>';
+			$output .= '</div></div></section>';
 		} elseif ( 'block' === strtolower( $style ) ) {
 			// build out the block top style card.
-			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
+			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
+			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="card-body">';
 			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
@@ -295,20 +303,22 @@ class UW_Card {
 			$output .= '</div></div>';
 		} elseif ( 'text-link' === strtolower( $style ) ) {
 			// build out the text link style card.
-			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
+			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="udub-slant-divider"><span></span></div>';
 			$output .= '<div class="card-content">' . apply_filters( 'the_content', $content ) . '</div>';
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p><a href="' . esc_url( $card_atts['link'] ) . '" class="link-arrow-box"><span>' . esc_attr( $button_text ) . '<span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
-			$output .= '</div></div>';
+			$output .= '</div></div></section>';
 		} elseif ( 'step' === strtolower( $style ) ) {
 			// build out the step style card.
-			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) .$random_id . '">';
+			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			if ( ! empty( $card_atts['subtitle'] ) ) {
 				$output .= '<div class="subtitle">' . esc_attr( $card_atts['subtitle'] ) . '</div>';
 			}
@@ -320,33 +330,35 @@ class UW_Card {
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="link-with-arrow-box"><a href="' . esc_url( $card_atts['link'] ) . '" class="link-arrow-box"><span>' . esc_attr( $button_text ) . '<span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
-			$output .= '</div></div>';
+			$output .= '</div></div></section>';
 		} elseif ( 'large' === strtolower( $style ) || 'half-block-large' === strtolower( $style ) ) {
 			// build out the large card.
-			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
-			$output .= '<div class="image-large"' . wp_kses_post( $background ) . '></div>';
+			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
+			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output .= '<div class="image-large"><img src="'.esc_attr( $image ) .'"  alt="' . esc_attr( $alt ) . '"></div>';
 			$output .= '<div class="card-body">';
 			$output .= '<div class="inner-card-body">';
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= apply_filters( 'the_content', $content );
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
-			$output .= '</div></div></div>';
+			$output .= '</div></div></div></section>';
 		} elseif ( 'full-width' === strtolower( $style ) || 'half-block-full' === strtolower( $style ) || 'half-block-full-width' === strtolower( $style ) ) {
 			// build out the full-width card.
-			$output  = '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
-			$output .= '<div class="image-large"' . wp_kses_post( $background ) . '></div>';
+			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) .$random_id . '">';
+			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
+			$output .= '<div class="image-large"><img src="'.esc_attr( $image ) .'"  alt="' . esc_attr( $alt ) . '"></div>';
 			$output .= '<div class="card-body">';
 			$output .= '<div class="inner-card-body">';
-			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
+			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'"  class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= apply_filters( 'the_content', $content );
 			if ( ! empty( $card_atts['link'] ) ) {
 				$output .= '<p class="button"><a href="' . esc_url( $card_atts['link'] ) . '" class="btn btn-lg arrow ' . esc_attr( $button_color ) . '"><span>' . esc_attr( $button_text ) . '</span><span class="arrow-box"><span class="arrow"></span></span></a></p>';
 			}
 			$output .= '</div></div>';
-			$output .= '<div><svg class="slant-pattern"><defs><pattern id="pattern-stripe-' . $random_id . '" width="14" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><rect width="1" height="10" transform="translate(0,0)" fill="white"></rect></pattern><mask id="mask-stripe"><rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-stripe-' . $random_id . ')" /></mask></defs><rect class="hbar purple-lines" x="0" y="0" width="100%" height="100"></rect></svg></div>';
-			$output .= '</div>';
+			$output .= '<div><svg aria-hidden="true" class="slant-pattern"><defs><pattern id="pattern-stripe-' . $random_id . '" width="14" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><rect width="1" height="10" transform="translate(0,0)" fill="white"></rect></pattern><mask id="mask-stripe"><rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-stripe-' . $random_id . ')" /></mask></defs><rect class="hbar purple-lines" x="0" y="0" width="100%" height="100"></rect></svg></div>';
+			$output .= '</div></section>';
 		}
 
 		// if shortcode is empty and there's no output, return nothing.
