@@ -42,14 +42,16 @@ class UW_Button {
 		if ( isset( $atts['style'] ) ) {
 			if ( in_array( strtolower( $atts['style'] ), $style_list ) ) {
 				$style = $atts['style'] . ' arrow icon-link';
-			}elseif   ( !in_array( strtolower( $atts['style'] ), $style_list ) ){
-				$style = 'arrow';
-			}elseif ( 'arrow' === strtolower( $atts['style'] ) ) {
+			} elseif ( 'primary' === strtolower( $atts['style'] ) ) {
+				$style = 'primary';
+			} elseif ( 'secondary' === strtolower( $atts['style'] ) ) {
+				$style = 'secondary';
+			} elseif ( 'arrow' === strtolower( $atts['style'] ) ) {
 				$style = 'arrow';
 			} elseif ( 'square-outline' === strtolower( $atts['style'] ) ) {
 				$style = 'square-outline';
 			} else {
-				$style = $atts['style'];
+				$style = 'arrow not-allowed';
 			}
 		} else {
 			$style = '';
@@ -86,7 +88,7 @@ class UW_Button {
 			$output .= 'Please add button text.';
 		}
 
-		if ( 'arrow' === strtolower( $atts['style'] ) || 'square-outline' === strtolower( $atts['style'] ) || !in_array( strtolower( $atts['style'] ), $style_list )  ) {
+		if ( 'arrow' === strtolower( $atts['style'] ) || 'square-outline' === strtolower( $atts['style'] ) || 'arrow not-allowed' === $style ) {
 			$output .= '</span><span class="arrow-box"><span class="arrow"></span></span></a>';
 		} elseif ( in_array( strtolower( $atts['style'] ), $style_list ) ){
 			$output .= '</span><span class="arrow-box"><span class="icon ic-';

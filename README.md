@@ -212,7 +212,7 @@ This accordion shortcode uses the [Bootstrap collapse](https://getbootstrap.com/
 
 Attributes:
 
-* **style**: Set the accordion titles to uppercase or non-bold. Options: **uppercase-title**, **non-bold** (_Default: none_)
+* **style**: Set the accordion titles to uppercase or non-bold, or changes the font to Open Sans. Options: **uppercase-title**, **non-bold**, **open-sans**  (_Default: none_)
 * **name**: Set the name for the accordion.
 * **id**: Specify an ID to use for the accordion. _Make sure to start your ID with a letter (no numbers or special characters). Default: auto-generated on accordion, none on section_
 * **titletag**: Set the title tag for each section of the accordion. Options: h2, h3, h4. (_Default: h3_)

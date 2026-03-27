@@ -257,7 +257,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$arialabel = '';
 
 			if (str_contains( $class_names, 'ic-external')){
-				$arialabel .= 'aria-label="external site, opens in new tab"';
+				$arialabel .= 'aria-label="external site, may open in new tab"';
 			}
 			$class_names = ' class="nav-item ' . esc_attr( $class_names ) . '"';
 

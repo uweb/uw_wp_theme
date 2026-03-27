@@ -96,7 +96,7 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 			}
 
 			if (str_contains( $class_names, 'ic-external')){
-				$arialabel .= 'aria-label="external site, opens in new tab"';
+				$arialabel .= 'aria-label="external site, may open in new tab"';
 				$attributes .= ' ' . $arialabel  . ' ';
 			}
 
