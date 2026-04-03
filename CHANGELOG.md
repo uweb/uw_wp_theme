@@ -1,8 +1,30 @@
 # Changelog
 
-## 2026-03-25 3.8
+## 2026-04-03 3.8
 
-- List of changes coming...
+- Added new open-sans styling, heading options for accordions
+- Added classic editor and select shortcodes (button, intro, modal) for the Site Notification Banner
+- Added new button icon options: external, marker, money
+- Added `[quote]` shortcode as alternative for `[blockquote]`
+- Added TikTok and X social icons to footer
+- Added left-align option for button shortcode
+- Bugfixes:
+  - Removed AddToAny social sharing icons appearing in shortcodes
+  - Restored missing border on white button
+  - Allowed `<time>` element in tab content
+  - Improved megamenu behavior on smaller screen sizes so menus stay in viewport
+  - Improved YouTube video display, setting 16:9 aspect ratio and full content-width
+  - Fixed alt text option in jumbotrons
+  - Corrected output of Sass maps
+  - Resolved RSS widget PHP warnings, moved heading outside `<ul>`
+- Accessibility updates
+  - Added aria-label to external icon in navigation
+  - Improved card shortcodes to use image element instead of background images and added aria-labeledby
+  - Improved gallery keyboard navigation
+  - Improved Bootstrap library warning and success color contrast
+  - Fixed empty sidebar `<ul>` when all child pages are hidden from menu
+  - Added title attribute to iframe shortcode and PDF embeds
+  - Improved UW Alert banner link text color and added ARIA attributes
 
 ## 2026-02-04 3.7.1
 
