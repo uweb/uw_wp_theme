@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-04-06 3.8.1
+
+- Bugfix for RSS widget PHP 7.4 errors
+- Bugfix for equal height cards
+
 ## 2026-04-03 3.8
 
 - Added new open-sans styling, heading options for accordions

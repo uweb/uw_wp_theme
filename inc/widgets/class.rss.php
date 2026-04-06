@@ -179,21 +179,25 @@ class UW_RSS extends WP_Widget
           $title = $item->get_title();
           $link  = $item->get_link();
           $desc = $item->get_description();
-          $enclosure = $item->get_enclosure();
-          $src = $enclosure?->link ?? '';
+		  $content_img = $item->get_content();
+		  if (preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content_img, $matches)) {
+            $src = $matches[1];
+		  } else {
+			$src = '';
+		  }
 
           $attr  = esc_attr(strip_tags($title));
 
           // set image based on whether RSS feed is from UW
-		  if (str_contains( $link, 'washington.edu') && !empty($src) && $show_image !== 'false' ) {
-            $ext = strrchr($src, '.');
+		  if ( strpos($link, 'washington.edu') !== false && !empty( $src ) && $show_image !== 'false' ) {
+            $ext = strrchr( $src, '.' );
 
 			$template_directory = get_bloginfo( 'template_directory' );
             $default_image_src = $template_directory. '/assets/svg/w.svg';
 
             $image = ( $ext != ".mp4" && $show_image !== 'false' ) ?
               //  "<a class='widget-thumbnail' href='$link' title='$attr'><img src='$src' title='$attr' /></a>" : '';
-            "<a class='widget-thumbnail' href='$link' title='$attr' aria-hidden='true' tabindex='-1'><img alt='' src='$src' /></a>" : "<a class='widget-thumbnail' href='$link' title='$attr' aria-hidden='true' tabindex='-1'><img class='default_image' alt='UW big-W logo' src='$default_image_src' /></a>";
+            "<a class='widget-thumbnail' href='$link' title='$attr' aria-hidden='true' tabindex='-1'><img alt='' src='$src' /></a>" : "<a class='widget-thumbnail' href='$link' title='$attr' aria-hidden='true'><img class='default_image' alt='UW big-W logo' src='$default_image_src' /></a>";
           } else {
             $image = '';
           }
