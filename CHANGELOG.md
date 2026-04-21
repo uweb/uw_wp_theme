@@ -4,6 +4,7 @@
 
 - Bugfix for typo in aria-labelledby for cards and jumbotrons
 - Bugfix update for empty sidebar `<ul>` when all child pages are hidden from menu
+- Bugfix for megamenu with dropdown items on mobile view
 
 ## 2026-04-06 3.8.1
 
