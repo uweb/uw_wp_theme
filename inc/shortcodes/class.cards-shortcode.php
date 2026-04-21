@@ -247,7 +247,7 @@ class UW_Card {
 
 		if ( 'inset' === strtolower( $style ) ) {
 			// built out the image inset or default style card.
-			$output = '<section aria-labeledby="'.esc_attr( $card_title_id ) . $random_id . '">';
+			$output = '<section aria-labelledby="'.esc_attr( $card_title_id ) . $random_id . '">';
 			$output  .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'. esc_attr( $card_title_id ) .  $random_id . '" class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
@@ -263,7 +263,7 @@ class UW_Card {
 			$output .= '</div></div></section>';
 		} elseif ( 'image-top' === strtolower( $style ) ) {
 			// build out the image top style card.
-			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) .  $random_id . '">';
+			$output = '<section aria-labelledby="'.wp_kses_post( $card_title_id ) .  $random_id . '">';
 			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) .  $random_id .'"   class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
@@ -280,7 +280,7 @@ class UW_Card {
 			$output .= '</div></div></section>';
 		} elseif ( 'no-image' === strtolower( $style ) ) {
 			// build out the no-image style card.
-			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) .  $random_id .'">';
+			$output = '<section aria-labelledby="'.wp_kses_post( $card_title_id ) .  $random_id .'">';
 			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
@@ -292,7 +292,7 @@ class UW_Card {
 			$output .= '</div></div></section>';
 		} elseif ( 'block' === strtolower( $style ) ) {
 			// build out the block top style card.
-			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
+			$output = '<section aria-labelledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
 			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
 			$output .= '<div class="card-body">';
@@ -303,7 +303,7 @@ class UW_Card {
 			$output .= '</div></div>';
 		} elseif ( 'text-link' === strtolower( $style ) ) {
 			// build out the text link style card.
-			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
+			$output = '<section aria-labelledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
 			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
@@ -315,7 +315,7 @@ class UW_Card {
 			$output .= '</div></div></section>';
 		} elseif ( 'step' === strtolower( $style ) ) {
 			// build out the step style card.
-			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) .$random_id . '">';
+			$output = '<section aria-labelledby="'.wp_kses_post( $card_title_id ) .$random_id . '">';
 			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="card-body">';
 			$output .= '<' . esc_attr( $card_atts['titletag'] ) . ' id="'.wp_kses_post( $card_title_id ) . $random_id .'" class="card-title mb-0">' . wp_kses_post( $card_title ) . '</' . esc_attr( $card_atts['titletag'] ) . '>';
@@ -333,7 +333,7 @@ class UW_Card {
 			$output .= '</div></div></section>';
 		} elseif ( 'large' === strtolower( $style ) || 'half-block-large' === strtolower( $style ) ) {
 			// build out the large card.
-			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
+			$output = '<section aria-labelledby="'.wp_kses_post( $card_title_id ) . $random_id .'">';
 			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="image-large"><img src="'.esc_attr( $image ) .'"  alt="' . esc_attr( $alt ) . '"></div>';
 			$output .= '<div class="card-body">';
@@ -346,7 +346,7 @@ class UW_Card {
 			$output .= '</div></div></div></section>';
 		} elseif ( 'full-width' === strtolower( $style ) || 'half-block-full' === strtolower( $style ) || 'half-block-full-width' === strtolower( $style ) ) {
 			// build out the full-width card.
-			$output = '<section aria-labeledby="'.wp_kses_post( $card_title_id ) .$random_id . '">';
+			$output = '<section aria-labelledby="'.wp_kses_post( $card_title_id ) .$random_id . '">';
 			$output .= '<div ' . $card_id . ' class="card ' . esc_attr( $card_classes ) . '" style="width:' . esc_attr( $card_width ) . '">';
 			$output .= '<div class="image-large"><img src="'.esc_attr( $image ) .'"  alt="' . esc_attr( $alt ) . '"></div>';
 			$output .= '<div class="card-body">';

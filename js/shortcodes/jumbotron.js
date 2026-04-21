@@ -1,1 +1,1 @@
-let imgs=document.querySelectorAll(".jumbotron"),screenSize=window.innerWidth;screenSize<=768&&imgs.forEach(e=>{e.setAttribute("aria-labeledby","")});
+let imgs=document.querySelectorAll(".jumbotron"),screenSize=window.innerWidth;screenSize<=768&&imgs.forEach(e=>{e.setAttribute("aria-labelledby","")});

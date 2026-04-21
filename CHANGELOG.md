@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-04-21 3.8.2
+
+- Bugfix for typo in aria-labelledby for cards and jumbotrons
+- Bugfix update for empty sidebar `<ul>` when all child pages are hidden from menu
+
 ## 2026-04-06 3.8.1
 
 - Bugfix for RSS widget PHP 7.4 errors

@@ -199,7 +199,7 @@ class UW_Jumbotron {
 		// build the shortcode output.
 		ob_start();
 		?>
-		<div <?php echo $jumbotron_id; ?> aria-labeledby="<?php echo wp_kses_post( $alt )?>" class="jumbotron jumbotron-fluid <?php echo esc_attr( $jumbotron_class ); ?> <?php echo esc_attr( $overlay_class );  ?> <?php if ( 'block' === $style ) { echo esc_attr( $align_class ); } ?>" <?php if ( ! empty( $jumbotron_atts['image'] ) && $image ) { ?> style="background-image: url(<?php echo esc_url( $image ); ?>);" <?php } ?>><img class="mobile-img" src="<?php echo $image ?>" alt="<?php echo esc_attr($alt )?>" >
+		<div <?php echo $jumbotron_id; ?> aria-labelledby="<?php echo wp_kses_post( $alt )?>" class="jumbotron jumbotron-fluid <?php echo esc_attr( $jumbotron_class ); ?> <?php echo esc_attr( $overlay_class );  ?> <?php if ( 'block' === $style ) { echo esc_attr( $align_class ); } ?>" <?php if ( ! empty( $jumbotron_atts['image'] ) && $image ) { ?> style="background-image: url(<?php echo esc_url( $image ); ?>);" <?php } ?>><img class="mobile-img" src="<?php echo $image ?>" alt="<?php echo esc_attr($alt )?>" >
 			<div class="<?php echo esc_attr( $inner_class ); ?> <?php if ( 'block-slant' === $style ) { echo esc_attr( $align_class ); } ?>">
 				<?php if ( 'block-slant' === $style ) { ?>
 					<div class="inner-overlay">
