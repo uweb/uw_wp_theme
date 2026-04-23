@@ -10,15 +10,10 @@
  * [/uw_tabs]
  */
 class UW_Tabs_Tours {
-	const PRIORITY = 12;
-
 	/**
 	 * Tabs constructor.
 	 */
 	public function __construct() {
-		remove_filter( 'the_content', 'wpautop' );
-		add_filter( 'the_content', 'wpautop', self::PRIORITY );
-
 		add_shortcode( 'uw_tabs', array( $this, 'tabs_tours_handler' ) );
 		add_shortcode( 'tabs_section', array( $this, 'tabs_section_handler' ) );
 
