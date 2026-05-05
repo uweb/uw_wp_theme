@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-05-05 3.8.3
+
+- Bugfix update for empty sidebar menu `<ul>` when all child pages are hidden
+- Bugfix sidebar menu child pages
+- Bugfix for white Call to Action module
+- Bugfix to prevent `[section]` shortcode being used outside `[accordion]` not rendering correctly
+
 ## 2026-04-21 3.8.2
 
 - Bugfix for typo in aria-labelledby for cards and jumbotrons

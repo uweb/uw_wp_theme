@@ -49,7 +49,12 @@ class UW_Accordion {
 	 * @return string
 	 */
 
-	public function accordion_handler( $atts, $content ) {
+	public function accordion_handler( $atts, $content = null) {
+
+	  	// Set flag while processing accordion content
+		$GLOBALS['uw_section_inside_accordion'] = true;
+		$output = do_shortcode( $content );
+		$GLOBALS['uw_section_inside_accordion'] = false;
 		// only enqueue script when shortcode is present!
 		wp_enqueue_script( 'uw_wp_theme-accordion-script' );
 
@@ -94,6 +99,7 @@ class UW_Accordion {
 			if ( preg_match( '/^[0-9]+/', $accordion_name ) ) {
 				$accordion_name = 'accordion-' . $accordion_name;
 			}
+
 		}
 
 		$class = '';
@@ -124,9 +130,10 @@ class UW_Accordion {
 		}
 
 		// build the shortcode.
-		$output = do_shortcode( $content );
+		//$output = do_shortcode( $content );
+
 		return sprintf(
-			'<div class="accordion %s" id="%s"><div class="screen-reader-text">%s</div>%s</div>',
+			'<div class="accordion  %s" id="%s"><div class="screen-reader-text">%s</div>%s</div>',
 			$class,
 			$accordion_name,
 			$accordion_atts['name'],
@@ -140,7 +147,11 @@ class UW_Accordion {
 	 * @param string $content content of the section.
 	 * @return string
 	 */
-	public function section_handler( $atts, $content ) {
+	public function section_handler( $atts, $content = null ) {
+		 // If not inside accordion, ignore it
+		if ( empty( $GLOBALS['uw_section_inside_accordion'] ) ) {
+			return do_shortcode( $content );
+		}
 		$section_atts = shortcode_atts(
 			array(
 				'title'  => '',
@@ -174,14 +185,18 @@ class UW_Accordion {
 			$class      = '';
 		}
 		global $titletag;
+		if ( ! isset( $titletag ) ) {
+			$titletag = 'h3'; // Fallback
+		}
 		$output = do_shortcode( $content );
 
 		return sprintf(
-			'<div class="card"%s><div class="card-header" id="accordion-header"><%s class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button></h3></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion" role="region">%s</div></div>',
+			'<div class="card"%s><div class="card-header" id="accordion-header"><%s class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="%s" aria-controls="collapse"><span class="btn-text">%s</span><span class="arrow-box"><span class="arrow"></span></span></button></%s></div><div id="collapse" class="collapse %s" aria-labelledby="collapse" data-parent="#accordion" role="region">%s</div></div>',
 			$section_id,
 			$titletag,
 			$active_tab,
 			$section_atts['title'],
+			$titletag,
 			$class,
 			apply_filters( 'the_content', $output )
 		);

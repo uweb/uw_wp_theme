@@ -108,8 +108,8 @@ class UW_Call_To_Action {
 							<<?php echo esc_attr( $heading_level ); ?> class="h2"><?php echo esc_html( $atts['heading'] ); ?></<?php echo esc_attr( $heading_level ); ?>>
 							<p><?php echo wp_kses_post( $content ); ?></p>
 							<p class="button"><a href="<?php echo esc_url( $atts['target'] ); ?>" class="btn btn-lg arrow <?php echo $button_class ? esc_attr( $button_class ) : esc_attr( 'primary purple' ); ?>"><span><?php echo esc_attr( $atts['link_text'] ); ?></span><span class="arrow-box"><span class="arrow"></span></span></a></p>
-						</div><!-- .cta-body -->
-					</div><!-- .cta-content -->
+						</div>
+					</div>
 					<?php if ( 'image' === $atts['type'] && $atts['img'] ) : ?>
 						<div class="cta-image" style="background-image: url('<?php echo esc_url( $atts['img'] ); ?>');"></div>
 					<?php endif; ?>
