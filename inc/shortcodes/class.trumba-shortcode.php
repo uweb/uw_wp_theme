@@ -8,6 +8,8 @@
 
 class UW_Trumba
 {
+    public $TrumbaAdded;
+
     function __construct()
     {
         $this->TrumbaAdded = false;

@@ -12,6 +12,8 @@ class UW_QuickLinks {
 	const LOCATION     = 'quick-links';
 	const ALLOWED_BLOG = 1;
 
+	public $MULTISITE;
+
 	function __construct() {
 		$this->MULTISITE = is_multisite();
 

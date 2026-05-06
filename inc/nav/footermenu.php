@@ -11,6 +11,9 @@ class UW_FooterMenu {
 	const DEFAULT_STATUS = 'publish';
 	const ALLOWED_BLOG	 =	1;
 
+	public $MULTISITE;
+	public $menu_items;
+	public $MENU_ID;
 
 	function __construct() {
 		$this->MULTISITE = is_multisite();
