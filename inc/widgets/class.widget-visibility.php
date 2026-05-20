@@ -242,18 +242,27 @@ class UW_Widget_Conditions
   public static function widget_update( $instance, $new_instance, $old_instance )
   {
     $conditions = array();
-    $conditions['action'] = $_POST['conditions']['action'];
+
+	// Check if 'conditions' is set and is an array before accessing keys
+	if ( isset( $_POST['conditions'] ) && is_array( $_POST['conditions'] ) ) {
+		$conditions['action'] = isset( $_POST['conditions']['action'] ) ? $_POST['conditions']['action'] : 'show';
+	} else {
+		$conditions['action'] = 'show';  // Default fallback
+	}
+
     $conditions['rules'] = array();
 
-    foreach ( $_POST['conditions']['rules_major'] as $index => $major_rule ) {
-      if ( ! $major_rule )
-        continue;
+	if ( isset( $_POST['conditions']['rules_major'] ) && is_array( $_POST['conditions']['rules_major'] ) ) {
+		foreach ( $_POST['conditions']['rules_major'] as $index => $major_rule ) {
+			if ( ! $major_rule )
+				continue;
 
-      $conditions['rules'][] = array(
-        'major' => $major_rule,
-        'minor' => isset( $_POST['conditions']['rules_minor'][$index] ) ? $_POST['conditions']['rules_minor'][$index] : ''
-      );
-    }
+			$conditions['rules'][] = array(
+				'major' => $major_rule,
+				'minor' => isset( $_POST['conditions']['rules_minor'][$index] ) ? $_POST['conditions']['rules_minor'][$index] : ''
+			);
+		}
+	}
 
     if ( ! empty( $conditions['rules'] ) )
       $instance['conditions'] = $conditions;

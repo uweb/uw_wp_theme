@@ -2,6 +2,8 @@
 
 class UW_Page_Meta {
 
+	protected $HIDDEN = [ 'No Sidebar' ];
+
 	const ID = 'pageparentdiv';
 	const TITLE = 'Page Attributes';
 	const POSTTYPE = 'page';
@@ -9,11 +11,9 @@ class UW_Page_Meta {
 	const PRIORITY = 'core';
 
 	function __construct() {
-		$this->HIDDEN = array( 'No Sidebar' );
 		add_action( 'add_meta_boxes', array( $this, 'replace_meta_box' ) );
 		add_action( 'save_post', array( $this, 'save_postdata' ) );
 		add_action( 'admin_head', array( $this, 'custom_style' ) );
-
 	}
 
 	function replace_meta_box() {

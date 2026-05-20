@@ -8,6 +8,9 @@
 class UW_Dropdowns
 {
 
+	protected $menu_items = [];
+	protected $MENU_ID;
+
 	const NAME           = 'White Bar';
 	const LOCATION       = 'white-bar';
 	const DISPLAY_NAME   = 'Dropdowns';
@@ -15,7 +18,6 @@ class UW_Dropdowns
 
 	function __construct()
 	{
-		$this->menu_items = array();
 		add_action( 'after_setup_theme', array( $this, 'register_white_bar_menu') );
 		add_action( 'after_setup_theme', array( $this, 'install_default_white_bar_menu') );
 	}

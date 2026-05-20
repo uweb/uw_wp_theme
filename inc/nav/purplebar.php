@@ -7,6 +7,8 @@
 
 class UW_Audience
 {
+	protected $menu_items = [];
+	protected $MENU_ID;
 
 	const NAME           = 'Purple bar';
 	const LOCATION       = 'purple-bar';
@@ -14,7 +16,6 @@ class UW_Audience
 	const DEFAULT_STATUS = 'publish';
 
 	function __construct() {
-		$this->menu_items = array();
 		add_action( 'after_setup_theme', array( $this, 'register_purple_bar_menu' ) );
 		add_action( 'after_setup_theme', array( $this, 'install_default_purple_bar_menu' ) );
 	}

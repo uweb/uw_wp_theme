@@ -56,6 +56,7 @@ class UW_Tabs_Tours {
 	 */
 	public function tabs_tours_handler( $atts, $content = null ) {
 		global $uw_tabs_tours;
+		$content = $content ?: '';  // Ensure $content is a string
 
 		// only enqueue script when shortcode is present!
 		wp_enqueue_script( 'uw_wp_theme-tabs-script' );
@@ -167,6 +168,7 @@ class UW_Tabs_Tours {
 		$i = 0;
 		foreach ($uw_tabs_tours['tabs_titles'] as $title) {
 			$tid = $uw_tabs_tours['tabs_ids'][$i];
+			$tid = $tid ?? '';
 			$tid = preg_replace('![^0-9A-Za-z_]+!u', "-", $tid);
 			// Store the $tid in the array
 			$tab_ids[] = $tid;
@@ -256,6 +258,7 @@ class UW_Tabs_Tours {
 	 */
 	public function tabs_section_handler( $atts, $content = null ) {
 		global $uw_tabs_tours;
+		$content = $content ?: '';  // Ensure $content is a string
 
 		if ( ! isset( $uw_tabs_tours ) ) {
 			return 'Something went wrong! Make sure your tabs look like this: [uw_tabs][tabs_section title="section title"]content[/tabs_section][/uw_tabs]';

@@ -1,16 +1,17 @@
 <?php
 
 class UW_Attachment_Meta {
+
+	protected $HIDDEN = [ 'No Sidebar' ];
+
 	const TITLE = 'Attachment Page Attributes';
 	const POSTTYPE = 'attachment';
 	const POSITION = 'side';
 	const PRIORITY = 'core';
 
 	function __construct() {
-		$this->HIDDEN = array( 'No Sidebar' );
 		add_action( 'add_meta_boxes', array( $this, 'replace_meta_box' ) );
 		add_action( 'edit_attachment', array( $this, 'save_postdata' ) );
-
 	}
 
 	function replace_meta_box() {

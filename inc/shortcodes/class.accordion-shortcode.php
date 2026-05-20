@@ -51,6 +51,8 @@ class UW_Accordion {
 
 	public function accordion_handler( $atts, $content = null) {
 
+		$content = $content ?: '';  // Ensure $content is a string
+
 	  	// Set flag while processing accordion content
 		$GLOBALS['uw_section_inside_accordion'] = true;
 		$output = do_shortcode( $content );
@@ -104,11 +106,12 @@ class UW_Accordion {
 
 		$class = '';
 
-		if (str_contains($accordion_atts['style'], 'uppercase-title')) {
+		$style = isset( $accordion_atts['style'] ) ? $accordion_atts['style'] : '';
+		if (str_contains($style, 'uppercase-title')) {
 			$class .= 'uppercase-title';
 		}
 
-		if (str_contains($accordion_atts['style'], 'non-bold')) {
+		if (str_contains($style, 'non-bold')) {
 			if (strlen($class) > 0) {
 				$class .= ' non-bold';
 			} else {
@@ -116,7 +119,7 @@ class UW_Accordion {
 			}
 		}
 
-		if (str_contains($accordion_atts['style'], 'open-sans')) {
+		if (str_contains($style, 'open-sans')) {
 			if (strlen($class) > 0) {
 				$class .= ' open-sans';
 			} else {
@@ -148,6 +151,8 @@ class UW_Accordion {
 	 * @return string
 	 */
 	public function section_handler( $atts, $content = null ) {
+		$content = $content ?: '';  // Ensure $content is a string
+
 		 // If not inside accordion, ignore it
 		if ( empty( $GLOBALS['uw_section_inside_accordion'] ) ) {
 			return do_shortcode( $content );
@@ -209,6 +214,7 @@ class UW_Accordion {
 	 * @return string
 	 */
 	public function subsection_handler( $content ) {
+		$content = $content ?: '';  // Ensure $content is a string
 
 		if ( empty( $content ) ) {
 			$content = 'No content for this section.  Make sure you wrap your content like this: [section]Content here[/section]';

@@ -170,6 +170,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * @param stdClass $args    An object of wp_nav_menu() arguments.
 			 * @param int      $depth   Depth of menu item. Used for padding.
 			 */
+			$class_names = '';
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
@@ -254,6 +255,7 @@ if ( !class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$classes[] = ( $item->current || $item->current_item_ancestor ) ? 'active' : '';
 			$classes[] = 'nav-item-' . $item->ID;
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+			$class_names = is_string( $class_names ) ? $class_names : '';
 			$arialabel = '';
 
 			if (str_contains( $class_names, 'ic-external')){

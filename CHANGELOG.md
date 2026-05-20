@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-05-TBD 3.8.4
+
+- Various PHP syntax changes for PHP 8.2 and 8.4 deprecation and warning mitigation (check diffs for specific changes)
+
 ## 2026-05-05 3.8.3
 
 - Bugfix update for empty sidebar menu `<ul>` when all child pages are hidden

@@ -8,6 +8,9 @@
 
 class UW_Trumba
 {
+
+	protected $TrumbaAdded;
+
     function __construct()
     {
         $this->TrumbaAdded = false;

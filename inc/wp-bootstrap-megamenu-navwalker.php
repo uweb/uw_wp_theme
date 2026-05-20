@@ -80,6 +80,7 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 			}
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+			$class_names = is_string( $class_names ) ? $class_names : '';
 			$class_names = ' class="nav-item ' . esc_attr( $class_names ) . '"';
 
 			$id = apply_filters( 'nav_menu_item_id', 'nav-item-' . $item->ID, $item, $args );
@@ -149,15 +150,13 @@ if ( ! class_exists( 'Bootstrap_MegaMenu_Walker' ) ) {
 			} else {
 				$output .= $n . str_repeat( $t, $depth ) . '</li>' . $n;
 			}
-
-
 		}
 
 		/**
 		 * Display Element
 		 *
 		 */
-		public function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
+		public function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args = array(), &$output = '' ) {
 			if ( ! $element ) {
 				return;
 			}

@@ -5,6 +5,11 @@
  * @package uw_wp_theme
  */
 class UW_FooterMenu {
+
+	protected $menu_items = [];
+	protected $MENU_ID;
+	protected $MULTISITE;
+
 	const NAME           = 'Footer menu';
 	const LOCATION       = 'footer-links';
 	const DISPLAY_NAME   = 'Footer menu';
@@ -14,7 +19,6 @@ class UW_FooterMenu {
 
 	function __construct() {
 		$this->MULTISITE = is_multisite();
-		$this->menu_items = array();
 		add_action( 'after_setup_theme', array( $this, 'install_default_footer_menu' ) );
 
 		if ( ! $this->MULTISITE || $this->MULTISITE && get_current_blog_id() === self::ALLOWED_BLOG ) {

@@ -28,7 +28,8 @@ class UW_Grid {
 			),
 			$atts
 		);
-		$content    = preg_replace( '/<br class="nc".\/>/', '', $content );
+
+		$content    = preg_replace( '/<br class="nc".\/>/', '', $content ?? '' );
 		$class      = isset( $atts['class'] ) ? 'grid ' . $atts['class'] : ' row';
 		$height     = isset( $atts['height'] ) ? $atts['height'] : '';
 		$width      = isset( $atts['width'] ) ? $atts['width'] : '';

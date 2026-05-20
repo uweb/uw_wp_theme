@@ -8,6 +8,8 @@
  */
 class UW_QuickLinks {
 
+	protected $MULTISITE;
+
 	const NAME         = 'Quick Links';
 	const LOCATION     = 'quick-links';
 	const ALLOWED_BLOG = 1;

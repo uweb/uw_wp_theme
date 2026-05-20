@@ -103,6 +103,7 @@ class UW_RSS extends WP_Widget
 
   function update( $new_instance, $old_instance )
   {
+		$new_instance['text']     = $new_instance['text'] ?: '';  // Ensure $text is a string
 		$instance['url']          = esc_url_raw( strip_tags( $new_instance['url'] ) );
 		$instance['title']        = strip_tags( $new_instance['title'] );
 		$instance['items']        = (int) ( $new_instance['items'] );
@@ -151,7 +152,15 @@ class UW_RSS extends WP_Widget
 
     $url = '';
     extract( shortcode_atts( self::$SHORTCODE_DEFAULTS, $atts ) );
-
+	$url = $url ?: '';
+	$title = $title ?: '';
+	$more = $more ?: '';
+	$heading = $heading ?: 'h2';
+	$show_image = $show_image ?: true;
+	$show_date = $show_date ?: true;
+	$show_more = $show_more ?: true;
+	$show_desc = $show_desc ?: false;
+	$has_blurb = $has_blurb ?: false;
 
     if ( $url == null || is_feed() ) return '';
 
@@ -160,8 +169,8 @@ class UW_RSS extends WP_Widget
      $rss = fetch_feed( wp_specialchars_decode($url) );
       if ( ! is_wp_error( $rss ) )
       {
-        $url       = !$more ? $rss->get_permalink() : $more;
-        $maxitems  = $number;
+		$url = !$more ? ($rss->get_permalink() ?: '') : $more;
+		$maxitems  = $number;
 
         $rss_items = $rss->get_items(0, $maxitems);
           // if $title is set then it's a shortcode, otherwise it's a widget
@@ -176,10 +185,11 @@ class UW_RSS extends WP_Widget
 
         foreach ( $rss_items as $index=>$item )
         {
-          $title = $item->get_title();
-          $link  = $item->get_link();
-          $desc = $item->get_description();
-		  $content_img = $item->get_content();
+          $title = $item->get_title() ?: '';
+		  $link = $item->get_link() ?: '';
+		  $desc = $item->get_description() ?: '';
+		  $content_img = $item->get_content() ?: '';
+		  $content_img = $content_img ?: '';  // Ensure $content_img is a string before preg_match
 		  if (preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content_img, $matches)) {
             $src = $matches[1];
 		  } else {

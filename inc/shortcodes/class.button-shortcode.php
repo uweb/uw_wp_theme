@@ -12,13 +12,14 @@ class UW_Button {
 		add_shortcode( 'uw_button', array( $this, 'button_handler' ) );
 	}
 
-
 	/**
 	 * Enqueue button script.
 	 *
 	 * @return void
 	 */
 	function button_handler( $atts, $content = null ) {
+		$content = $content ?: '';  // Ensure $content is a string
+
 		// Attributes.
 		$atts = shortcode_atts(
 			array(
@@ -36,8 +37,6 @@ class UW_Button {
 		$btn_id = ! empty( $atts['id'] ) ? 'id="' . esc_attr( $atts['id'] ) . '"' : '';
 
 		$style_list = [ 'external', 'marker', 'money', 'play', 'plus' ];
-
-
 
 		if ( isset( $atts['style'] ) ) {
 			if ( in_array( strtolower( $atts['style'] ), $style_list ) ) {
