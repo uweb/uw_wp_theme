@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-05-TBD 3.8.4
+## 2026-06-05 3.8.4
 
 - Various PHP syntax changes for PHP 8.2 and 8.4 deprecation and warning mitigation (check diffs for specific changes)
 
