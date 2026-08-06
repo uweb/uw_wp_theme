@@ -15,6 +15,10 @@ class UW_Trumba
     {
         $this->TrumbaAdded = false;
         add_shortcode( 'trumba', array( $this, 'trumba_handler' ) );
+        add_filter( 'slim_seo_skipped_shortcodes', function( $shortcodes ) { // fixes conflict with Slim SEO plugin
+            $shortcodes[] = 'trumba';
+            return $shortcodes;
+        } );
     }
     function trumba_handler( $atts )
     {

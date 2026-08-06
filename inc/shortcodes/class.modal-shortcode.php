@@ -104,7 +104,7 @@ class UW_Modal {
 		ob_start();
 		?>
 		<button type="button" class="btn btn-lg btn-modal <?php echo esc_attr( $button_color ); ?> <?php echo esc_attr( $modal_id ); ?>" data-toggle="modal" data-target="#<?php echo esc_attr( $modal_id ); ?>"><span class="btn-label"><?php echo esc_attr( $button_text ); ?></span></button>
-		<div id="<?php echo esc_attr( $modal_id ); ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="<?php echo esc_attr( $modal_id ); ?>Title" aria-hidden="true">
+		<div id="<?php echo esc_attr( $modal_id ); ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="<?php echo esc_attr( $modal_id ); ?>Title">
 			<div class="modal-dialog <?php echo esc_attr( $width_class ); ?> <?php echo 'true' === $modal_atts['scroll'] ? esc_attr( 'modal-dialog-scrollable' ) : ''; ?> <?php echo 'center' === $modal_atts['position'] ? esc_attr( 'modal-dialog-centered' ) : ''; ?>" role="document">
 				<div class="modal-content">
 					<div class="modal-header">

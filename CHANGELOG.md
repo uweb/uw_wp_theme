@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-07 3.9.0
+
+- Removed UW Campus Maps widget and related styling (This is a potentially “breaking change” in that if you were using a UW Campus Maps widget, it will no longer show on your site. There should not be any errors or side effects. Noting this widget hadn’t worked for a while so the impact should be negligible.)
+- Fixed modal trap to not allow scrolling or keyboard access outside a modal when it’s open
+- Fixed conflict between Slim SEO plugin and Trumba that caused Trumba calendars to not display properly
+- Fixed bug with displaying large or vertical images in large cards
+- Fixed bug with mini=false in blogroll shortcode
+- Added tag filtering to blogroll shortcode options
+- Added jumbotron page template preview image
+- Fixed several UW Alert layout issues on mobile
+
 ## 2026-06-05 3.8.4
 
 - Various PHP syntax changes for PHP 8.2 and 8.4 deprecation and warning mitigation (check diffs for specific changes)

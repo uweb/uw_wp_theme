@@ -20,7 +20,6 @@ class UW_Blogroll extends WP_Widget
         ));
 
         add_shortcode( self::ID , array( $this, 'shortcode' ) );
-
     }
 
 
@@ -88,11 +87,12 @@ class UW_Blogroll extends WP_Widget
                     'titletag'  => 'h2',
                     'post_type' =>  'post',
                     'number'    =>  5,
-                    'category'  =>  '',
-                    'category_name' =>  '',
+                    'category'  =>  '', // Category ID
+                    'category_name' =>  '', // Category slug
                     'mini'     =>  false,
                     'date'     =>  'show',
-                    'readmore' => 'on'
+                    'readmore' => 'on',
+                    'tag'      => ''
             ), $atts );
 
         if ( !array_key_exists('numberposts', $params ) )
@@ -101,12 +101,12 @@ class UW_Blogroll extends WP_Widget
         $posts = get_posts( $params );
 
         $params = (object) $params;
+
         $mini = $params->mini;
         $read_more = $params->readmore;
         $html = '';
 
         foreach ( $posts as $post ) {
-
             $link = get_permalink( $post->ID );
 			$excerpt = '';
             if ( $this->is_true( $params->excerpt ) )
@@ -140,7 +140,7 @@ class UW_Blogroll extends WP_Widget
             }
 
 
-            if ($mini){
+            if ($mini === "true" ){
                 if (!empty($author_mini) && !empty($date)){
                     $byline = sprintf('<small>%s | %s</small>', $author_mini, $date);
                 }
@@ -159,7 +159,7 @@ class UW_Blogroll extends WP_Widget
 
         }
 
-        $miniclass = $mini ? '-mini' : '';
+        $miniclass = $mini ==="true" ? '-mini' : '';
         $html = "<ul class=\"shortcode-blogroll$miniclass\">$html</ul>";
         return $html;
 

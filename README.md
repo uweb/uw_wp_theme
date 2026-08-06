@@ -1,10 +1,10 @@
 # UW WordPress Theme
-![UW WordPress Theme version 3.8.4](https://img.shields.io/static/v1?label=version&message=v3.8.4&color=green)
+![UW WordPress Theme version 3.9.0](https://img.shields.io/static/v1?label=version&message=v3.9.0&color=green)
 
 Please visit the [theme Wiki pages](https://github.com/uweb/uw_wp_theme/wiki) for more information on changes from the uw-2014 theme, Bootstrap features, child themes, and developer documentation.
 
 ## Requirements
-* [PHP](https://php.net/) 7.4 or higher, 8.2.x recommended
+* [PHP](https://php.net/) 7.4 or higher, 8.4.x recommended
 * [WordPress](https://wordpress.org/) 5.4 or higher
 
 ## Theme features
@@ -280,6 +280,7 @@ Attributes:
  * **mini**:  Use the miniture template instead of the default one. (_Default: false_)
  * **category**:  The WordPress category ID to limit the results from. (_Default: None_)
  * **category\_name**:  The WordPress category name to limit the results from. (_Default: None_)
+ * **tag**: The WordPress tag name to limit the results from. (_Default: None_)
  * **readmore**: Choose whether to show the "Read More" link or not. Options: **on**, **off**. (_Default: on_)
 
  Example:
@@ -695,16 +696,6 @@ Example:
 ```
 
 ## Widgets
-
-### UW Campus Map ###
-
-Embed the location of a UW campus building on your page using the UW branded campus map. You can find the building code on the [UW Campus Map](https://www.washington.edu/maps/)
-
-Options:
-
-* **Title** : The title of the widget (*Default: None*)
-* **Building code** : The UW campus building code for the desired building to embed, ie: "kne" for Kane Hall. (*Default: None*)
-
 
 ### UW Image Card ###
 
