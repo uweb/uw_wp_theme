@@ -21,11 +21,6 @@ class UW_Filters
         add_filter( 'excerpt_more', '__return_false' );
         add_filter( 'the_excerpt', array( $this, 'excerpt_more_override' ) );
 
-        //remove auto-paragraphs from shortcodes and keep it for content
-        remove_filter( 'the_content', 'wpautop' );
-        add_filter( 'the_content', 'wpautop', 99 );
-        add_filter( 'the_content', 'shortcode_unautop', 100 );
-
         // Add PDF filter to media library
         add_filter( 'post_mime_types', array( $this, 'modify_post_mime_types' ) );
 
