@@ -67,7 +67,7 @@
 						?>"
 						value="" autocomplete="off" placeholder="Search" />
 				</div>
-				<input type="submit" value="search" class="search" tabindex="0"/>
+				<input type="submit" value="Submit search" class="search" tabindex="0"/>
 			</form>
 		</div>
 	</div>

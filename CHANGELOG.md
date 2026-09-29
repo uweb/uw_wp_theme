@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-09-29 3.9.1
+- Minor accessibility tweaks to search widget
+
 ## 2026-08-07 3.9.0
 
 - Removed UW Campus Maps widget and related styling (This is a potentially “breaking change” in that if you were using a UW Campus Maps widget, it will no longer show on your site. There should not be any errors or side effects. Noting this widget hadn’t worked for a while so the impact should be negligible.)
