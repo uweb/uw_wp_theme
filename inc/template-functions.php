@@ -460,13 +460,7 @@ if ( !function_exists( 'uw_meta_tags' ) ) :
 		$has_post_thumbnail = isset( $post->ID ) ? has_post_thumbnail( $post->ID ) : false;
 
 		if( $url="http:/gs2.local/" || $url = "http://cmsdev.uw.edu/cms/" || $url = "https://www.washington.edu/cms/" ) {
-			if ( $site_url === "https://www.washington.edu/cms/uwclimatesurvey" ) {
-
-				$og_img = "https://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/164/2019/10/16193323/Campus-Climate-Survey-Social-Facebook-1200x630.jpg";
-
-				echo '<meta property="og:image" content="' . $og_img . '" />' . PHP_EOL;
-			}
-			elseif ( $has_post_thumbnail ) {
+			if ( $has_post_thumbnail ) {
 				// check if the thumbnail has a large size.
 				if ( has_image_size( 'large' ) ) {
 					$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
@@ -477,7 +471,7 @@ if ( !function_exists( 'uw_meta_tags' ) ) :
 					$thumbnail_url = $thumbnail_src[0];
 				} else {
 					// if that isn't available either, use the default image.
-					$thumbnail_url = 'https://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/10/2019/06/21094817/Univ-of-Washington_Memorial-Way.jpg';
+					$thumbnail_url = get_template_directory_uri() . "/assets/images/Univ-of-Washington_Memorial-Way.jpg";;
 				}
 
 				echo '<meta property="og:image" content="' . esc_attr( $thumbnail_url ) . '" />' . PHP_EOL;
@@ -485,7 +479,7 @@ if ( !function_exists( 'uw_meta_tags' ) ) :
 			}
 			else {
 				//the post does not have featured image, use a default image
-				$default_image = "https://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/10/2019/06/21094817/Univ-of-Washington_Memorial-Way.jpg";
+				$default_image =  get_template_directory_uri() . "/assets/images/Univ-of-Washington_Memorial-Way.jpg";
 				//replace this with a default image on your server or an image in your media library
 
 				echo '<meta property="og:image" content="' . $default_image . '" />' . PHP_EOL;

@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-10-09 3.9.2
+- Replaced hosted thumbnail image with local image asset
+
 ## 2026-09-29 3.9.1
 - Minor accessibility tweaks to search widget
 
